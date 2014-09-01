@@ -7,3 +7,9 @@
 .classpath
 .project
 .settings
+*.aux
+*.log
+*.out
+*.pdf
+*.toc
+

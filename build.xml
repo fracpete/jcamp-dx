@@ -20,7 +20,7 @@
   </target>
 
   <target name="compile" depends="init">
-    <javac srcdir="${src}" destdir="${build}" optimize="off" debug="on" deprecation="on" target="1.3" source="1.3">
+    <javac srcdir="${src}" destdir="${build}" optimize="off" debug="on" deprecation="on" target="1.7" source="1.7">
       <classpath refid="project.class.path" />
     </javac>
   </target>

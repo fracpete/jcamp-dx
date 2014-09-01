@@ -1,9 +1,11 @@
 <project name="JCampParser" default="compile" basedir=".">
-  <property name="build" value="build" />
-  <property name="src" value="src" />
-  <property name="dist" value="dist" />
+  <property name="build" value="target/classes" />
+  <property name="src" value="src/main/java" />
+  <property name="dist" value="target" />
   <property name="lib" value="lib" />
-  <property name="doc" value="doc" />
+  <property name="javadoc" value="target/site/apidocs" />
+  <property name="antlr" value="src/main/antlr" />
+  <property name="latex" value="src/main/latex/jcamp-dx" />
 	
   <path id="project.class.path">
     <pathelement location="${build}" />
@@ -27,9 +29,16 @@
     <delete>
       <fileset dir="." includes="**/*~" defaultexcludes="no" />
     </delete>
-   <delete dir="${build}" />
-   <delete dir="${dist}" />
-   <delete dir="${doc}/api" />
+    <delete dir="${dist}" />
+    <delete>
+      <fileset dir="${latex}" includes="**/*.aux"/>
+      <fileset dir="${latex}" includes="**/*.blg"/>
+      <fileset dir="${latex}" includes="**/*.dvi"/>
+      <fileset dir="${latex}" includes="**/*.out"/>
+      <fileset dir="${latex}" includes="**/*.log"/>
+      <fileset dir="${latex}" includes="**/*.pdf"/>
+      <fileset dir="${latex}" includes="**/*.toc"/>
+    </delete>
   </target>
 
   <target name="dist" depends="compile">
@@ -37,18 +46,31 @@
   </target>
 
   <target name="javadoc">
-    <mkdir dir="${doc}/api" />
-    <javadoc packagenames="org.jcamp.*" sourcepath="${src}" destdir="${doc}/api" access="private" windowtitle="JCamp API">
+    <mkdir dir="${javadoc}" />
+    <javadoc packagenames="org.jcamp.*" sourcepath="${src}" destdir="${javadoc}" access="private" windowtitle="JCamp API">
       <classpath refid="project.class.path" />
     </javadoc>
   </target>
-	
+
+  <target name="latex">
+    <exec executable="pdflatex" dir="${latex}">
+      <arg value="jcamp-dx.tex"/>
+    </exec>
+    <exec executable="pdflatex" dir="${latex}">
+      <arg value="jcamp-dx.tex"/>
+    </exec>
+    <copy todir="${dist}" >
+      <fileset dir="${latex}">
+        <include name="jcamp-dx.pdf"/>
+      </fileset>
+    </copy>
+  </target>
 
   <target name="antlr">
-	<antlr target="ASDFLexer.g" outputdirectory="src/org/jcamp/parser">
+	<antlr target="${antlr}/ASDFLexer.g" outputdirectory="src/org/jcamp/parser">
 		<classpath refid="project.class.path" />
 	</antlr>
-	<antlr target="ASDFParser.g" outputdirectory="src/org/jcamp/parser">
+	<antlr target="${antrl}/ASDFParser.g" outputdirectory="src/org/jcamp/parser">
 		<classpath refid="project.class.path" />
 	</antlr>
   	<delete file="${src}/org/jcamp/parser/ASDFLexerTokenTypes.txt"/>

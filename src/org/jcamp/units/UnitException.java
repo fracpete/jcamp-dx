@@ -1,0 +1,21 @@
+package org.jcamp.units;
+
+/**
+ * exception raised if units are not convertible into each other.
+ * @author Thomas Weber
+ */
+public class UnitException extends Exception {
+    /**
+     * UnitException constructor comment.
+     */
+    public UnitException() {
+        super();
+    }
+    /**
+     * UnitException constructor comment.
+     * @param s java.lang.String
+     */
+    public UnitException(String s) {
+        super(s);
+    }
+}

@@ -1,0 +1,57 @@
+<project name="JCampParser" default="compile" basedir=".">
+  <property name="build" value="build" />
+  <property name="src" value="src" />
+  <property name="dist" value="dist" />
+  <property name="lib" value="lib" />
+  <property name="doc" value="doc" />
+	
+  <path id="project.class.path">
+    <pathelement location="${build}" />
+    <fileset dir="${lib}">
+            <include name="*.jar" />
+    </fileset>
+  </path>
+
+  <target name="init">
+    <mkdir dir="${build}" />
+    <mkdir dir="${dist}" />
+  </target>
+
+  <target name="compile" depends="init">
+    <javac srcdir="${src}" destdir="${build}" optimize="off" debug="on" deprecation="on" target="1.3" source="1.3">
+      <classpath refid="project.class.path" />
+    </javac>
+  </target>
+
+  <target name="clean">
+    <delete>
+      <fileset dir="." includes="**/*~" defaultexcludes="no" />
+    </delete>
+   <delete dir="${build}" />
+   <delete dir="${dist}" />
+   <delete dir="${doc}/api" />
+  </target>
+
+  <target name="dist" depends="compile">
+		<jar destfile="${dist}/${ant.project.name}.jar" basedir="${build}" excludes="org/jcamp/test/**"/>
+  </target>
+
+  <target name="javadoc">
+    <mkdir dir="${doc}/api" />
+    <javadoc packagenames="org.jcamp.*" sourcepath="${src}" destdir="${doc}/api" access="private" windowtitle="JCamp API">
+      <classpath refid="project.class.path" />
+    </javadoc>
+  </target>
+	
+
+  <target name="antlr">
+	<antlr target="ASDFLexer.g" outputdirectory="src/org/jcamp/parser">
+		<classpath refid="project.class.path" />
+	</antlr>
+	<antlr target="ASDFParser.g" outputdirectory="src/org/jcamp/parser">
+		<classpath refid="project.class.path" />
+	</antlr>
+  	<delete file="${src}/org/jcamp/parser/ASDFLexerTokenTypes.txt"/>
+  	<delete file="${src}/org/jcamp/parser/ASDFParserTokenTypes.txt"/>
+  </target>
+</project>

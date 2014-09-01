@@ -1,0 +1,20 @@
+New:
+* JCAMPReader now has a STRICT and RELAXED mode. For documentation, see STRICT constant in JCAMPReader. Further 
+usages of this flag should add documentation there.
+
+Fixes:
+* Labels in a comment (like $$ ##TITLE=) confused the parser
+* The parser reader now shows same behaviour with respect to units first and second time (this influenced if hertz-ppm-conversion was done in nmr, so rather big effects)
+* Reading of floats in XYDATA not works (thanks to Ralf Tralow for that)
+
+0.9.1 Release
+------------
+New:
+* Handling of multi block files (see doc)
+
+Fixes:
+* Some bugfixes
+
+0.9 Release
+-----------
+No changes, since initial release  

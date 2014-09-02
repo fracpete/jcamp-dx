@@ -2,6 +2,11 @@ package org.jcamp.test;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
 
 import junit.framework.TestCase;
 
@@ -13,11 +18,153 @@ import org.jcamp.spectrum.Spectrum;
 
 public class TestParser extends TestCase
 {
-	
+
+    /**
+     * Returns the tmp directory.
+     *
+     * @return		the tmp directory
+     */
+    public String getTmpDirectory() {
+      return System.getProperty("java.io.tmpdir");
+    }
+
+    /**
+     * Returns the location in the tmp directory for given resource.
+     *
+     * @param resource	the resource (path in project) to get the tmp location for
+     * @return		the tmp location
+     * @see		#getTmpDirectory()
+     */
+    public String getTmpLocationFromResource(String resource) {
+      String	result;
+      File	file;
+
+      file   = new File(resource);
+      result = getTmpDirectory() + File.separator + file.getName();
+
+      return result;
+    }
+
+    /**
+     * Copies the given resource to the tmp directory.
+     *
+     * @param resource	the resource (path in project) to copy
+     * @return		false if copying failed
+     * @see		#getTmpLocationFromResource(String)
+     */
+    public boolean copyResourceToTmp(String resource) {
+      boolean			result;
+      BufferedInputStream	input;
+      BufferedOutputStream	output;
+      byte[]			buffer;
+      int			read;
+      String			ext;
+
+      input    = null;
+      output   = null;
+
+      try {
+        input  = new BufferedInputStream(ClassLoader.getSystemResourceAsStream(resource));
+        output = new BufferedOutputStream(new FileOutputStream(getTmpLocationFromResource(resource)));
+        buffer = new byte[1024];
+        while ((read = input.read(buffer)) != -1) {
+          output.write(buffer, 0, read);
+          if (read < buffer.length)
+            break;
+        }
+        result = true;
+      }
+      catch (IOException e) {
+        if (e.getMessage().equals("Stream closed")) {
+          ext = resource.replaceAll(".*\\.", "");
+          System.err.println("Resource '" + resource + "' not available?");
+        }
+        e.printStackTrace();
+        result = false;
+      }
+      catch (Exception e) {
+        e.printStackTrace();
+        result = false;
+      }
+
+      if (input != null) {
+        try {
+          input.close();
+        }
+        catch (Exception e) {
+          // ignored
+        }
+      }
+      if (output != null) {
+        try {
+          output.close();
+        }
+        catch (Exception e) {
+          // ignored
+        }
+      }
+
+      return result;
+    }
+
+    /**
+     * Removes the file from the tmp directory.
+     *
+     * @param filename	the file in the tmp directory to delete (no path!)
+     * @return		true if deleting succeeded or file not present
+     */
+    public boolean deleteFileFromTmp(String filename) {
+      boolean	result;
+      File	file;
+
+      result = true;
+      file   = new File(getTmpDirectory() + File.separator + filename);
+      if (file.exists())
+        result = file.delete();
+
+      return result;
+    }
+  
+    /**
+     * Called by JUnit before each test method.
+     *
+     * @throws Exception if an error occurs.
+     */
+    @Override
+    protected void setUp() throws Exception {
+      super.setUp();
+      copyResourceToTmp("testdata/spinworks.dx");
+      copyResourceToTmp("testdata/1567755.jdx");
+      copyResourceToTmp("testdata/cpd01.jdx");
+      copyResourceToTmp("testdata/bug1054.jdx");
+      copyResourceToTmp("testdata/bug1054withoutspace.jdx");
+      copyResourceToTmp("testdata/mzdiv-813_c.jdx");
+      copyResourceToTmp("testdata/ir_floats.jdx");
+      copyResourceToTmp("testdata/jcamp60.jdx");
+    }
+
+    /**
+     * Called by JUnit after each test method.
+     *
+     * @throws Exception	if tear-down fails
+     */
+    @Override
+    protected void tearDown() throws Exception {
+      super.tearDown();
+      deleteFileFromTmp("spinworks.dx");
+      deleteFileFromTmp("1567755.jdx");
+      deleteFileFromTmp("cpd01.jdx");
+      deleteFileFromTmp("bug1054.jdx");
+      deleteFileFromTmp("bug1054withoutspace.jdx");
+      deleteFileFromTmp("mzdiv-813_c.jdx");
+      deleteFileFromTmp("ir_floats.jdx");
+      deleteFileFromTmp("jcamp60.jdx");
+    }
+          
     public void testSpinworks() throws Exception{
 
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/spinworks.dx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/spinworks.dx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -41,7 +188,7 @@ public class TestParser extends TestCase
     public void testMoreThan49Peaks() throws Exception{
 
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/1567755.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/1567755.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -65,7 +212,7 @@ public class TestParser extends TestCase
     
     public void testPMR() throws Exception{
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/cpd01.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/cpd01.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -90,7 +237,7 @@ public class TestParser extends TestCase
 
     public void testBugBioclipse1054() throws Exception{
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/bug1054.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/bug1054.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -114,7 +261,7 @@ public class TestParser extends TestCase
     	
     public void testBugBioclipse1054withoutspace() throws Exception{
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/bug1054withoutspace.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/bug1054withoutspace.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -138,7 +285,7 @@ public class TestParser extends TestCase
 
     public void testMzdiv813() throws Exception{
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/mzdiv-813_c.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/mzdiv-813_c.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -165,7 +312,7 @@ public class TestParser extends TestCase
     
     public void testMzdiv813Relaxed() throws Exception{
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/mzdiv-813_c.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/mzdiv-813_c.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){
@@ -194,7 +341,7 @@ public class TestParser extends TestCase
     
 	public void testIR_floats() throws Exception{
       StringBuffer fileData = new StringBuffer(1000);
-      BufferedReader reader = new BufferedReader(new FileReader("testdata/ir_floats.jdx"));
+      BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/ir_floats.jdx"));
       char[] buf = new char[1024];
       int numRead=0;
       while((numRead=reader.read(buf)) != -1){
@@ -232,7 +379,7 @@ public class TestParser extends TestCase
  
     public void testBugJcamp60() throws Exception{
         StringBuffer fileData = new StringBuffer(1000);
-        BufferedReader reader = new BufferedReader(new FileReader("testdata/jcamp60.jdx"));
+        BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/jcamp60.jdx"));
         char[] buf = new char[1024];
         int numRead=0;
         while((numRead=reader.read(buf)) != -1){

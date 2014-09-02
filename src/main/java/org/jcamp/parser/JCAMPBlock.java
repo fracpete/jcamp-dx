@@ -26,15 +26,18 @@ public class JCAMPBlock {
     private ASDFDecoder asdfDecoder = new ASDFDecoder();
     private static Log log = LogFactory.getLog(JCAMPBlock.class);
     private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
-        public void fatal(String msg) throws JCAMPException {
+        @Override
+	public void fatal(String msg) throws JCAMPException {
             log.fatal(msg);
             throw new JCAMPException("FATAL ERROR! " + msg);
         }
-        public void error(String msg) throws JCAMPException {
+        @Override
+	public void error(String msg) throws JCAMPException {
             log.error(msg);
             throw new JCAMPException("ERROR! " + msg);
         }
-        public void warn(String msg) throws JCAMPException {
+        @Override
+	public void warn(String msg) throws JCAMPException {
             log.warn(msg);
         }
     };
@@ -46,7 +49,8 @@ public class JCAMPBlock {
             this.ordinal = ordinal;
             this.key = key;
         }
-        public String toString() {
+        @Override
+	public String toString() {
             return key;
         }
         public Collection types() {
@@ -55,10 +59,12 @@ public class JCAMPBlock {
         private Object readResolve() throws java.io.ObjectStreamException {
             return TYPES[ordinal];
         }
-        public final int hashCode() {
+        @Override
+	public final int hashCode() {
             return ordinal;
         }
-        public final boolean equals(Object obj) {
+        @Override
+	public final boolean equals(Object obj) {
             if (obj instanceof Type && ((Type) obj) == this)
                 return true;
             return false;
@@ -525,6 +531,21 @@ public class JCAMPBlock {
         this.ntuple = new JCAMPNTuple(this, startNTupleLDR, endNTupleLDR);
         this.ntupleBlock = true;
     }
+    
+    /**
+     * Parses the string as double.
+     * 
+     * @param s		the string to parse
+     * @return		the parsed double
+     */
+    private Double parseDouble(String s) {
+      try {
+	return new Double(s);
+      }
+      catch (NumberFormatException e) {
+	return new Double(s.replace(",", "."));
+      }
+    }
 
     /**
      * find definitions for all variables.
@@ -587,19 +608,19 @@ public class JCAMPBlock {
                 v.setUnit(ldr.getContent());
             ldr = getDataRecord("FIRST" + symbol);
             if (ldr != null)
-                v.setFirst(new Double(ldr.getContent()));
+                v.setFirst(parseDouble(ldr.getContent()));
             ldr = getDataRecord("LAST" + symbol);
             if (ldr != null)
-                v.setLast(new Double(ldr.getContent()));
+                v.setLast(parseDouble(ldr.getContent()));
             ldr = getDataRecord(symbol + "FACTOR");
             if (ldr != null)
-                v.setFactor(new Double(ldr.getContent()));
+                v.setFactor(parseDouble(ldr.getContent()));
             ldr = getDataRecord("MIN" + symbol);
             if (ldr != null)
-                v.setMin(new Double(ldr.getContent()));
+                v.setMin(parseDouble(ldr.getContent()));
             ldr = getDataRecord("MAX" + symbol);
             if (ldr != null)
-                v.setMin(new Double(ldr.getContent()));
+                v.setMax(parseDouble(ldr.getContent()));
             vars[i] = v;
         }
     }

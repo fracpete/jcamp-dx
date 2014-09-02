@@ -1,4 +1,5 @@
 New:
+* can be build using Apache Maven now as well
 * JCAMPReader now has a STRICT and RELAXED mode. For documentation, see STRICT constant in JCAMPReader. Further 
 usages of this flag should add documentation there.
 

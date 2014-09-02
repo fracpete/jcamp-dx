@@ -2,6 +2,7 @@
 */target/*
 */bin/*
 *~
+*.swp
 /build
 /target
 .classpath

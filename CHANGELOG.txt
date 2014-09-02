@@ -4,6 +4,7 @@ New:
 usages of this flag should add documentation there.
 
 Fixes:
+* numeric values in header can be format "#.#" or "#,#" now
 * Labels in a comment (like $$ ##TITLE=) confused the parser
 * The parser reader now shows same behaviour with respect to units first and second time (this influenced if hertz-ppm-conversion was done in nmr, so rather big effects)
 * Reading of floats in XYDATA not works (thanks to Ralf Tralow for that)

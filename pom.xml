@@ -42,6 +42,7 @@
       <organization>University of Waikato, NZ</organization>
       <organizationUrl>http://www.waikato.ac.nz/</organizationUrl>
       <roles>
+        <role>maintainer</role>
         <role>maven deployment</role>
       </roles>
     </developer>

@@ -9,7 +9,7 @@
   <packaging>jar</packaging>
 
   <name>jcamp-dx</name>
-  <description>The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard. </description>
+  <description>The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.</description>
   <url>https://code.google.com/p/jcamp-dx/</url>
   <licenses>
     <license>

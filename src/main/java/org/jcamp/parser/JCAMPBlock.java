@@ -242,7 +242,7 @@ public class JCAMPBlock {
       errorHandler.error("LDR \"##" + key + "=\" not found in block");
       return new JCAMPBlock(this.getJCAMP());
     }
-    StringBuffer newJCAMP = new StringBuffer();
+    StringBuilder newJCAMP = new StringBuilder();
     if (oldLDR.getStart() > 0) {
       newJCAMP.append(this.jcamp.substring(0, oldLDR.getStart() - 1));
       if (newJCAMP.charAt(newJCAMP.length() - 1) != '\n')
@@ -446,7 +446,7 @@ public class JCAMPBlock {
    */
   private void initBlocks() throws JCAMPException {
     int id = 0;
-    StringBuffer tmp = new StringBuffer();
+    StringBuilder tmp = new StringBuilder();
     BlockIterator blockIter = new BlockIterator(jcamp.substring(this.start, this.end));
     int o0 = start;
     int o1;

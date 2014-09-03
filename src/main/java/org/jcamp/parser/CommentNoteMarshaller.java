@@ -50,7 +50,7 @@ public class CommentNoteMarshaller implements IJCAMPNoteMarshaller {
    * @param value java.lang.Object
    */
   public String toJCAMP(Object value) {
-    StringBuffer label = new StringBuffer("##=");
+    StringBuilder label = new StringBuilder("##=");
     label.append(value.toString());
     int len = label.length();
     int line = len / 75;

@@ -98,7 +98,7 @@ public abstract class Peak
    */
   @Override
   public String toString() {
-    StringBuffer label = new StringBuffer("Peak[");
+    StringBuilder label = new StringBuilder("Peak[");
     for (int i = 0; i < position.length; i++) {
       label.append(position[i]);
       if (i < position.length - 1)

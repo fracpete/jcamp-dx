@@ -35,7 +35,7 @@ public class MSJCAMPWriter
    * @param ms MassSpectrum
    */
   private String buildPeakTable(int block, MassSpectrum ms) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = ms.getTitle();
     jcamp.append("##TITLE=").append(title != null ? title : "").append(CRLF);
     jcamp.append("##JCAMP-DX=5.00").append(CRLF);
@@ -79,7 +79,7 @@ public class MSJCAMPWriter
    */
   @Override
   protected String getJCAMPNotes(Spectrum spectrum) {
-    StringBuffer notesStr = new StringBuffer();
+    StringBuilder notesStr = new StringBuilder();
     Iterator notesIt = spectrum.getNotes().iterator();
     while (notesIt.hasNext()) {
       Note note = (Note) notesIt.next();
@@ -133,7 +133,7 @@ public class MSJCAMPWriter
     if (!(spectrum instanceof MassSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     MassSpectrum ms = (MassSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     // mass spectra are always peak spectra
     jcamp.append(buildPeakTable(0, ms));
     return jcamp.toString();

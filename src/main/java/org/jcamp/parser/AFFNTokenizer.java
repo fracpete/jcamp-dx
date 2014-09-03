@@ -195,7 +195,7 @@ public class AFFNTokenizer
    */
   private static String normalizeData(int groupLength, String orig)
       throws JCAMPException {
-    StringBuffer normal = new StringBuffer();
+    StringBuilder normal = new StringBuilder();
     boolean inNumber = false;
     int j = 0;
     for (int i = 0; i < orig.length(); i++) {

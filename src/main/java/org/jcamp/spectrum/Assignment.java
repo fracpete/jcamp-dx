@@ -47,6 +47,7 @@ public class Assignment
    * cloning.
    * @return java.lang.Object
    */
+  @Override
   public Object clone() {
 
     Assignment assign = null;
@@ -80,7 +81,7 @@ public class Assignment
     if (targets == null || targets.length == 0)
       return "<n/a>";
 
-    StringBuffer astr = new StringBuffer();
+    StringBuilder astr = new StringBuilder();
     astr.append("<");
     for (int i = 0; i < targets.length; i++) {
       astr.append(targets[i].getLabel());

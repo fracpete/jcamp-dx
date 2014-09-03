@@ -301,7 +301,7 @@ public class Pattern
    */
   @Override
   public String toString() {
-    StringBuffer label = new StringBuffer("Pattern[");
+    StringBuilder label = new StringBuilder("Pattern[");
     for (int i = 0; i < position.length; i++) {
       label.append(position[i]);
       if (i < position.length - 1)

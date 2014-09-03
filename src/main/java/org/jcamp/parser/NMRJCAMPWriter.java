@@ -36,7 +36,7 @@ public class NMRJCAMPWriter
    * @param nmr NMRSpectrum
    */
   private String buildAssignmentTable(int block, NMRSpectrum nmr) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Assignment[] assigns = nmr.getAssignments();
     String title = nmr.getTitle();
     String origin = nmr.getOrigin();
@@ -83,7 +83,7 @@ public class NMRJCAMPWriter
    * @param nmr NMRFIDSpectrum
    */
   private String buildFIDData(int block, NMRFIDSpectrum nmr) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     int n = nmr.getXData().getLength();
     double x0 = nmr.getXData().pointAt(0);
     double x1 = nmr.getXData().pointAt(n - 1);
@@ -138,7 +138,7 @@ public class NMRJCAMPWriter
    * @param nmr NMRSpectrum
    */
   private String buildFSData(int block, NMRSpectrum nmr) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     int n = nmr.getXData().getLength();
     double x0 = nmr.getXData().pointAt(0);
     double x1 = nmr.getXData().pointAt(n - 1);
@@ -204,7 +204,7 @@ public class NMRJCAMPWriter
    * @param nmr NMRSpectrum
    */
   private String buildPatternTable(int block, NMRSpectrum nmr) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Pattern[] pattern = nmr.getPatternTable();
     String title = nmr.getTitle();
     int n = pattern.length;
@@ -240,7 +240,7 @@ public class NMRJCAMPWriter
    * @param nmr NMRSpectrum
    */
   private String buildPeakTable(int block, NMRSpectrum nmr) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Peak1D[] peaks = nmr.getPeakTable();
     int n = peaks.length;
     String title = nmr.getTitle();
@@ -277,7 +277,7 @@ public class NMRJCAMPWriter
    * @return java.lang.String
    */
   protected String getJCAMPNotes(Spectrum spectrum) {
-    StringBuffer notesStr = new StringBuffer();
+    StringBuilder notesStr = new StringBuilder();
     Iterator notesIt = spectrum.getNotes().iterator();
     while (notesIt.hasNext()) {
       Note note = (Note) notesIt.next();
@@ -301,7 +301,7 @@ public class NMRJCAMPWriter
     if (!(spectrum instanceof NMRSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     NMRSpectrum nmr = (NMRSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = nmr.getTitle();
     // main data
     int nDataBlocks = 1;
@@ -369,7 +369,7 @@ public class NMRJCAMPWriter
     if (!(spectrum instanceof NMRSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     NMRSpectrum nmr = (NMRSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     // main data
     if (nmr.isFullSpectrum()) {
       if (nmr.isFID()) {

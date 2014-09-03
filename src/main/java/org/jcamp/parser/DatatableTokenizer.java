@@ -372,7 +372,7 @@ public class DatatableTokenizer
    * @param orig java.lang.String
    */
   private static String normalizeData(int groupLength, String orig) throws JCAMPException {
-    StringBuffer normal = new StringBuffer();
+    StringBuilder normal = new StringBuilder();
     boolean inDataValue = false;
     boolean inQuote = false;
     int j = 0;

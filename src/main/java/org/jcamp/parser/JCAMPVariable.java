@@ -367,7 +367,7 @@ public class JCAMPVariable
    */
   @Override
   public String toString() {
-    StringBuffer tmp = new StringBuffer(getSymbol());
+    StringBuilder tmp = new StringBuilder(getSymbol());
     tmp.append(": ");
     tmp.append(type);
     if (type.equals(Type.INDEPENDENT) && first != null && last != null) {

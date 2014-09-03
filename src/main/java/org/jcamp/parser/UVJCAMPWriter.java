@@ -37,7 +37,7 @@ public class UVJCAMPWriter
    * @param uv UVSpectrum
    */
   private String buildAssignmentTable(int block, UVSpectrum uv) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Assignment[] assigns = uv.getAssignments();
     String title = uv.getTitle();
     int n = assigns.length;
@@ -68,7 +68,7 @@ public class UVJCAMPWriter
    * @param uv UVSpectrum
    */
   private String buildFSData(int block, UVSpectrum uv) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     int n = uv.getXData().getLength();
     double x0 = uv.getXData().pointAt(0);
     double x1 = uv.getXData().pointAt(n - 1);
@@ -108,7 +108,7 @@ public class UVJCAMPWriter
    * @param uv UVSpectrum
    */
   private String buildPeakTable(int block, UVSpectrum uv) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = uv.getTitle();
     jcamp.append("##TITLE=").append(title != null ? title : "").append(CRLF);
     jcamp.append("##JCAMP-DX=4.24").append(CRLF);
@@ -152,7 +152,7 @@ public class UVJCAMPWriter
    */
   @Override
   protected String getJCAMPNotes(Spectrum spectrum) {
-    StringBuffer notesStr = new StringBuffer();
+    StringBuilder notesStr = new StringBuilder();
     Iterator notesIt = spectrum.getNotes().iterator();
     while (notesIt.hasNext()) {
       Note note = (Note) notesIt.next();
@@ -216,7 +216,7 @@ public class UVJCAMPWriter
     if (!(spectrum instanceof UVSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     UVSpectrum uv = (UVSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = uv.getTitle();
     // main data
     int nDataBlocks = 1;
@@ -266,7 +266,7 @@ public class UVJCAMPWriter
     if (!(spectrum instanceof UVSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     UVSpectrum uv = (UVSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     if (uv.isFullSpectrum()) {
       jcamp.append(buildFSData(0, uv));
     } else { // peak spectrum

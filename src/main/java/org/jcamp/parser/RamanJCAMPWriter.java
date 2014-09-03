@@ -37,7 +37,7 @@ public class RamanJCAMPWriter
    * @param raman RamanSpectrum
    */
   private String buildAssignmentTable(int block, RamanSpectrum raman) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Assignment[] assigns = raman.getAssignments();
     String title = raman.getTitle();
     int n = assigns.length;
@@ -68,7 +68,7 @@ public class RamanJCAMPWriter
    * @param raman RamanSpectrum
    */
   private String buildFSData(int block, RamanSpectrum raman) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     int n = raman.getXData().getLength();
     double x0 = raman.getXData().pointAt(0);
     double x1 = raman.getXData().pointAt(n - 1);
@@ -108,7 +108,7 @@ public class RamanJCAMPWriter
    * @param raman RamanSpectrum
    */
   private String buildPeakTable(int block, RamanSpectrum raman) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = raman.getTitle();
     jcamp.append("##TITLE=").append(title != null ? title : "").append(CRLF);
     jcamp.append("##JCAMP-DX=4.24").append(CRLF);
@@ -152,7 +152,7 @@ public class RamanJCAMPWriter
    */
   @Override
   protected String getJCAMPNotes(Spectrum spectrum) {
-    StringBuffer notesStr = new StringBuffer();
+    StringBuilder notesStr = new StringBuilder();
     Iterator notesIt = spectrum.getNotes().iterator();
     while (notesIt.hasNext()) {
       Note note = (Note) notesIt.next();
@@ -216,7 +216,7 @@ public class RamanJCAMPWriter
     if (!(spectrum instanceof RamanSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     RamanSpectrum raman = (RamanSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = raman.getTitle();
     // main data
     int nDataBlocks = 1;
@@ -266,7 +266,7 @@ public class RamanJCAMPWriter
     if (!(spectrum instanceof RamanSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     RamanSpectrum raman = (RamanSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     // main data
     if (raman.isFullSpectrum()) {
       jcamp.append(buildFSData(0, raman));

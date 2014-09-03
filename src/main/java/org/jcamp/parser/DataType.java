@@ -31,7 +31,7 @@ public final class DataType
   private DataType(int ordinal, String[] symbols) {
     this.ordinal = ordinal;
     this.symbols = symbols;
-    StringBuffer tmp = new StringBuffer();
+    StringBuilder tmp = new StringBuilder();
     for (int i = 0; i < symbols.length; i++)
       tmp.append(symbols[i]);
     key = tmp.toString();

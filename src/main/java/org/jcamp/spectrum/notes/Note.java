@@ -181,7 +181,7 @@ public class Note
    */
   @Override
   public String toString() {
-    StringBuffer tmp = new StringBuffer("[").append(getDescriptor().toString()).append("] ");
+    StringBuilder tmp = new StringBuilder("[").append(getDescriptor().toString()).append("] ");
     if (fieldValue != null)
       tmp.append("\"").append(fieldValue.toString()).append("\"");
     else

@@ -161,7 +161,7 @@ public class TestParser extends TestCase {
 
   public void testSpinworks() throws Exception{
 
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/spinworks.dx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -185,7 +185,7 @@ public class TestParser extends TestCase {
 
   public void testMoreThan49Peaks() throws Exception{
 
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/1567755.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -208,7 +208,7 @@ public class TestParser extends TestCase {
   }
 
   public void testPMR() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/cpd01.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -233,7 +233,7 @@ public class TestParser extends TestCase {
   }
 
   public void testBugBioclipse1054() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/bug1054.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -257,7 +257,7 @@ public class TestParser extends TestCase {
   }
 
   public void testBugBioclipse1054withoutspace() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/bug1054withoutspace.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -281,7 +281,7 @@ public class TestParser extends TestCase {
   }
 
   public void testMzdiv813() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/mzdiv-813_c.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -308,7 +308,7 @@ public class TestParser extends TestCase {
   }
 
   public void testMzdiv813Relaxed() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/mzdiv-813_c.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -337,7 +337,7 @@ public class TestParser extends TestCase {
 
 
   public void testIR_floats() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/ir_floats.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -375,7 +375,7 @@ public class TestParser extends TestCase {
   }
 
   public void testBugJcamp60() throws Exception{
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/jcamp60.jdx"));
     char[] buf = new char[1024];
     int numRead=0;
@@ -391,7 +391,7 @@ public class TestParser extends TestCase {
   }
 
   public void testDoubleFormat() throws Exception {
-    StringBuffer fileData = new StringBuffer(1000);
+    StringBuilder fileData = new StringBuilder(1000);
     BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/doubleformat.jdx"));
     char[] buf = new char[1024];
     int numRead=0;

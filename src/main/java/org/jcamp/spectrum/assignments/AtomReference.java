@@ -121,6 +121,6 @@ public class AtomReference
    */
   @Override
   public String toString() {
-    return new StringBuffer().append(structure).append(" <").append(atomNo).append(">").toString();
+    return new StringBuilder().append(structure).append(" <").append(atomNo).append(">").toString();
   }
 }

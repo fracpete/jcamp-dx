@@ -37,7 +37,7 @@ public class FluorescenceJCAMPWriter
    * @param uv FluorescenceSpectrum
    */
   private String buildAssignmentTable(int block, FluorescenceSpectrum fl) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Assignment[] assigns = fl.getAssignments();
     String title = fl.getTitle();
     int n = assigns.length;
@@ -69,7 +69,7 @@ public class FluorescenceJCAMPWriter
    * @param uv FluorescenceSpectrum
    */
   private String buildFSData(int block, FluorescenceSpectrum fl) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     int n = fl.getXData().getLength();
     double x0 = fl.getXData().pointAt(0);
     double x1 = fl.getXData().pointAt(n - 1);
@@ -110,7 +110,7 @@ public class FluorescenceJCAMPWriter
    * @param uv FluorescenceSpectrum
    */
   private String buildPeakTable(int block, FluorescenceSpectrum fl) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = fl.getTitle();
     jcamp.append("##TITLE=").append(title != null ? title : "").append(CRLF);
     jcamp.append("##JCAMP-DX=4.24").append(CRLF);
@@ -154,7 +154,7 @@ public class FluorescenceJCAMPWriter
    * @return java.lang.String
    */
   protected String getJCAMPNotes(Spectrum spectrum) {
-    StringBuffer notesStr = new StringBuffer();
+    StringBuilder notesStr = new StringBuilder();
     Iterator notesIt = spectrum.getNotes().iterator();
     while (notesIt.hasNext()) {
       Note note = (Note) notesIt.next();
@@ -221,7 +221,7 @@ public class FluorescenceJCAMPWriter
     if (!(spectrum instanceof FluorescenceSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     FluorescenceSpectrum uv = (FluorescenceSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = uv.getTitle();
     // main data
     int nDataBlocks = 1;
@@ -271,7 +271,7 @@ public class FluorescenceJCAMPWriter
     if (!(spectrum instanceof FluorescenceSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     FluorescenceSpectrum uv = (FluorescenceSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     if (uv.isFullSpectrum()) {
       jcamp.append(buildFSData(0, uv));
     } else { // peak spectrum

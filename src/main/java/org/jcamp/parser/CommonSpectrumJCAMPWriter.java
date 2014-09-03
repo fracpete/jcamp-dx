@@ -22,7 +22,7 @@ public CommonSpectrumJCAMPWriter() {
  * @return java.lang.String
  */
 protected String getJCAMPNotes(Spectrum spectrum) {
-	StringBuffer notesStr = new StringBuffer();
+	StringBuilder notesStr = new StringBuilder();
 	Iterator notesIt = spectrum.getNotes().iterator();
 	while (notesIt.hasNext()) {
 		Note note = (Note) notesIt.next();

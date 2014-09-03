@@ -606,8 +606,8 @@ abstract class CommonSpectrumJCAMPReader
 	      descr.getNoteContentClass());
       spectrum.setNote(descr, content);
     } catch (org.jcamp.spectrum.notes.BadContentException ex) {
-      StringBuffer msg =
-	  new StringBuffer("bad ").append(descr.getName()).append(" note:\n").append(
+      StringBuilder msg =
+	  new StringBuilder("bad ").append(descr.getName()).append(" note:\n").append(
 	      ex.getMessage());
       block.getErrorHandler().warn(msg.toString());
     }

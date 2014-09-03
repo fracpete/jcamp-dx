@@ -36,7 +36,7 @@ public class IRJCAMPWriter
    * @param ir IRSpectrum
    */
   private String buildAssignmentTable(int block, IRSpectrum ir) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     Assignment[] assigns = ir.getAssignments();
     String title = ir.getTitle();
     int n = assigns.length;
@@ -67,7 +67,7 @@ public class IRJCAMPWriter
    * @param ir IRSpectrum
    */
   private String buildFSData(int block, IRSpectrum ir) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     int n = ir.getXData().getLength();
     double x0 = ir.getXData().pointAt(0);
     double x1 = ir.getXData().pointAt(n - 1);
@@ -107,7 +107,7 @@ public class IRJCAMPWriter
    * @param ir IRSpectrum
    */
   private String buildPeakTable(int block, IRSpectrum ir) {
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = ir.getTitle();
     jcamp.append("##TITLE=").append(title != null ? title : "").append(CRLF);
     jcamp.append("##JCAMP-DX=4.24").append(CRLF);
@@ -151,7 +151,7 @@ public class IRJCAMPWriter
    */
   @Override
   protected String getJCAMPNotes(Spectrum spectrum) {
-    StringBuffer notesStr = new StringBuffer();
+    StringBuilder notesStr = new StringBuilder();
     Iterator notesIt = spectrum.getNotes().iterator();
     while (notesIt.hasNext()) {
       Note note = (Note) notesIt.next();
@@ -215,7 +215,7 @@ public class IRJCAMPWriter
     if (!(spectrum instanceof IRSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     IRSpectrum ir = (IRSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     String title = ir.getTitle();
     // main data
     int nDataBlocks = 1;
@@ -265,7 +265,7 @@ public class IRJCAMPWriter
     if (!(spectrum instanceof IRSpectrum))
       throw new JCAMPException("JCAMP adapter missmatch");
     IRSpectrum ir = (IRSpectrum) spectrum;
-    StringBuffer jcamp = new StringBuffer();
+    StringBuilder jcamp = new StringBuilder();
     // main data
     if (ir.isFullSpectrum()) {
       jcamp.append(buildFSData(0, ir));

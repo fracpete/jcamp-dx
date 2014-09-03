@@ -159,10 +159,16 @@ public class TestParser extends TestCase {
     deleteFileFromTmp("doubleformat.jdx");
   }
 
-  public void testSpinworks() throws Exception{
-
+  /**
+   * Reads the file into a StringBuilder.
+   * 
+   * @param file	the file to read
+   * @return		the content
+   * @throws Exception	if reading of file fails
+   */
+  protected StringBuilder readFile(String file) throws Exception {
     StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/spinworks.dx"));
+    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + File.separator + file));
     char[] buf = new char[1024];
     int numRead=0;
     while((numRead=reader.read(buf)) != -1){
@@ -171,8 +177,11 @@ public class TestParser extends TestCase {
       buf = new char[1024];
     }
     reader.close();
-
-
+    return fileData;
+  }
+  
+  public void testSpinworks() throws Exception{
+    StringBuilder fileData = readFile("spinworks.dx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof NMRSpectrum)) {
       throw new Exception("Spectrum in file is not an NMR spectrum!");
@@ -184,18 +193,7 @@ public class TestParser extends TestCase {
   }
 
   public void testMoreThan49Peaks() throws Exception{
-
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/1567755.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
+    StringBuilder fileData = readFile("1567755.jdx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof MassSpectrum)) {
       throw new Exception("Spectrum in file is not an mass spectrum!");
@@ -208,18 +206,7 @@ public class TestParser extends TestCase {
   }
 
   public void testPMR() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/cpd01.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
-
+    StringBuilder fileData = readFile("cpd01.jdx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof MassSpectrum)) {
       throw new Exception("Spectrum in file is not an mass spectrum!");
@@ -233,18 +220,7 @@ public class TestParser extends TestCase {
   }
 
   public void testBugBioclipse1054() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/bug1054.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
-
+    StringBuilder fileData = readFile("bug1054.jdx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof MassSpectrum)) {
       throw new Exception("Spectrum in file is not an mass spectrum!");
@@ -257,18 +233,7 @@ public class TestParser extends TestCase {
   }
 
   public void testBugBioclipse1054withoutspace() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/bug1054withoutspace.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
-
+    StringBuilder fileData = readFile("bug1054withoutspace.jdx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof MassSpectrum)) {
       throw new Exception("Spectrum in file is not an mass spectrum!");
@@ -281,17 +246,7 @@ public class TestParser extends TestCase {
   }
 
   public void testMzdiv813() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/mzdiv-813_c.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
+    StringBuilder fileData = readFile("mzdiv-813_c.jdx");
     //we should get the same values when reading twice
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof NMRSpectrum)) {
@@ -308,17 +263,7 @@ public class TestParser extends TestCase {
   }
 
   public void testMzdiv813Relaxed() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/mzdiv-813_c.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
+    StringBuilder fileData = readFile("mzdiv-813_c.jdx");
     //we should get the same values when reading twice
     Spectrum jcampSpectrum = JCAMPReader.getInstance(true, JCAMPReader.RELAXED).createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof NMRSpectrum)) {
@@ -334,20 +279,8 @@ public class TestParser extends TestCase {
     assertEquals(firstvalue,nmrspectrum.getXData().toArray()[0],.1);
   }
 
-
-
   public void testIR_floats() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/ir_floats.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
+    StringBuilder fileData = readFile("ir_floats.jdx");
     //we should get the same values when reading twice
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof IRSpectrum)) {
@@ -375,33 +308,13 @@ public class TestParser extends TestCase {
   }
 
   public void testBugJcamp60() throws Exception{
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/jcamp60.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
+    StringBuilder fileData = readFile("jcamp60.jdx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     assertTrue(jcampSpectrum instanceof NMRSpectrum);
   }
 
   public void testDoubleFormat() throws Exception {
-    StringBuilder fileData = new StringBuilder(1000);
-    BufferedReader reader = new BufferedReader(new FileReader(getTmpDirectory() + "/doubleformat.jdx"));
-    char[] buf = new char[1024];
-    int numRead=0;
-    while((numRead=reader.read(buf)) != -1){
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    reader.close();
-
+    StringBuilder fileData = readFile("doubleformat.jdx");
     Spectrum jcampSpectrum = JCAMPReader.getInstance().createSpectrum(fileData.toString());
     if (!(jcampSpectrum instanceof MassSpectrum)) {
       throw new Exception("Spectrum in file is not an mass spectrum!");

@@ -25,14 +25,14 @@
       <name>Thomas Weber</name>
       <organization>Creon Lab Control</organization>
       <roles>
-        <role>author</role>
+        <role>original author</role>
       </roles>
     </developer>
     <developer>
       <id>skuhn</id>
       <name>Stefan Kuhn</name>
       <roles>
-        <role>author</role>
+        <role>original author</role>
       </roles>
     </developer>
     <developer>

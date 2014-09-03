@@ -1,5 +1,7 @@
 package org.jcamp.parser;
 
+import java.io.IOException;
+import java.io.Reader;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
@@ -119,11 +121,30 @@ public class JCAMPReader {
   }
 
   /**
+   * Create spectrum from JCAMP-DX reader. Caller must close reader.
+   * 
+   * @return Spectrum
+   * @param reader JCAMP-DX source
+   * @throws JCAMPException The exception description.
+   */
+  public Spectrum createSpectrum(Reader reader) throws IOException, JCAMPException {
+    StringBuilder fileData = new StringBuilder();
+    char[] buf = new char[1024];
+    int numRead=0;
+    while ((numRead=reader.read(buf)) != -1) {
+      String readData = String.valueOf(buf, 0, numRead);
+      fileData.append(readData);
+      buf = new char[1024];
+    }
+    return createSpectrum(fileData.toString());
+  }
+
+  /**
    * create spectrum from JCAMP-DX string.
    * 
    * @return Spectrum
    * @param jcamp JCAMP-DX source
-   * @exception JCAMPException The exception description.
+   * @throws JCAMPException The exception description.
    */
   public Spectrum createSpectrum(String jcamp) throws JCAMPException {
     JCAMPBlock block = new JCAMPBlock(jcamp, errorHandler);

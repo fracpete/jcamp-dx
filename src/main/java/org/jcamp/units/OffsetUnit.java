@@ -1,140 +1,158 @@
 package org.jcamp.units;
 /**
- * unit created by adding an offset to another unit
+ * unit created by adding an offset to another unit.
+ * 
  * @author Thomas Weber
  */
-public final class OffsetUnit extends Unit {
-    Unit unit;
-    double offset;
-    String symbol;
-    String name;
-    /**
-     * cloning.
-     * 
-     * @return java.lang.Object
-     */
-    public Object clone() {
-        OffsetUnit unit = (OffsetUnit) super.clone();
-        unit.unit = (Unit) this.unit.clone();
-        return unit;
-    }
+public final class OffsetUnit
+  extends Unit {
+  
+  /** for serialization. */
+  private static final long serialVersionUID = 7394622355294421470L;
 
-    /**
-     * ScaledUnit constructor comment.
-     * @param identifier java.lang.String
-     */
-    public OffsetUnit(BaseUnit unit, double offset, String name, String symbol) {
-        this((Unit) unit, offset, name, symbol);
-    }
+  Unit unit;
+  
+  double offset;
+  
+  String symbol;
+  
+  String name;
+  
+  /**
+   * cloning.
+   * 
+   * @return java.lang.Object
+   */
+  @Override
+  public Object clone() {
+    OffsetUnit unit = (OffsetUnit) super.clone();
+    unit.unit = (Unit) this.unit.clone();
+    return unit;
+  }
 
-    /**
-     * ScaledUnit constructor comment.
-     * @param identifier java.lang.String
-     */
-    public OffsetUnit(DerivedUnit unit, double offset, String name, String symbol) {
-        this((Unit) unit, offset, name, symbol);
-    }
+  /**
+   * ScaledUnit constructor comment.
+   * @param identifier java.lang.String
+   */
+  public OffsetUnit(BaseUnit unit, double offset, String name, String symbol) {
+    this((Unit) unit, offset, name, symbol);
+  }
 
-    /**
-     * ScaledUnit constructor comment.
-     * @param identifier java.lang.String
-     */
-    public OffsetUnit(ScaledUnit unit, double offset, String name, String symbol) {
-        this((Unit) unit, offset, name, symbol);
-    }
+  /**
+   * ScaledUnit constructor comment.
+   * @param identifier java.lang.String
+   */
+  public OffsetUnit(DerivedUnit unit, double offset, String name, String symbol) {
+    this((Unit) unit, offset, name, symbol);
+  }
 
-    /**
-     * ScaledUnit constructor comment.
-     * @param identifier java.lang.String
-     */
-    private OffsetUnit(Unit unit, double offset, String name, String symbol) {
-        super(name, symbol);
-        this.unit = unit;
-        this.offset = offset;
-        this.name = name;
-        this.symbol = symbol;
-    }
+  /**
+   * ScaledUnit constructor comment.
+   * @param identifier java.lang.String
+   */
+  public OffsetUnit(ScaledUnit unit, double offset, String name, String symbol) {
+    this((Unit) unit, offset, name, symbol);
+  }
 
-    /**
-     * convert value from unit <code>thatUnit</code> to this unit.
-     * @param value double
-     * @param thatUnit Unit
-     * @return double
-     */
-    public double convertFrom(double value, Unit thatUnit) throws UnitException {
-        if (isConvertibleTo(thatUnit)) {
-            if ((thatUnit instanceof ScaledUnit)
-                || (thatUnit instanceof BaseUnit)
-                || (thatUnit instanceof DerivedUnit))
-                return value * thatUnit.getScaleFactor() / getScaleFactor() - offset;
-            else
-                return thatUnit.convertTo(value, this);
-        } else
-            throw new UnitException("units not convertible");
-    }
+  /**
+   * ScaledUnit constructor comment.
+   * @param identifier java.lang.String
+   */
+  private OffsetUnit(Unit unit, double offset, String name, String symbol) {
+    super(name, symbol);
+    this.unit = unit;
+    this.offset = offset;
+    this.name = name;
+    this.symbol = symbol;
+  }
 
-    /**
-     * convert value to unit <code>thatUnit</code> from this unit.
-     * @param value double
-     * @param thatUnit Unit
-     * @return double
-     */
-    public double convertTo(double value, Unit thatUnit) throws UnitException {
-        if (isConvertibleTo(thatUnit)) {
-            if ((thatUnit instanceof ScaledUnit)
-                || (thatUnit instanceof BaseUnit)
-                || (thatUnit instanceof DerivedUnit))
-                return value * thatUnit.getScaleFactor() / getScaleFactor() + offset;
-            else
-                return thatUnit.convertFrom(value, this);
-        } else
-            throw new UnitException("units not convertible");
-    }
+  /**
+   * convert value from unit <code>thatUnit</code> to this unit.
+   * @param value double
+   * @param thatUnit Unit
+   * @return double
+   */
+  @Override
+  public double convertFrom(double value, Unit thatUnit) throws UnitException {
+    if (isConvertibleTo(thatUnit)) {
+      if ((thatUnit instanceof ScaledUnit)
+	  || (thatUnit instanceof BaseUnit)
+	  || (thatUnit instanceof DerivedUnit))
+	return value * thatUnit.getScaleFactor() / getScaleFactor() - offset;
+      else
+	return thatUnit.convertTo(value, this);
+    } else
+      throw new UnitException("units not convertible");
+  }
 
-    /**
-     * getDefinition method comment.
-     */
-    public java.lang.String getName() {
-        return name;
-    }
+  /**
+   * convert value to unit <code>thatUnit</code> from this unit.
+   * @param value double
+   * @param thatUnit Unit
+   * @return double
+   */
+  @Override
+  public double convertTo(double value, Unit thatUnit) throws UnitException {
+    if (isConvertibleTo(thatUnit)) {
+      if ((thatUnit instanceof ScaledUnit)
+	  || (thatUnit instanceof BaseUnit)
+	  || (thatUnit instanceof DerivedUnit))
+	return value * thatUnit.getScaleFactor() / getScaleFactor() + offset;
+      else
+	return thatUnit.convertFrom(value, this);
+    } else
+      throw new UnitException("units not convertible");
+  }
 
-    /**
-     * gets quantity.
-     * @return String
-     */
-    public java.lang.String getQuantity() {
-        return unit.getQuantity();
-    }
+  /**
+   * getDefinition method comment.
+   */
+  @Override
+  public java.lang.String getName() {
+    return name;
+  }
 
-    /**
-     * gets scale factor.
-     * @return double
-     */
-    public double getScaleFactor() {
-        return unit.getScaleFactor();
-    }
+  /**
+   * gets quantity.
+   * @return String
+   */
+  @Override
+  public java.lang.String getQuantity() {
+    return unit.getQuantity();
+  }
 
-    /**
-     * getDefinition method comment.
-     */
-    public java.lang.String getSymbol() {
-        return symbol;
-    }
+  /**
+   * gets scale factor.
+   * @return double
+   */
+  @Override
+  public double getScaleFactor() {
+    return unit.getScaleFactor();
+  }
 
-    /**
-     * checks if unit is convertible to unit <code>thatUnit</code>.
-     * @param thatUnit Unit
-     * @return boolean
-     */
-    public boolean isConvertibleTo(Unit thatUnit) {
-        if (thatUnit instanceof OffsetUnit)
-            return unit.isConvertibleTo(((OffsetUnit) thatUnit).unit);
-        else if (thatUnit instanceof ScaledUnit)
-            return unit.isConvertibleTo(((ScaledUnit) thatUnit).unit);
-        else if (thatUnit instanceof BaseUnit)
-            return unit.isConvertibleTo((BaseUnit) thatUnit);
-        else if (thatUnit instanceof DerivedUnit)
-            return unit.isConvertibleTo((DerivedUnit) thatUnit);
-        return false;
-    }
+  /**
+   * getDefinition method comment.
+   */
+  @Override
+  public java.lang.String getSymbol() {
+    return symbol;
+  }
+
+  /**
+   * checks if unit is convertible to unit <code>thatUnit</code>.
+   * @param thatUnit Unit
+   * @return boolean
+   */
+  @Override
+  public boolean isConvertibleTo(Unit thatUnit) {
+    if (thatUnit instanceof OffsetUnit)
+      return unit.isConvertibleTo(((OffsetUnit) thatUnit).unit);
+    else if (thatUnit instanceof ScaledUnit)
+      return unit.isConvertibleTo(((ScaledUnit) thatUnit).unit);
+    else if (thatUnit instanceof BaseUnit)
+      return unit.isConvertibleTo((BaseUnit) thatUnit);
+    else if (thatUnit instanceof DerivedUnit)
+      return unit.isConvertibleTo((DerivedUnit) thatUnit);
+    return false;
+  }
 }

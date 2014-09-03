@@ -1,5 +1,7 @@
 package org.jcamp.math;
+
 import java.io.Serializable;
+
 /**
  * abstract base class for grid topologies.
  * (grid values must be strict monotone in all dimensions).
@@ -7,108 +9,118 @@ import java.io.Serializable;
  * real world values into grid coordinates possible.
  * used for independend data in spectra and data mappings to
  * axes.
+ * 
  * @author Thomas Weber
  */
-public abstract class Grid extends OrderedArray implements Cloneable, Serializable {
-    /**
-     * Grid constructor comment.
-     */
-    public Grid() {
-        super();
-    }
+public abstract class Grid
+  extends OrderedArray 
+  implements Cloneable, Serializable {
+  
+  /** for serialization. */
+  private static final long serialVersionUID = -2843269058848877668L;
 
-    /**
-     * Grid constructor comment.
-     */
-    public Grid(int length) {
-        super(length);
-    }
+  /**
+   * Grid constructor comment.
+   */
+  public Grid() {
+    super();
+  }
 
-    /**
-     * cloning
-     * 
-     * @return java.lang.Object
-     */
-    public Object clone() {
-        Grid grid = null;
-        //	try {
-        grid = (Grid) super.clone();
-        //	} catch( CloneNotSupportedException e) {}
-        return grid;
-    }
+  /**
+   * Grid constructor comment.
+   */
+  public Grid(int length) {
+    super(length);
+  }
 
-    /**
-    * convert n-dimensional real world value into
-    * n-dimension grid coordinate
-    * @param value double []
-    * @return double []
-    */
-    public abstract double[] coordinateAt(double[] value);
+  /**
+   * cloning
+   * 
+   * @return java.lang.Object
+   */
+  @Override
+  public Object clone() {
+    Grid grid = null;
+    //	try {
+    grid = (Grid) super.clone();
+    //	} catch( CloneNotSupportedException e) {}
+    return grid;
+  }
 
-    /**
-    * convert 1- or 2-dimensional real world value array into
-    * grid coordinate array
-    * @param values double [][]
-    * @return double [][]
-    */
-    public abstract double[][] coordinatesAt(double[][] values);
+  /**
+   * convert n-dimensional real world value into
+   * n-dimension grid coordinate
+   * @param value double []
+   * @return double []
+   */
+  public abstract double[] coordinateAt(double[] value);
 
-    /**
-    * return grid point at index
-    * n-dimension grid coordinate
-    * @param value double []
-    * @return double []
-    */
-    public double[] elementAt(int index) {
-        return gridPointAt(index);
-    }
+  /**
+   * convert 1- or 2-dimensional real world value array into
+   * grid coordinate array
+   * @param values double [][]
+   * @return double [][]
+   */
+  public abstract double[][] coordinatesAt(double[][] values);
 
-    /**
-    * return grid points at indices
-    * @param value double [][]
-    * @return double [][]
-    */
-    public double[][] elementsAt(int[] indices) {
-        return gridPointsAt(indices);
-    }
+  /**
+   * return grid point at index
+   * n-dimension grid coordinate
+   * @param value double []
+   * @return double []
+   */
+  @Override
+  public double[] elementAt(int index) {
+    return gridPointAt(index);
+  }
 
-    /**
-    * return grid point at index
-    * n-dimension grid coordinate
-    * @param value double []
-    * @return double []
-    */
-    public abstract double[] gridPointAt(int index);
+  /**
+   * return grid points at indices
+   * @param value double [][]
+   * @return double [][]
+   */
+  @Override
+  public double[][] elementsAt(int[] indices) {
+    return gridPointsAt(indices);
+  }
 
-    /**
-    * return grid points at indices
-    * @param value double [][]
-    * @return double [][]
-    */
-    public abstract double[][] gridPointsAt(int[] indices);
+  /**
+   * return grid point at index
+   * n-dimension grid coordinate
+   * @param value double []
+   * @return double []
+   */
+  public abstract double[] gridPointAt(int index);
 
-    /**
-     * return index of nearest grid point at position <code>position</code>.
-     */
-    public abstract int indexAt(double[] position);
+  /**
+   * return grid points at indices
+   * @param value double [][]
+   * @return double [][]
+   */
+  public abstract double[][] gridPointsAt(int[] indices);
 
-    /**
-     * return indices of nearest grid points at positions <code>positions</code>.
-     */
-    public abstract int[] indicesAt(double[][] positions);
+  /**
+   * return index of nearest grid point at position <code>position</code>.
+   */
+  public abstract int indexAt(double[] position);
 
-    /**
-    * convert n-dimensional grid coordinate into real world coordinate
-    * @param grid double []
-    * @return double []
-     */
-    public abstract double[] valueAt(double[] grid);
+  /**
+   * return indices of nearest grid points at positions <code>positions</code>.
+   */
+  public abstract int[] indicesAt(double[][] positions);
 
-    /**
-    * convert n-dimensional grid coordinate into real world coordinate
-    * real world data array
-    * @param grid double [][]
-    * @return double [][]
-     */
-    public abstract double[][] valuesAt(double[][] grid);
+  /**
+   * convert n-dimensional grid coordinate into real world coordinate
+   * @param grid double []
+   * @return double []
+   */
+  public abstract double[] valueAt(double[] grid);
+
+  /**
+   * convert n-dimensional grid coordinate into real world coordinate
+   * real world data array
+   * @param grid double [][]
+   * @return double [][]
+   */
+  public abstract double[][] valuesAt(double[][] grid);
 }

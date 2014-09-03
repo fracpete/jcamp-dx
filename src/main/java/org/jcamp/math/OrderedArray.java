@@ -1,34 +1,43 @@
 package org.jcamp.math;
+
 import java.io.Serializable;
+
 /**
  * extended array with sorted values.
+ * 
  * @author Thomas Weber
  */
-public abstract class OrderedArray extends Array implements Cloneable, Serializable {
+public abstract class OrderedArray
+  extends Array
+  implements Cloneable, Serializable {
 
-    /**
-     * OrderedArray constructor comment.
-     */
-    public OrderedArray() {
-        super();
-    }
+  /** for serialization. */
+  private static final long serialVersionUID = 5527645205009351239L;
 
-    /**
-     * OrderedArray constructor comment.
-     * @param length int
-     */
-    public OrderedArray(int length) {
-        super(length);
-    }
+  /**
+   * OrderedArray constructor comment.
+   */
+  public OrderedArray() {
+    super();
+  }
 
-    /**
-     * @return java.lang.Object
-     */
-    public Object clone() {
-        OrderedArray array = null;
-        //	try {
-        array = (OrderedArray) super.clone();
-        //	} catch (CloneNotSupportedException e) {}
-        return array;
-    }
+  /**
+   * OrderedArray constructor comment.
+   * @param length int
+   */
+  public OrderedArray(int length) {
+    super(length);
+  }
+
+  /**
+   * @return java.lang.Object
+   */
+  @Override
+  public Object clone() {
+    OrderedArray array = null;
+    //	try {
+    array = (OrderedArray) super.clone();
+    //	} catch (CloneNotSupportedException e) {}
+    return array;
+  }
 }

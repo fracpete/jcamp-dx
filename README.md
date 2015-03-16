@@ -1,8 +1,7 @@
 jcamp-dx
 ========
 
-The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX
-spectroscopy data standard.
+The JCAMP-DX project is the reference implemention of the [IUPAC JCAMP-DX](http://www.jcamp-dx.org/protocols.html) spectroscopy data standard.
 
 Fork of the following (inactive) sourceforge.net project:
 

@@ -3,14 +3,14 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.googlecode.jcamp-dx</groupId>
+  <groupId>com.github.fracpete</groupId>
   <artifactId>jcamp-dx</artifactId>
   <version>0.9.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>jcamp-dx</name>
   <description>The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.</description>
-  <url>https://code.google.com/p/jcamp-dx/</url>
+  <url>https://github.com/fracpete/jcamp-dx</url>
   <licenses>
     <license>
       <name>GNU General Public License 2</name>
@@ -55,9 +55,9 @@
   </parent>
 
   <scm>
-    <connection>scm:git:https://code.google.com/p/jcamp-dx/</connection>
-    <developerConnection>scm:git:https://code.google.com/p/jcamp-dx/</developerConnection>
-    <url>https://code.google.com/p/jcamp-dx/</url>
+    <connection>scm:git:https://github.com/fracpete/jcamp-dx</connection>
+    <developerConnection>scm:git:https://github.com/fracpete/jcamp-dx</developerConnection>
+    <url>https://github.com/fracpete/jcamp-dx</url>
     <tag>HEAD</tag>
   </scm>
 

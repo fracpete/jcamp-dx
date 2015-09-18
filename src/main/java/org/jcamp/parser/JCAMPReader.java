@@ -1,5 +1,7 @@
 package org.jcamp.parser;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.Enumeration;
@@ -154,6 +156,12 @@ public class JCAMPReader {
 			buf = new char[1024];
 		}
 		return createSpectrum(fileData.toString());
+	}
+
+	public Spectrum createSpectrum(File file) throws IOException,
+			JCAMPException {
+		return createSpectrum(new FileReader(file));
+
 	}
 
 	/**

@@ -61,7 +61,7 @@ public class JCAMPBlock {
 			return key;
 		}
 
-		public Collection types() {
+		public Collection<Type> types() {
 			return TYPES_LIST;
 		}
 
@@ -88,7 +88,7 @@ public class JCAMPBlock {
 		public final static Type ASSIGNMENT = new Type(4, "assignment");
 		private final static Type[] TYPES = new Type[] { LINK, STRUCTURE,
 				FULLSPECTRUM, PEAKTABLE, ASSIGNMENT };
-		private final static List TYPES_LIST = Collections
+		private final static List<Type> TYPES_LIST = Collections
 				.unmodifiableList(Arrays.asList(TYPES));
 	}
 
@@ -351,7 +351,7 @@ public class JCAMPBlock {
 	 * 
 	 * @return java.util.Enumeration
 	 */
-	public Enumeration getDataRecords() {
+	public Enumeration<JCAMPDataRecord> getDataRecords() {
 		return this.dataRecords.elements();
 	}
 
@@ -403,7 +403,7 @@ public class JCAMPBlock {
 	 */
 	public JCAMPBlock[] getReferences() {
 		if (this.references == null) {
-			Vector refs = new Vector();
+			Vector<JCAMPBlock> refs = new Vector<JCAMPBlock>();
 			if (this.parent == null) {
 				this.references = new JCAMPBlock[0];
 				return this.references;
@@ -427,7 +427,7 @@ public class JCAMPBlock {
 			}
 			this.references = new JCAMPBlock[refs.size()];
 			for (int i = 0; i < refs.size(); i++) {
-				this.references[i] = (JCAMPBlock) refs.elementAt(i);
+				this.references[i] = refs.elementAt(i);
 			}
 		}
 		return this.references;
@@ -521,7 +521,7 @@ public class JCAMPBlock {
 	private void initLDRs() {
 		IStringIterator ldrIter = new LDRIterator(data);
 		int blockIndex = 0;
-		ArrayList tmp = new ArrayList();
+		ArrayList<JCAMPDataRecord> tmp = new ArrayList<JCAMPDataRecord>();
 		while (ldrIter.hasNext()) {
 			int offset = ldrIter.getOffset();
 			String ldr = ldrIter.next();
@@ -539,7 +539,7 @@ public class JCAMPBlock {
 		this.numDataRecords = blockIndex;
 		this.ldrs = new JCAMPDataRecord[tmp.size()];
 		for (int i = 0; i < tmp.size(); i++)
-			this.ldrs[i] = (JCAMPDataRecord) tmp.get(i);
+			this.ldrs[i] = tmp.get(i);
 	}
 
 	/**
@@ -602,9 +602,9 @@ public class JCAMPBlock {
 		if (isLinkBlock())
 			return;
 		JCAMPDataRecord dataLDR = null;
-		Enumeration records = getDataRecords();
+		Enumeration<JCAMPDataRecord> records = getDataRecords();
 		while (records.hasMoreElements()) {
-			JCAMPDataRecord ldr = (JCAMPDataRecord) records.nextElement();
+			JCAMPDataRecord ldr = records.nextElement();
 			if (ldr.isData()) {
 				if (dataLDR != null) {
 					errorHandler

@@ -67,7 +67,7 @@ public class JCAMPDataRecord {
 				+ blockIndex + ", next=" + next + ", prev=" + prev + "]";
 	}
 
-	class Iterator implements ListIterator {
+	class Iterator implements ListIterator<JCAMPDataRecord> {
 		JCAMPDataRecord current;
 
 		Iterator(JCAMPDataRecord current) {
@@ -75,10 +75,10 @@ public class JCAMPDataRecord {
 		}
 
 		@Override
-		public void add(Object o) {
+		public void add(JCAMPDataRecord o) {
 			if (!(o instanceof JCAMPDataRecord))
 				return;
-			JCAMPDataRecord newLDR = (JCAMPDataRecord) o;
+			JCAMPDataRecord newLDR = o;
 			JCAMPDataRecord cLDR = current;
 			// find last in list
 			while (cLDR.next != null)
@@ -95,7 +95,7 @@ public class JCAMPDataRecord {
 		}
 
 		@Override
-		public Object next() {
+		public JCAMPDataRecord next() {
 			return current.next;
 		}
 
@@ -113,7 +113,7 @@ public class JCAMPDataRecord {
 		}
 
 		@Override
-		public Object previous() {
+		public JCAMPDataRecord previous() {
 			return current.prev;
 		}
 
@@ -143,12 +143,12 @@ public class JCAMPDataRecord {
 		}
 
 		@Override
-		public void set(Object o) {
+		public void set(JCAMPDataRecord o) {
 			if (current == null)
 				return;
 			if (!(o instanceof JCAMPDataRecord))
 				return;
-			JCAMPDataRecord s = (JCAMPDataRecord) o;
+			JCAMPDataRecord s = o;
 			JCAMPDataRecord p = current.prev;
 			JCAMPDataRecord n = current.next;
 			s.index = current.index;
@@ -192,8 +192,8 @@ public class JCAMPDataRecord {
 	/**
 	 * JCAMPLabel constructor comment.
 	 */
-	JCAMPDataRecord(ListIterator list, String jcamp, int start, int end,
-			int blockIndex) {
+	JCAMPDataRecord(ListIterator<JCAMPDataRecord> list, String jcamp,
+			int start, int end, int blockIndex) {
 		this(jcamp, start, end, blockIndex);
 		list.add(this);
 	}
@@ -245,7 +245,7 @@ public class JCAMPDataRecord {
 		JCAMPDataRecord d = prev;
 		while (d != null)
 			d = d.prev;
-
+		// TODO: BUG
 		return d.blockIndex;
 	}
 
@@ -320,7 +320,7 @@ public class JCAMPDataRecord {
 	 * 
 	 * @return ListIterator
 	 */
-	public ListIterator listIterator() {
+	public ListIterator<JCAMPDataRecord> listIterator() {
 		return new JCAMPDataRecord.Iterator(this);
 	}
 }

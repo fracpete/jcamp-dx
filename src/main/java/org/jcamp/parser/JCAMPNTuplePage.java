@@ -87,7 +87,7 @@ public class JCAMPNTuplePage {
 	 */
 	private void analyzeVars(String varlist) throws JCAMPException {
 		// read page variables
-		ArrayList tmp = new ArrayList();
+		ArrayList<String> tmp = new ArrayList<String>();
 		int pos = 0;
 		while (varRE.match(varlist, pos)) {
 			String symbol = varlist.substring(varRE.getParenStart(1),
@@ -97,7 +97,7 @@ public class JCAMPNTuplePage {
 		}
 		symbols = new String[tmp.size()];
 		for (int i = 0; i < symbols.length; i++)
-			symbols[i] = (String) tmp.get(i);
+			symbols[i] = tmp.get(i);
 
 		// read data block variables
 		JCAMPBlock block = this.ntuple.getBlock();
@@ -265,7 +265,7 @@ public class JCAMPNTuplePage {
 			data = new XYArray2D(new LinearGrid1D(xFirst, xLast, xDim),
 					new Array1D(yValues));
 		} else {
-			ArrayList xyVec = new ArrayList(20);
+			ArrayList<double[]> xyVec = new ArrayList<double[]>(20);
 			AFFNTokenizer tokenizer = new AFFNTokenizer(dataLDR);
 			while (tokenizer.hasMoreGroups()) {
 				AFFNGroup group = tokenizer.nextGroup();
@@ -275,11 +275,11 @@ public class JCAMPNTuplePage {
 				xyVec.add(xyElem);
 			}
 			// sort by x value
-			Collections.sort(xyVec, new Comparator() {
+			Collections.sort(xyVec, new Comparator<double[]>() {
 				@Override
-				public int compare(Object o1, Object o2) {
-					double[] xy1 = (double[]) o1;
-					double[] xy2 = (double[]) o2;
+				public int compare(double[] o1, double[] o2) {
+					double[] xy1 = o1;
+					double[] xy2 = o2;
 					if (xy1[0] < xy2[0])
 						return -1;
 					if (xy1[0] > xy2[0])
@@ -294,8 +294,8 @@ public class JCAMPNTuplePage {
 			do {
 				duplicateFound = false;
 				for (index = start; index < xyVec.size(); index++) {
-					double[] xy2 = (double[]) xyVec.get(index);
-					double[] xy1 = (double[]) xyVec.get(index - 1);
+					double[] xy2 = xyVec.get(index);
+					double[] xy1 = xyVec.get(index - 1);
 					if (xy1[0] == xy2[0]) {
 						duplicateFound = true;
 						xyVec.remove(index);
@@ -306,9 +306,9 @@ public class JCAMPNTuplePage {
 			double x[] = new double[xyVec.size()];
 			double y[] = new double[xyVec.size()];
 			for (int i = 0; i < xyVec.size(); i++) {
-				x[i] = ((double[]) xyVec.get(i))[0];
+				x[i] = xyVec.get(i)[0];
 				x[i] *= xFactor;
-				y[i] = ((double[]) xyVec.get(i))[1];
+				y[i] = xyVec.get(i)[1];
 				y[i] *= yFactor;
 			}
 			data = new XYArray2D(new OrderedArray1D(x), new Array1D(y));

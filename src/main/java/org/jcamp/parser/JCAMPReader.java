@@ -11,253 +11,286 @@ import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.Spectrum;
 
 /**
- * reader for JCAMP-DX spectrum format.
+ * Reader for the JCAMP-DX spectrum format.
  * 
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class JCAMPReader {
-  private static Log log = LogFactory.getLog(JCAMPReader.class);
-  private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
-    @Override
-    public void fatal(String msg) throws JCAMPException {
-      log.fatal(msg);
-      throw new JCAMPException("FATAL ERROR! " + msg);
-    }
-    @Override
-    public void error(String msg) throws JCAMPException {
-      log.error(msg);
-      throw new JCAMPException("ERROR! " + msg);
-    }
-    @Override
-    public void warn(String msg) throws JCAMPException {
-      log.warn(msg);
-    }
-  };
-  private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
-  private static JCAMPReader theInstance = null;
-  private static Hashtable adapters = new Hashtable(20);
-  private static boolean isValidating=true;
-  private static String mode=JCAMPReader.STRICT;
-  private JCAMPBlock rootblock=null;
-  private int idoffirstspectrum=-1;
-  /**
-   *these are flags for initialising the reader as strict or relaxed.
-   *Differences in behaviour are:
-   *- STRICT uses the SHIFT REFERENCE for calculating ppm in NMR, relaxed ignores them.
-   *We found many files have the SHIFT REFERENCE but are actually already shifted.
-   */
-  public final static String STRICT="strict";
-  public final static String RELAXED="relaxed";
 
+	private static Log log = LogFactory.getLog(JCAMPReader.class);
 
-  /**
-   * shk3: This method gives you the root block in order to retrieve other blocks in 
-   * case of multi block files. If a JCAMP file contains several blocks (blocks means basically spectra
-   * in JCAMP), the spectrum returned by create spectrum is the first subblock.
-   * 
-   * @return The root block.
-   */
-  public JCAMPBlock getRootblock() {
-    return rootblock;
-  }
+	private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
+		@Override
+		public void fatal(String msg) throws JCAMPException {
+			log.fatal(msg);
+			throw new JCAMPException("FATAL ERROR! " + msg);
+		}
 
-  /**
-   * shk3: This method gives you the id of the first child block in case of multi 
-   * block files. If a JCAMP file contains several blocks (blocks means basically spectra
-   * in JCAMP), the spectrum returned by create spectrum is the first subblock. In order
-   * to filter this out, you can get its id here.
-   * 
-   * @return The id of the first child block.
-   */
-  public int getIdoffirstspectrum() {
-    return idoffirstspectrum;
-  }
+		@Override
+		public void error(String msg) throws JCAMPException {
+			log.error(msg);
+			throw new JCAMPException("ERROR! " + msg);
+		}
 
-  /**
-   * JCAMPReader constructor comment.
-   * @param isValidating should the parser be validating? often files are not strictly correct
-   */
-  private JCAMPReader(boolean isValidating, String mode) {
-    super();
-    JCAMPReader.isValidating=isValidating;
-    JCAMPReader.mode=mode;
-  }
+		@Override
+		public void warn(String msg) throws JCAMPException {
+			log.warn(msg);
+		}
+	};
+	private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
+	private static JCAMPReader theInstance = null;
+	private static Hashtable<Integer, ISpectrumJCAMPReader> adapters = new Hashtable<Integer, ISpectrumJCAMPReader>(
+			20);
+	private static boolean isValidating = true;
+	private static String mode = JCAMPReader.STRICT;
+	private JCAMPBlock rootblock = null;
+	private int idoffirstspectrum = -1;
+	/**
+	 * these are flags for initialising the reader as strict or relaxed.
+	 * Differences in behaviour are: - STRICT uses the SHIFT REFERENCE for
+	 * calculating ppm in NMR, relaxed ignores them. We found many files have
+	 * the SHIFT REFERENCE but are actually already shifted.
+	 */
+	public final static String STRICT = "strict";
+	public final static String RELAXED = "relaxed";
 
+	/**
+	 * shk3: This method gives you the root block in order to retrieve other
+	 * blocks in case of multi block files. If a JCAMP file contains several
+	 * blocks (blocks means basically spectra in JCAMP), the spectrum returned
+	 * by create spectrum is the first subblock.
+	 * 
+	 * @return The root block.
+	 */
+	public JCAMPBlock getRootblock() {
+		return rootblock;
+	}
 
-  /**
-   * JCAMPReader constructor. gives a validating reader.
-   */
-  private JCAMPReader() {
-    super();
-  }
+	/**
+	 * shk3: This method gives you the id of the first child block in case of
+	 * multi block files. If a JCAMP file contains several blocks (blocks means
+	 * basically spectra in JCAMP), the spectrum returned by create spectrum is
+	 * the first subblock. In order to filter this out, you can get its id here.
+	 * 
+	 * @return The id of the first child block.
+	 */
+	public int getIdoffirstspectrum() {
+		return idoffirstspectrum;
+	}
 
-  /**
-   * create spectrum from JCAMPBlock.
-   * 
-   * @return Spectrum
-   * @param blockID int
-   */
-  public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-    if (block.isLinkBlock()) {
-      errorHandler.warn("compound JCAMP encountered: using first spectrum block");
-      rootblock=block;
-      block = findFirstSpectrumBlock(block);
-    }
-    ISpectrumJCAMPReader reader = findAdapter(block.getSpectrumID());
-    if (reader == null)
-      errorHandler.fatal("spectrum type not implemented");
-    return reader.createSpectrum(block);
-  }
+	/**
+	 * JCAMPReader constructor comment.
+	 * 
+	 * @param isValidating
+	 *            should the parser be validating? often files are not strictly
+	 *            correct
+	 */
+	private JCAMPReader(boolean isValidating, String mode) {
+		super();
+		JCAMPReader.isValidating = isValidating;
+		JCAMPReader.mode = mode;
+	}
 
-  /**
-   * create spectrum from JCAMPBlock.
-   * 
-   * @return Spectrum
-   * @param block JCAMPBlock
-   * @param blockID int
-   */
-  public Spectrum createSpectrum(JCAMPBlock block, int blockID) throws JCAMPException {
-    return createSpectrum(block.getBlock(blockID));
-  }
+	/**
+	 * JCAMPReader constructor. gives a validating reader.
+	 */
+	private JCAMPReader() {
+		super();
+	}
 
-  /**
-   * Create spectrum from JCAMP-DX reader. Caller must close reader.
-   * 
-   * @return Spectrum
-   * @param reader JCAMP-DX source
-   * @throws JCAMPException The exception description.
-   */
-  public Spectrum createSpectrum(Reader reader) throws IOException, JCAMPException {
-    StringBuilder fileData = new StringBuilder();
-    char[] buf = new char[1024];
-    int numRead=0;
-    while ((numRead=reader.read(buf)) != -1) {
-      String readData = String.valueOf(buf, 0, numRead);
-      fileData.append(readData);
-      buf = new char[1024];
-    }
-    return createSpectrum(fileData.toString());
-  }
+	/**
+	 * create spectrum from JCAMPBlock.
+	 * 
+	 * @return Spectrum
+	 * @param blockID
+	 *            int
+	 */
+	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
+		if (block.isLinkBlock()) {
+			errorHandler
+					.warn("compound JCAMP encountered: using first spectrum block");
+			rootblock = block;
+			block = findFirstSpectrumBlock(block);
+		}
+		ISpectrumJCAMPReader reader = findAdapter(block.getSpectrumID());
+		if (reader == null)
+			errorHandler.fatal("spectrum type not implemented");
+		return reader.createSpectrum(block);
+	}
 
-  /**
-   * create spectrum from JCAMP-DX string.
-   * 
-   * @return Spectrum
-   * @param jcamp JCAMP-DX source
-   * @throws JCAMPException The exception description.
-   */
-  public Spectrum createSpectrum(String jcamp) throws JCAMPException {
-    JCAMPBlock block = new JCAMPBlock(jcamp, errorHandler);
-    block.setValidating(JCAMPReader.isValidating);
-    return createSpectrum(block);
-  }
+	/**
+	 * create spectrum from JCAMPBlock.
+	 * 
+	 * @return Spectrum
+	 * @param block
+	 *            JCAMPBlock
+	 * @param blockID
+	 *            int
+	 */
+	public Spectrum createSpectrum(JCAMPBlock block, int blockID)
+			throws JCAMPException {
+		return createSpectrum(block.getBlock(blockID));
+	}
 
-  /**
-   * find JCAMPAdapter for specific spectrum ID.
-   * 
-   * @return ISpectrumJCAMPReader
-   * @param spectrumID int
-   */
-  private ISpectrumJCAMPReader findAdapter(int spectrumID) {
-    ISpectrumJCAMPReader adapter = (ISpectrumJCAMPReader) adapters.get(new Integer(spectrumID));
-    return adapter;
-  }
+	/**
+	 * Create spectrum from JCAMP-DX reader. Caller must close reader.
+	 * 
+	 * @return Spectrum
+	 * @param reader
+	 *            JCAMP-DX source
+	 * @throws JCAMPException
+	 *             The exception description.
+	 */
+	public Spectrum createSpectrum(Reader reader) throws IOException,
+			JCAMPException {
+		StringBuilder fileData = new StringBuilder();
+		char[] buf = new char[1024];
+		int numRead = 0;
+		while ((numRead = reader.read(buf)) != -1) {
+			String readData = String.valueOf(buf, 0, numRead);
+			fileData.append(readData);
+			buf = new char[1024];
+		}
+		return createSpectrum(fileData.toString());
+	}
 
-  /**
-   * find first spectrum block within a compound JCAMP link block,
-   * first tries to find a full spectrum block, otherwise uses first block encountered
-   * 
-   * @return com.creon.chem.jcamp.JCAMPBlock
-   * @param block com.creon.chem.jcamp.JCAMPBlock
-   */
-  private JCAMPBlock findFirstSpectrumBlock(JCAMPBlock block) throws JCAMPException {
-    // first try, returning only full spectra
-    Enumeration blocks = block.getBlocks();
-    if (blocks != null) {
-      while (blocks.hasMoreElements()) {
-	JCAMPBlock b = (JCAMPBlock) blocks.nextElement();
-	if (b.isStructureBlock() || b.isLinkBlock())
-	  continue;
-	JCAMPDataRecord dataTypeLDR = b.getDataRecord("DATATYPE");
-	if (dataTypeLDR == null)
-	  continue; //bad block
-	String dataType = dataTypeLDR.getContent().toUpperCase();
-	if (dataType.endsWith("TABLE") || dataType.endsWith("ASSIGNMENTS"))
-	  continue;
-	idoffirstspectrum=b.getID();
-	return b;
-      }
-    }
-    // second try, returning any spectrum
-    blocks = block.getBlocks();
-    if (blocks != null) {
-      while (blocks.hasMoreElements()) {
-	JCAMPBlock b = (JCAMPBlock) blocks.nextElement();
-	if (b.isStructureBlock() || b.isLinkBlock())
-	  continue;
-	return b;
-      }
-    }
-    errorHandler.fatal("link block contains no spectrum block");
-    return null;
-  }
+	/**
+	 * create spectrum from JCAMP-DX string.
+	 * 
+	 * @return Spectrum
+	 * @param jcamp
+	 *            JCAMP-DX source
+	 * @throws JCAMPException
+	 *             The exception description.
+	 */
+	public Spectrum createSpectrum(String jcamp) throws JCAMPException {
+		JCAMPBlock block = new JCAMPBlock(jcamp, errorHandler);
+		block.setValidating(JCAMPReader.isValidating);
+		return createSpectrum(block);
+	}
 
-  /**
-   * gets current error handler.
-   * 
-   * @return com.creon.chem.jcamp.IErrorHandler
-   */
-  public IErrorHandler getErrorHandler() {
-    return errorHandler;
-  }
+	/**
+	 * find JCAMPAdapter for specific spectrum ID.
+	 * 
+	 * @return ISpectrumJCAMPReader
+	 * @param spectrumID
+	 *            int
+	 */
+	private ISpectrumJCAMPReader findAdapter(int spectrumID) {
+		ISpectrumJCAMPReader adapter = adapters.get(new Integer(spectrumID));
+		return adapter;
+	}
 
-  /**
-   * access method for JCAMPReader singleton instance. gives a validating instance
-   * 
-   * @return JCAMPReader
-   */
-  public static JCAMPReader getInstance() {
-    if (theInstance == null || JCAMPReader.isValidating!=true || JCAMPReader.mode!=JCAMPReader.STRICT) {
-      theInstance = new JCAMPReader(true, JCAMPReader.STRICT);
-      initAdapters();
-    }
-    return theInstance;
-  }
+	/**
+	 * find first spectrum block within a compound JCAMP link block, first tries
+	 * to find a full spectrum block, otherwise uses first block encountered
+	 * 
+	 * @return com.creon.chem.jcamp.JCAMPBlock
+	 * @param block
+	 *            com.creon.chem.jcamp.JCAMPBlock
+	 */
+	private JCAMPBlock findFirstSpectrumBlock(JCAMPBlock block)
+			throws JCAMPException {
+		// first try, returning only full spectra
+		Enumeration<JCAMPBlock> blocks = block.getBlocks();
+		if (blocks != null) {
+			while (blocks.hasMoreElements()) {
+				JCAMPBlock b = blocks.nextElement();
+				if (b.isStructureBlock() || b.isLinkBlock())
+					continue;
+				JCAMPDataRecord dataTypeLDR = b.getDataRecord("DATATYPE");
+				if (dataTypeLDR == null)
+					continue; // bad block
+				String dataType = dataTypeLDR.getContent().toUpperCase();
+				if (dataType.endsWith("TABLE")
+						|| dataType.endsWith("ASSIGNMENTS"))
+					continue;
+				idoffirstspectrum = b.getID();
+				return b;
+			}
+		}
+		// second try, returning any spectrum
+		blocks = block.getBlocks();
+		if (blocks != null) {
+			while (blocks.hasMoreElements()) {
+				JCAMPBlock b = blocks.nextElement();
+				if (b.isStructureBlock() || b.isLinkBlock())
+					continue;
+				return b;
+			}
+		}
+		errorHandler.fatal("link block contains no spectrum block");
+		return null;
+	}
 
-  /**
-   * access method for JCAMPReader singleton instance.
-   * 
-   * @param isValidating should the parser be validating? often files are not strictly correct
-   * @return JCAMPReader
-   */
-  public static JCAMPReader getInstance(boolean isValidating, String mode) {
-    if (theInstance == null || JCAMPReader.isValidating!=isValidating || JCAMPReader.mode!=mode) {
-      theInstance = new JCAMPReader(isValidating, mode);
-      initAdapters();
-    }
-    return theInstance;
-  }
+	/**
+	 * gets current error handler.
+	 * 
+	 * @return com.creon.chem.jcamp.IErrorHandler
+	 */
+	public IErrorHandler getErrorHandler() {
+		return errorHandler;
+	}
 
-  /**
-   * initialize adapter map
-   * 
-   */
-  private static void initAdapters() {
-    adapters.put(new Integer(ISpectrumIdentifier.NMR), new NMRJCAMPReader(mode));
-    adapters.put(new Integer(ISpectrumIdentifier.IR), new IRJCAMPReader());
-    adapters.put(new Integer(ISpectrumIdentifier.UV), new UVJCAMPReader());
-    adapters.put(new Integer(ISpectrumIdentifier.MS), new MSJCAMPReader());
-    adapters.put(new Integer(ISpectrumIdentifier.RAMAN), new RamanJCAMPReader());
-    adapters.put(new Integer(ISpectrumIdentifier.CHROMATOGRAM), new ChromatogramJCAMPReader());
-    adapters.put(new Integer(ISpectrumIdentifier.FLUORESCENCE), new FluorescenceJCAMPReader());
-  }
+	/**
+	 * access method for JCAMPReader singleton instance. gives a validating
+	 * instance
+	 * 
+	 * @return JCAMPReader
+	 */
+	public static JCAMPReader getInstance() {
+		if (theInstance == null || JCAMPReader.isValidating != true
+				|| JCAMPReader.mode != JCAMPReader.STRICT) {
+			theInstance = new JCAMPReader(true, JCAMPReader.STRICT);
+			initAdapters();
+		}
+		return theInstance;
+	}
 
-  /**
-   * sets the error handler.
-   * 
-   * @param newErrorHandler com.creon.chem.jcamp.IErrorHandler
-   */
-  public void setErrorHandler(IErrorHandler newErrorHandler) {
-    errorHandler = newErrorHandler;
-  }
+	/**
+	 * access method for JCAMPReader singleton instance.
+	 * 
+	 * @param isValidating
+	 *            should the parser be validating? often files are not strictly
+	 *            correct
+	 * @return JCAMPReader
+	 */
+	public static JCAMPReader getInstance(boolean isValidating, String mode) {
+		if (theInstance == null || JCAMPReader.isValidating != isValidating
+				|| JCAMPReader.mode != mode) {
+			theInstance = new JCAMPReader(isValidating, mode);
+			initAdapters();
+		}
+		return theInstance;
+	}
+
+	/**
+	 * initialize adapter map
+	 * 
+	 */
+	private static void initAdapters() {
+		adapters.put(new Integer(ISpectrumIdentifier.NMR), new NMRJCAMPReader(
+				mode));
+		adapters.put(new Integer(ISpectrumIdentifier.IR), new IRJCAMPReader());
+		adapters.put(new Integer(ISpectrumIdentifier.UV), new UVJCAMPReader());
+		adapters.put(new Integer(ISpectrumIdentifier.MS), new MSJCAMPReader());
+		adapters.put(new Integer(ISpectrumIdentifier.RAMAN),
+				new RamanJCAMPReader());
+		adapters.put(new Integer(ISpectrumIdentifier.CHROMATOGRAM),
+				new ChromatogramJCAMPReader());
+		adapters.put(new Integer(ISpectrumIdentifier.FLUORESCENCE),
+				new FluorescenceJCAMPReader());
+	}
+
+	/**
+	 * sets the error handler.
+	 * 
+	 * @param newErrorHandler
+	 *            com.creon.chem.jcamp.IErrorHandler
+	 */
+	public void setErrorHandler(IErrorHandler newErrorHandler) {
+		errorHandler = newErrorHandler;
+	}
 }

@@ -101,10 +101,12 @@ public class JCAMPBlock {
 	private Type type;
 	private int spectrumID;
 	private String data;
-	private Hashtable childBlocks = new Hashtable(10);
+	private Hashtable<Integer, JCAMPBlock> childBlocks = new Hashtable<Integer, JCAMPBlock>(
+			10);
 	// hashtable containing all data records (or list of data records for
 	// multiple records with same key)
-	private Hashtable dataRecords = new Hashtable(50);
+	private Hashtable<String, JCAMPDataRecord> dataRecords = new Hashtable<String, JCAMPDataRecord>(
+			50);
 	// array of data records with duplicate keys
 	private JCAMPDataRecord[] ldrs;
 	private JCAMPBlock[] references = null;
@@ -310,7 +312,7 @@ public class JCAMPBlock {
 	 *            int
 	 */
 	public JCAMPBlock getBlock(int id) {
-		return (JCAMPBlock) this.childBlocks.get(new Integer(id));
+		return this.childBlocks.get(new Integer(id));
 	}
 
 	/**
@@ -318,7 +320,7 @@ public class JCAMPBlock {
 	 * 
 	 * @return java.util.Enumeration
 	 */
-	public Enumeration getBlocks() {
+	public Enumeration<JCAMPBlock> getBlocks() {
 		return this.childBlocks.elements();
 	}
 
@@ -341,7 +343,7 @@ public class JCAMPBlock {
 	 *            java.lang.String
 	 */
 	public JCAMPDataRecord getDataRecord(String key) {
-		return (JCAMPDataRecord) dataRecords.get(key);
+		return dataRecords.get(key);
 	}
 
 	/**
@@ -368,7 +370,7 @@ public class JCAMPBlock {
 	 * @return int
 	 */
 	public int getID() {
-		JCAMPDataRecord ldr = (JCAMPDataRecord) this.dataRecords.get("BLOCKID");
+		JCAMPDataRecord ldr = this.dataRecords.get("BLOCKID");
 		if (ldr == null)
 			return -1;
 		String blockID = ldr.getValue();
@@ -525,8 +527,7 @@ public class JCAMPBlock {
 			String ldr = ldrIter.next();
 			JCAMPDataRecord dataRecord = new JCAMPDataRecord(this.data, offset,
 					offset + ldr.length(), blockIndex);
-			JCAMPDataRecord ldrList = (JCAMPDataRecord) this.dataRecords
-					.get(dataRecord.getKey());
+			JCAMPDataRecord ldrList = this.dataRecords.get(dataRecord.getKey());
 			if (ldrList == null) {
 				this.dataRecords.put(dataRecord.getKey(), dataRecord);
 			} else {

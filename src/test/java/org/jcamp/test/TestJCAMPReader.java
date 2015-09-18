@@ -16,7 +16,7 @@ import org.jcamp.spectrum.MassSpectrum;
 import org.jcamp.spectrum.NMRSpectrum;
 import org.jcamp.spectrum.Spectrum;
 
-public class TestParser extends TestCase {
+public class TestJCAMPReader extends TestCase {
 
   /**
    * Returns the tmp directory.

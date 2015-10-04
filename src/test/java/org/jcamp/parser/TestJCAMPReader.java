@@ -127,4 +127,20 @@ public class TestJCAMPReader {
 		System.out.println(s);
 	}
 
+	@Test
+	public final void testCreateSpectrum11() throws IOException, JCAMPException {
+		Spectrum s = JCAMPReader
+				.getInstance()
+				.createSpectrum(
+						new File(
+								"src/test/resources/testdata2/S2014_5533_94 AM-1220_aceton-HSQC.jcamp"));
+		System.out.println(s);
+	}
+
+	@Test
+	public final void testCreateSpectrum12() throws IOException, JCAMPException {
+		Spectrum s = JCAMPReader.getInstance().createSpectrum(
+				new File("src/test/resources/testdata2/2-MAPB.jcamp"));
+		System.out.println(s);
+	}
 }

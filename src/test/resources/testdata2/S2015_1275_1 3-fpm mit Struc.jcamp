@@ -1,0 +1,3351 @@
+##TITLE=	S2015_1275_1.120.1.1r
+##JCAMPDX=	6.0	$$ NMR Plug-in v.1.12 of MestReNova 10.0.0-14381
+##DATATYPE=	LINK
+##BLOCKS=	4
+##ORIGIN=	Bruker BioSpin GmbH
+##OWNER=	KT12-nmr
+##TITLE=	S2015_1275_1.120.1.1r
+##JCAMPCS=	3.7	$$ Molecule Plug-in 1.8 of MestReNova 10.0.0-14381
+##ORIGIN=	Bruker BioSpin GmbH
+##OWNER=	KT12-nmr
+##CROSS REFERENCE=	NMRSPECTRUM: BLOCKID = 3
+##CROSS REFERENCE=	NMRPEAKASSIGNMENTS: BLOCKID = 2
+##BLOCKID=	1
+##ATOMLIST=	
+$$ AN	AS	NH
+	1	C	1
+	2	C	 
+	3	C	1
+	4	C	1
+	5	C	1
+	6	C	 
+	7	F	 
+	8	C	1
+	9	O	 
+	10	C	2
+	11	C	2
+	12	N	1
+	13	C	1
+	14	C	3
+##BONDLIST=	
+$$ AN1	AN2	BT
+	1	2	D
+	1	6	S
+	2	3	S
+	2	8	S
+	3	4	D
+	4	5	S
+	5	6	D
+	6	7	S
+	8	9	S
+	8	13	S
+	9	10	S
+	10	11	S
+	11	12	S
+	12	13	S
+	13	14	S
+##MAXRASTER=	32768
+##XYRASTER=	
+$$ AN	X	Y	Z
+	1	26231	7236	0
+	2	27865	8182	0
+	3	27865	10074	0
+	4	26231	11020	0
+	5	24597	10074	0
+	6	24597	8182	0
+	7	22962	7236	0
+	8	29499	7236	0
+	9	29499	5343	0
+	10	31134	4397	0
+	11	32768	5343	0
+	12	32768	7236	0
+	13	31134	8182	0
+	14	31134	10074	0
+##END=	
+
+##TITLE=	S2015_1275_1.120.1.1r
+##JCAMPDX=	6.0	$$ NMR Plug-in 1.12 of MestReNova 10.0.0-14381
+##BLOCKID=	2
+##CROSS REFERENCE=	NMRPEAKTABLE: BLOCKID = 4
+##CROSS REFERENCE=	STRUCTURE: BLOCKID = 1
+##DATATYPE=	NMRPEAKASSIGNMENTS
+##DATACLASS=	ASSIGNMENTS
+##.OBSERVEFREQUENCY=	125.75743003422999777
+##.OBSERVENUCLEUS=	^13C
+##NPOINTS=	11
+##XUNITS=	PPM
+##YUNITS=	ARBITRARY UNITS
+##PEAKASSIGNMENTS=	(XYMWA)
+(117.29884834517153536, 45091888,  , 0, <1>)
+(141.04519888142414175, 52957692,  , 0, <2>)
+(126.49677575157147658, 517039936,  , 0, <3>)
+(133.73193945017112583, 592495296,  , 0, <4>)
+(119.34975680364019013, 38235188,  , 0, <5>)
+(165.54329333841153016, 6935855.5,  , 0, <6>)
+(84.093051816417855093, 138297024,  , 0, <8>)
+(66.655986222960152077, 369487168,  , 0, <10>)
+(46.135411107337290559, 54507276,  , 0, <11>)
+(57.589949941126384658, 83420424,  , 0, <13>)
+(16.853115889781147274, 47115840,  , 0, <14>)
+##END=	
+##TITLE=	S2015_1275_1.120.1.1r
+##JCAMPDX=	6.0	$$ NMR Plug-in 1.12 of MestReNova 10.0.0-14381
+##BLOCKID=	3
+##CROSS REFERENCE=	STRUCTURE: BLOCKID = 1
+##DATATYPE=	NMRSPECTRUM
+##DATACLASS=	XYDATA
+##NUMDIM=	1
+##ORIGIN=	Bruker BioSpin GmbH
+##OWNER=	KT12-nmr
+##.OBSERVEFREQUENCY=	125.75743003422999777
+##.OBSERVENUCLEUS=	^13C
+##.SOLVENTNAME=	D2O
+##.PULSESEQUENCE=	zgpg30
+##LONGDATE=	2015/04/10 03:20:00.000
+##.ACQUISITIONMODE=	SIMULTANEOUS
+##$ORIGINALFORMAT=	Bruker XWIN-NMR
+##$PARAMETERFILE=	(acqus, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/acqus, 0)
+$$ ##TITLE= Parameter file, TOPSPIN		Version 2.1
+$$ ##JCAMPDX= 5.0
+$$ ##DATATYPE= Parameter Values
+$$ ##NPOINTS= 11	$$ modification sequence number
+$$ ##ORIGIN= Bruker BioSpin GmbH
+$$ ##OWNER= KT12-nmr
+$$ $$ 2015-04-10 03:20:50.756 +0200  BK\KT12-nmr@WSA30886
+$$ $$ C:\Bruker\TOPSPIN\Daten/data/xtc/nmr/S2015_1275_1/120/acqus
+$$ $$ process C:\Bruker\TOPSPIN\prog\mod\shimcntl.exe
+$$ ##$ACQT0= -2.62605042016807
+$$ ##$AMP= (0..31)
+$$ 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+$$ 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+$$ ##$ANAVPT= -1
+$$ ##$AQSEQ= 0
+$$ ##$AQ_mod= 1
+$$ ##$AUNM= <au_zg>
+$$ ##$AUTOPOS= <85 >
+$$ ##$BF1= 125.757789
+$$ ##$BF2= 500.13
+$$ ##$BF3= 125.757789
+$$ ##$BF4= 125.757789
+$$ ##$BF5= 125.757789
+$$ ##$BF6= 125.757789
+$$ ##$BF7= 125.757789
+$$ ##$BF8= 125.757789
+$$ ##$BYTORDA= 1
+$$ ##$CFDGTYP= 2
+$$ ##$CFRGTYP= 9
+$$ ##$CHEMSTR= <none>
+$$ ##$CNST= (0..63)
+$$ 1 1 145 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+$$ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+$$ ##$CPDPRG= <waltz16>
+$$ ##$CPDPRG1= <>
+$$ ##$CPDPRG2= <waltz16>
+$$ ##$CPDPRG3= <>
+$$ ##$CPDPRG4= <mlev>
+$$ ##$CPDPRG5= <mlev>
+$$ ##$CPDPRG6= <mlev>
+$$ ##$CPDPRG7= <mlev>
+$$ ##$CPDPRG8= <mlev>
+$$ ##$CPDPRGB= <>
+$$ ##$CPDPRGT= <>
+$$ ##$D= (0..63)
+$$ 0 2 0.00345 0 0 0 0 0 0 0 0 0.03 2e-005 3e-006 0 0 0.0002 0 0 0 0 0 0 0
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ 0 0 0 0
+$$ ##$DATE= 1428628843
+$$ ##$DBL= (0..7)
+$$ 120 120 120 120 120 120 120 120
+$$ ##$DBP= (0..7)
+$$ 150 150 150 150 150 150 150 150
+$$ ##$DBP07= 0
+$$ ##$DBPNAM0= <>
+$$ ##$DBPNAM1= <>
+$$ ##$DBPNAM2= <>
+$$ ##$DBPNAM3= <>
+$$ ##$DBPNAM4= <>
+$$ ##$DBPNAM5= <>
+$$ ##$DBPNAM6= <>
+$$ ##$DBPNAM7= <>
+$$ ##$DBPOAL= (0..7)
+$$ 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+$$ ##$DBPOFFS= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DE= 6.5
+$$ ##$DECBNUC= <off>
+$$ ##$DECIM= 6
+$$ ##$DECNUC= <off>
+$$ ##$DECSTAT= 4
+$$ ##$DIGMOD= 1
+$$ ##$DIGTYP= 8
+$$ ##$DL= (0..7)
+$$ 0 120 120 120 120 120 120 120
+$$ ##$DP= (0..7)
+$$ 150 150 150 150 150 150 150 150
+$$ ##$DP07= 0
+$$ ##$DPNAME0= <>
+$$ ##$DPNAME1= <>
+$$ ##$DPNAME2= <>
+$$ ##$DPNAME3= <>
+$$ ##$DPNAME4= <>
+$$ ##$DPNAME5= <>
+$$ ##$DPNAME6= <>
+$$ ##$DPNAME7= <>
+$$ ##$DPOAL= (0..7)
+$$ 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+$$ ##$DPOFFS= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DQDMODE= 0
+$$ ##$DR= 17
+$$ ##$DS= 4
+$$ ##$DSLIST= <SSSSSSSSSSSSSSS>
+$$ ##$DSPFIRM= 0
+$$ ##$DSPFVS= 10
+$$ ##$DTYPA= 0
+$$ ##$EXP= <C13CPD>
+$$ ##$F1LIST= <111111111111111>
+$$ ##$F2LIST= <222222222222222>
+$$ ##$F3LIST= <333333333333333>
+$$ ##$FCUCHAN= (0..9)
+$$ 0 1 2 0 0 0 0 0 0 0
+$$ ##$FL1= 83
+$$ ##$FL2= 83
+$$ ##$FL3= 83
+$$ ##$FL4= 83
+$$ ##$FOV= 20
+$$ ##$FQ1LIST= <freqlist>
+$$ ##$FQ2LIST= <freqlist>
+$$ ##$FQ3LIST= <freqlist>
+$$ ##$FQ4LIST= <freqlist>
+$$ ##$FQ5LIST= <freqlist>
+$$ ##$FQ6LIST= <freqlist>
+$$ ##$FQ7LIST= <freqlist>
+$$ ##$FQ8LIST= <freqlist>
+$$ ##$FRQLO3= 0
+$$ ##$FRQLO3N= 0
+$$ ##$FS= (0..7)
+$$ 83 83 83 83 83 83 83 83
+$$ ##$FTLPGN= 0
+$$ ##$FW= 125000
+$$ ##$FnMODE= 0
+$$ ##$FnTYPE= 0
+$$ ##$GP031= 0
+$$ ##$GPNAM0= <SINE.100>
+$$ ##$GPNAM1= <SINE.100>
+$$ ##$GPNAM10= <SINE.100>
+$$ ##$GPNAM11= <SINE.100>
+$$ ##$GPNAM12= <SINE.100>
+$$ ##$GPNAM13= <SINE.100>
+$$ ##$GPNAM14= <SINE.100>
+$$ ##$GPNAM15= <SINE.100>
+$$ ##$GPNAM16= <SINE.100>
+$$ ##$GPNAM17= <SINE.100>
+$$ ##$GPNAM18= <SINE.100>
+$$ ##$GPNAM19= <SINE.100>
+$$ ##$GPNAM2= <SINE.100>
+$$ ##$GPNAM20= <SINE.100>
+$$ ##$GPNAM21= <SINE.100>
+$$ ##$GPNAM22= <SINE.100>
+$$ ##$GPNAM23= <SINE.100>
+$$ ##$GPNAM24= <SINE.100>
+$$ ##$GPNAM25= <SINE.100>
+$$ ##$GPNAM26= <SINE.100>
+$$ ##$GPNAM27= <SINE.100>
+$$ ##$GPNAM28= <SINE.100>
+$$ ##$GPNAM29= <SINE.100>
+$$ ##$GPNAM3= <SINE.100>
+$$ ##$GPNAM30= <SINE.100>
+$$ ##$GPNAM31= <SINE.100>
+$$ ##$GPNAM4= <SINE.100>
+$$ ##$GPNAM5= <SINE.100>
+$$ ##$GPNAM6= <SINE.100>
+$$ ##$GPNAM7= <SINE.100>
+$$ ##$GPNAM8= <SINE.100>
+$$ ##$GPNAM9= <SINE.100>
+$$ ##$GPX= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$GPY= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$GPZ= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$GRDPROG= <>
+$$ ##$GRPDLY= -1
+$$ ##$HDDUTY= 20
+$$ ##$HDRATE= 20
+$$ ##$HGAIN= (0..3)
+$$ 0 0 0 0
+$$ ##$HL1= 3
+$$ ##$HL2= 83
+$$ ##$HL3= 83
+$$ ##$HL4= 83
+$$ ##$HOLDER= 0
+$$ ##$HPMOD= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$HPPRGN= 0
+$$ ##$IN= (0..63)
+$$ 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001
+$$ 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001
+$$ 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001
+$$ 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001
+$$ 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001
+$$ 0.001 0.001 0.001 0.001
+$$ ##$INF= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$INP= (0..63)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$INSTRUM= <spect>
+$$ ##$L= (0..31)
+$$ 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+$$ ##$LFILTER= 200
+$$ ##$LGAIN= -15
+$$ ##$LINPSTP= 10
+$$ ##$LOCKED= yes
+$$ ##$LOCKFLD= -3287
+$$ ##$LOCKGN= 101.800003051758
+$$ ##$LOCKPOW= -17
+$$ ##$LOCKPPM= 4.69999980926514
+$$ ##$LOCNUC= <2H>
+$$ ##$LOCPHAS= 37
+$$ ##$LOCSHFT= yes
+$$ ##$LOCSW= 0
+$$ ##$LTIME= 0.349999994039536
+$$ ##$MASR= 4200
+$$ ##$MASRLST= <masrlst>
+$$ ##$NBL= 1
+$$ ##$NC= -1
+$$ ##$NLOGCH= 1
+$$ ##$NS= 8000
+$$ ##$NUC1= <13C>
+$$ ##$NUC2= <1H>
+$$ ##$NUC3= <off>
+$$ ##$NUC4= <off>
+$$ ##$NUC5= <off>
+$$ ##$NUC6= <off>
+$$ ##$NUC7= <off>
+$$ ##$NUC8= <off>
+$$ ##$NUCLEI= 0
+$$ ##$NUCLEUS= <off>
+$$ ##$O1= 12575.3048526036
+$$ ##$O2= 2000.51999996731
+$$ ##$O3= 12575.3048526036
+$$ ##$O4= 12575.3048526036
+$$ ##$O5= 12575.3048526036
+$$ ##$O6= 12575.3048526036
+$$ ##$O7= 12575.3048526036
+$$ ##$O8= 12575.3048526036
+$$ ##$OBSCHAN= (0..9)
+$$ 0 0 0 0 0 0 0 0 0 0
+$$ ##$OVERFLW= 0
+$$ ##$P= (0..63)
+$$ 12.5 12.5 25 75 150 16.5 25 50 20000 30 60 2000 2000 0 40000 0 1000 2500
+$$ 0 600 2500 0 0 0 0 0 500 12.5 0 0 0 3000 0 0 0 0 0 0 0 0 0 2250 1500 1510
+$$ 150 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 360 0
+$$ ##$PACOIL= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAPS= 2
+$$ ##$PARMODE= 0
+$$ ##$PCPD= (0..9)
+$$ 100 70 75 100 100 100 100 100 100 100
+$$ ##$PHCOR= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PHLIST= <>
+$$ ##$PHP= 2
+$$ ##$PH_ref= 0
+$$ ##$PL= (0..63)
+$$ 120 -4 5 120 120 120 120 120 120 120 2.02 120 22 22 120 -2.96 120 120 -4
+$$ 10.96 120 120 120 120 120 120 120 120 120 120 22 -0.46 120 120 120 120
+$$ 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120 120
+$$ 120 120 120 120 120 120 120 120 120 120
+$$ ##$PLSTEP= 0.1
+$$ ##$PLSTRT= -6
+$$ ##$POWMOD= 0
+$$ ##$PQPHASE= 0
+$$ ##$PQSCALE= 0
+$$ ##$PR= 4
+$$ ##$PRECHAN= (0..15)
+$$ -1 1 0 2 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$PRGAIN= 0
+$$ ##$PROBHD= <5 mm PABBI 1H-BB Z-GRD Z810701/0019
+$$ >
+$$ ##$PROSOL= no
+$$ ##$PULPROG= <zgpg30>
+$$ ##$PW= 0
+$$ ##$PYNM= <acqu.py>
+$$ ##$QNP= 1
+$$ ##$RD= 0
+$$ ##$RECCHAN= (0..15)
+$$ 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$RECPH= 0
+$$ ##$RECPRE= (0..15)
+$$ -1 1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RECPRFX= (0..15)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RECSEL= (0..15)
+$$ 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$RG= 32800
+$$ ##$RO= 0
+$$ ##$ROUTWD1= (0..23)
+$$ 1 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0 0 0
+$$ ##$ROUTWD2= (0..23)
+$$ 1 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$RSEL= (0..9)
+$$ 0 1 2 0 0 0 0 0 0 0
+$$ ##$S= (0..7)
+$$ 83 25 26 83 26 83 83 83
+$$ ##$SEOUT= 0
+$$ ##$SFO1= 125.770364304853
+$$ ##$SFO2= 500.13200052
+$$ ##$SFO3= 125.770364304853
+$$ ##$SFO4= 125.770364304853
+$$ ##$SFO5= 125.770364304853
+$$ ##$SFO6= 125.770364304853
+$$ ##$SFO7= 125.770364304853
+$$ ##$SFO8= 125.770364304853
+$$ ##$SOLVENT= <D2O>
+$$ ##$SP= (0..31)
+$$ 1 32.37 2.22 45.81 120 0 120 120 2.22 0 120 120 0 0 120 0 150 150 11.77
+$$ 60.95 59.04 62.35 55.03 150 150 150 150 150 150 120 150 120
+$$ ##$SP07= 0
+$$ ##$SPECTR= 0
+$$ ##$SPNAM0= <gauss>
+$$ ##$SPNAM1= <Gaus1.1000>
+$$ ##$SPNAM10= < >
+$$ ##$SPNAM11= < >
+$$ ##$SPNAM12= <gauss>
+$$ ##$SPNAM13= <gauss>
+$$ ##$SPNAM14= < >
+$$ ##$SPNAM15= < >
+$$ ##$SPNAM16= <gauss>
+$$ ##$SPNAM17= <gauss>
+$$ ##$SPNAM18= <Q5tr.1000>
+$$ ##$SPNAM19= <Squa100.1000>
+$$ ##$SPNAM2= <Crp60comp.4>
+$$ ##$SPNAM20= <Squa100.1000>
+$$ ##$SPNAM21= <Squa100.1000>
+$$ ##$SPNAM22= <Squa100.1000>
+$$ ##$SPNAM23= <gauss>
+$$ ##$SPNAM24= <gauss>
+$$ ##$SPNAM25= <gauss>
+$$ ##$SPNAM26= <gauss>
+$$ ##$SPNAM27= <gauss>
+$$ ##$SPNAM28= <gauss>
+$$ ##$SPNAM29= < >
+$$ ##$SPNAM3= <Gaus1_180r.1000>
+$$ ##$SPNAM30= <gauss>
+$$ ##$SPNAM31= < >
+$$ ##$SPNAM4= < >
+$$ ##$SPNAM5= <gauss>
+$$ ##$SPNAM6= < >
+$$ ##$SPNAM7= < >
+$$ ##$SPNAM8= <Crp60,0.5,20.1>
+$$ ##$SPNAM9= <gauss>
+$$ ##$SPOAL= (0..31)
+$$ 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+$$ 0 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+$$ ##$SPOFFS= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$SUBNAM0= <"">
+$$ ##$SUBNAM1= <"">
+$$ ##$SUBNAM2= <"">
+$$ ##$SUBNAM3= <"">
+$$ ##$SUBNAM4= <"">
+$$ ##$SUBNAM5= <"">
+$$ ##$SUBNAM6= <"">
+$$ ##$SUBNAM7= <"">
+$$ ##$SUBNAM8= <"">
+$$ ##$SUBNAM9= <"">
+$$ ##$SW= 238.768728992791
+$$ ##$SWIBOX= (0..15)
+$$ 0 1 2 3 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$SW_h= 30030.03003003
+$$ ##$SWfinal= 0
+$$ ##$TD= 65536
+$$ ##$TD0= 1
+$$ ##$TE= 297.16
+$$ ##$TE2= 300
+$$ ##$TE3= 300
+$$ ##$TEG= 300
+$$ ##$TL= (0..7)
+$$ 0 120 120 120 120 120 120 120
+$$ ##$TP= (0..7)
+$$ 150 150 150 150 150 150 150 150
+$$ ##$TP07= 0
+$$ ##$TPNAME0= <>
+$$ ##$TPNAME1= <>
+$$ ##$TPNAME2= <>
+$$ ##$TPNAME3= <>
+$$ ##$TPNAME4= <>
+$$ ##$TPNAME5= <>
+$$ ##$TPNAME6= <>
+$$ ##$TPNAME7= <>
+$$ ##$TPOAL= (0..7)
+$$ 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5
+$$ ##$TPOFFS= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$TUNHIN= 0
+$$ ##$TUNHOUT= 0
+$$ ##$TUNXOUT= 0
+$$ ##$USERA1= <user>
+$$ ##$USERA2= <user>
+$$ ##$USERA3= <user>
+$$ ##$USERA4= <user>
+$$ ##$USERA5= <user>
+$$ ##$V9= 5
+$$ ##$VALIST= <valist>
+$$ ##$VCLIST= <CCCCCCCCCCCCCCC>
+$$ ##$VD= 0
+$$ ##$VDLIST= <DDDDDDDDDDDDDDD>
+$$ ##$VPLIST= <PPPPPPPPPPPPPPP>
+$$ ##$VTLIST= <TTTTTTTTTTTTTTT>
+$$ ##$WBST= 1024
+$$ ##$WBSW= 4
+$$ ##$XGAIN= (0..3)
+$$ 0 0 0 0
+$$ ##$XL= 0
+$$ ##$YL= 0
+$$ ##$YMAX_a= 27419486
+$$ ##$YMIN_a= -22210308
+$$ ##$ZGOPTNS= <>
+$$ ##$ZL1= 120
+$$ ##$ZL2= 120
+$$ ##$ZL3= 120
+$$ ##$ZL4= 120
+$$ ##END=
+$$ 
+##$PARAMETERFILE=	(audita.txt, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/audita.txt, 0)
+$$ ##TITLE= Audit trail, TOPSPIN		Version 2.1
+$$ ##JCAMPDX= 5.01
+$$ ##ORIGIN= Bruker BioSpin GmbH
+$$ ##OWNER= KT12-nmr
+$$ $$ C:\Bruker\TOPSPIN\Daten/data/xtc/nmr/S2015_1275_1/120/audita.txt
+$$ ##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+$$ (   1,<2015-04-10 03:20:44.100 +0200>,<BK\KT12-nmr>,<WSA30886>,<go>,<TOPSPIN 2.1>,
+$$       <created by zg
+$$ 	started at 2015-04-09 20:19:54.487 +0200,
+$$ 	POWCHK enabled, PULCHK disabled,
+$$        configuration hash MD5:
+$$        C4 3B 22 B7 02 AD 18 19 C9 B1 11 AE D9 E5 81 89
+$$        data hash MD5: 64K
+$$        05 C3 B7 2C D0 8D 8F AD 2B 7D D9 BD 63 F1 6C 17>)
+$$ (   2,<2015-04-10 03:20:55.100 +0200>,<BK\KT12-nmr>,<WSA30886>,<audit>,<TOPSPIN 2.1>,
+$$       <user comment:
+$$        ICON-NMR User ID: xtc
+$$        data hash MD5: 64K
+$$        05 C3 B7 2C D0 8D 8F AD 2B 7D D9 BD 63 F1 6C 17>)
+$$ ##END=
+$$ 
+$$ $$ hash MD5
+$$ $$ 70 5E 73 C6 0D C9 23 B0 36 D9 BD CD 80 E3 11 B9
+$$ 
+##$PARAMETERFILE=	(auditp.txt, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pdata/1/auditp.txt, 0)
+$$ ##TITLE= Audit trail, TOPSPIN		Version 2.1
+$$ ##JCAMPDX= 5.01
+$$ ##ORIGIN= Bruker BioSpin GmbH
+$$ ##OWNER= KT12-nmr
+$$ $$ C:\Bruker\TOPSPIN\Daten/data/xtc/nmr/S2015_1275_1/120/pdata/1/auditp.txt
+$$ ##AUDIT TRAIL=  $$ (NUMBER, WHEN, WHO, WHERE, PROCESS, VERSION, WHAT)
+$$ (   1,<2015-04-10 03:20:44.100 +0200>,<BK\KT12-nmr>,<WSA30886>,<go>,<TOPSPIN 2.1>,
+$$       <created by zg
+$$ 	started at 2015-04-09 20:19:54.487 +0200,
+$$ 	POWCHK enabled, PULCHK disabled,
+$$        configuration hash MD5:
+$$        C4 3B 22 B7 02 AD 18 19 C9 B1 11 AE D9 E5 81 89
+$$        data hash MD5: 64K
+$$        05 C3 B7 2C D0 8D 8F AD 2B 7D D9 BD 63 F1 6C 17>)
+$$ (   2,<2015-04-10 03:20:55.100 +0200>,<BK\KT12-nmr>,<WSA30886>,<audit>,<TOPSPIN 2.1>,
+$$       <user comment:
+$$        ICON-NMR User ID: xtc
+$$        data hash MD5: 64K
+$$        05 C3 B7 2C D0 8D 8F AD 2B 7D D9 BD 63 F1 6C 17>)
+$$ (   3,<2015-04-10 07:43:32.515 +0200>,<BK\KT12-nmr>,<WSA30886>,<proc1d>,<TOPSPIN 2.1>,
+$$       <Start of raw data processing
+$$        efp BC_mod = 2 LB = 1 FT_mod = 6 PKNL = 1 PHC0 = -81.89838 PHC1 = 150.7881 SI = 32K 
+$$        data hash MD5: 32K
+$$        6A 34 55 7C F3 FF 52 9C B2 3F A5 23 35 C6 7E AF>)
+$$ (   4,<2015-04-10 07:44:07.499 +0200>,<BK\KT12-nmr>,<WSA30886>,<proc1d>,<TOPSPIN 2.1>,
+$$       <pk fgphup PHC0 = 81.90886 PHC1 = -126.9 
+$$        data hash MD5: 32K
+$$        61 4F C7 5B 7F 24 A4 A3 C8 A8 36 28 58 DB 9B 8E>)
+$$ (   5,<2015-04-10 07:44:11.405 +0200>,<BK\KT12-nmr>,<WSA30886>,<proc1d>,<TOPSPIN 2.1>,
+$$       <abs n ABSG = 5 
+$$        data hash MD5: 32K
+$$        12 07 23 3F C2 00 A9 F3 EC DE 0C B3 4D 6C 64 D0>)
+$$ ##END=
+$$ 
+$$ $$ hash MD5
+$$ $$ 0C 37 30 2A ED AC 84 E0 38 88 BF 90 BD 64 CE 45
+$$ 
+##$PARAMETERFILE=	(cpdprg2, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/cpdprg2, 0)
+$$ ;$OWNER=Bruker
+$$ 1 pcpd*3:180
+$$   pcpd*4:0
+$$   pcpd*2:180
+$$   pcpd*3:0
+$$   pcpd  :180
+$$   pcpd*2:0
+$$   pcpd*4:180
+$$   pcpd*2:0
+$$   pcpd*3:180
+$$ 2 pcpd*3:0
+$$   pcpd*4:180
+$$   pcpd*2:0
+$$   pcpd*3:180
+$$   pcpd  :0
+$$   pcpd*2:180
+$$   pcpd*4:0
+$$   pcpd*2:180
+$$   pcpd*3:0
+$$   lo to 2 times 2
+$$ 3 pcpd*3:180
+$$   pcpd*4:0
+$$   pcpd*2:180
+$$   pcpd*3:0
+$$   pcpd  :180
+$$   pcpd*2:0
+$$   pcpd*4:180
+$$   pcpd*2:0
+$$   pcpd*3:180
+$$   jump to 1
+$$ 
+##$PARAMETERFILE=	(datafile, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pdata/1/1r, 0)
+$$ 
+##$PARAMETERFILE=	(format.temp, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/format.temp, 0)
+$$ EDIT_PAR COMMAND FILE
+$$ 
+$$ DI_MODE         LONG
+$$ ED_ENTRY        ACQU
+$$ ORDER           FILE
+$$ 
+$$ 
+$$ HEADER		"F2 - Acquisition Parameters"
+$$ T_NAME		Date_
+$$ 		TYPE	R64
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 50000000
+$$ 		REL	"Date_=itodate(DATE)"
+$$ 		INV_REL	"DATE=datetoi(Date_,DATE)"
+$$ 		FORMAT	"%14.0f"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		Time
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1000000
+$$ 		REL	"Time=itotime(DATE)"
+$$ 		INV_REL	"DATE=timetoi(Time,DATE)"
+$$ 		FORMAT	"%14.2f"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		INSTRUM
+$$ 		TEXT	" "
+$$ END
+$$ NAME		PROBHD
+$$ 		FORMAT	"%14.14s"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		PULPROG
+$$ 		TEXT	" "
+$$ END
+$$ NAME		TD
+$$ 		TEXT	" "
+$$ END
+$$ NAME		SOLVENT
+$$ 		TEXT	" "
+$$ END
+$$ NAME		NS
+$$ 		TEXT	" "
+$$ END
+$$ NAME		DS
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		SWH
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1e8
+$$ 		REL	"SWH=SW*SFO1"
+$$ 		INV_REL "SW=SWH/SFO1"
+$$ 		UNIT	"Hz"
+$$ 		FORMAT	"%14.3f Hz"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME          FIDRES
+$$                 TYPE    R32
+$$                 CLASS   ACQU
+$$                 SUBRANGE 0.0 100000
+$$                 REL     "FIDRES=SW*SFO1/TD"
+$$                 INV_REL "TD = nextpow(SW*SFO1/FIDRES)"
+$$ 		UNIT	"Hz"
+$$ 		FORMAT	"%14.6f Hz"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME          AQ
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1000
+$$ 		REL	"AQ=aqcalc(SW,SFO1,TD,DIGTYP)"
+$$ 		INV_REL	"TD=tdcalc(SW,SFO1,1.0e6*AQ,DIGTYP)"
+$$ 		UNIT	"sec"
+$$ 		FORMAT	"%14.7f sec"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		RG
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME          DW
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1000000
+$$ 		REL	"DW=1/(2*SW*SFO1)"
+$$ 		INV_REL	"SW=1000000/(2*(0.005+DW)*SFO1)"
+$$ 		UNIT	"usec"
+$$ 		FORMAT	"%14.3lf usec"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		DE
+$$ 		FORMAT	"%14.2f usec"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		TE
+$$ 		FORMAT	"%14.1f K"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		D1
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1e38
+$$ 		REL	"D1=D[1]"
+$$ 		INV_REL	"D[1]=D1"
+$$ 		UNIT	"sec"
+$$ 		FORMAT	"%14.8f sec"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		D11
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1e38
+$$ 		REL	"D11=D[11]"
+$$ 		INV_REL	"D[11]=D11"
+$$ 		UNIT	"sec"
+$$ 		FORMAT	"%14.8f sec"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		TD0
+$$ 		TEXT	" "
+$$ END
+$$ HEADER		"======== CHANNEL f1 ========"
+$$ NAME		NUC1
+$$ 		NONEDIT
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		P1
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0.0 1.0e10
+$$ 		REL	"P1=P[1]"
+$$ 		INV_REL	"P[1]=P1"
+$$ 		UNIT	"usec"
+$$ 		FORMAT	"%14.2f usec"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL1
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL1=PL[1]"
+$$ 		INV_REL	"PL[1]=PL1"
+$$ 		UNIT	"dB"
+$$ 		FORMAT	"%14.2f dB"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL1W
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL1W=285*pow(10.0,(-6-PL[1])/10.0)"
+$$ 		INV_REL	"PL[1]=-6-4.3425*log(PL1W/285)"
+$$ 		UNIT	"no"
+$$ 		FORMAT	"%14.8f W"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		SFO1
+$$ 		FORMAT	"%14.7f MHz"
+$$ 		TEXT	" "
+$$ END
+$$ HEADER		"======== CHANNEL f2 ========"
+$$ NAME		CPDPRG2
+$$ 		TEXT	" "
+$$ END
+$$ NAME		NUC2
+$$ 		NONEDIT
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PCPD2
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE 0 1e38
+$$ 		REL	"PCPD2=PCPD[2]"
+$$ 		INV_REL	"PCPD[2]=PCPD2"
+$$ 		UNIT	"usec"
+$$ 		FORMAT	"%14.2f usec"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL2
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL2=PL[2]"
+$$ 		INV_REL	"PL[2]=PL2"
+$$ 		UNIT	"dB"
+$$ 		FORMAT	"%14.2f dB"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL12
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL12=PL[12]"
+$$ 		INV_REL	"PL[12]=PL12"
+$$ 		UNIT	"dB"
+$$ 		FORMAT	"%14.2f dB"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL13
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL13=PL[13]"
+$$ 		INV_REL	"PL[13]=PL13"
+$$ 		UNIT	"dB"
+$$ 		FORMAT	"%14.2f dB"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL2W
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL2W=97.3*pow(10.0,(-6-PL[2])/10.0)"
+$$ 		INV_REL	"PL[2]=-6-4.3425*log(PL2W/97.3)"
+$$ 		UNIT	"no"
+$$ 		FORMAT	"%14.8f W"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL12W
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL12W=97.3*pow(10.0,(-6-PL[12])/10.0)"
+$$ 		INV_REL	"PL[12]=-6-4.3425*log(PL12W/97.3)"
+$$ 		UNIT	"no"
+$$ 		FORMAT	"%14.8f W"
+$$ 		TEXT	" "
+$$ END
+$$ T_NAME		PL13W
+$$ 		TYPE	R32
+$$ 		CLASS	ACQU
+$$ 		SUBRANGE -6.0 1e38
+$$ 		REL	"PL13W=97.3*pow(10.0,(-6-PL[13])/10.0)"
+$$ 		INV_REL	"PL[13]=-6-4.3425*log(PL13W/97.3)"
+$$ 		UNIT	"no"
+$$ 		FORMAT	"%14.8f W"
+$$ 		TEXT	" "
+$$ END
+$$ NAME		SFO2
+$$ 		FORMAT	"%14.7f MHz"
+$$ 		TEXT	" "
+$$ END
+$$ 
+##$PARAMETERFILE=	(intrng, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pdata/1/intrng, 0)
+$$ P 0
+$$ 163.862727   163.563945
+$$ 161.953436   161.618217
+$$ 139.114812   138.050856
+$$ 134.625791   133.554547
+$$ 132.978845   131.448497
+$$ 131.441209   130.778059
+$$ 126.012117   125.443702
+$$ 125.254231   124.452620
+$$ 124.445332   123.527123
+$$ 122.732800   122.062362
+$$ 122.018637   121.676131
+$$ 121.668844   118.506124
+$$ 118.498837   118.287503
+$$ 118.280216   116.305338
+$$ 116.181453   115.051910
+$$ 115.044622   114.490782
+$$ 114.483495   114.250299
+$$ 112.311858   111.036568
+$$ 81.420688   81.070894
+$$ 64.018444   63.639501
+$$ 54.901942   54.471987
+$$ 54.435550   53.910859
+$$ 43.446193   43.052675
+$$ 14.165532   13.560680
+$$ 13.553393   13.167162
+$$ -2.748458   -3.418896
+$$ 
+##$PARAMETERFILE=	(parm.txt, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pdata/1/parm.txt, 0)
+$$ NAME       S2015_1275_1                
+$$ EXPNO               120                
+$$ PROCNO                1                
+$$ Date_          20150410                
+$$ Time               3.20                
+$$ INSTRUM           spect                
+$$ PROBHD   5 mm PABBI 1H-                
+$$ PULPROG          zgpg30                
+$$ TD                65536                
+$$ SOLVENT             D2O                
+$$ NS                 8000                
+$$ DS                    4                
+$$ SWH           30030.029 Hz             
+$$ FIDRES         0.458222 Hz             
+$$ AQ            1.0912410 sec            
+$$ RG                32800                
+$$ DW               16.650 usec           
+$$ DE                 6.50 usec           
+$$ TE                297.2 K              
+$$ D1           2.00000000 sec            
+$$ D11          0.03000000 sec            
+$$ TD0                   1                
+$$ 
+$$ ======== CHANNEL f1 ========
+$$ NUC1                13C                
+$$ P1                12.50 usec           
+$$ PL1               -4.00 dB             
+$$ PL1W       179.82284546 W              
+$$ SFO1        125.7703643 MHz            
+$$ 
+$$ ======== CHANNEL f2 ========
+$$ CPDPRG2         waltz16                
+$$ NUC2                 1H                
+$$ PCPD2             75.00 usec           
+$$ PL2                5.00 dB             
+$$ PL12              22.00 dB             
+$$ PL13              22.00 dB             
+$$ PL2W         7.72881365 W              
+$$ PL12W        0.15421011 W              
+$$ PL13W        0.15421011 W              
+$$ SFO2        500.1320005 MHz            
+$$ SI                32768                
+$$ SF          125.7574300 MHz            
+$$ WDW                  EM                
+$$ SSB                   0                
+$$ LB                 1.00 Hz             
+$$ GB                    0                
+$$ PC                 1.40                
+$$ 
+##$PARAMETERFILE=	(procs, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pdata/1/procs, 0)
+$$ ##TITLE= Parameter file, TOPSPIN		Version 2.1
+$$ ##JCAMPDX= 5.0
+$$ ##DATATYPE= Parameter Values
+$$ ##NPOINTS= 27	$$ modification sequence number
+$$ ##ORIGIN= Bruker BioSpin GmbH
+$$ ##OWNER= KT12-nmr
+$$ $$ 2015-04-10 07:45:04.874 +0200  BK\KT12-nmr@WSA30886
+$$ $$ C:/Bruker/TOPSPIN/Daten/data/xtc/nmr/S2015_1275_1/120/pdata/1/procs
+$$ $$ process C:\Bruker\TOPSPIN\prog\mod\dataserver.exe
+$$ ##$ABSF1= 219.3925
+$$ ##$ABSF2= -19.4001
+$$ ##$ABSG= 5
+$$ ##$ABSL= 3
+$$ ##$ALPHA= 0
+$$ ##$AQORDER= 0
+$$ ##$ASSFAC= 0
+$$ ##$ASSFACI= 0
+$$ ##$ASSFACX= 0
+$$ ##$ASSWID= 0
+$$ ##$AUNMP= <proc_1d>
+$$ ##$AXLEFT= 0
+$$ ##$AXNAME= <>
+$$ ##$AXNUC= <13C>
+$$ ##$AXRIGHT= 0
+$$ ##$AXTYPE= 0
+$$ ##$AXUNIT= <>
+$$ ##$AZFE= 0.1
+$$ ##$AZFW= 0.5
+$$ ##$BCFW= 0
+$$ ##$BC_mod= 2
+$$ ##$BYTORDP= 0
+$$ ##$COROFFS= 0
+$$ ##$CY= 15
+$$ ##$DATMOD= 1
+$$ ##$DC= 0
+$$ ##$DFILT= <>
+$$ ##$DTYPP= 0
+$$ ##$F1P= 200
+$$ ##$F2P= -10
+$$ ##$FCOR= 0.5
+$$ ##$FTSIZE= 32768
+$$ ##$FT_mod= 6
+$$ ##$GAMMA= 0
+$$ ##$GB= 0
+$$ ##$INTBC= 1
+$$ ##$INTSCL= 1
+$$ ##$ISEN= 30
+$$ ##$LB= 1
+$$ ##$LEV0= 0
+$$ ##$LPBIN= 0
+$$ ##$MAXI= 10000
+$$ ##$MC2= 0
+$$ ##$MEAN= 0
+$$ ##$ME_mod= 0
+$$ ##$MI= 0
+$$ ##$NCOEF= 0
+$$ ##$NC_proc= 2
+$$ ##$NLEV= 6
+$$ ##$NOISF1= 0
+$$ ##$NOISF2= 0
+$$ ##$NSP= 0
+$$ ##$NTH_PI= 0
+$$ ##$NZP= 0
+$$ ##$OFFSET= 222.2476
+$$ ##$PC= 1.4
+$$ ##$PHC0= 0.01048279
+$$ ##$PHC1= 23.8881
+$$ ##$PH_mod= 1
+$$ ##$PKNL= yes
+$$ ##$PPARMOD= 0
+$$ ##$PPDIAG= 0
+$$ ##$PPIPTYP= 0
+$$ ##$PPMPNUM= 2147483647
+$$ ##$PPRESOL= 1
+$$ ##$PSCAL= 4
+$$ ##$PSIGN= 0
+$$ ##$PYNMP= <proc.py>
+$$ ##$REVERSE= no
+$$ ##$SF= 125.75743003423
+$$ ##$SI= 32768
+$$ ##$SIGF1= 0
+$$ ##$SIGF2= 0
+$$ ##$SINO= 80
+$$ ##$SIOLD= 32768
+$$ ##$SPECTYP= <>
+$$ ##$SREGLST= <13C.D2O>
+$$ ##$SSB= 0
+$$ ##$STSI= 32768
+$$ ##$STSR= 0
+$$ ##$SW_p= 30030.03003003
+$$ ##$SYMM= 0
+$$ ##$S_DEV= 0
+$$ ##$TDeff= 65536
+$$ ##$TDoff= 0
+$$ ##$TI= <>
+$$ ##$TILT= no
+$$ ##$TM1= 0
+$$ ##$TM2= 0
+$$ ##$TOPLEV= 0
+$$ ##$USERP1= <user>
+$$ ##$USERP2= <user>
+$$ ##$USERP3= <user>
+$$ ##$USERP4= <user>
+$$ ##$USERP5= <user>
+$$ ##$WDW= 1
+$$ ##$XDIM= 64
+$$ ##$YMAX_p= 364682025
+$$ ##$YMIN_p= -12140435
+$$ ##END=
+$$ 
+##$PARAMETERFILE=	(pulseprogram, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pulseprogram, 0)
+$$ # 1 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30"
+$$ ;zgpg30
+$$ ;avance-version (07/04/03)
+$$ ;1D sequence with power-gated decoupling
+$$ ;using 30 degree flip angle
+$$ ;
+$$ ;$CLASS=HighRes
+$$ ;$DIM=1D
+$$ ;$TYPE=
+$$ ;$SUBTYPE=
+$$ ;$COMMENT=
+$$ 
+$$ 
+$$ # 1 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/Avance.incl" 1
+$$ ;Avance2.incl
+$$ ;   for 1
+$$ ;
+$$ ;avance-version (09/07/02)
+$$ ;
+$$ ;$CLASS=HighRes Incl
+$$ ;$COMMENT=
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ 
+$$ ;$Id: Avance2.incl,v 1.17.2.2 2009/11/18 11:19:58 ber Exp $
+$$ # 13 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30" 2
+$$ 
+$$ # 1 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/Delay.incl" 1
+$$ ;Delay.incl  -  include file for commonly used delays
+$$ ;
+$$ ;version 00/02/07
+$$ ;
+$$ ;$CLASS=HighRes Incl
+$$ ;$COMMENT=
+$$ 
+$$ 
+$$ ;general delays
+$$ 
+$$ define delay DELTA
+$$ define delay DELTA1
+$$ define delay DELTA2
+$$ define delay DELTA3
+$$ define delay DELTA4
+$$ define delay DELTA5
+$$ define delay DELTA6
+$$ define delay DELTA7
+$$ define delay DELTA8
+$$ 
+$$ define delay TAU
+$$ define delay TAU1
+$$ define delay TAU2
+$$ define delay TAU3
+$$ define delay TAU4
+$$ define delay TAU5
+$$ 
+$$ 
+$$ ;delays for centering pulses
+$$ 
+$$ define delay CEN_HN1
+$$ define delay CEN_HN2
+$$ define delay CEN_HN3
+$$ define delay CEN_HC1
+$$ define delay CEN_HC2
+$$ define delay CEN_HC3
+$$ define delay CEN_HC4
+$$ define delay CEN_HP1
+$$ define delay CEN_HP2
+$$ define delay CEN_CN1
+$$ define delay CEN_CN2
+$$ define delay CEN_CN3
+$$ define delay CEN_CN4
+$$ define delay CEN_CP1
+$$ define delay CEN_CP2
+$$ 
+$$ 
+$$ ;loop counters
+$$ 
+$$ define loopcounter COUNTER
+$$ define loopcounter SCALEF
+$$ define loopcounter FACTOR1
+$$ define loopcounter FACTOR2
+$$ define loopcounter FACTOR3
+$$ 
+$$ 
+$$ 
+$$ ;$Id: Delay.incl,v 1.12 2005/11/10 12:16:58 ber Exp $
+$$ # 14 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30" 2
+$$ 
+$$ 
+$$ 
+$$ "d11=30m"
+$$ 
+$$ 
+$$ "DELTA=d1-100m"
+$$ 
+$$ 
+$$ "acqt0=-p1*0.66/3.1416"
+$$ 
+$$ 
+$$ # 1 "mc_line 26 file C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30 expanding definition part of mc command before ze"
+$$ define delay MCWRK
+$$ define delay MCREST
+$$ "MCWRK = 0.333333*30m"
+$$ "MCREST = 30m - 30m"
+$$     dccorr
+$$ # 26 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30"
+$$ 1 ze
+$$ # 1 "mc_line 26 file C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30 expanding definition of mc command after ze"
+$$ # 27 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30"
+$$   d11 pl12:f2
+$$ # 1 "mc_line 28 file C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30 expanding start label for mc command"
+$$ 2 MCWRK  * 2 do:f2
+$$ LBLF0, MCWRK 
+$$   MCREST
+$$ # 29 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30"
+$$   10u pl13:f2
+$$   d11 cpd2:f2
+$$   DELTA
+$$   4u do:f2
+$$   10u pl12:f2
+$$   100m cpd2:f2
+$$   p1*0.33 ph1
+$$   go=2 ph31
+$$ # 1 "mc_line 37 file C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30 expanding mc command in line"
+$$   MCWRK do:f2 pl13:f2 wr #0
+$$   MCWRK zd 
+$$   lo to LBLF0 times td0
+$$ 
+$$   MCWRK
+$$ # 38 "C:/Bruker/TOPSPIN/exp/stan/nmr/lists/pp/zgpg30"
+$$ exit
+$$ 
+$$ 
+$$ ph1=0 2 2 0 1 3 3 1
+$$ ph31=0 2 2 0 1 3 3 1
+$$ 
+$$ 
+$$ ;pl1 : f1 channel - power level for pulse (default)
+$$ ;pl12: f2 channel - power level for CPD/BB decoupling
+$$ ;pl13: f2 channel - power level for second CPD/BB decoupling
+$$ ;p1 : f1 channel -  90 degree high power pulse
+$$ ;d1 : relaxation delay; 1-5 * T1
+$$ ;d11: delay for disk I/O                             [30 msec]
+$$ ;NS: 1 * n, total number of scans: NS * TD0
+$$ ;cpd2: decoupling according to sequence defined by cpdprg2
+$$ ;pcpd2: f2 channel - 90 degree pulse for decoupling sequence
+$$ 
+$$ 
+$$ 
+$$ ;$Id: zgpg30,v 1.10 2007/04/11 13:34:31 ber Exp $
+$$ 
+##$PARAMETERFILE=	(title, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/pdata/1/title, 0)
+$$ S2015_1275_1e20 6,78 mg + Stdlsg. 37
+$$ 
+##$PARAMETERFILE=	(uxnmr.par, ASCII, V:/data/xtc/nmr/S2015_1275_1/120/uxnmr.par, 0)
+$$ ##TITLE= Parameter file, TOPSPIN		Version 2.1
+$$ ##JCAMPDX= 5.0
+$$ ##DATATYPE= Parameter Values
+$$ ##NPOINTS= 56	$$ modification sequence number
+$$ ##ORIGIN= Bruker BioSpin GmbH
+$$ ##OWNER= KT14-Nmr
+$$ $$ 2013-09-02 10:57:24.484 +0200  BK\kt12-nmr@WSA30886
+$$ $$ C:/Bruker/TOPSPIN/conf/instr/spect/uxnmr.par
+$$ $$ process C:\Bruker\TOPSPIN\prog\mod\hconfserver.exe
+$$ ##$ACB= 1
+$$ ##$ACBTAT= (0..15)
+$$ 0 88 72 50 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTBA= (0..15)
+$$ 0 40 30 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTBLK= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTCTL= (0..15)
+$$ 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTDI= (0..15)
+$$ 0 70 70 72 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTDM= (0..15)
+$$ 0 10 25 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTFHI= (0..15)
+$$ 0 243 600 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTFL= (0..15)
+$$ 0 249 250 8 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTFLO= (0..15)
+$$ 0 6 180 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTINP= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTOUT= (0..15)
+$$ 0 2 1 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTPO= (0..15)
+$$ 0 300000 100000 20000 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTPW= (0..15)
+$$ 0 1000 1000 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTSB= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$ACBTY= <tty20>
+$$ ##$AQSBDCH= (0..95)
+$$ 0 0 0 0 0 0 0 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255
+$$ ##$AQSBDHW= (0..95)
+$$ 2 1 4 4 0 0 0 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255
+$$ ##$AQSBDID= (0..95)
+$$ 82 88 83 83 89 80 66 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255
+$$ ##$AQSBDNO= (0..95)
+$$ 1 1 1 2 1 1 1 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255
+$$ ##$AQSBDSL= (0..95)
+$$ 2 3 4 5 8 21 25 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255
+$$ ##$AQSBDTY= (0..95)
+$$ 97 192 24 24 4 10 7 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255
+$$ ##$AQSBUAD= (0..95)
+$$ 16 52 36 37 60 33 32 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255
+$$ ##$AQSECL= (0..95)
+$$ 4 0 3 3 1 1 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255
+$$ ##$AQSECLS= (0..95)
+$$ 1 4 0 0 0 0 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255 255
+$$ 255 255 255
+$$ ##$AQSSPLT= no
+$$ ##$ATT19F= (0..1)
+$$ 0 0
+$$ ##$ATT1H= (0..1)
+$$ 0 0
+$$ ##$ATT3H= (0..1)
+$$ 0 0
+$$ ##$ATTX= (0..1)
+$$ 0 0
+$$ ##$ATTY= (0..1)
+$$ 0 0
+$$ ##$ATTZ= (0..1)
+$$ 0 0
+$$ ##$BACSAIR= yes
+$$ ##$BACSCAP= 120
+$$ ##$BACSDEL= 10
+$$ ##$BACSFCM= no
+$$ ##$BACSOPT= <>
+$$ ##$BACSTY= <tty08>
+$$ ##$BARPTY= <no>
+$$ ##$BFREQ= 500.13
+$$ ##$BGAETH1= <no>
+$$ ##$BGAETH2= <no>
+$$ ##$BGAETH3= <no>
+$$ ##$BGAETH4= <no>
+$$ ##$BGAETH5= <no>
+$$ ##$BGAETH6= <no>
+$$ ##$BGAETH7= <no>
+$$ ##$BGAETH8= <no>
+$$ ##$BIRDS= yes
+$$ ##$BMPC= 0
+$$ ##$BMPCTY= <no>
+$$ ##$BPSUTY= <no>
+$$ ##$BSMS= 1
+$$ ##$BSMSETH= <no>
+$$ ##$BSMSTY= <tty02>
+$$ ##$CFASMOD= (0..7)
+$$ 1 1 1 1 1 1 1 1
+$$ ##$CFASMUL= (0..7)
+$$ 1 1 1 1 1 1 1 1
+$$ ##$CNFTXDR= (0..7)
+$$ 6 6 0 0 0 0 0 0
+$$ ##$COMDIG2= 0
+$$ ##$CPDBTY= <no>
+$$ ##$CRCOTY= <no>
+$$ ##$CSW1= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$CSW2= (0..31)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$CSWNUM= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DATSTAT= no
+$$ ##$DIGI140= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIB12= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIB16= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIFA= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIHA= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIHAF= (0..7)
+$$ 1 0 0 0 0 0 0 0
+$$ ##$DIGIHRD= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIIA= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGIO16= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGISA= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGISAF= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGISL= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGITYI= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$DIGITYP= (0..7)
+$$ 2 0 0 0 0 0 0 0
+$$ ##$DIGITZ= 0
+$$ ##$DRU= no
+$$ ##$DRUETH01= <no>
+$$ ##$DRUETH02= <no>
+$$ ##$DRUETH03= <no>
+$$ ##$DRUETH04= <no>
+$$ ##$DRUETH05= <no>
+$$ ##$DRUETH06= <no>
+$$ ##$DRUETH07= <no>
+$$ ##$DRUETH08= <no>
+$$ ##$DRUETH09= <no>
+$$ ##$DRUETH10= <no>
+$$ ##$DRUETH11= <no>
+$$ ##$DRUETH12= <no>
+$$ ##$DRUETH13= <no>
+$$ ##$DRUETH14= <no>
+$$ ##$DRUETH15= <no>
+$$ ##$DRUETH16= <no>
+$$ ##$DRUETH17= <no>
+$$ ##$DRUETH18= <no>
+$$ ##$DRUETH19= <no>
+$$ ##$DRUETH20= <no>
+$$ ##$DRUETH21= <no>
+$$ ##$DRUETH22= <no>
+$$ ##$DRUETH23= <no>
+$$ ##$DRUETH24= <no>
+$$ ##$DRUETH25= <no>
+$$ ##$DRUETH26= <no>
+$$ ##$DRUETH27= <no>
+$$ ##$DRUETH28= <no>
+$$ ##$DRUETH29= <no>
+$$ ##$DRUETH30= <no>
+$$ ##$DRUETH31= <no>
+$$ ##$DRUETH32= <no>
+$$ ##$FCUMEM= (0..7)
+$$ 2093056 2093056 0 0 0 0 0 0
+$$ ##$FCUPAL= (0..7)
+$$ 260 260 0 0 0 0 0 0
+$$ ##$FGSVTY= <no>
+$$ ##$FQMIX= 0
+$$ ##$FUNCMOD= <>
+$$ ##$GCUTYPE= 2
+$$ ##$GPREDEL= 0
+$$ ##$GPSCUTY= <no>
+$$ ##$GRADRES= 5
+$$ ##$GTUTY= <no>
+$$ ##$HFAC= 3
+$$ ##$HPCU= 0
+$$ ##$HPCUTY= <no>
+$$ ##$HPTXLP= (0..3)
+$$ -1 -1 -1 -1
+$$ ##$HPTXPI= (0..3)
+$$ 0 0 0 0
+$$ ##$HPTXPO= (0..3)
+$$ 0 0 0 0
+$$ ##$HPTXTY= (0..3)
+$$ 0 0 0 0
+$$ ##$IF451= 0
+$$ ##$IFREQ= 1
+$$ ##$INTFPR= 0
+$$ ##$IPSO= no
+$$ ##$IPSOETH= <>
+$$ ##$LOCKTY= <tty03>
+$$ ##$LOCSWID= 0
+$$ ##$LOCSWIF= 0
+$$ ##$M2FAC= 0
+$$ ##$MAS= 0
+$$ ##$MASETIME= 10
+$$ ##$MASITIME= 10
+$$ ##$MASTY= <tty07>
+$$ ##$MAS_CT= 0
+$$ ##$MAS_SG= 0
+$$ ##$MAS_TO= 0
+$$ ##$MEMPRM= 0
+$$ ##$MHFAC= 0
+$$ ##$MXFAC= 0
+$$ ##$NAMPD1= <1H LNA>
+$$ ##$NAMPD10= <>
+$$ ##$NAMPD11= <>
+$$ ##$NAMPD12= <>
+$$ ##$NAMPD13= <>
+$$ ##$NAMPD14= <>
+$$ ##$NAMPD15= <>
+$$ ##$NAMPD16= <>
+$$ ##$NAMPD2= <XBB19F 2HS>
+$$ ##$NAMPD3= <2H>
+$$ ##$NAMPD4= <19F>
+$$ ##$NAMPD5= <>
+$$ ##$NAMPD6= <>
+$$ ##$NAMPD7= <>
+$$ ##$NAMPD8= <>
+$$ ##$NAMPD9= <>
+$$ ##$NFCU= 2
+$$ ##$NMRCH= 2
+$$ ##$NMRMEM= 16384
+$$ ##$NRCU= 1
+$$ ##$NROUT= 1
+$$ ##$NSGU= 2
+$$ ##$PAMPF1= (0..15)
+$$ 75 24 64 96 40 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF2= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF3= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF4= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF5= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF6= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF7= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PAMPF8= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$PH4= 0
+$$ ##$PHF4TY= <no>
+$$ ##$POWCHK= yes
+$$ ##$PRAMD1= (0..7)
+$$ 2 0 0 536870912 0 0 0 0
+$$ ##$PRAMD10= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD11= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD12= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD13= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD14= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD15= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD16= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD17= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD18= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD19= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD2= (0..7)
+$$ 2147483644 2131230719 2147483647 671088639 0 0 0 0
+$$ ##$PRAMD20= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD21= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD3= (0..7)
+$$ 0 1048576 0 536870912 0 1048576 0 536870912
+$$ ##$PRAMD4= (0..7)
+$$ 4 0 0 536870912 4 0 0 536870912
+$$ ##$PRAMD5= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD6= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD7= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD8= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMD9= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PRAMLED= (0..1)
+$$ 15 15
+$$ ##$PRAMP1= <tty10>
+$$ ##$PRAMP2= <no>
+$$ ##$PRAMP3= <no>
+$$ ##$PRAMP4= <no>
+$$ ##$PRAMP5= <no>
+$$ ##$PRAMP6= <no>
+$$ ##$PRAMP7= <no>
+$$ ##$PRAMP8= <no>
+$$ ##$PRAMPTP= 1
+$$ ##$PREPTY= <tty06>
+$$ ##$PRESHLD= 1
+$$ ##$PTS160= -1
+$$ ##$PTSA2X= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PTSF2X= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$PTSFMX= (0..7)
+$$ 643.52499 643.52499 0 0 0 0 0 0
+$$ ##$PULCHK= no
+$$ ##$RCUCDS= (0..7)
+$$ 8388608 0 0 0 0 0 0 0
+$$ ##$RCUCFS= (0..7)
+$$ 4096 0 0 0 0 0 0 0
+$$ ##$RCUCSS= (0..7)
+$$ 1048576 0 0 0 0 0 0 0
+$$ ##$RCUI2C1= (0..7)
+$$ 78 0 0 0 0 0 0 0
+$$ ##$RCUI2C2= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RCUI2C3= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RCUI2C4= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RCUI2C5= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RCUI2C6= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RCUI2C7= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RCUI2C8= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RDCU= 0
+$$ ##$RFSVTY= <no>
+$$ ##$RGTYPE= (0..31)
+$$ 9 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$RG_max= (0..31)
+$$ 46300 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$RG_min= (0..31)
+$$ 0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$RG_tab1= (0..255)
+$$ 0.25 0.28 0.32 0.35 0.4 0.44 0.5 0.56 0.64 0.7 0.8 0.89 1 1.12 1.28 1.4
+$$ 1.6 1.78 2 2.25 2.56 2.8 3.2 3.56 4 4.5 5 5.6 6.35 7.12 8 9 10 11.3 12.7
+$$ 14.2 16 18 20.2 22.6 25.4 28.5 32 36 40.3 45.2 50.8 57 64 71.8 80.6 90.5
+$$ 101 114 128 144 161 181 203 228 256 287 322 362 406 456 512 575 645 724
+$$ 812 912 1030 1150 1290 1440 1620 1820 2050 2300 2580 2890 3250 3640 4100
+$$ 4600 5160 5790 6500 7290 8200 9200 10300 11500 13000 14600 16400 18400
+$$ 20600 23100 26000 29100 32800 36800 41200 46300 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab2= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab3= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab4= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab5= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab6= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab7= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tab8= (0..255)
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RG_tabA= (0..255)
+$$ 0.25 0.28 0.32 0.35 0.4 0.44 0.5 0.56 0.64 0.7 0.8 0.89 1 1.12 1.28 1.4
+$$ 1.6 1.78 2 2.25 2.56 2.8 3.2 3.56 4 4.5 5 5.6 6.35 7.12 8 9 10 11.3 12.7
+$$ 14.2 16 18 20.2 22.6 25.4 28.5 32 36 40.3 45.2 50.8 57 64 71.8 80.6 90.5
+$$ 101 114 128 144 161 181 203 228 256 287 322 362 406 456 512 575 645 724
+$$ 812 912 1030 1150 1290 1440 1620 1820 2050 2300 2580 2890 3250 3640 4100
+$$ 4600 5160 5790 6500 7290 8200 9200 10300 11500 13000 14600 16400 18400
+$$ 20600 23100 26000 29100 32800 36800 41200 46300 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+$$ ##$ROUT14= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$ROUTER= 2
+$$ ##$RX22TY= <no>
+$$ ##$RXFMAX= (0..7)
+$$ 1070 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RXFMIN= (0..7)
+$$ 5 -1 -1 -1 -1 -1 -1 -1
+$$ ##$RXINTLV= (0..7)
+$$ 0 0 0 0 0 0 0 0
+$$ ##$RXMSTY= <no>
+$$ ##$SCMTY= <no>
+$$ ##$SGUC1= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$SGUC2= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$SPECTR= 5
+$$ ##$SY2FLAG= 0
+$$ ##$TFXNUM= 0
+$$ ##$TRIPLO2= 0
+$$ ##$VTUTY= <tty05>
+$$ ##$WBREFAM= (0..15)
+$$ 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100 100
+$$ ##$WBREFPH= (0..15)
+$$ 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+$$ ##$XFAC= 2
+$$ ##END=
+$$ 
+##$DECIM=	6
+##$DSPFVS=	10
+##XUNITS=	HZ
+##YUNITS=	ARBITRARY UNITS
+##FIRSTX=	27948.682469313502224
+##LASTX=	-2080.431116928962183
+##XFACTOR=	-0.91644378753753663602
+##YFACTOR=	18235.539199999999255
+##NPOINTS=	32768
+##XYDATA=	(X++(Y..Y))
+-30496D64l01l00J82J83q9q9q8q9L03L04j80j80p9p8p9q0L04L04n02n03L15L13L14L15l70
+-30471B94l68l69l69L77L78j07j07j90j89K95K94pqqql3l3l3l4m26m27N8N8o9o8J021r16K04
+-30443g90K04Q3Q3M5M5J134q03k66k68R6R5K58K57K58K58l48l46l48l47J97J98k87k87J6J5
+-30418h48J105q31J85J85N47N48p14p12k29k29N41N39N6N6n4n5n5n4L55L57m51m50K74K76
+-30394C42k09k07K46K48K48K48j16j15j15j16k72k70K11K13j81j80j81j81K12K12K12K13l83
+-30371G9l82r88R49M0M0J60J60j20j22j22j22k83k83N24N23k62k63k63k63J21J20O05O04l84
+-30347F8l83J00J00q4q4q3q4L7L7L7L8K42K42k40k42L1L1L1L1m5m5m5m4k67k67K18K17k05
+-30319f58k05O03O01k15k14k15k15K21K21k63k63K42K41K41K41m56m58K6K7j55j56L30L29
+-30296a50K37K39K38K38j24j25L59L60l03l03l03l02n14n14O15O15k64k65K19K19l75l76J09
+-30273d70J08RJ0RJ0N23N24k83k83j45j43L39L40k36k35k34k35N30N32k76k75N7N8N7N7m6
+-30247C02m6m6m6m6m6m6m5P0P2P1P1n33n34K73K73K10K09k73k75L31L30J90J90P57j501k32
+-30221c20k31P1P1P2P1l5l5l4l5j96j96l5R33M52j161K91K90l65l65M42M41l7l7l7l6j08j08
+-30194b37j08j08K13K12K12K12l93l92M14M14J6J6m69m67N6N6N6N6q1q0q1q1K02K02K01K01
+-30168B42j13j14j12j14L40L40m66m66j32j33j32j33J81J80J80J81L6L7L7L6q4q5J6J7o39
+-30143i00R75O7O8m06m07M01L99J58J59q10Q03L50o18m57m57M22M21l84l86L21L20M63M62
+-30120I64j262R96k14k14n66M01j050N63M58M59j154M59k98k98J87J87Q77p36k52k52m65N05
+-30098g05j01j01R75Qn77n77J18J19N8N8M69n00M6M5K07K07l38l38J336L68J06J06p72p71
+-30074e54K98K97M69n00q61P51O6O4K28K27j237k68O39O39k29k27L16o52L98L96m69m71K46
+-30051d34K46p83J85N89N88m79m81k08k08k08k08O19O19L56o11k38k38N08N07l27l28J57J56
+-30028b21L88L88l18l17r40O73j74j74r3Q74Q15j54R4q73R4R5P30P30p23p22M55M55l52l51
+-30004C79n93n95N37N35j81j79l02O67M25n44J22q45J93J93P2J039j09j10n94L75k20k19r8
+-29981e2r8o43L25k80k80O71k98M29M28j719J185L57L59j7j7r25O89L76L77m92M78m76M92
+-29958H69m76m75QQN52N53r72mQ63j05q30J36j65j65m00N68j78P90j202M12J10q59K98K98
+-29934c66N99l67j039p0L53L54J371k41o85K82M0M1J01J01k78k77k78k78J5J4J5J4j62j62
+-29910i03K01J169j190M23O04l63qpM75m91j59j58L65L65j399K15k10k09O58O58J74p94q12
+-29887a396Q03L78L78m43N24r27O86k18k20r65KQ86q3M82m86J171m43M66n03l00l01M46M44
+-29864C81K2K2m62m62q5q4J58J58N87N88k80k80K54p13m71M97l06l05O64r51K75K75l71N98
+-29840b91k12k11M55n14k11P57l93N76j61j61j00j00P6P6J6R83K4K4P51q64j02j02j252L62
+-29816e74q34P81J55J55K26p43k58P10j48j47L97L96J55J56J55q13M47n20L86L87N29m40l19
+-29793B39l19Q4J053o82o82N13m55O34O34o82K86r84O29K05p62K66K65P03r12P83j85l47l46
+-29770f2P6P7q4q4l87N80mlj24j25J17J084o50o49K72o95j059N56J1J0J12J12J01J02P06k61
+-29744b71o08L62J470j43l00k99j58j58k08k09K15K15J38q28K60K61o40L28K68K68l4l5l5
+-29721a41l4L3L3L4L3m71m71l50J265L61j251K42K41j21j22j82P86o9o8M14M16l41j309O88
+-29697c84O87k32k30L12o54K53K52J32J32J62q06L24L22p05R08m43N25j031N81o88R24lmO43
+-29673I77l26p44p45O48O47j40j39l8l9r07P06o25R88p86p87J21J21M0M0R49o66K82K83Q26
+-29649F86j41j504J10n2n1o2o2J028N8j21Q45O45j615P75j93k74k73N6N5nnN19m48O40l28
+-29624B83n54n55L0R98p25K42L01L03r18M9j2j1N9O0n46M22Q53j15l76l77O21l46P42k26k44
+-29599d2k44l06l05k24k25M62M61J119q16k12k12Q1Q1Q1Q0o58o59P95P94K80K80k05k04k54
+-29575e2k55K30K29m3m3m3m2j61j62L23L22N0N1N0N1n6n5n6n5K07K06o00n99k82k82N25N26
+-29548a6L62L64j20j21n30n32N98N98m91m90L16L14l23l24K81K81r59R76j12j11K42K44n03
+-29525e6n03k81O87J292o44o76K91J10J11j32j32L53L52n08n06n08n08L61L60L60L59M55M54
+-29502A091l52l53n0m9O16l53j247O89n21M47O4O2J25J24l98l99P30P31o00o00K07K05o8o9
+-29478C2o7o8l82l81J071J072q66q65j20j19J010M2K64p04L52o16j32Q36m54N13r99l1L30
+-29455b82L28P53q60N50m17Q7Q7n32M34j09j09j9j9N86l82m44N22n04n06l85N84N84l85J45
+-29431b93J45J476j37m91m90j08j06l18l17M89M88j46j46L98n69L90L91j54j54m65m67N63
+-29409b1m07M35M36m91m92J110J44J03q65J5J4N4N5j306L08K06K06L49L48m57m59P52P52r61
+-29385a72O50K53K53J52q16j038o9J039n74O10O10n60n59m29N40L98n69P96j462M94M94J81
+-29363B22p86j392J513M27M25j99k00J54J54R3R4k05j172m2R24J8J8N62N63l94l93J51q16
+-29340b81J51J50j078J179p66Q47m63m64R07o1l82l84M92m76O13l56M71M71J49q19l0l0j52
+-29317c12j51Q26j41m02m04q7q7L97L97m6m7J4J4l77N90r21O93M29n38r22M7J106J108l86
+-29293H00l86L10j303m57m56J307L37p91J76O6O5m18N49JJJ21J21n13M55L93n74N17m50N17
+-29269C88j096j28Q40J95J95n09n09k5k5l27l28Q03Q01J6J5n28M38k36k37k37k36P02k66L38
+-29245D4L40q51J18R84J6j113j45N7N7L19L18L19L19j95j95o38L28j203M10L70L69n22n23
+-29222a017R30R28l31l31k90O76o39R73m78M90M19n49o50o49r18O97l32O36N34m32K33K31
+-29200A31o77K91L50o16m96M72M12n57K81K80J390q70M32j181O8O9K93K94K94K94r0q9p36
+-29177C9K34P17q96l11l12j007O06J83J83j34j33Q94p2r81r81M11M11N42N43O62l05q39J28
+-29154d18Q55p59P24k44K60K61o78K91J037O9j46j114P02r12N60m08m48m48M6M7N30N30l27
+-29131A0l26l27l27L29L29K88o80J448j66j85j86N19m49p11p11M48M49O09l58o53R60N37m32
+-29108D15n62n62p25Q90L43L42K1K0o15L53j91j92K83K81n24n24J01J01O45l23O33O34k34
+-29085F10k34l05l03l05l04L66L66L66L66n62n60K45K45m50m50L57L56j47j48L37L36mml66
+-29061a92l67j073Q64Q63j073M11M10K88K89j65j65O43O42j67j68j67j68p21p23M08M07M13
+-29039D89M12j039j040M33M33n2n1M17M18l90l88L4L4L5L4j49j50j49j50L05L05n03n03K80
+-29015i35K79K79K80L99M01m07m06K00K02K01K01l74l73l74l74J76J76J76J76N5N4N4N5j71
+-28991e0j73j73j73Q0P9Q0P9j98j98O09O08j57j58j58j56N27N29M4M4q44q43K87K86j32j33
+-28966b94j32j33K61K61p68J168n87L80m3m3L40L40J38q30j111j45R66o48L60L60k65J348
+-28944I23K81j332l85N83kkO04l65J4J4j08j07L66o01j17j18K83o87K63J230j089J169K1r48
+-28920a10p5p6M08n59K27K26r5j065N36N36j30Q38P2q96J33J31N24m46l83N83o16L51o16o17
+-28896a119O97O96l31l32p46Q69m0m0O28O29o02j570M17M17M77m90o66L03Q2Q1P36q76j71
+-28873i51P97J145j114l88N80R34l5o20o19R56j2q18J49o1o2r10P05k39k39L47L46J34J35
+-28850A60P40k29j014m7o53o52M78M77o7R01j42j43q2q3J60J60l24l25K79K78k05k06P01P02
+-28826H64j516M20O53O55j706K31k64P04k63P04O4O5l59l59J85J85k97k99r9j00r9j00O27
+-28803a04O26n03n02K07K08K06K08j46j46j44j46j99j98j99j98K95K96K96K95l34l35M72M72
+-28780D27n3n2n3n2L54L54q98q96J705k32M95M95j352N85l84l84j240O96K12p57k86O83P8
+-28757e55P8p3p4k55P14J309o28k2R47n17n16K8K8m67m69L99L99m58N09R34j003J326o12j538
+-28733e16L97j06j07M97M99l49l48l50l49ooooPPO12O11p90J146m27m26K12K13O98j238J322
+-28707A191o14j218P17R6R7n89n89N70N70j76j75m08N60J6J5O6O7l57l57n42M27O89O90l7
+-28683G09l7M47j166n87L82M42M42M02j211l05l04L39L40j45Q22r00O6J88p80J40J107q48
+-28661d57J20N93N94r2r2j270l03m0m1N65N64m63N04l12l13K32K31J42J41K02p66j01j00k22
+-28637f84k22R58j0rj0J74p93K35K35N26N28k80k80k09k09L33o32J43J43Q2Q2k54k56l16l16
+-28612a041R36l4k96k95k87k87Q84q5J398j507m78M90N16N14k31k30q0p9o25L44mnmnJ054
+-28587E63Q7M70m99j068N44m22m23O87O86j81j81L85n83r8r9N05m61O26l41k87k88P40k28
+-28564A34n09M57p51K16Q51j17o40o41Q01Q01N39m29n48n47j25j24K7K7M71m97J462j51J10
+-28541H17q56k52k53J72J71J37J35P82j87o90R22j06j06J64q04K24K25M3M2n02n01L71n98
+-28518f50L91n77R35o78J69J137n79L90r5r5J7J6j254J004k6k7N5N4J05q63J072n40o2o2Q05
+-28493F42q07l24O43n45M21l10l12P78j90K12K13l92N77o06o06J189K21o87K82J00J00L17
+-28471I16o51j68j66Q21j47j47j48M73m97m35N32n96L70J49J118k92k92j71j71l23O47l83
+-28449D39l83n20n21O10O08l89l89M17M17k21k19k21k20P27P28q0p9k37k37k36k37M99M99
+-28426G55j86j87o72J263l10l10o8o8M16M17n26n25K81K81n95n96K11K11K25K26q02J133j418
+-28403h44m49R02R01m12m11P2P2N35N37l32l31k40j209J172p65P28k41l61O07j72j71j11j10
+-28380f33P05P07p46p46M57M56M57M57m51m52L56L56k58k58k58k58K05K06J296o42L07L07
+-28358A570j005j004O89k77p63J174n76L90M52M53J59J60o48o48o87o88M42M42O43O44q09
+-28337A13q08P32P34N92l76j163P73O52l15r91r92K79K79J116q19p60K09J26J26J87J87J76
+-28315E7J77l06l08k36k37J26J27J366n70k86k87QQPQM11M11l95l95n8n7n8n8O58O58J75J74
+-28288A120n94n94K12K13l32l31O76O77K89j648K48K47J47J48l37l37K95K95q34q35J34J33
+-28266a008M97M97J240o96k93k91q48J089%%m28m29L79L77o40o40M89M89o63o64M67M67k00
+-28243h09j99K85K85K30K28k54k55r4r4L91L90L35L35p94p95qqpqK98K98K97K98K57K58n50
+-28217C10n48L32L33m73m74K63K62K62K63m58m57L50L48K38K39k46k46K71K71n36n35j93j93
+-28194f17Q76Q76J66q03r84R52M78j458l09O60M2M2J02J02k09k11K74K73k52k52m74J462j251
+-28171e15k83J01J00J82J81J81J81K21K22k02k02j72P95q38J098l25l24k03k02l1l2l1l2K10
+-28147H0K10k73k73M88M89o61L07O71j266K5R93J041q96k29k30K95K94j89j90n47n46K59K59
+-28124A11N8N8N8N8M3M3M3M3m32m30N3N3M9M9N0M9P8Q0P9Q0OOPOK48K49k36k36K20K19k65
+-28093D97k65k2k3k3k3l0l0l0l1%%%%j03j05L79L79l36l36l37l37N82N80q4Q84M60j477r31
+-28065g62J004l37l38K67K66k76k78K07K07J02J03l80l81M06M05m00m02J00R9n06J430l05
+-28043B31l03L00L01L94L94j501M33j40j40j9j9N9N9N45N44q08q07L22L22m9m8m9m8k8k8k9
+-28017a12k8M47M47l59l59k7k5J183p53n65J370J60J60o77o78j92j93N0N0M9N0J80J81l04
+-27993E5l02M02M02m04m03J10J10J09J10P0O9m13m15n2n1n2n1L62L61j21j22N9N9O0N8P09
+-27967G19P08p44p44m11m12L96L96M00M00q3q4J19J18o89o88O01O02k06k05j14j14j14j15
+-27944b64Q0Q0m05m04L92L93m15m14Q34Q33K6K7o19o18J89J88L31L32j52j53K52K51k33k33
+-27920B98k19k17N88N88Q4Q5p23p22M18M20K99j315r43O72O91k75Q6Q7K6K7M94M95l12l11
+-27896C21j58j58l99m01P10P09m20m20M21M23J80J80o22o21j38j38K41K40k44k43K8K9K9K8
+-27872d23K97K95l69l70J253j650j78J435o7j035J35J102J75p92m31m30K53K54J1J2j56j55
+-27850h34L29L30J14J14j26j28J76J74o7o7J9J8J8J9N48N48n83n82k70k72L13L13n33J079
+-27826F50J32q36J240l74q76Q9j60j61L82L83k87k87k87k88J46J47J46J46K01K03K62K63q67
+-27803c3J01j81P87m74m73L93L94j97j96M5M6j4j5M50j810L34L33K53K53K8R97l3R37r96k7
+-27778I02k09j176l36l36O73O71J74p94K94K94m84M82%jj044p6K4R93n67M01r31L8P09k60
+-27754e59L46L44J06J06P12k58o35L33J51J51R5q75k6k6m11N58k88O78j70j71M35n34J17J17
+-27730B96r72mK45K45K44K45J74p93l70N98R3q74l31O39L36L35q8q7l28l28l89N80j21j21
+-27706g76N25N24j013O00Q41p70L42L43L02o66m1m2j02j01o7o7l09l09R41R42p32K36L11L12
+-27682A224j13j12J63J63l82l82N16m53j077J181q70P42m48m47l46O22q11J448L64j250p47
+-27661a015K22K73K72L33o35K42p26N65N64p0p0M13n53O81k87L19o49r02O6k76O92Q63Q63
+-27638A185L39o30q81q81l5R33K7K7O93k76k86O83m07m08k32k33P96j73n1n2j71j73P29k39
+-27614B84L67L66r45K4L26o42J105j799J97J98Q32j35p5p5m3m4m4m4J97J98k85k86r9j00r9
+-27589f21j00K84K84l21O46O95k73l74l73o46R67O0O0k15k14L29o38O01O02N8r11r03P10P10
+-27565D17r03m6R22k68k67J065R8j65j64J18J18o90o88K79K77P63P62j55j55r63r62J07J07
+-27542c93OON60j052L99n69K76K76K15K15k6k7k7k7J94J96J95J95J95J95k89k89K3K2m61m61
+-27516d53J84J84J84J84j01j01j00j01m0m1M43M44M57M56o73o74R4R3l91l90L52L53J92p76
+-27492b21o25R87n23M43l81l81J63J63K65K63K64K64l3l4n17n17J7J7N00N02j37j37o20o21
+-27468h99L57L58j27j27J36J35J043n71M29M28q03q02m02m03Q48j20J060n53Q37j30o83o81
+-27446f70J233l80K86o82L66o01k61P08N86N87r17r15J53J53J208K42K41j372m96m95L12L12
+-27424d02n64J049J43J42J43J43J42J43q57q55O57O56l82N86l82l81q33J36L97L97K5K5K4
+-27401A52K5m89m90K56K57Q41j27j27Q42n62n61p7p8P19k49p32K35N37N38j217L96Q00q14
+-27378G5p13R01jjK01K02p97Q16r2r1k1k1q1Q87q89q87n05M63l16O52J68J66l36l36l98N72
+-27352c82K33K32K94K94K2K1r06O2l59J254J85j428J85J86J44J45m14N53O14l55m75M93o56
+-27329e8L10j77j77j78j78R11n7n7n6J25q43J85J86N17N18k28k28k90O78K35K34j309L05j79
+-27305A89j79K75o92R39k7o32L34K14K15J36J36l48l48m98n00L08L08J66J66k57P11p71J164
+-27282A009o71o70o0o1J836j01l23l23M0M1l31l30J54J53LKLLK01K01k83k83k83k83K01K01
+-27256D6l1l0l1l1L31L33m75m74J91J90J91J91o45o46J60J61Q59Q59n93n93j49j50O57O58
+-27232I79n16n14l1l2J10J10j040Q97M63n05J60J60RRJ0Rk33k32K50K51j72j72L11L12k9k8
+-27206E36k9k9L25L24j60j60L58L58p73p71j97j97K87K86Q0Q0l42O24j241O95M74M74o48o48
+-27182b94M81M82j33j34j33j34L94L93n14M54j633L03J553l84o35L34O97k72j71j71L14o56
+-27160A41J17J17nmO01l68J78p91Q44j23o69L00m55m57K8K8O14l52J92J90L1L0p56J503l95
+-27135E39l95L51o15k44P24j534P9L29J297n98o00m4m4m5m4N44N42m24N42o66L01P24q88M04
+-27111B35M04n03n02K53K52rr76k1k2J310l03N84N84j02j070K94K94k51k50p9q0N27m43l33
+-27087b07O34l94J220l95l94L12o57n10M57o30o32O50O49p01K66l43l43K01K01M14M12n94
+-27065c84J017J473j41n86j553o76R37M53M54m90m89m89M78o10L58j26j27K27K27J65J66M18
+-27043G02n50noL81L80m27m27L60L60L60L60j052j052M01L99R8R8R8R7M43M43l65l64k03k03
+-27018C26k03k03M07M07m00l98l40l39J355n82o07J328m27N41n3n4m77m77N76N77n53n52K13
+-26995F5K14O98O98q47q47l63l63L12L13L12L13j52j51L33L33k12k12K73K72k00j99k00j99
+-26972A91M66M66o63o63N3N2N3N2j99k00M86M86P39j198L75L76k10k10l30l30Q69j067N67
+-26949A61m01l00l01r66R71O04O02q2q2K81K81K81K81l05l04L62o07p98J138o17L51J73p96
+-26926g3O16O16q26q26L04L03L77L76m30m30O79O80m51m51M17M17m51m51L16o53j196P40J97
+-26903b00J97L18L18n19n18O10O11k32k32k32k31M1M0L9M1j71j71j72j71L02L03L02L02j24
+-26879D51j23K39K39K90j647J89J89J139J71q58J080l14l13o76o75N65N64n04n03p87J82J210
+-26857A08p25j38j39N48N47M3M3P09j227P8J046j04j04K90K90n18n17k20k19k20k19J03J03
+-26834d42J03J03P07P08m22m23N17N16k91k91K74K74k11k10J73J73L2r37o97J238l95l95M92
+-26811E96M93QQq44q44K86K86P2P4P4P4M50M50o80o78n09n08k4k4R60R59j71j70N2N2q15q16
+-26784a189O73k94J89J157L21L21m87m86N77l90J54J54m31m30N3N4M0M0M1M0N56N55l73N96
+-26760A441j178M37P19k50r35O79K95K96j194M22lkm17m15J28J29o65L02k42k42O36O34n55
+-26737B0n54J051Q2L65o03O2O3n9n9K37p31j87j88K27K26J65J134k66k66j45j45j75P93j103
+-26713e6j34K37K38M61n09j274L39R44k4J79j435M81M81M70m96l77J237l16l16L30o38j14
+-26691b92j14p4p4l18J296J26q42J36J36m09m09N12N11j13j13J268r92Q25j44m64m62k62P05
+-26668D33K13K12q57J11R24o91p50K18l5l5n80L89Q60j08n31M35J24J24l00k99k69k70K15
+-26645d67K15J39J38j02j03J87J89l55l56R90K3j80j79k04P63q09J58R3R3o33L36L0L0R0R0
+-26620A76J26J26J26J26k47k48N00M99J61q07p46p47L88L88m60N08O54l13j32j31j70P98j29
+-26597D46j30r61O52M7M7K58J227k27j195K83K83k61k62l19l19m21J193k04k03n06M62R94
+-26575H84o20M49j163j71j71l73J241K75K76m31m29j13j13J036n77k60k62k00P66L29j284
+-26554i11M90M89L52L51j93j93O14l55j060r2m00J213Q31j429L00L02q08J60j73P94N53m15
+-26532D20J35q33O18r95j65Q03J56J58R6R7N21j093l52l52J32J099R2R2l32l31N24N25o05
+-26509D10o04N24N25j129M84p8Q90n82L86l7l8m61m60N87N89Mr66m2m1k23P44N61m08M40n29
+-26484E46R30m0j008j007Q8Q8p3J539M97m72R3j520j199J062o9o8J38J39j04j04Q4Q3L25L25
+-26460B73j84j84R65o48j84j83K59p08M36M36o53L16L95L96k8k8m3m3J39J39K27p42j164M49
+-26436c62L82n84K63J229j5r83j77P91K77o92q6q5O40O40p12K57l03l03N65N65l8l8O27r86
+-26412H72k20k20o22L44L93L93l53l53q1q2O46r68J4R81J124j136m71m69k7R42n11n10L36
+-26389B2o31J25J24o62R53O3r06K25K24J64J64K3K2p49Q64N02m66j18j18k80k80R27o85K82
+-26365b11K82k46P20j578O81K25K23O3O3L51o17j3j2m15N52r1r2L71j241J319k93J87p79j35
+-26341f86Q33N56m13J33J32M56n13L95n74q85Q2l9R29O38r78l50l52J590k4M01n69j416J97
+-26318d57j87P82l47l48N20N19m66m66N62m05j48j49o33R82n3n2k55k54Q50j18J63q03K05
+-26295e58K04J44J44L35L36m8m7p49Q63n28n27K38K38p29K39P4J043N59m10K62p08Q0q88l96
+-26271h29l96L51L51M21M20j24j23M77m92j88j90O8O9R14o99K17p50P81j87p41K27P51P52
+-26248A080Q1Q0m03m04j61j62L23L23n1n1n35n34N54N55j92j93r78j0L13L12p1Q97j32j31
+-26224E10n32n32K74K75l31l31j69J444m04j371R88o26K47K47r6r6Q17Q18o96o95K08p61M6
+-26201g66J013K1K1O06j653l32O36K53p16J30J30P95j72M01n65j43j42P32k36k35P32j15j15
+-26178B80n37n39O42O40m87m88O40O42N20j093j709r5J217K48O7O5m16J195m46m45q3Q85l05
+-26155C98l05kr70Q15j54P34k35r59O53p99Q15P23k45r51J8M01L99n67M00l72l74L93L92M84
+-26131F92j129P45k22O60l09J15J15or73R82J4n91L77k28k28M68M69j7j6k49k49o11J001l30
+-26107D80O39o12o12K50K50k34k33K49K51k95O74k27k27J105j155q6q6K58K57q97q98J240
+-26085I1l72p07R08m23J189r35O77o8o8o13L55Q19p95n01J111J64q05L55L55j89j90N2N1l72
+-26061H9l72l42O26Q2Q1O2O1M85j128l82l83J574O07n96L73k32k33q1q1k21k22R59j298j29
+-26037g01j29J081n32K14J182K51j363k72O94J00k159Q47Q45N79j034j095N18J577O10q44
+-26017C69q42r1r0M54M54o75K93K92o75J87J87J034n80m38m38K07K07j9r88L64L64K94K92
+-25994A62K33K33J88p81J88J87L90n80n78L88M03M03j82j150J088J21o87K82J7R86m07J208
+-25972B112p60p60M30n37o68K99J19J18L8r30j23Q44L00L00l86l86j83P84M01n68j090N22
+-25950a24L9L8j03j02M41n26j61j60L23o45N35N35q76R1R8R9R8R9O82k85K60K60J7J8J39q29
+-25924c9o69L01j04Q64O89k79l61O08J022j238p13p13R30R31j99j99J3J3J3J3n50n48J185
+-25901I70K17p92J77K17p51o80R33J26q41m08J205j033J225j02j03L9L9l85l84K61p08l50
+-25879a128J264K96K96j7j6j7j7n29n27R6R7j003J256j4j4mmmmm88m88O41O41M0M0l84J231
+-25852A240L63L63o66o67l63l63N44N44o26R89J291j615j137j69r97O18J64J63M25j187lR66
+-25830a23L19L20l96l96p59Q55q5Q84m4m4m4m3m4m4K39K38m07N62M50j163L49o19k51k52J72
+-25805c26J72J52J50J52J52j66j67O41O41n79n80r6r5M66M66l40l41j09j09n92n93L10L10
+-25782d81L10L09R8R8p08R04p45Q68n84L84P17q97O17l52p45p46JJJ22J22J22J22L37L36j47
+-25757F3j46n7n6M27M28J20J20l64l65L33L32j53j52j02j02Q67j070N03j433L43L42J89J91
+-25734B58J91J91P15P16j384N54j613L23M43j493N76N74l1k9l56l55M51M51o3o3o2o3K68K69
+-25710D68k15k15j3j3j3j3k53k53N54N54k43k43K42K41n11n10K95K95k48k49N57N58m53m53
+-25686a34L53L54o85o85L23L24J184p51k07P62k78k77k17k16J96J96J97J97m79m79r03O6m51
+-25663a610J486l51l50j99j99O08O09o8o8M16M16k09k09K75K76o04o03N25N26m82m82L23L25
+-25640C51l78l80k38P30J013r24P71j98j92j92k53k51m55m54K92K93R19m8J344r16q15J53
+-25618A72M97m72l87l87L59L58j4j4j4j5j46j48O58O59l49l50l50l48K56K56k27k27n00n01
+-25594a234R53R52p23p25o03J010O17r96Q18Q19k06k06k07k06J17J17l67l68K43K42K43K42
+-25572E32j40j41P68q47k10k11J72J72j29j31j30j30L82L81j03j02L51L52j33j33m51m50L3
+-25549b98L3J24J24l60l61M22M20M22M21o17o17j33j34j43j43K40K40P85q29P9P9J44J44J44
+-25525A86J45m60m61L46L45k52k54N53N53k03k03k03k02M72M73o57o56J80J81J79J80k43k44
+-25502b45K99o67L31L30O94r20K14K15J13J14m41m40n02M67K43K41K63p05N74j038k52k51
+-25480a363R69%O1O1Q1Q1m64N05M11M12k73k74n05M62J008L9j342l75O94k73j1j1o17L52N9
+-25455c13N9J20J20k74k73K10K11j35j35p4p5r4Q73Q74r5k57k58l79N90o51o50K77K77n93
+-25431f45L76K14K13N17j097K95K94L50L50Q15j446j04j03j44j44l78J234m79m79J66J67K25
+-25409A97K27m00N68m60m60N68N68j166j98O03l64K40K40J40J39K01K00j016m8M95m71r06
+-25387a103O3n8n9R43R43j87j87j27j26o6o5o68L00l85l86J813m46k44k44p44K25J04J04m8
+-25363f48j016k50J365J94J93J92J93M56j158K34K34j9j9N86l82n52M14K94K95j4j4q20q21
+-25340a063O42O41j66j64K9K9N73l95j12j11k33P34k21k20L84n83k91k92O78O76Mj610L27
+-25317g44L26J143m70r54O60j00r9n44M25j10j09N36N35n53J060o55o54M75M75n94n93m10
+-25295i54N58L96L96pj620J022N4k7R40m71m70K14K15k09k07l88N81N81N82l67O01r72mo99
+-25271b55p00p00K69R24R24M60n08l78N90o21L48M29n40J26J27l28O40l28l27m18N49NNm2
+-25247B51m2m2m2K9K8K9K9K61K60n46n45L11L10R17j021N3N3n51n52J34J34J34J34kkklK00
+-25219h3J99J99K00Q3Q3K05K04j087Q50k40k39O3O3O3O3o42o44M87M86m16m18L90L89j66j64
+-25194g2j65j65J09J10m96J441k03k03q2q2O1O1O0O1j41j41L44L43p01p00N51N49j195P41
+-25170H5l46l48O19O20j154P80p91J144l08l07J52J54J53J54N3N2N3N2l41l42M65M66n74n73
+-25146h2r0q9J68J66l15l17M91M89POj43j43L41L41p48p48L82L80k93k95N12N12L21L21q09
+-25121C65q08J67J67J66J66n5n5NOq99O8L31L31J48J49K10p58K26K25J05J05M17n50ooo4o4
+-25094I2j64j65J196m17j022j022Q77r2R97K9J71J70l74l73n2n1j93j92J380q78L31L32M36
+-25071A016n32P3q95l8l8K24J192m37N32m37m37k44k45P8J046p75J95l50l51M86m81m81M87
+-25048d12J00J01l83N85L42L43j048N64Q01j67p92p92J164j095O61l09N48m18O5O5k78k78
+-25026f33P50k17l68l69L78L78p6p6o21L48k35k35L10L10L20L19L20L20k69k68K15p52R71
+-25003H20LMLk34k33q38J29N43m25k03k03r91O24j23Q45J016n97L72L71q27q25L03L03j30
+-24979b93j31L54L53l11l13J73J71K02K03k82k81j74j73P34q79J39J40N21N23n23n23K84K83
+-24956A97J73J73J72J73JKq06q05J42J43O26O26l60l61l60l60KLM26M25M82m87j212J046L00
+-24931C61L00m3m3r9r9j00r9N67N66q86q85J70J71J69J71l73l75M33M32R1R1R2R1o46o44M84
+-24905a03M84P9P8m06m04l26l25J60J59R87R88j635k1m85M83L01J270r87r86K03K03L2L2L2
+-24881a87L2K15K17k68k66L5L5L5L5k33k32K52K52k1k0j22j21Q09q03N87l80J53q13J54J122
+-24856D67O08j006l8l6J83J85j106N07q77P36p0p0n0n0n1n0M75M73l31l33P97P97O16j645
+-24832A31Q2Q2M1M1p34Q77N16m53k44k44k42k44n36M32L72L70J1J0P1P1j280l12K12K12M09
+-24807c49n60N30m38O91O91M5r22P0O9RRo2o2o2o1P2P1P2P2m53m52J261l51k62k62O64l01
+-24780b71J81J81J82p86m04m04k42J373P45P47k83k82k69k68k67O99o81K86k58k58K11p58
+-24758h26j1R57P0q98L12o57r6Q73k16k17J16J17J16J17J99J99O84k85K80o88k03k04J4J4
+-24734b33J3J4J35J34J35J35j68j66j68j68J05J05r85R52L53L55l32l31O2O1m22m22O82O81
+-24710E27j213P22J27J27k36k34J4J5J224p12n70J366o52o50J35J35r53R82q6q6m49m50J63
+-24687g54J64J63J63K84K84l20l21R22j014P5P5M27M29l79l78k14k15N94N92j14j13j13j13
+-24664A24J62J61J62J62j51j51j51j51K89K89j95j95k06k04k05k05J88J88J87J89r5r4r4r4
+-24640i0J68J69M7M8R15j022m15m17O68O68j39j39qqqql08l07k68J669q63q62L88L87L88L88
+-24614A041m19m19j77j76j76j77L07L06L07L07l94l93l94l94M03M03J59J61k27k27K56K56
+-24592C33l82l82J01J02L63L63j20j20k37k35L67L69r72R64J16J17O5O6j265O70j5j6J06J06
+-24568D64l50l50M56M56k85k85m3m3J01J00l83l84RJ0k33k33M64M63k0k1K76K76n29n30N79
+-24543c5N78j317O20N5N4r14J022k44k46k46k45J388n48k65k66L39L38k66k66P92j143P52
+-24521f3P52q0q0p9q0L54L54p76p75O70O71j36j36k12k12l32l33k93J644n75n74J66J66O10
+-24497F51O10j858J368k05k05j8j9j8j8K24K24j9j8k61k60K24K24l02l02n9o0nmM79M80p56
+-24471I7p55L74L73J87J87n5n5l77l78l79l78O36O34J52J51p51p51L78L78P16P16q37q37J026
+-24447D52n86P9P8M3M3m39m41j61j61L23L24NOONJ04J03j39j39R9R8l86l86L43L43m64m65
+-24420a313N15N14L1L0n1n1n2n1K5K5K4K5K87K86M4M5o05o06N24N23j16j15o00o01O21O21
+-24394b1J35J36J01J01J01J01P5P6m09m07k96k95n3n3M11M10J69J69O3O3m21m21J19J18J78
+-24369A50J79n49M18r32O81m09J205J96p72j028o1M65M63k5k5k67k68K89K89K88K90l42l40
+-24346a05l42l41M20M19l86l86K38K39K39K37L44L43p87p85M0M1M1M0L84L83m23m23P56P57
+-24322I43n0n0o69o67R04j030J13J14j29j29p44J193J04J02N3N3j88j89L84L84m22m22JKM84
+-24297A45M86p5p4J68J67j19j20o03o04N35N34k71k71N59N61o90o90J092q44o02J334k03k04
+-24274B11q3q2j65j66j66j66R2R1R2R1j84j83J147p88n01n01N07N08M82M83kjp87p89L42L41
+-24248a77n00n01O29O28J25J24l58l60N7N6N40N41o29o29j45j45M35M34j138P98L13L14n0
+-24225C62m9k35k34k96O72k15k14PR74M43j171l63j332k53J362J50J51j46j45L6L6M29n39
+-24202e70L08L08n97L72q39P75n3n2p3Q95Q73r5k98k97n05n03n65M04J41J42m0m1N90N90K68
+-24177A138p01k44j211L42L42P05k64j110N04J04J05o01o02P31P30o62R52J76J76L98n70n34
+-24155i6M32M94j119M5M5j56j57J174m39l38l38K89K87m37N30j199k31P38P36q23q24J174
+-24133b13K05k33k34j12j13P06k61K82K83J37J36l47l47j11j10L73L74L33L33q57q56M60n09
+-24110f81L5J004n03M63k01k00n3R15M32n37j7j7o23L46j84j83q10J59J127j132K00J99p6
+-24087c37p5M08n60O20l47J36J36j01j02n86n86k12k13K72K72N47N46O07l62L2L3k9k8J46
+-24063B17J45o60o62P11P10n80L87m14N54O75k93m75M94n1j019m8m8m8m8k29P38o7j037J34
+-24039i14J33P3P4K64K65k19k20N06N05K1K2j40j40j40j39k16k16k76k76O7r02P73P73m03
+-24015g25m04N65m03O15l53O15l53Q54j13l75l76l76N93M8M8Q11Q11j085j17j145M69M5M4
+-23992c07L92n74l1l1j1j1p1p1J142J75m71m70N97l69J74J74L84L84m83m84J1r57L33L34R15
+-23967F74n3k55k55l54O11QQM84m84O05l63n85n85P06k62l41l42M65M65p25K44K1R89q88Q0
+-23942a32J39J40l94N73Q9R0r12N6n90J023L28L29K67j345k98O71J26j487L18L18K18K17n09
+-23919g65n10K98K98K48K47J86J87L69n99o00L69l58l58J518r6j264L50k76k76J045n67M00
+-23897a54L99l4R35o39L29n48n47L79L80n59M08j96P72j16j16o00L69j61j61M44n25k50k52
+-23874d43J71J72J59J59l84N82L9L8K20p47m18N49OOo80K88P52q61r67O47M46M44k40k40K44
+-23849e8p25Q30j36M07n60P5P4J4J5n5n5Q52p60K6K6p5p5P6P6O81k87n79L89O91r21M61M63
+-23822H70k84j252K31p39J501p57N12N13j73j73M02n67R47o68k37P31j266k99J97J96J96J95
+-23800G6L02o66j21j22J31J30P0J038n58n58m97m98O63O62l65O01m97m97J055n57j103N11
+-23778h00O33O31K73K73j018n0m24N45N45m24K02p65M63M65M34n34l73l72l09J305j014m7
+-23756c61R32l7m60N09j55j55r4r4K38K39p89J78j73j73K71K71M93j121L32L31j277l09N4
+-23733a350J023l49l49P40k28N41N42l25l25q3q3k45P23P77q37r58J0O46l23Q27j42M3M2o03
+-23709b86o03J121m92l91J221q52P60n29M37q52J15J16J15j36j36o21o20L88L89R92K6m81
+-23687c19M86j490P69Q29p83J64J64N02j111p48K20K71K71J238l74j65j66K18K17q5q4q4q5
+-23664a45L83L85j00j00j41j40j40j40J9J9J79p88k34J380J50q18l71l70L15L15P58k09m8
+-23641A59m8m07J204q32q32K88K88L87L89q51P61K78j335J57J57J17q52K35K35J14J14O89
+-23619D15k80k78O88k11k11k11k11L02o64o05L64J27J094k36j204J16J085J367q92j735j22
+-23598a302O66O64l12O54J10J10n15n14J139m75L22o45k03k02K35K35K34K36k09k09k08k08
+-23576c97J64J65J63J65J3J4J3J3q32q33k6k6L98L98L98L97j47j46L36L38p72p72M78M79q95
+-23551i14J042j196P40N88l79M06M07j116Q20k69k68MLO4O4m19N49o00J336l49l48q92P5Q59
+-23527B07j077P3P3p9p8j8j8j31Q38J018r17j018R18q97J039l2l3Q9Q7K20K20k65k63l88l87
+-23502h19R7R6J58J57k06k06p53J184K76o93q74J063k09k08J107q29P43k23M71m95n58M12
+-23480c09k07k06L38L39n6n5n5n5JJJJM1M1m43m43N51N50O6O7j15j14o00n99J137J136l15
+-23453F98l16j34j35j33j34J5J4J5J5o21o21N09N09k73k73k73k73Q07Q06J089q48p08p10J389
+-23429D14n47K7K7r3r4J92J91k91k93M84M85%%J52J52n35n33q68J070k0k0m8m8o53o53J626
+-23403A24l09l51l51L53L54L52L53l23l22l23l23J45J44J44J44O68O69j227P09J87J87m99
+-23381E05m99j35j36K28K26P21j215q53J084R52r83K26K26k80k80K04K03p03p05M26M26K06
+-23359a56K04K06K05J86J85k99k99k75k76k76k77J48J48J47J48O92O94j525M11M71M72n38
+-23337C96n36J36J35r52R83K77K78l49l48n52M15o9o9r27M2k40P28N64N63L62o06j93j91j93
+-23313c46j93L6J003P6P6q01Q12n80L89o42L25j58j58K3K3K3K3n9n9o03L65O2O3l62l61L78
+-23287f45L78j07j07o6o6P40P41n57n56o57R55l44l45L01L01l27O40N40m28O42r74k4k5j175
+-23263a165M38k68P00O49l19j97j98PPM90M91j25j24j25j25m95m97K50K50N22m45l86l86l35
+-23239a386l35K10K09k44P24J80J79N87N88j59j59o73K94J042n72J05j507M29M29R5R5N20
+-23217F51j094L6L6Q42p70j96j96J87J87K53K52l31l33O66r47j00Q67k21k22j62j62N04N04
+-23194B51Q0Q0p99J69P93j464R95o18O93k75n4n5L68L70j36j35j35j34L5L6m47m48L79L80
+-23170g1L78L79n81n81r8r7J55J55J54J55J4J3J4J2O4O4p82Q30k88O79L5r33l60O10n41M28
+-23144a93ooN5N4o6o7M17M18n03n01j8j8J84J84J83J83M8M8M7M8p89p90L40L41K01K02K00
+-23117A96K02m03m04m04m04O18O16n11n13K75K75K74K74L43L44m64m63O1O1O0O1n77n77N53
+-23093e07N51L9L8L8L8j96j95j95j96N6N7N39N41m28m27K18p50l38J277P32q82Q9Q9j343K71
+-23068h84L31J299o98o98J90j424M92J460j020N94j162M52k71k72L75n94O62O62Q43j25K01
+-23047D13p67Q04j62r04O5k79O90K8K7Q8Q8k49k49r16O99N29N29Q33j427p57K12K72K73P96
+-23023F36j72l73l72m04N65m64m64J51J52J058n54Q6Q6K26p41N77l91l91l92O64O62P8q90
+-23000f67J31J30J0J0M43n24m1R27J86J87p83J87j96j97m19J194j606O53l3l3J68J69l76l76
+-22976h56L59o09Q64j05N00j113N41N40o9o8m53m53r42O72P33k36R32l5l37O30l03l02k42
+-22953c52k42L48L47l57l58q38P77J260l53p7p8l19l19p89Q25N62m04j213M02P85j83O53O53
+-22930G30q58q60N70N70j76j77k57P10m17j388P55P54l36O32l7l8Q3q84J64J64M06n62J04
+-22907c48J04J04J03n04M65l23O45n48M18M19j195j05Q62K17K17M09M09j306L08K50K50o78
+-22885A73K90l75l75J69J69M26M26j308l40N42m26J18J19K19p49L8L8R8R8m46m47R43k6L38
+-22861b88L36q22J46j57j57P79P77R21R20K065M325J0238j0103o951j72q97q98K6K5j15j15
+-22840a17n95J018m32N34l84l82J62J62M7M8K91K90k59k60k58k60J87J87P31k37m88m89o5
+-22817e69o5J53J54q15J122r97R41k8k8r7r6L87L88m08m08m09m09KKJ23J24m32J505O98j238
+-22792d00R8R8k3k3l46l46J39J38L4L3L4L3L3L4L3L4O8O9m15m16M92M93M92M92m76m75QQj03
+-22763a60j02N82N83l2j968N73N72J60J59L9L8M73j463J10J09q2q2q2q2j90j91j90j90J72
+-22739a244J73J73J73K1K2R89r46P77j158O16O16o7o7o6o6j48j47j48j48r54r54J467J466
+-22716C80j47j48j46j47l74l75J10J10J0RM93M93k93k94k93k94l1l1P76P75J30J30J31J30
+-22692A104m35m35m34m34n13n13N56N57J02q66K23K24n99L70L09L10k4k4N22m48p99p99R16
+-22669a130R16L8L8k3k2L37o29k5k5j66Q02j094j26N93N93o98K70L11L09k34P35J2r54m11
+-22645e83m11Q40j28l91l90q9q8Q80q9R50j8j8j8o1o1o05L62l62l64J81J82k2k1n66M02K21
+-22619b67K20L41o26l6l7L87n81O79k88J95J95j70j68L74n93M3M2p9p9R67%q48P66k1k1O85
+-22593A080k83k08P61k69k69k38P30Q52Q51O582R489j0389n546k337p7k38k39P7P7n47n49
+-22572f90Q83j375j65Q03l34l34M73M73Q35j32j625j1R3R3O79O77l8l7l8l8l14l16Q14Q15
+-22548A191n88n88j02j03qqj89P79M97j440J94J95m01m01M06M06j24j23m87m87m99J438J06
+-22525c36J06K67K68q21J114l58l57J26J26j118Q17K11K13k6k6n08n10L32L33j52j51K26K26
+-22502Bj4j6j97j97K87K87K3K4k18k18J14J15k49k49Q00j136m7R21r39K8j93P76k33k33J90
+-22477e72J91N73j362N34N34R0Q9l94l94P9Q0K01K01o88J249J8r49p98J138M9r20j63j63K61
+-22453a116K61K30K31J70J70J074J07j890M7N05N04J63q05q52J086J16J17p5j043m58J478
+-22432B0j28j29k50k50m3m3L81L80K5r44j16J497q52J16K77o91o88K81J60J59N13N13o17o17
+-22408a046N87N85n43n44N26N24M1M2J97J98o08o10L85L83N46j068o22L47o02L66M43M42J9
+-22385a2J7j72j74L10L10k34k34J50J48L68j245J47J47Q1Q1L22L23o10o10J96J97L62L62j21
+-22361A09j20m37m37L71L70K08K09k74k75j70j70O36O37m32m31N2N2K05K06j78j76n21J093
+-22338E27j166j97N64N63q2q2j171M43r49O65N84l85P45P45m04m04m05m05L20L19L18L19K2
+-22315D84K2o23L43p59J498j425J88L64L64l41l41O13O14r20M8p67J490m2j655P20q95J3J4
+-22292i93q65P50P50P49n39J073l18l19n09n10N20m50M2M3M2M3j19Q48M66j147l10O58m71
+-22269e66M97l41O27j8r85r28O86j21Q48O85r28k0k0M72m97N93l76l46l45J18J086M39n30
+-22246C0J37J36r12N5Q62j06q2q2j41j43J80J80o66R46n73L94M35j179l11O57J1J2L82L84
+-22222F06m1m0n15M54l0l0n14M53Q18p98o64o66L63L63m3m4N7N8r01P13j95j95J66J66l79
+-22197h38N89M5M5MNQ10q01m40N29m19m19L87L88P78j90m52m51k81k80K03K04K3K2K3K3N76
+-22171H3N78j318O18L49L51l35l35N7N8m25m26N04N04N04N05n45n45q27J109n3n3O9O8l56
+-22147A39l55J29J28q1q1q1q1K21K21k62k63K65K63K64K65l21l21J64J63m6m7m6m7K66K67
+-22122G23n41n40m76m75RRO14O15J29J30J67J67l17l16n09n09N00N00R18j018j018R19j00
+-22099d19j01K1K1JJj19j20R28j006N66N65k00k00K83K84r46r48N06N06k87k86J98J98j05
+-22075f59j05j05j05jkjjK71K71j53j53l15O54J319o18j464M72O74k94l53O16J0J1N24N25
+-22050A018n44n43m68N02M80j132m27J186J79J78m12m11n12n13J021n93M76m93l99J215k37
+-22029d29k38L77L77J16q53K0K0N64m04l44O25N63m03n91n92P61k08o22L47J132m79MLn20
+-22005g74n21pR63K15p53L0R97j51Q16q1q2n05n04M63M63n66M03J21J20j170k02p8p7p8Q91
+-21980f7M4M2m40m40R73Ok56k57J07J06N30j083j06j06K77K78j67j66J043j215O01l69L6L5
+-21956e94K47K47j76j77l14O55p99Q16J09J10K10K11l11l11j50j119m22J192O25l40J016j241
+-21934e16l1l2M33M31r18M9K13K13j50j50k51P17l11l11K96K97n11n11Q4Q5N69N68k71k71
+-21910b79k71k71J22J23O1O2N19m47q12Q03m5m4N6N6J87J87J87J87m98m99j4j5M80M79l27
+-21885a3l28k67k67K18K17K78K76P02r12r5r6j96j97J67J67k17k16n60J055J46J46j089j089
+-21862b170l23O46J302r58j71P97L83L82M41M43o07o05j031N84l29l29N79N79j7j6j6j7l21
+-21839g74l21J64J63R3R2R3R3r9r9r9r9O27O27n02n03K40K40k44k44Q8Q9j3j2J195m18n39
+-21813a62n39q93P22O21O19k75k74K08K09M71M72l36l36n29n30r54O61p6p6K5K5J12J12P18
+-21789ej220Q09Q07p64p66K54K53k31k31R80R79p95p95k9k9M55M54L30L29j55j56j98j98m39
+-21765c61m40l1l2M53M52J97J98k26k25n89L79J044q91r37R99K73o94K83o85k01k01k51k51
+-21742a737N55N56P52P53l78l77k38k39MLp2p2p2p2N07N07j772J65P55k14O93O94r74r76m10
+-21717a659J527N92j343J09J09L82L80P9P9O9q99r00J037m35N32r20M9M97M98Q40j096k18
+-21695f91k18r7r6J60J61J60J61K9K9L0K9M77M79o51o52L57L55N99N99n77n77r1r2m41m40
+-21670i98O89O89o21o22N68N68q07J61J9R87j805M53J91J91j105J154M28n40M5M5p7p6L83
+-21647h0n86Q26Q27j060r1j52j52K79K79k04k05J58J58l26l26O57O58p93p95N16N16o8j036
+-21624a000M61M61N62j052o08L61O83r31l58O11R32o80k26P42R5R6l95l95m57N13l25l25N42
+-21601f93N43l31l30P39P38O94k75j182M30K45p23k60k60l76N93N92l75m8m8j69j69N63m06
+-21578e08K39K40n22J091n8n8QPm76m76k3k3q4q4Q14j53M50n16k05k05M01M00J167j092o28
+-21553b94o28k43k43Q0J048j78P91m80M88J60J61q07J59P5P5o71o72J91J91O76O75m1m0r08
+-21529d35r08Q97p1l73J240p97J71k72k73O33O33Q8Q9j43j112J087n26N24m44n9R08o36o34
+-21506d13r1r0L5L4L5L5J4J5J4J5O21O23j092N20J28J28L91j223j207k38K47K47K56K57K57
+-21481d82K56k35k35K49K49p50p50P03P04K43K43k40k40k81k81N26N26o11o11J96J95j17j17
+-21458h60j17j17N07N06K1K2m22m22O2O2J88J88J89J88k26k25k25k26K09K10K09K10k15k14
+-21434d98P13k54N01j112K20K19k14k14k15k14J19J20O04O04j13j12j12j11j43j42j43j42
+-21412f39J09J10J70J70p03K65M66M66O3r05J24J24K99L00L00L00j151j153k3k3K12K12K12
+-21389f95K12j62j61o1o0l03J311L43L43l13j280J31J31k24P45Q04j63r49J8K81K79p62K05
+-21366c30K04p63L46L46p43K25n8n7n7n8Q41j28p13p14P65P65j02j03P54k14L31L31n54n54
+-21342b40L13L13q66J02M1M1j41j41j169k02R29R29K42K43j299l31K54K54K54K54k30k30l36
+-21319a016l36K49J217K29K29j95j95q98r00J563o97K30J199k94k94l23l24J390k23n57n55
+-21298e01J50J50j38j39k40k39Q50p65K05K04R8J066o3j030O02O02j232j234L37L36L36L37
+-21276c08M96M98o92o93P95j73j73P94m25m25J80J79P5J044o31o30j06j07m6m6o21L48p42
+-21253a409K27R02R02j034o6j24j25L8L7p40Q75N71l96o18L50j55j54m68J147P63q50j053
+-21231a380N61Q23j436K69K69J27J28K78K79o29R84J27J27l57j324J95J94L4L3J092n21n22
+-21209f49J092n36n37M12j203N03m67M63M62J57J58J56J58q11q11L19L19L42L41L41L42o77
+-21187a26o77J30J29J92J92k32k32m24N45%%k20k19k20P50j69P98j69j68l0l0n15n15N96N95
+-21162a9R98j260M65n01L25L25J84p83K45K43L32L32j53j53p06p08J189p47k4k4j45j45M30
+-21139c00M29M30M30l35l36l34l36k75k75K10K09L20L20j63j64j74j74k96k95J361n75j060
+-21117a383Q77m54m55J51J50M8M7J68J69q31J107O21j314k4k4L40L39L7L6L7L6O0N9N9N9j1
+-21091i6j1j2j1N21N21o08o08k96k96J89J89L45L43m61m62O88O87n63n62J312o25r86r88M56
+-21067a334M55M55M54J76J75l09l08n81n82J05J05J532m04L22j614N34N34L72j564L75L75
+-21046g27K55K54L34L34j49j49Q6Q6Q7Q6m98m98j5j5j50j51j51j50q0q1O27O26N46j067N86
+-21021B6N87k60j228P68P68p31p32J4J5J244K77o31o30j96j97K28K28O80k86j65j66n52M17
+-20998e22M77m91o22L46LR71o12o13o8o8N97N98L35o32l79l78J336k78k71O95L53o15q70q70
+-20974a578P44k24L00L00klK04K05j79j79n88J025J80p89m02m02N66m02Q7Q7p60J500RRL91
+-20949I9L92m80m79MML67L66m39m40L22L20N64m04K13p54l32l31L59o09M81M81l04O64K41
+-20925C05p26j98P70p7p5k36k35K48K48j59j60r9j068P75P74j53j54Q90p8l40l39J25J27M89
+-20901F54m78r78j0M55M53M0r28M24M22l02l04l03l03L15L15L15L13k8k8N17m52k36k36K48
+-20877a15p21N7N6j05j05J117m95l35l35n21M47J355k59n68M00O00l67j39Q28k61k61j20j20
+-20854C3j79j81O06l61l62l62N45m24J21J21o0o1o0o1m16m16m77M92L40L41P04k65K10K09
+-20830C7j52j52k14j182M93M93j03j02j63Q05l64l65J80J80K87K87L47o20%%K41K41q34J33
+-20806e27k8k8M01j214M42M41N78l89O39r73l19O50J45J45j466P94R74o38n03M65n63n64J586
+-20783D8o72J14J14Q3Q4k59k60R73o39Q11j56q0q1o24L43k13P53J10q59p08R06kkm18N51N
+-20757g8Ok67k66P61k05r3r3P54q58j2j2M31n36J82J83l63l63J83J82P26k42p89p91N7J025
+-20732d78J78J78k4r93L17L16K56K55J35J35r54J4L70n99n5n4J025N6J18J17R7R7p09p10j75
+-20707a087j76O32O31K69K70K09K08o3j032N8N7j92P75j92j93p1Q97l94l94m36N31m97m97
+-20684f87K7K7K7K7j%j%M43M42J81p86j25j25k4R43J228l88J38j476l97J216n39n37J88J155
+-20658I56o80K89j119j51P1P0N05j110k02k02M14M14P75q36K02p67j61Q07J018n93J72p97
+-20636i25j81P88L03o65l47O21q5q5P91q20N70l98N42m24N8N9O63O64m66m66l44l45J39J40
+-20612b13L8L9L8L9J05J06J06J06o19o21J87J87K17K17k67k67O29O31q21q22K09K09K09K08
+-20588a50J78J79k44k46j029o1P26q89N95l74Q17Q16L81n88r50O64K89K90m15m17J77J77l08
+-20565c82l08K27K27K27K26p78p78J359k53p59Q56L30L31l35l34l35l35L72L71k13k14J033
+-20543E35n80n19J093l68O00o51o50l05l06Q25Q24J7J8J7J8r2r3r2r2j23j21K60K61M60j153
+-20518b17P21q91k15P51j163J095j22j23J107q29j13j12j13j13r40R97L91L91o67o67M62M61
+-20496I1k3k4n06n08L50L50j34j35K19K19p50J187m77J459l16l16M9M8l14l15j030R05j82
+-20473a53j84l27l27J57J57L28L29l5l5j326O11L29L28mmm89m89J09J09J09J09J10J09l76
+-20449h55l75K83K84K83K83J21J21k40k42o90J245r31J003Q7Q6k77k76l89l89M18M18m90m90
+-20426a012J97J96P95j140M34M33j52j52j52j52k52k53k52k52P67P67m1m0M8M8M8M8M20M21
+-20402G72o3o3m69m68J5J5j67j66Q01j134J076q59J08J09k55k55N53N51M67M68j7j7n22n20
+-20378d0O07O09o20o19J86J87l16l17l17l17K27K28K28K27J87J87k97k96L75L77o52o53m20
+-20355a239J194Q29j38n25n23j01j01m14m14P57k12J303j600J102J101m31m31J94J94j835
+-20335a290M23P67k01N43m22O0O1p3p4p3p3l15l16l15l15L23L23L22L23q0q1q1q1J92J92J92
+-20309f9J90%%%%l97l99M09M07m07m09P21P21n22n21m82M87n22J091k40k38K13K15k68k70
+-20284b90j78j79j78j79K28K27k57k57L09L08L08L07n22n23K85K84J23J22J22J23m61m63L45
+-20261c96L45J2J2m9m9L84n83l9l9J1J1o34L34J400k13m75m75R57o57k93k94P53k13k15P53
+-20236C48O8O9J28J29M54M54l53l53q68q67K62K63M5M6J26J094j336R22l48l47n28j495K80
+-20213a807J248L10L10j73P93k34k35k33k35M10n56r82O34N39m28K16K17N49N50m19j386O13
+-20191b99l56J28J28R8R9R8R8J37J38J99J99l35O32j242L69o31L36j68j68K56p13L16L16J88
+-20167a77J87J27J27K28p40L89L89j015N97M97j117Q29p83K3K3L0L1n15M54J12J11J71J71
+-20144A49k97k98j97j98p6J537m39m38o82K87P71j97j36j37j97j97K07K08J47J48K37p30M20
+-20121a08n49j08Q60L77n91j58Q10p62Q50M87m82m41N28l20j288O69l00M95M93o94o96j82
+-20099a110j81k42k42J149J79q2q3J60J59K81o88l42O26K1K0J12J12m34N36J13J14J14J14
+-20076D06j58j126J65J64M73m97m35N32k94O74k34k34l70N99O58l09l99N67l6l7n2n2n1n2
+-20052i8j03j02j03j02K26K27j125j57L78L78N99l67p20Q96j3r82j34j34K90K90j37j37L47
+-20029g83L48K77K76n30n30P5P5R82o30L98L97n70n71M82m87N8N8J79J79m66N02R82o30j45
+-20005g4j47L47L48j36j36l95l97M72M70p89J79n27J085M11n58Q8Q8l34l36k75k76n99L69
+-19982a122L69L70m18N51J06J07m78J135l17l16K07p60K69K68n2n3M92m75l55l55L91L92J56
+-19959A12J57p50Q62k57k55M48n18m73M96o54L14J32J32p15R00J01J02P48k21j40j40Q29j40
+-19936A070p89p87K21K21O8q98N13N12o86K81K81o87k33k34P36P34K16j397J184K17k89k87
+-19914c3J35J35q49q51J147J78L90L90m77m77J58J57K18K18r21M7J478j35k83j252n86J028
+-19892a85L10L12l95l94l8l8j006O08N27m41K64K65j96P70q01J67j16j16n6n5O67O67m62m61
+-19868b03L54L55j29j30k32k32K51K51K0J9m63m65J26J26J26J26j36j36j36j37L79L77j06
+-19845Ej05m18m19O5O6M46M46j127Q10J94J94m91m92P8P8P8P9L10L09L10L11k99k99k98k99
+-19820d68m7m6M37M37m29m30n51n51J990N4l09l08K89K89M11M10j293O41L7L8m20m18O5O5
+-19796a07K05K06M89j448k01k01L64L64Q97j037N1N1j46j45R83R84n29n29m5m4k3k3k3k3k65
+-19771a95k65K19K20j22j21j090Q47o66J270o1o0r32J005q3q5K08K08K09K08j32j32j32j32
+-19748A86m04m04P9Q0J55J55q75J062k78O89n41n41N41N40n89n89o5o4P42P42m80m80MNO4
+-19723b66O5O4O5j02j02j01j02O54O54m75m74J57J58J58J58m68m66m07m07k03P66Q86j050
+-19700h38j62Q06m04N64o3o3K80j656N22N23q3q3J26J27J26J27j56j57o40o40M72M72M72M71
+-19676A43J09J08n56M11J153p84j19j18l00k99l00k99L4L4N19N18l38l39J45J46J82J83l00
+-19653f7l01k21k20K64K64l73l73L14L13J039q96L12o54k82O87j009l9M74m93J201p36l12
+-19631a108l12L74L74q0q0q1q0L11L11K51K49P14k54q99J037M20j192j65j65L90L90j001O11
+-19608A5l30l31K54p14N47m22N46N46K0J9m1R28k23k22L22L22n50n51j27j25Q10j57M89j125
+-19584a00n3n3k54k55J076n36K69K69K15j399qpJ2J3m8R20o9p0Q97p15n13n14R1R2Q62p50
+-19558f28K17K18m48N20L6r33L51L52K30K29P9q89Q45Q45j196k29J95J162r55J3n31M37p03
+-19535g83p04M26M27N87l81N87N88M94m74l53l53j028o1P87q27L49L49P93j76R8R7n08n08
+-19512e74M48n21J052Q5l7l7o41L26k66k68j46j46j36Q32j97j97l2l3N11m56k14k14K09K09
+-19488d43n7n8MLm11N58m71m71N38N38k69k70M98M97o92o93J294L28j185k18R23m6j88j87
+-19464d78j70P98L15L15n23M46p04K64K32p35j039N75K93K93l12l13j11J503L33o35l02l02
+-19442b57O1O1O90k78k77O90m49m49j26Q41R1R0j200k32K21K22K82K82K98K99j85j85J57J58
+-19418H05l27l26j00r9r9j00L94L95m13m11L01L02M03j211L53L51o55R57l26l25L19L19j061
+-19395e54r4L90L89J22j491N46N46O1O2n44M24O94k74j53Q16j090j23L61j252m67N02L40L40
+-19372d49K70K68Q15j55O8O8n3n4P95j75J117K732O666m38L013n382n361q41m38K791O383
+-19351A1640N72K670l142q126k315j164j94L6L6N81N82j76j75o60o58JJKJO2O1N46N46k3k3
+-19326F81R9R8j031R05j84j84m56m57L51L50J79J79J79J79n61n60n62n61J65J66P70j166P85
+-19303f36P85J210p28K00p68q88Q0P7P8J38J38j45j44j44j45J46J46J45J46J46J45J45J46
+-19280B73k60k58k59k59J64J65k59P08j083Q54L67n98L79L78L18L19n09n08L6L5m07N59J106
+-19257A261q32q5q5o90o90O71O71J87J88j239j240Q59Q59j20j20j20j20O25O23q48J20J844
+-19235A719r2j000l1Pr60N12N12o68L00L00o67p3p3k55P13m2j011L41L41N18m47l89l88P11
+-19211a22P11m19m17j8j7n63M07M45M47l00k99K06K08l37O31K07K08o00n99O61l07l06O60
+-19188D87m38m38J07J07k2k1N22N24r09O0R26m2r79j1l35J279p58K11L12o56N5N4nnl07l08
+-19162e90J16J16P98j69j09j08J64J63J64J64r3r4L91L91q71q69l26l25J89J156J89J90o48
+-19139a1L19O84r31l53l54K92K92L82n85j01j02O32l36J49J47J08q60O7O8Q33p79O8J035n4
+-19115F10n4PPk85k85K58p08r4r4N92N91K47p22j16j17k17P50l39O30J46J45n40n39p83J86
+-19090g24J86J86k33P35l52O13k12k12k53k52J587k6m70m69j034N79q13Q02L91n76O73k94
+-19068a68M9J016j73j142J31J31l1l1L21j291L22L22O61r52N40N40n08J104p71J98q02J66
+-19046c68M87M89n60n60L47L47r73O40j055J205r7r6M4M5L19L20o48L19l76N91J08J08j60
+-19023D76j59J172j088l91N77L75n94J81p86l64O04l73l74J10J11O78k89p74J95R4R4K56K55
+-19000a4o98R15QRk53k55k54k54K08K08K08K08m4m4j04j05J22q46l02O68N1J020m92M74m22
+-18975A2m21J22J23K83K84k00k00o48o50M81M81o4o4o4o4J04J05LMJ031n81L26o41L85n80
+-18950d33L87L85k08k07k09k08K04K04L65o02n92J020m30m32N02N01l04l05M10M11N73j041
+-18928il78N89j56j56P00r12nnK42K42K42K42l03l03J82J82M43M43o87o86m15m15P0P0J96
+-18903e87J95J96J96ooool60l61M47M46L25L26m81m81L11L12l34O35N03j111O65O65j026j026
+-18878e69J04J03l41l40l81J234k57P12k16k14M19M20l87l87P0O8l74N94p88Q25k1k2k03k02
+-18854a53P04r08M42M42j42j43M43M43m2m1l25l24J60J61n26n25N9N9m55J158k33k34L2L1
+-18830H3L2L2N66N66j9j9J38j476Q83Q84m58m58K7K6k57k57k57k57M99M99n70n69k38P29N49
+-18805F78j065J04q64P11P09l88l88R6R5l07l08J77J76N36N35k71k70O56O57l52j319J373
+-18783I71k39J23J24p04p03K25p44J106n06j44J470j64j132n47M21QPQ75Q75n78n77j303R56
+-18760a80l01O68n8j026Q50j18p65K05P79q33k90J324LLl79l80J3J3J3J4K15K15K14K15j51
+-18735B63j52l12O55N75j038p1p0O19O21j87j86n00m98O90O91j362l94J91J91Q5Q6p02K66
+-18712e39J76J76K96K97l03O65l64l63m82m84L25L24N30N31L29o40o03L64JJl35l37j144M70
+-18688a109j35J479J88J88o44o44K23K23o27L42L9L9M23M21o1o2j57j56Q4Q5J61J61l24l22
+-18664a85M60M61P7P8q56P59j50j49l72l72j90j90M20n49N81N81j037N76J52J52L2L1M56j158
+-18640c92L97L98j155M58K0r49N03N04Q5Q6L26L27m80m79L28L26N6N6K98K99k72k72P58k12
+-18616A014q97q96j51j51M35M34R2R1o63J597p04K66q8q7r35O79O51O51p00p00L58L59j26
+-18593E29j25J4J4J35q33oR61j28j27K08K08j14j083K94o75L55L54n64M05J009o04l10l12
+-18570c95P2P2O2O2O66r46P46k20P68k01j35j36J47J47j118M94M54M55q19J49Q9Q9m96m95
+-18546d89K50K49K01p66k83O85K21K21k02J412M10n58j103j102K90o80R96R95j41j40k02P68
+-18524A032o05o04o04L63N65N66L64o05l83l82n04M65M24M25o43o45M20M19n07M59J129j131
+-18502A8K00K01M4M4J05J05m23N46JKk41k41l02O68l95l94l95N73M23M22jjl92l91R2q75K14
+-18475c93p55K150j399O21l45L7L7J27J097q00J68J78J78n69n68M64M66K23K23m32m33L75
+-18453F50L74J28J27j446M90M58M58k29k28L9L9m45m44j88j88N4N5M92M93RRn61n59K47K46
+-18428H0m08m09L98L97k5k6k4k6J45J46J46J46p3p4p3p4l55l56M51M51k63k62N44N44K02K01
+-18402A403o05o06J76J77l08l06K46K47N30j407K50K49J28J29J44J43r8r8k20k18N87N87m46
+-18379F84m47O44j293K82K82J61J61J62J61J62J61L66L65M87M86R51K888P690K5127o822k1673
+-18358A0985n449r28p88J150P46N267K1508R238k8538p229k854r18M15j523j37j38J04J05
+-18340A016q19J118m56m55Q9Q9N73N74k54k54k54k54o5o5L59o09P12j224J155J87N3N2qqq25
+-18315D27q25L05L04K89K90j95j94M10M11j485M50M47M47Q4Q4l60l60J24J24k19k19N89N88
+-18292A516m61m61O90k80j534M01j63Q04M42M42j394N43K63K63j00j01j35j36L49L49l34l34
+-18270F29r1r2k03k02L9M0O20O20n11n10L27L27Q5Q5n75n74K32K33J87J87k97k97L51L51m56
+-18245E05m56J54J54q7q8l49l50N77N78j176P59l89N77j33j33J69J70p88p89L41L42K20K19
+-18222B7k2k1k90k89J95J94m4m5P6P6r83R54j35j36R7R6m48N20J72J71l11O56k29k29P4P3
+-18196A99j38j37O68O69m52m52p54K14J076J076j022j021L61o05L62L62M79m90P21q94J96
+-18175D18J95P41k29q89P25p27p27L39L38M00n69J68J68J07J07n24n24N44N45M79m89M79M79
+-18152A554j31j100N95j018K67K67o40R73q95P17N16m52j037o9P18q96O57O57N57m12O2r05
+-18130a5l61l62L95J363q56J13L2L2R3R2l87l85m88J126K89K89j95j95M92j121N31N32K10
+-18107A224p60k14k14Q8Q8J49J49l11O59J54j460Q44j23J7R87r9r8k80k80j72j71P0P1m43
+-18083a25m44j81P86PQN53N52l00l00n42n41l5l6l5l5l0l0M54M53n35n35R16R17j43j42k1
+-18057F36k2O45j292m45m45J96J96m7m6Q68Q69j39k076P08P06L45L45k59k58K26K26l64l64
+-18034B09J20J20l4l3n17n18j25j24L59L60L01L02L01L02l1l1o37o36P86j149l43J593l73
+-18011B02l72j0j0L54L56r75R60J64J64n23n21K06K04k77k79N93N94n36n35J05J04K25K26
+-17988D19Q26j111k2k1O1O1O1O0L64L64j21j21m03m04Q1Q2M29M29n5n6k45k46lmK54K54n53
+-17961C80n53N03N03j069Q66N9O0q88q89M9J016l34l35K30K30K30K30j06j05j04j05K87K88
+-17938D43K6r42K80K79K80K80m47N23k25j192l76N93N92l75m57N12N52m15n36J077k33k34
+-17916Ep97J461L11o57n35M32j73j72M82M83l24l24J36J36l48l47J16J15l67l68M86M86n41
+-17893c04M25k59k59l01J314j045j045J779m79N48N49r84O29j20j19N26N26n83L85L85n84
+-17872I84j30j30j31j30n83L83p04K63l14l15J70J70O94k73K70K71J51J52j240L74J61J61
+-17850B54k81k82L52o14M14M13J32J31j361K53J616Lm41m41N07N07r05O4P84j83l86l86P9
+-17827B29P8P9P8m7m7o51L15L4r34M78M77J34J35l50l49M47M47l7l7j83j83L62o06l2l2L91
+-17801A96n76P80j89Q41j27n42n40K04K05k10k10L33o33N35N36M76m94L30o40L90n79J68J67
+-17778D21N31j082K29K29J29J28n07n06L01K99K65K64k80k80J64q03K85K84j75P92k37k36
+-17756B15J87J87n59n59n89L79J084J17N40j073L58L59j314L00P42k25O8O7m16m17L2J000
+-17734D83q9Q80l51l51l92l91J221l92l0k9m23j390L84J352K99K98n08n09L09o59M69J439
+-17712A620O1O2J22J22n75n74k9k9p90J76m87M79N51m18K48K48r74ok88O79q7q7k5k7l57l56
+-17686g41N11N10m17N51n4n5r4j062N51N51P02k66n28n27k06k05J145J78n4n4K69K69R38o77
+-17662A235j040J220m54m55M33M33J59q11j24j24j041J216n3n4j35j35o79K89M39M40q4j052
+-17640c77N2N1M75m92M94m72J2J1K52K54L14o54J61J63M1M2M50n19K7K6K99K99n69n68N20
+-17615B92m46n48M20R54o59K09K08M76j137k31k30M76M75l91l91J353L86j067r8J33J34k90
+-17593B8k89L09L10J69J69O64j596J026N8n15n13Q36j31m74M94M94m74p03K64N07j106N97
+-17571A24l70j198J062k55k55O33O33J046P9L7r30N32N32l35l36n07n06J207m06p3p3M31n37
+-17548E35j14Q56l56O13j57j125n79L88J06J06Q12j57o57R56L52j263J19q49J9J8N42m25O63
+-17525D03O64q59J09m35m36N00M98o29o31N90N89J67J66m86M81j23Q45j94j95j33j34j96j95
+-17502C66K89K89m08m07M00L99k61k61l21O47p0o9rrn43n42J64J63J252l61O2O3l34l34q77
+-17477g12R0N65N63j82j83N51N51r03r01K27K28K87K88l12O57O56l12N25N26q88Q2j14j15
+-17454A174r61O52j34j34l4l3o9o9j69J445l32l31l31l31P09r05J031O3k7k8q76R4J79J79
+-17430G62lkm26m26R65o48N34N33j020n2R32o82K86K86k23k23R27o87m00m00N69N69J6r52
+-17406B35m67N00J98J98j25j25p77Q35R57j1J95J96o72o73J3J3k30P39o83K85N87l81l55l56
+-17382I6R96K8r66LJ112n02J00R9q48P65m15N54J462M93l77l77M30M30M70J439L921J1348
+-17360B0261K7777j9685m308K0553j4782j8333m591k331j292j291L03L02n35n34n35M34m78
+-17343I35M90n38M30J6J7l47l47n03M65n64n62P97P98q76R2J25J25P30k38P4P4m10m09Q9J058
+-17318A521o16o17K46K46j206J698M00n68R8J066o74o74j90j90M46n23j19j19J505p55k91
+-17297F84k90n6n5J06J074P67q47j272L43O3O3j38j39M97m72P3P3J45J44r8r8N13N12K8K9
+-17272A649l93l93l93l93J21J22l03J313k58k57Q72r6l83l84L43o26k02k02N45N45l99l99
+-17250D29q82P31L65o04N87N88r67KN46m21q48J21O44O45j01j02M43M44j209k41j39Q29p44
+-17227A16K23J092J23p47p48o0o1J250K82p88J81J86J155j045N70m85m85l84l83L02L02l64
+-17205B32J251m70m70m5R22n33M35n94L75k05k06O42l26M25M25p65p65L59L60M60j154J32
+-17183D85J31N14m54L63o05Q1J049N6r13p92p92N40N39j06Q63M63j152L62o07L02L01P86j83
+-17160A231p9q0j40j40j40j40k00k01Q02j67L77L78l79l79J05q62Q51j17j16j17J26J25O5
+-17137H03O5J39q29K00K00J29J29m15N53k77k77q61J07R73o39k16P51J34J34K95K95q75P39
+-17114A257L76n92P8P8n27M42m3m2N62m06ooM78m90m91m90Q41Q42P50k18j065j066j58Q12
+-17090I16K66K66k54k54K91o78j84j83K80J250J94p73L76n92J95J95J34J34n24n25Q68p47
+-17068F51R1R1p1p1M34n35n0n0J130J61P87j473L53o16L33o36J0J0Q17Q17q02J66q22J46j336
+-17043d65K77O20O20l92N76j360K52O17O16N56m12j371K43P28q87L24J292p05K64L0L1N15
+-17021A969N15j91j160K53K53j201k31l0l0N66m03K02K02n73L96K35K34O28r86o24L46O3O3
+-16998D96J23J23J34J34J94p75L4L4n70L96J85J86K46K46j43j42j312R46o46R66k83k84M68
+-16975G56M69l39l38l6l6O5O5n36J079J71J71m14m15l13l13n04J108L02L02o56R58J11J10
+-16952A767k32P36j565O96J51J51j32j31n05M65J251j009p26K42l83l84L1R99l0l0p17p15
+-16930g0P97P97n92L77p12K56O09O09p83p83l19l18N47N49m96M73l14l14o0o0M85M85o20L49
+-16906H92j5j4N66m03n45M25p66Q48%JL49L48j406Q53J87J87m58N10j88j89J14J14m96m96
+-16882D18j2j2o9o9J74J73m02m00M04M06J88J89PPn89L81J046n68m36N33j13j13N08N07j228
+-16857I30k59P53k17r5r5j76j76N71N70J21q48J81J81p48p46P05P05n43n43Q09j59k61k60
+-16834D00J031O3l12l11m32N36l21l21L44o24K4R93r6r7k69k68P61k08J33J33M55M56l72j985
+-16810b87j70P98K59K58m87m87R49R50q26q26K94K94rR60n18n19n58J055m58m57J035n79j65
+-16787E06j65L6L7j88P81N38m30J4J4j48j47L49j264R94K7j05j05P7P7k79k79O4O4q68P44
+-16762C44J9J8R52j7k79k79K51K51k34k34l47l47J429j86l4R34j96j96l39l40m00m00N88l80
+-16738E78J65J65M66M65m02m03N2r17M35M35j40j40L45L44m38m37M6J016O83r30K80K80p65
+-16715A183p64J233K65j64j64j23j24j274L41J79J79O00l68J77J76R1R1m54m54O96k72N14
+-16693A564N15l28l28n70n70K91K91p1Q96L67o01k39k38P05P05J80p88o67L01o1o2Q1Q0p66
+-16669F87Q48j67Q02j25j26n55n55Q98p16j008m0L42L43R34o81J67J66l5j004J47q21P5J044
+-16646F20K77o91p50Q62Q22j46P86q29q28P85j62Q06j091N23M78m91N99l69M48j167j17Q51
+-16624A216j44j112K38K39O02l67J79J78j0j1N0N0n56M13K72o97J297r63K48K47k87k87J37
+-16601I32J36L16o53m7m7J24J092O4O3m97m98Q95p20J88J89J48q21L85L85j59j60k8k9N16
+-16577A774m52m40m39N69N70L07o62o61L07K04K03L25o44n8n9j19j19K78K79L39o29K6K7r5
+-16553H31Q74m57m58j35Q33l97l97O92k76m29m29P62P62j246O91k77k78o18J319k54k55K60
+-16531A118K59k24k25J47J46l38l38O41O40j66j66j22j21j21j21P1P0j019R19l4l3Q7Q8J89
+-16507A347J88k96k95J58J58O43O42p29p30P23P24o11o11j27j27R5R6l90l89O00O00n31n30
+-16484F08J96J96J97J96j05j05j04j05J78J78J77J78N2N2N1N2k31k31k30k31m4m4j133Q02
+-16460E50J005J006mmq34q33k7k6L77L77L77L77j65j65j66j65j95j96j95j96K11K10k73k74
+-16436G72k74k73Q56Q56k80k80k80k80M3M3p8p8J304o33k8k8m61m62R91R92l62l62J22J23
+-16412A943k62k61k61k61M00M00M00L99n18n18O11O12q7q7L4L4o12J326M38M37J709M938J8701
+-16389B9515J1597k5615q179j802j803l99m00m00l99m7m6P4P5p73J164P5P4K97K96J467J467
+-16368F238O072J7050J3619k7064q417k606j152j153k95k95J89J90j24j23j24j23L5L4N19
+-16349B470N19k27k28k28k27m22m22L85L86n23n23K84K85K00K00K00J99p68p69O84O84q5q5
+-16326A989q5q5l88l88R7R6J56J57J56J56L88L89m19m19M11M11l96l96o4o3o3o3k61k62N46
+-16301A600N46l62l62M45M45q7q7J002r35j37j38K26K25n77n77o18R97l25O43K00J99j63j64
+-16278A996L21L20n26n27n27n27J71J70O55O55L9M0q69P46l75l74k73k74L63L62L62L63q35
+-16255A456q34l50l49Q09Q11LLj94j93O13O14j73j74k34k34L77n92r56O59Q4Q4l60l60Q05
+-16231A315j63q90J370q2q3K40K41j516J390k04P65j223L91m56m57J62J62J62J61M85M85o46
+-16209A609o45k40k39N68N68m61m62L46L46N55N56k52k52n15n14K93K93k6k6m50m50J15J084
+-16186A801r14P00M86m83J23J737j926r57R20m9o4o4o4o4n99L70P33q81K44K43J43J43n63
+-16163A015n64J83J83Q73r7J86p82K06K06K06K06m85M84%jm85M84L9M0p34Q80k7k8KLr06P09
+-16136A796j54j54M92M92p79J89J89p79M24M23o66L03K52K53j72j72M67M67J44q25O58l10
+-16114B538l10O58J848K817O329K2795q46k3770n285j734o59j627m98M71m47J167r72lm58
+-16095B014N11n79L90Q24j45k4k4J479J480K488R269K9489k5077j3716k416j214j215j477
+-16077B057n08m88M80J026N7J60J60j313l44P75j93N14N13j235L80m4m4k16k16k76k76M58
+-16055A427n11L4L4K56K56K56K56j92j91K92o76M34n35Q58p57o0o1O86r28L83n85O66O66n25
+-16031A483n26m0m1R0R0R0R0m19m19P10P11o92o92J16J15M31M31n4n4j44j44j45j44N97N97
+-16006B037k10k10j49j50j49j50M25M24o0o0M85M85o45o45q8q7q8q8j28j28j28j28R2R1p0
+-15981F78Q99L43j270O66l02M42n26L81j233M53M52L51L51n48n49o4J550N91l77n38n39L09
+-15959A520L09j75j76p4p4n59n59K29K29k55k56J58J59J58J58k53k52N54N54j42j42M44M43
+-15936A998j280L34q9r0J32J33J32J33j05j05j04j05J37J38l47l47O20O20J36J35j16j17j17
+-15913A726j16m93m92rqKKn9n8P08k59l61O08R00p14k29k30K85K85j087J173Q50p64j99k00
+-15888A261ooopM48M48j268L47l19l19M4J013p7p7j38Q32L51o16j041p2L32L32m15m15L19
+-15863I45L19M40n28o09L59K99K99m52N17L3r36L66L66L05L05m74m74J0J0j72j71K12K12O00
+-15839A781j014o51L18J97J97Q02j67l81l81M3M3J74J74k49k50J15J083n91n92MMLMN41N41
+-15814A748j497J17J08J07J015n99Q94p21J87J87r42O71k36k37J67J68J06J07M59n08n09M59
+-15792A251l82l83J62J62P37P37o15L54O9O9m16m15N93l75k54k55j012m2Q63Q65l46l46J005
+-15769B026L8m93m92K94J263J03q66KR71o00o00n39n39O6O6O6O7j94j94J865j041L82n88l24
+-15745G39J289q66q65j20Q50J23J091L45o23l36l37n17M51L40o29R45o69n01M67l00O69M07
+-15723A953n62m81J133L97j218k08k09O4O3m81M88J35J35l48O19j6j6n00M69l77l77M31M30
+-15700A524L91n79r4r4m2j012O04O03M52n16p3p3R59o55J92J92m0j008k02P68j77j76M28n39
+-15676H33J26J26m79M89Q58Q57M14j847K83K83o66o66R66R66j072N42l35l36L71n98q10J59
+-15654D64N83l86Q8Q9N12N12K67K67k18k17P5P5J76j438n1n1j52j51K41K42k43k42j98j98
+-15630D6O09O10N28N29r24r25l5l5M49M49m89m89O41O41j34j34j34j33m06m06P8P8N84N84
+-15606A582m45m46o57R58M9M9k50k50J143m72N98N98o33o33k0k1k0k0l43l43M64M64L09L09
+-15582A970L09L09p60p61k76k76P2P2P1P2k10k11k11k09O54O55J71J71k02k03n65J048n92
+-15559A098L77n52n52N08N07o22L46O95r19M9M9J30J30l55l54L73L74L73L73q67q68N85N85
+-15536A463L19L19j65j65j85j86l47O22J096n18r63PJ88p81M30M30n93J345n53n52J94J94
+-15514A599o12o13L00L00j84j84M31M31n3n3k95k95k95k95PQM92M92m47m46m46m46P73P75
+-15490I44K90K90l98l98P32P32j86j86j86j86m86m86kkR9R9r90R46J33J33k30k30R2R3r96
+-15465c79R39M79M78n30n30k28k28M59M58O95j242j53j52J70J70J71J70j98j98K86K86k98
+-15443F25k99P90j145M85M85o44o44n43J392L04L04k86k86J98J98J87J88m98m98k40J698n22
+-15421A249n22l31l30P99Q00kllkl56l55J28J29K05K06j368N68L5L4J55J55m76m75L32L31
+-15396I03M9N0M9M9l3l4n18n16L89L90L91L90l99l99Q5Q5L98L98p32p32O94O94j13j13l34
+-15371A091l35l35l35K23K22K23K22K13K12k71k72j6j5j5j6K37K37n71n70j27j25K96K98Q22
+-15347A293j47n10J105l80l80j186M26J3J4M98M98P30q85K4K4j38j38o22o21L01K99M02M02
+-15324A022o28R87m66N03r5r6n19n19j05j04L78L79J57J57l27l28l67l67J17J16R04R05k25
+-15301A479k25o09o08O22O23j128M88P09k60p84Q30j38j39K76K75K75K75p84p84K3K3Q9R0
+-15278F18Q9Q9P9P9P9Q0k08k07k07k07P21P21m09m09L83L83J61j454p1p1j73j71R0R0N14N14
+-15252A103L42o26j42Q27j32j32j1r79N44N44K22p48J90J90J29J30m56m56N12m55N64m04Q0
+-15229H36Q0N0N0m35N34q42J27J87p80P31P32K48K48j001l3r4r3J09J08J69q00Q9Q8l3R36
+-15204A211j94j94j95P75o11o10K57K57N60N60K98o71o96o96N0N1P76P77K53p17p05K64j9
+-15181G81R50n94L74N2r17q05Q07j60j60l61l62Q68Q69p17Q96j1j1k64k64o87R27n51n51J810
+-15157A919j096n72J689q94P4P77q37j220k52l1l0M54M53M14n55j31Q37L94n76m54m53L1L0
+-15134b9N14N14k02k01o86o86L89L87L89L88j36j36o20o20M02M01M03M02l65l64M43M42J7
+-15111A046J6J7J6J37J38J37J38n94n94N36N36n64n64N67N66k89k89N19N18m20m20O4O5J16
+-15087A398J16J16J16K5K5K5K6n22n23n22n21N26N27k80k80n11n13O17O17K34K34k51k50j52
+-15063B77j52L32L33K01K01o06o05K07K08K08K08k05k06k05k05L6L6L7L6j14j14j15j15L69
+-15039D7L70j14j14K29K28k55k56n4n3n3n4L59L60L60L60l52l52l52l51K02K02K03K03m27
+-15015C36m27N6N6L59L60L59L59o15o15J92J92K63K62k21k22m64m63M64M64j351N86L02L03
+-14992E35O09O10n21n20o01o01N28N29p09p10M21M20L99M00k86k86p43J191l81l81K03K04
+-14970C10k80k80K17K15k67k68M78M79nom32m32N2N2p9q0M04M05J18J17J18J17K49K48n58
+-14945H92n59o04o05Q48Q47m14m12P0P1N1N0N1N1K53K52K53K52o91o91J15J16M5M5N29N30
+-14920A345k53k52N54N55l64l63l64l63J2J3M97M97o23o23j39j38K7K8n77J359lkJ18J19o45
+-14895D15o43Q07Q09m03m02Q2Q2j50j50k71k71J242o95L95L94K18K17n89n90K08K07k77k77
+-14872C58N64N63k44k44q20q18M32M31q23J112K3K4j89j88O18O19p16p15R1R1K1K1J42J42
+-14848D95j419N18O58l09J435n01M3M4o96o94J11J12O05O06k01k01J3J4J4J4l80l78J04J04
+-14824A11O90O90m40m40k99k99J85J86k66k66K18K18O42O42m88m88j76j75L09L09k76k77K09
+-14801E19K08j14j15L71L70r22r20K09K09M52M53l53l54M0L9M0M0m46m47O82O82q3q4q4q4
+-14776C08m21m22P07P09m22m22o03L65J037q99K49K51j2j2j2j2l92l93L1L1P66k01R49r88
+-14752A92N93N94r41K9N83l85l25O44p69p67k24P44P04r09q50P65N78N78r95k7O98P00m31
+-14729G79m31N18m51L4L3N08m61k80J335j048q0R28o85n04M65j81j81J01J02M1M1M65n04J01
+-14705F45J02n75L95j51j51M35M34k11j179P76j91n13n14N76N75L1L1P35k33k74k74Q16p98
+-14682D87J10J10k01k01r9j00j39J474k41k41j55j56J08J076q72q71mmO2O2O1O2N2N2m93M75
+-14656D14K8K9Q9Q8jkm86m86J85J84J093n22J45J44n7n8L37j277Q20Q21j005l6K25K26n61
+-14631C37n60j7j6r7Q70k18k18R6q71M80M79k16k16K67o99N66m03N04N05L03o65P87q26m21
+-14607b49m21K85K85L3L3L3L1K10K09K10K09k75k75j3R56m88m88N7N7r92r92P22P23O94k74
+-14582B80j52j52l75N93j1j1O71k98L48L48j548O6J154J87o66o65Q87q1Q1q87N04N04j217
+-14559d40L96J33J102q75R3R3R4m90m88O40O40M6M5p62p61K73K71l32O35M94m74k32P37j407
+-14535e69J497m99m98q6Q82m09m08J65J135Mr64J96J96l49O20r48K0m1m1N23m44m44N23RQ
+-14510G8m14m14M52M52J30q38N46m22J271r86N45m21j9j9n1n0m14J200m74M94J11J11q97P0
+-14486D1L33L33l1l0r1r1J39q29m06N63K89o78M11M10J80J79J79p90N8r09Q64j04O73k95k36
+-14461A62k34n58M10L49L50m44m44M0M0J30J31O9P0Q18j50q9r0p9q0j40j40M53n16K9K9K9
+-14435A45K9n75L92M08n58j4j5L17o49M40n29k5k4L99L98R6R7R6R7R4R4O18r95j116M97k7
+-14409c10k7P7P6q32P83K97K98q5q5j96j97M08n59m69M99M38M39p86J82J80J82l42O25J81
+-14385G77J82j103N10J48q21L99M00M00n69m9m9j10j10K94K94K94K94q39q38K92K90j72j73
+-14362b59K11K10P70q43J24J25r74oO39O39k38P30K86j328n20n21m00J215L74L74rrk20k21
+-14338A49K64K63n4n3n4n4k3k4J18J18r89J270jjk53k53k53k52P7P7m06m07O93O92j15j14
+-14312D15M64M63j212k42N0N0O54l14l25l25J59J59l15O52k14j182J373M07Q3Q3j89j89M16
+-14289I21n53q50J17k25P42M30M30j55j123L08o59k76J337J17J18l67l66Q12q01J06J07L6
+-14267B06L6J98j416L31J299p98p99N13N12k93k95k56k57P12k56O40l26o50R64r47O67Q87
+-14245F72q0l92l92n14n14O51l19P71j97J4J5Q61p51O94O96k13k12j201j201J442M73j1j1
+-14222B81j0j1r48J9J149J81p39p39n4n4R75Pn77n79j7j7j7R52J54J123m31m31l44O23r29
+-14197d33O83N53j060M31M32k87k86J98J98R7R7j173J085j17j18K4K4k99k98K46K45k36P32
+-14174G38j4r83j65Q01k87k86K57K58Q03j66r5r5r5r6n19M49r6r6n29n29n91L79J41J41L03
+-14149c72L03j019N95k52k53p6Q93R52j5q12J55O41l29o04L62l02l03L32o36Q77r1m2j010
+-14126a006R67jj041J218j72j73P9q89q3Q87O53O54L11J280j691N70p02p02N90l79K26K27
+-14104H23o85K85K84o84k49k51R80o33P50q62n6n6o7o6o11L58Q7Q8K09K08o79K90K29p40J014
+-14079c4M4j164J739O51l18l38l38q76R0L54L52l1l0M54n14M49n19l5l6J56J56j235L78j81
+-14055h26j82M64n04Q37Q37k32j200J206m07l67l68j4j4N31m38l7l7p03R12J455j448k59P09
+-14032h5j35j35j35Q32m07m07J37J37n11n11K293j257J84J85N08m61n95n97J50J50J50J50
+-14010c60O94k73O54O55j827k13R26m1k03k02l18l17K28K27m18N51O10l58o21L46j99j98Q4
+-13987e73J051k99k99m42m41R50o63J93J94l91l91J84J83P29k40K64K64P49k20o77o76m14
+-13965i65N54J20J088p48p47p6J537n01m99J4J4m70M99K5R93o21o19M98N00l08l07M7M8m36
+-13941c60m36j13j14P95q20K83K83J82J83L32L34k92k91J003j254J6J5L18L18j05j05m17N50
+-13918C05n98L69J27q40k36k36Q54Q53K69p00n58n59k36k35R80o34K75K74O37O37m92m92J33
+-13895a03J32m71M95M36n32n73L95K96j317P80P80n60n61K45K46l99m00R52j6O4O4n41M28
+-13872a60k64k63k03k04N54N53n76n76L82L82J027O0j242L72N33N33j81j82K42j371J82J81
+-13850b21N24m43O19r92q6q6r6Q72k16k17O63l06P24k44N62m06m06N62r39K7l3l2M50n16K8
+-13825b08K8j36j36j97P72l67l68Q21Q23o91o90k67k67Q73r5l5l5O7O7O6O7o28o29J78J78
+-13800h09P46P45j62j130P9Q0J9K0r4r3N12m56j54Q14l74l76P18q94j09Q61N16m52l89N76
+-13776A94l65l67l67l67O12l57P94j76k68O99m69J789j7j629R11p02j225L90K88J257l98l97
+-13754a70K07p60K61K61l45O23k83k84k84O84R7R9K79o88l86N82k3k3N8N8N6N8l25l25M81
+-13729i2M81o84o84r9Q69O77O78p15p14llN7N7o99K69N31N31m03m02L43L43N35m34q96P16
+-13704B59Q65p48j091j23J09J09m77M93J082n31m7R20j267l00l40J274P37q77n13M55R88o25
+-13682C52j007m0M35M33m52m54J221j038K33K32l09l10K96o73J44J113l60l60M06n63N26m42
+-13660f17l11l11M36M36L02L01J00q67j52Q16L32o35o05L64k42k41N25N24k81k81l8l7N07
+-13637B5m60j38j38j38j39J44J112K45p22K94o72k8R41J072n42J04j510J041n71K34K35J61
+-13615E50J62o45o45Q1Q1j069J836j84j83kkk45k44K40K40J29J30J30J30l14l14J70J70l56
+-13591a54l57l57l57R25R23n28n28n57n58O94O94q40J096QPj01j00j00j01m95m94J079q57
+-13568a058M2M3p9p8O88O88j19j19j00j02j01j01%j%%j68j67L17L17L96L98p32p32J12J13
+-13542e43J13J12J2J1J2J2Q5Q5l99l99N29N28k77k78j25j24k45k45J549l86m26m27P8P8P8
+-13517e92P9o3o3M21M20k3k2k3k3J59J59l25l25J52J50J241o96j11j11K52K52j86j87j87j86
+-13492A62j06j05j06j06l82l82M25M25M24M25l82l82m1m2J047q88r2r2K70K71l92l94K12K12
+-13468a9o86J250P67j171j60j61Q06j129j01j01k22k22M57M56k8k7J2J3J2J3J11J11l73l74
+-13444g66r0r1L93L94l32l32l31l32N16N16k92k91L49L50L48L49o4o4o5o4J34J33J224p14
+-13420H78l8l8o43o42P3P3m8m8O98j237j49j49P09P08K24K25m02m00M05M07k45k45k43k45
+-13396c72j04j03j03j04M97M96J3J2N3N3N3N3n36n37K69K70k64k65J308o28N37N37l91l91
+-13372C53k7k8k8k8j16j16j15j16J87J86k97k98k48k47K36K37J35J36K55K57j044Q91p6p6
+-13348A3j180P56J51J50p2p2l74N94p68p68R67jK68K69Q13q00K42p24n23M45k44P24o2o3P4
+-13323a85q95J002L4o8o7N3N4O13l55j202M12M49M49n78n80N25N25n44n44K83J251n04J111
+-13300A239n5j024J07J07n14n15l0l0N0N1k32J381j391Q66K0R89r89k0n03n05K10K10P54k13
+-13276c7j33j33L51L51k95O74m56j423O9O8P55P54l98j367Q53j16K02K01j61Q06q16q17m95
+-13253a563M75m6m5L98L99P87q25n03n04R91o25P08P06O95k73q18J49K11p57k13P54m13m15
+-13230g27J92J91n26M44Q05q07L60L60k26k24N91N93n38n37l77l77J67J68k61P08l22l22P2
+-13207e93P2j70j70J37J37J38J37J83J82J83J83n12n14N16m53K03K03J42J43j10j09m9m9n67
+-13183g37M01q2q3l75N93J10J09j039p0L1R99n14M55J483p76K7K8m56m56P38q74k70k70P34
+-13159b94k35k34P34K54K54o52L14j50Q17p97p96J12J11J72p97o5o5M59M59o00J014j35j36
+-13136b56m6m7J96J95m6m6n91L77n05n06R08o2K56K56n90L77m77m76J28J29m3R25J38J39j46
+-13111A87j46q5q6l83N84n64M03K65p02n82L86l35O34Q9Q9N60m07j66j66K33p36O16O15l31
+-13087b8l32J52J52o9p0p0o9n0m9n0m9n0m9P1P2o53J283J95J94p8p8p7p8J56J57l28l26J76
+-13059E5J77J77J76m28m27N6N6j4j5j4j5k29k29k28k29M97M98J3J3N57N58n72n71K75K76k09
+-13033B04k08N50N50O6O7m18m19O72j265P0O9n2n1J20J18J20J20N9O0m25m25J30J30RRO61
+-13007E21j274j85j86K69K68K69K69K37K39j335O01k05k06M00L99J77J76J77J76m5m6n29n29
+-12984c62J08J09J08J08j3j2J08J09l35J601r41r40j24j23k45k44J247o88M02M00m96m97J459
+-12961G39m76n68M00q70R8O62l05n08n08K92K92K32K31Q97p2k32k33r48O66O65r47K42K42
+-12938im03N64l45l46M62M61J89p79k34k35J05J05J04J05L76L77ooq15P97M35n34o03o04J43
+-12913f96J42L89L88l4l5l77N90N31N30m53m54J32J32j361K53j10j079M30M30Q53j15L19o48
+-12890b43j05j05q06J63O47l22O98O96l92l91q82P33J48J115l07O62l06O62j174k06p49K18
+-12868b46K78K78j112N01M72m94J058n56o75o77j92P76k08k07j47j47N29N29J06J05k76O92
+-12846C87k75k75j64Q03L19L20j498n30q53P61O45O44o1o1L4L4p52K15l1l2R0q79J12J12N97
+-12821c38l72L09L09r02P13k06k05J306L40p10K58j193k26J347L80j436J78O66l00k01j814
+-12800b097N51N51M50M50L08L09j465J47K13p55J161j098M55M55J222l93Q0P9n05n05l50l49
+-12778a086Q01q14K01K00J61J60k94O74j72P95n53n51N36m30j64j64K60K60lkm87m87J89J89
+-12754g81M32M30q1q0q07J62J51J119J51J52n38n36K10K08Q20j49o94K75K37p31J74J76q17
+-12731e17J51p17Q98k76J338k76k75p79p81O8J036L34o33L96L94Q65j05r11N8j73j71J30J30
+-12708A84j82j81O04l64n92n93o13J325M20M21m66m66o46J290k81k83m03m04Q1Q1M44M44l64
+-12685e44l63M44M44m0m1M53M54o76o75j36j36J06J06K63K63n44n45L24L23n24J412j50j51
+-12662F7n13n14M40M39m5m4j41j41J433n04n03n04J82J83k92k92J92J92J1J1m74m73N88N88
+-12638a14J04J04q3q2q2q3k89k90m7m7P04P03m25m25l30l30M78M77L45L47k60k59Q08j128
+-12614b04m0m0K13K11n93n95P13P13r4r3n77n78N52N51l35l36J49J48k3k3k3k3o1o0M23M23
+-12588C98o6o6j397N39J8J7l46l46O58O57K35K34p08K58O83k86J53q14m93M76j158J102M34
+-12565A82M36r00O8k96k96P24k45O02l65k34k35l55O13l71l71M56J425k050Q55O8r00K85K85
+-12542f19L87j229j13Q56K09K10QQn37M31k19k19n62M06J113n00j7j7m55m56J90J158l28O38
+-12518C43o52o52K46K45K46K44J76J75o91o93P86j83m25N44K05K05K05K06L57o12o7o7j7j8
+-12494A06k59k59l91l91M16M16M8M8r4r3n32J081J3j601j8R50P27P29K74o94q9q9j047p8p86
+-12469a613Q30O02l66L7L7J52J52L1R98j10j078j31j30o22R91Q10j58j737J169n87L81J81
+-12447a61J80k42k42R0R0K11K10j205P31J25J26m19m20O5O5L0L1L0L0L0L1L0L0L84L82j01
+-12421A11j01m12m14P1P0K32K31l74l74R87r48J41J41M20M20o4o4n3n3M30j506J067q70N83
+-12397c29N81l44l46J8J8J245o91q6q5J35J36l47l48J52J52l32l32N45N45n84n85M1M1J130
+-12373C30q06k71k72J059J060o55o54J52J51o0n9N44j391K31K30J09J09L81L81l05l03p54
+-12351g93J182l90l91J33J34l51l50j11j11L73L74l33l33M74M74n28n29K79K79j15j15L70
+-12329c78L69l6l7l7l6K14K16n90n92L12L11j73j72p2p2J259l55j66j137P61k08p53Q61O99
+-12305A88P00o89o87R85J8m06m05O62O63q72q72n50M19nR62k06j175J292l21k81k81JJJ02
+-12281g57J02n86J028N9N9P25k44j83j83l32l34P96j71o47R67j%o20o21J052Q5N30N29r85
+-12257B68r83J35J35J35J35p7p7p7p7j93j93L52o17Q26Q25m1m2k72k71L33o34m53N15r0r1
+-12232e29K4K3r8Q70J85p83p84J85P57k12l0l1o65L02J82J81N92l75l15l15K60K59n47n47
+-12208a411J51J51R1R1P16k52p36K32K47K47k37P30r4r6P71P71m09m09m09m09K27K25k57k58
+-12184c27L57L57m48m50J26J25k38k37q28J109J108q27K71K72j665J563k98k98r6r7j37j37
+-12162g95L48L47M04M05m02m02l11l12J73J73J27J28j023R14N00m67P7J044j79j148O3O2p14
+-12139i88J222L55j582O63l06m27N42PPO7O8J52J53J52J52k60k61k61k61j60j60L24L24K53
+-12115b25K53n53n53K86K86n21n21J96J95J96J95M20M19l86l87n4n5n4n4M5M6M5M6k58k57
+-12090a250K27K27K65K65k20k19p04p04J04J03P10P09J052q84j99P69J04J04n5n4n5n5j76
+-12067F4j75k37k36N39m30K56K56j741N19R22m6j35j34K89K89K78K79j536P7P60q55O38l30
+-12044f89M67n01o23L46N83l86J127m85n3n3o98K70K79K78q4q5k35P31J28J27J02q65k61k61
+-12020h41rR59o14L55k34k34p3p2l55J258m55m56K00K00K00J99m55m56K91K91O35l32q76R2
+-11996g82N86l82K23K23j41j40k61P06Q99p0r16r17P24P23m06m05m96m97P95j74O59l10K35
+-11973a24K34k69O98q74R4k08k08j48j47J55J55J55J55k99k99J113J45k38P30l59l60k35k37
+-11950c71k36k37L39L38k06k06O50l16p41K28k67P02L19L17j155M59R01o6j77j78p81J86j40
+-11927f38j39p9p9J94J94k91k91M37M37n31J081j38j106O29l40j91P78K72j340L43L44k01
+-11905f55P66p03R09m21m22m42m42j8j9Q75r4M51M50k95k96J89J87K54K53k91O77o54o54J53
+-11881b42J52L13o53p15K53M05n64N26N25l95l97O73O72L09o59n97L70p04K64k20k20P2P3
+-11858g59P2P3N70N69j144M69l18l18N30N29L25o42r9r8J94J94l50l51M20n50o5R03k05k06
+-11834b57l28l27J183j721J3J3q8J526j358K56l8R30R10p04n61n63K05K04n68M01L41L41L19
+-11811A29L20k65k64P1j544n0R18K42K42L63L63q92P6J5J5p6p5j37Q32p12p12P00k69M38M36
+-11786A64j07j06N07N08j145M67j398m30L17L16j64Q05K60K58q69q70N83N82J14J13N3N2Q4
+-11763I4q85J011M3l08l09p94Q21Q5Q4K45K46o18L48K89K89k56k56q00J68J86J87k37k37O40
+-11739C6O40n50n49O38l30l30l31J04q66N88N88j021N93l14l15M02M01Q85p27o53L16J55J54
+-11716d86j48j48O59O58m92m91N37m31j18j19O68r45Q24j43p29K39J8J8m07N63r67KJ535p24
+-11692f27R70Kp9p9l43l43m05m04J140J69K32K31p06p08L62L62K11p58k13k13L11L12L72n97
+-11668h01K51K51J90J90m09m10k6k7J052n60M06M08p60K08l36l37J68J67J68J68j85j85P23
+-11645C14q90j55j54M91M90K74o93k10k10Q38j28J52q14R5R4L4L4J66J65l19l19k04k03J81
+-11621i71J80J007o06j091N24L11L10M72m96J20J19m26m25L53L54L53L54j71j71j70j71k94
+-11599e35k94J91J90R16R17r19r19N25m42l82N87m33N36k10j180K20K20M22J390n2n3j383
+-11577f88K30K56K54L56L57k50k49q53J14Q74r4N72l97k45k45k45k45m95M73p1p1m1m1m1m1
+-11552h26M04M04q0q0k62k61Q27j40L71J340N73J542L771R907L731N346N530j251J535n892
+-11532B6489m823r665p062k220p96p96N35m33r89r87M05M03p3p4p4p3j35j34M11M09m86M80
+-11510C12M20n48m3j011j053J208P79j88L96L97O08j006r7r8k46k46k47k46NOONL65L66k21
+-11485c77k20J263l52m71M95K24K24L45o24p9p8K84K84J95p74K56K55L16L16j298l29m06N63
+-11462A2j83j152P85P84p27p29O03O02J6r51L81L80P42q70m19m19O5J033o6o6onO21O22q30
+-11437B23q30K19K19K78K80m59N08q42q43K76K77K77K77O2O3O1O3k09k10K74K73l17l19p42
+-11413a141K27q13J124q73J064p43J194r23J013K57p11p12K56J815j22j170k02q89J049J9
+-11393b81K0o17o17N14N13j22j23j22j22K25K26K26K26K4K4K3K4o5o6o5o6M68M70o81K87Q48
+-11367A171j090O0O1L0L1j119Q17M28n38J27J26O6O6O6O6m95m96m96m97L82L81j02j03Q4Q4
+-11342h90Q3Q4J24J25J24J24o00n99N30N30j4j5j4j5M93M94RJ0n85n86K22K21l03l04J81J81
+-11316c90k43k42k43k43N46N45N45N45k21k22k21k20j61j61j61j61J12J12J11J12n10n10k6
+-11293a307R42J063n50j66j67O82r31n68M00q4q3n08J107L30o37N52m14J29J29l75N92o34
+-11271d98R79l53l51j31j30j31j30m73m73l52O17J857m02J22J23p22p22J314k97p7p7j78j77
+-11248f62J78J78J78J77p3p5K7K7r95O19J103n11r03r04M48M48M00M00q3q4k75k75K08K09
+-11224b40o3o4o3o4l3l3l4l3P7P6P7P6j96j96K88K89j56j55n5n5p41Q74N09m57j65j65N82
+-11197a20N81l17l15l16l16OPOPK59K59p10R05K39p28M01M01P8P9K40p28o48R65kkj33j33
+-11170c5j33j33K43K43L45L45j440J73N56m11L08o58k35k36Q85q4q4Q83o21o23m61m61j08
+-11147a742J506m30N37j23j23kkq50J19k24P45N01m68l47O22o29L40q5q4o55L15J020N2Q08
+-11123H01q05m43N25m05N62m05N62k35P35M11j203l75N92n3n3p98p99m37N33m98J117k76O93
+-11100b54M8M7J08J07l78l79J05J05J86J86L47j266l31O37N37m32K74K75J12J13R42o71n70
+-11077a52n71J96J97J96J95N26N27m42N26j318l52k8k9j57j57n80J033r6r7n6n6O93k76K70
+-11053hK68l45l46l47l46L07L07j77j77L58L57m50m49R53R53j77j76n39n40N89N91n12n12
+-11030d18K96K94O3O3j026R10l89l90K16K16j48j47j48j48J93J93O77O77k01k00k01k00j3
+-11007A69j2j3j3M92M92r61r60J14J13l71l71M97M97J3J3k1k0n04n05N65N65Q1Q1k48k47K37
+-10981c17K37j5j5j5j5l25l25M83M81K51K50k34k34K78K78n29n28j96j96O11O10l51l51P38
+-10957E71j198M26M24n01n03j32j31J441m94k63k63o67J271R9J01K21K21k02k03l22l24J086
+-10935F58q50k45k45J78J79l06l06J94J94J95J94k30k29K54K55k75k75k75k75N53N52J68J69
+-10912B32r15O97k09k10J63J64l21l21k88k89L78L78q94K012p52p52k5k6M60M59p02p01P52
+-10889g10P51J36J36J97J97j104j37p82Q33J60J60n46n46L22L21L22L20q6q7q7q7L4L4L5L4
+-10864a80J72J72J73J73JJn42n44L75n94r58O57k9k9P2P2j32j33L52L52J50J50J158m55q33
+-10839c99P80p11p13J85J86J85J86P3P3P3P3O2O3m20m21k5k6k5k5J56J57J56J56N36N37N2
+-10813I24r16j097N16L55L54j71j72j72j72m55m55L53L52J04J03J04J03m8m8m8m8Q4Q3J84
+-10789a83J83r25O89k19k20K51K51K50K51jjm85m86J91J90J91J89l83l85R46o66L65o03L24
+-10765b86L24j8j9n01n03k30k30N77N77j09j09j09j09O1O1O1O1L14L12m93m93J54J55N3N4
+-10740d45J051n62L06o62J051n62q44q45P29P29m01m01L88L88m18j388j56J458NNN49N47O5
+-10717E87O4l29l28N78j035m02m03O27O27k81k81K03K03J23J22q45P69M24n42l81l82J38J39
+-10694f05J38J38k15k15K69K69K61K62n45n45J10J10N94N95k56k55o98K69r42O73p19K49J81
+-10671h77J81K82J249j109N02K02p67l89l89L5L4P31P30l99l98J35J35N57j054J25J24R32
+-10649E72o82M57M58j398Q61k29k27k6k7q99P0n1n1J009L9m44N24l39l38K66K67o51L17L17
+-10625b05L16l77N89n5n6J226l88j155j86K64K64m20m21J54J121l30l31P84q29J7J7m4j012
+-10602a057L40L40J58J58l26O42j95P74j102N10m59m60J032n81l59l60J295r64j81j80J02
+-10581h73J02N26m42JJP48q64j8j7M46n22J051Q3l52l53K32J200j029o0%r69M43M43j02j03
+-10556d28K41K40K41K41p62p63R12n7n31n31M38n31O85O83o66L02m25N43N9O0j2j1r19O95
+-10532b96L61L62j23j090J31J32P0P1n65n65Q88Q87l70l71M36M36p8p9p8p8K56K56k28k29
+-10508A36k6k7r94O20N25m42J42J111l42l42k81k81K86K86n20n21M18M16l89l89j91j90J261
+-10485B66l51l62O06l9l9m66m66O63O62k54k54k55k55J59J59J59J58m15m16L91L90j67j68
+-10462b94j68j68J95J96J95J94J60J60o46o47l65l64R27o88J093n21j98P71q04J65l19l19
+-10440a445R02R02R6R6j87j87o70o71NNNNJ06J06q63P52M17n51l90l89Q31Q31J25J25p88Q26
+-10414fj43Q25l64l64J80J80p36p36P0P1K02K02L23L21p11J224n50n51p03J235l39l39k95
+-10391a004k95J90J89k35k34N73N73m7m6n31n31P40P40o7o5K67K69k15k16k65k66K19K18k27
+-10367b66k27k27k27o6o5J507m29J09J08j101Q35l16l15j94j94M8M8N32N31p3p2p3p4k27k27
+-10342f55K58K57K56K58k27k27J8J8J7J8M71M72o59o57K87K87j96j97L07L08j77j76n82n83
+-10318a104Q71Q69l10l11K95K96j005R31l6l7q32J102p92p93J93J94k91k91l8l9l8l9L68L68
+-10294d69j17j17l58l59J537l98R9R9k2k2J78J80J80J79m79m79MMO60O60j619L17J54q15N98
+-10269d05N97L56o12o8o9m8m7m8m8L15L14q13q15P84P84j354K60L41j274J188J187m26m26
+-10246c27M41M41o67K99k44k44J31J31R37o76K93j321K93K92K92K92M14n55r78j0M75m95P3
+-10223g13J040l71l71p9p9j79j80J464j50J2J2j79P89q87q85J59J59l25l25L40L41O62r50
+-10200f95J528q6r53J6NNNNM51n16N12N13j64j63j63j131J117J49q18P94J70p98M9J016O58
+-10175A506l10j118j47O87k80j59j59k10k12j120M94L23L23M23M23l29l28l29l29R4R5J062
+-10153D00n50m10N59Q80p32n30M36P00r13L5L5o5o6L68L68o40o41q47J090N43m22N0N1M73
+-10129A72M74o07o05R05j029M83m85o2o2J75J76J75J75ooj641K96J484N15p94p96n74J363
+-10106b74Q18j50n2n2j12j12J70J70J71J70j33j33j33j33J39J39k24k23r77R58j30j30J62
+-10083g1J61l21l23j67j66K16J185j084Q51L07L08m95m94m94m95K21K22K22K21k6k6k6k6J25
+-10059a75J25l59l59M48M47M48M48m30m29m29m30j10j10j10j10M96M95M95M96l32l32l31l32
+-10036d80k11k11N97N95j05j04n89n89J78J78J17J17K79o91R44r92L19L19J98J97m8m7m8m7
+-10012a24J03J03J03J04m91m91qpp8p8M06M06l54l54J30J30J60J61r70r70N99O00N99N98o41
+-9987c64o42J66J65K28K27k57k57L89L87o19o20q77J059N76j362P37P37Q97j038l88l88O21
+-9965f23O20k36k37N69N71k32k32k31k31o1o0o0o0J90J91J89J91r3r2r1r2K4K4K4K4k58k59
+-9938e31k59k58L92L92L92L92m86m84kjR5R4R5R5l50l49J35J35J05J05J06J05k58k58K27K26
+-9912a45j92j93j92j92M23M23k63k63k71J666N37j400l91l92M96M96J094q43k38k37k18k17
+-9890e12k18k17J23J24J23J24J23J23J24J22l8l7l8l8K03K05k80k80K87K87j97j96L78L78
+-9866F73m29m28n8n9n8n8J34J33o73o74Q49Q49o03o03M2M2M2M3K08K09K09K09l16l16O12O11
+-9840E90j313O22L39L40j45j44j44j45J43J44K2K2Q29j108P89P89q94q93q7q7K46K45n60n61
+-9816i61L34L35L33L34k71k70K13K13o0o1o0o0%%%%j53j53j486J743J8J7k64k64R24R26q50
+-9789D77q48l3l3M51M52p3p3j94j94Q55j081M91M92L20L21p69J168j203j202L71L70l85l86
+-9766g06R9R8L21L19j63j64M00M00q50q51J307o28J065q70l01l02j027R10K03K03L25L23j90
+-9743g9j92j91j91O46O45l63l62j019R19j72j71L1L0J52J52j091Q47K41K41l03l03k63J673
+-9720H77l24l24k02k02n15n15O14O14P0P0m14m14O94O95j11j12m83m81JKJ53J53J53J53k32
+-9695h0k32K53K51k0k0k1k0m3m3m1m3P7P8P8P8p1p2M9M9j393N44N84N83r7r7j186P50m6m7
+-9666a98N58N58n00m99L05L07J46J45o62o61L47L47p82p83M48M48o82o82R54R52q21q22N61
+-9643a016N60N59N61j104j104L48L48Q6Q7Q6Q6L39L38m68m68L19L19m89m88K78K79K78K78
+-9620A2l16l17M90M89k66k65K16K18k36k35k36k36J57J57l27l27N01N00J6J5O2O2JJj39j108
+-9594a111P68q46M65n03o04L64K33K34K94K94l37l37l37l36R54R54j082N31j73j73M12M12
+-9572G6K21K20k63k63q5q6n29M39l28J286nj618p48Q65m3m2q20P95L71L72L02L03n04n04J01
+-9547d87J02J01J01J44J43o62R50j378K35N58N56j55j55j54j55j15j15j14j15M15M14Q99p15
+-9524B98j007l9J373M04l39O29p83p82q7q7q7q7L92L91r2r2J50J50J51J50j03j02n86n87K10
+-9499e62K11k74k74k3k3P84P83J08J08m97M71K8r40K08K09j061r4J69J68jkN9N9l50O19P39
+-9473F22q73k11k11m73J141L98n68P7P7P1P3J34q35l00l01J032n83P1P2N15N15p55K13r0r0
+-9448b79R8R8n68J046o8o9p53K14K21K21L43L43n15M53l0r98p8p7q04Q11K61K59j82j83J90
+-9423d6p80N73N72k69k69R40o73m30N37j08j08K90K90L51o18l05l07L78L80k5r92m48N21m42
+-9399i88N27J172K04j420J94L54L56j66j67p10K58p5p6N70N70n60J055k77k77n89L78o50o50
+-9376i67M50M49N10N10j012m4J16J17N62j051k05P63lkn27n27N57j058L36L35P8P8j65j64
+-9352h64K89K88n19n18Q89Q87n02n04o46L23K62K62j%m84m85M28M29M88m79N6N5onM16M17
+-9326D76N18j095M4M4o02o02R42k7l50l49N13m56Q16j53N00m67N00N01k00k00j40j107R39
+-9303D5R40j158M54L2L2o73o75l11l11J73J73qrM15M16J35q34N19N19K75K77p52K16O14O14
+-9278A118j685p1M23M21j291R68K52p13j30j30J020n93L15L13m4m4q4j052R05p10J99J98j7
+-9255d32R50m01m00j58j59k19P50l48l47k87k87k22k21J353n85L87L86K4K3j18j18J24J25
+-9232a80K62K63n44n44j4j5j104Q33K09K08L30L29l60l62j19j19L99L99q5q5J02J01p06p05
+-9208a507O01O01J16J17ONOOJ51J52m53J483j00j00m64m63N55N56k52k51k57k57k55k57l5
+-9183b96l6K07K06J77J76o30o30M60M60P02P03q01q00J26J28q32J104Q63j075J82J81N45N45
+-9160A665n56n56N74N73Q97Q97K672N902J9063O794l134O551j822j9259j0944l840k525n86
+-9142B366j515M22l95l95k74k73L17L19j65j66M50M50M10j528l56l58J095q40k77k76J437
+-9121D48m97M98m68j195J709n08n10M80M78l63l62J21J22M0M0N04j754O1O2J311l01l67l68
+-9098h19M40J407l32l32n13n14L69L68M30n38J55J57O40l28m18m18K27K26L24j289M25M24
+-9076I1M65M66L44j270j176M37J001L3O39r76J15J14l71l71o9o9K34J202j198M15J122j138
+-9054D0l09l11M06n62M66M66j04j02M40n27p3p3l3l3p09R05n47M21k30k29P37q74m8m8O38
+-9029b93l31N22N21k3k2m39m40Q51j16O90k78o01o00r5r5k17P53K92o74l13O57k88O79K57
+-9005C97K57k48P21M78m90r00q99M93M91J04J04J65q03L33L35n34n33J73J73J73J72j82j83
+-8982b03j83j83P0O9J70J70j203M11P55k15O73r40j54Q14j18j18M85m80Q3Q3N67m01o20o20
+-8958a088J26J26k07k07O00O01m77m77Q76r4L50L50j040N71p78J89N52N52p3p3j74j75O39
+-8935F69r76o8o8m31m31N37J505q59J08M31M31k04k04j44j43p23K45J84J83l69l71J283r75
+-8912c90J097n17j101j34QPN53m16N88l81q04Q10K65K65j8j7k14J401l14l14Q9R0K9K9L24
+-8887I35o45j60j59K63p04L84n84M4M3Q90p22J3J3n31M37K38J851j316l47L28L28m18m17n65
+-8863h01n66M64n05K01K01M84M84P76j483Q56Q57j72j139n1n1j63Q05L83n86m75M92j11j12
+-8840b12mlmR64o59L09M30n38n38M29j74j75K27K28l4j002N09N07K46p22m10N59n91L77L28
+-8815D7L29l4l4r51J6N7J024p34p35P2P1J383M15m93m92K18K20j111N02m36N33M8r20Q15p99
+-8790i89M8M8J79J80l66O04j15j14N90l75p61Q55J156j103N7N7M60n07J27J28O72k96r35L2
+-8766c68q8q9O98O98m32m30k45k45l06l05Q24j44L40L39O51l18k58k57j97j97j97j97J21J21
+-8742d81r09O1J41J40l43O25Q29Q29j80j80n12M56N16m52o48L19l45l47R95K7k95k95O97k71
+-8718C77k70O98m32m31J12J13j4j3j3j3n88n88K19K19L81L81j009O04L00L01M62n06M00L99
+-8694A089P7q92r5r5j54j56k07k07K77K77J86J86p01K67N72j041J68q00Q80q8m52N17R84J7
+-8670F09j052q4p4p4P11k54K9r39O14O14O60l09K36p31N62m06q89P8j48Q20P38k29o97R15
+-8646G00M31n37j08j076m7m8j06Q62j65j66l27l28M80M78M97M98j540P3K45K44r44K3m55N13
+-8622h03K9L0M33M32RRn70L98o93K77K71K71j059N54j40j39o43R71r31L7O63O62r0j060P1
+-8597a011J038l43l43l43O25O9O9m15N53j53j53o37L31Q50Q51m40N28o83o81j78j147J314
+-8575b99l01L45o23l36O33J69J69K36j377P21P20l52O14P0P0o42o44M26M25M8r20P54P53M
+-8551F63Nk98k98O81k88n90L77P3q96K54K54n48M20K98K99L05o65M26n43m37m37j75P93n08
+-8527h35M61K79o90r9r9L24L25L76L78j035o6P85j82J80J81n87n88p49K20J364k50J142m72
+-8504C63o01o03J03J04K54K55k29k30j6j7Q5Q4j126M88P10P09k38k38k38k38J95J96k89k89
+-8480h06R7R8j295L19N16N17J32J33K98L00J17J18n43M25o63L03p5p5N29m38N5N6nmn29n29
+-8454i49N6J023n64n64Q48j21L41L43n04M62j82j82N9O0j0r79n35J079L36L38J4J5n52M14
+-8430B46j90P79o03o03l01l00L62L63O0O0P90j77p21K45M52n16j54j54k50k49J020j237N14
+-8407e64N15L72L73j31j31j462J51n21M48J355L87m45m44k64k63M52M52l53l55L78L76M78
+-8385H04j136N5N5j07Q61l38l38O29r83P0P0K9r39N35N34k13P55j148M64q0q0n14M55Q77r0
+-8360B27N21m49M60j154o0o0L24L22K3K3q24J111J24J24j268O67o07L61J78J79m30m31L75
+-8337b64L75K51K51n56n55r7r7r45R92J40J40k23k23L87L87J44J45N8N8j85j83j39j39l21
+-8313e99O47Q20j117j49Q18j666K69O93O93m57m58N49N51R95r42p80p81J927ro96o94p0o9
+-8290e25n54n54N96N97J13J12j20j19j20j20M66M64j8j9k50k51L54L54p55J179n14n13J013
+-8267H16r22R52j5p84p83O08O07k09k10k08k09M3M2j99k00K7K8N12N10l28l27l28l29K98K97
+-8242c11Q41j094O22l45J227p09p03K64j59j59M21M20llk60P09j309O27n08J104p10K57j66
+-8219E3j65Q02q11L1L0o15L54K22K22K83K83j8j8n02n01J64J64l81N86K3K2L46J314o94o94
+-8194E00o32o34j02j02j63j62Q26j43J189j070k34k33J017n96J40J40N83l83o48o48R07o3
+-8172e11J117J50L11o58M3r24n41J071l79l80M27M26K35j377o32L37Q71p43J074j187m7R22
+-8150c95J143m70l59l59K4K4P3P3J34q35KLk60P09J028j230J01J01N0N1N94l72j30j30J080
+-8125F50j179L95L94q35J32Q13j55l4l4j65j65M80m87j001O15J29J30r2r2j93j93J282l32
+-8102F3M15n52j664m9J726J12m49N18o6o5p43K27O5O5J174m40j6j6p61p62N89l79M83M82j03
+-8077a46j071j53Q15K10K10K14K15n31n31J85J152M07n62l21O48m42m41k30k30K54K55Q7Q7
+-8054H1Q8Q8j14j14j021N92N79N80r74O40j357l89J165J95N8N7n46M19q2q4q4q4J012M5k18
+-8029E32k18n91n91k69J345j223L90j55Q12k14k16k15k16J021N3O59O58j641o73J74J74K3
+-8007c81r46n01J112L26L25K24p43n65M04Q26j40K1K0j41j41O55r58n95L74Q07Q06k62k62
+-7984B65L2L1L2L2K23K24L24j289mlL18L19M20n48M80M81k59k60K25K25j18j18r25r24N07
+-7959c10N07q84P28P75P75r00q99j52j52R0R0j22j22J20J20J54J53l32l31M41M39l65l67K1
+-7935e23K1N04N05l98l97j55j56N28N27O28O29j334K81j43j43K69K69k15k15Q8Q7L30L30J006
+-7911B323J006J732M638J8199N2102j4977m3067j2081n301j345j346o59o59J48J47m02m02
+-7894E6L45L45R90K2j149M66n61n60O69O70K9L0j544P14m1j009M83M83k79k77k78k79O87O88
+-7870G00O2O2K49k011n4R15m85J128N24m45k79j246L68L67N31N33n97n97J09J09J07J09M82
+-7847F41M82L82L81O03j011m3m2n90L79j05j06n29M40p51K17P85q29J40J39j68j69m09N57
+-7824C94j033o5N81N80m5m5j45j46r67J291m0l9J014M6k16k16l24l25M23M22J9r49J9J8O50
+-7799I02l19l7j004N12N14l34O34q50q49Q84q2M7M8N32m36k57k57j5j5q53J16L79L78o7o7
+-7774d96J76J75L31L31j52j53k9k9n12n14Q59Q58n33n33k16P51n5j022J47J47Q6Q7j0rm94
+-7749h09M75o00L69J27J26p6p7M08M07l34l33m35J179o71o72M58M58P04r08P85j82l54l52
+-7726c07m14m14m1m1K22J189n5n6j76j77o1R07j21j22n0n1n0n1M1M0m43m44K68K67k17k17
+-7700e74K42K42L02L03m67N02q29J107r50J7M00M01O3O4j80j79J29J29l56l56J12J12l71l73
+-7676e10N15N15r36r37O56O57N15m53j361N77l12O56N49N50j97j97k43k41j%M5M5N29N29q58
+-7651I2q57K72K72o8o9M15M16r9r8r9r9k71k73N33N35o86o86J21J20L24L23l9m0n48J388j86
+-7625F93j86L9L9j292O44K45K45j17j18m13m14n1n1J306o30q73J063L02L03l84l83L57L58
+-7602F82p71p72K27K28P12P12l17l17J68J67m23m22O2O1l42l42M05M03Q01j69q13q14R15n1
+-7578a0N52m16Q2Q1L24o45j60j61Q1Q2j83P86j83j82n80L88r6j065J58J58O43O41o07L59Q44
+-7553H91j24o94o92N3N3j13j14J89J90j42Q27n24n24k42k42M84m84J207K37j45j44O26l42
+-7530B31o43L24O84k83m65N03l04l03J80J80j30j100O36O35p96J72J12J11O65O66j431J82
+-7508a74N04m63l02l03K51K52M11j200q2Q87K40K42k90k92p14p15J93J162m12N56o3o3klj19
+-7483d99j18J23J24k45k45N63N61m61m61O67O69n29n28k66P02m37m38O52l16K55K55J35J35
+-7460B98P20k48n11n10O9O9O9O8Q9R0j94j92j412J817j088Q48l9m0l9l9N29j405J67J68L39
+-7435c77L38p50J185k38k38j18j17K45K45k38k38J61J60n24n25K238r89K0K0m36m36L70L70
+-7412A28j33j34j34j34j24j24j24j24M51M51L29L31L80j556L41L39L40L40m67m66J00J01J01
+-7389B12J01k22k21K61K63r4r3r3r4P9P8j495M41j36j36M69M69j96j97J66J67O17j318J33
+-7365h39J34J495m42m80m82M1M1j049Q89K02K02L23L23l12l11J72J71J42J42l42l42K85K83
+-7342B46k00j99J13J12J13J13L52L53m55m54j72j72k73k73J082n30m30m31L97L97L96L97n50
+-7319f8n52o7o7K3K4K4K3K09K09K09K09j84j84Q23p89M3J656p45p44m71M96k106P99J8R87
+-7294b25m67N03R65km26N43o05o05J311r48o64R48M44n25mnj26j25J155J87j306L08p6p5K5
+-7269B05K6k66k67K17K16o15o16J91J91L23L22L21L22m01m01Q2Q3K94K94q34q36O39O38J54
+-7245B82J55M97M98o33o32j83j83P43k23P95q19K8K8J9J8j43Q25P45q70l85l85j43j43j43
+-7221b52j43M11M12p18p18O69O68j045N68N47N48n7n7j305L08K06K08l57l57J87J87j284l15
+-7198a689J822K09p43p45O08O06j58j59m02m01K80K79K80K79N24N25j150j82P5P6o51L17J99
+-7175b01J99O22r91M35n31q9q9K77K76K75K76o56o57l95N74M13M11K31K31L31L32m75m76L8
+-7151C61L8l05l05R00p13l51O17j74j73j13Q54n07M61o06o08J594j9j208M04P07k61n84L85
+-7128C94r11N7J17J17l82N87J170K03j309L05O3r04J025N8j171M41K84K85j39j106k35P34
+-7106c17j13j14L48L48m59m59p5p6M09M08j06j06O80k87J5J5M39M39m34m34j90j92N49N50
+-7082H38NNm3j011k04P63L8L8r30L8l1l2J057R0k74k74J50J51J24J25j37j105N08N07m19m20
+-7056d43R41k7o12o12K15K15q14J54M30M29n5n4Q06j60m23m23L40L39L6L7K24p44K22K24N2
+-7031B97r16J13J12M50M51m58m56J166m47K20K19l26l26q3q3L44L46p44K23O69l01KR71o66
+-7007G77o65j20j21K06K08k78k76o5o5j26Q42P6P6K98j316J33J100j29j097Q17Q19j238k71
+-6984d15J33J32K53p13m9m9J342k71o26L40J79J79m05m05n27M42Q29j39j509J03l30O39K55
+-6961f12K55k08P59K76o92M21M22m45m45J05J04P69q43j1j2Q55j13O68l01l01l01M75M76r77
+-6937C24r76J18J17J18J17J93J93m11N55J83p85J22q47O22O20p90J78P6P7l47l47N6N6Q43
+-6913F5j24J39J40L83L82p57K10J51q17Q98o9J53q15K13K13l91N76n81n83l7l8k7k8q8Q80
+-6888D8M1M0l21l23l02O66J81p86j16j16O31O30j11j11L12L13l5j003k17k17J72J71K32K31
+-6864A0o63L04l02O66j79j80O25O27R7q71N81j032l06l07L40L39L91n76l3l2N62N64j111j43
+-6840f29j03j03N03N01k23P44l85l85L92j221K91J905j142j72J29J30P89j81q65q67Q09q06
+-6818h89N86N86m42m43L64L63l16l17K89K87r54R81J35J35QRm75m76P31P32p6p5j36j36p40
+-6793b69J195l20l20J64J64N18j419l30l30M86M85l21l21O7O7L10L08n15n15n96J341J314
+-6771A163o21r84R52j95j96p4p3l4l3n18n18K66K66K67K66N0M8J71J71K73j663N56N55q0p9
+-6746f4l22l22K36K35J567j660O78O79m50m51J172p66N66N66o20o19j36j35q0p8q0q0J92J92
+-6722B20J283o55J2J3j197P38m15m17n2n3O54O56j51j51n1n0J91J92o05o05K02K02K31K32
+-6698D24n74n75lkK39K40j49j49O58O58m28m28M38M39l98N71k98j265O03l65J19J19L30L30
+-6674E34O9q99L50L50k94j263O34O32n3n2J599o60J87J87j618o51N81N79k51k52k53k52O66
+-6651a30O65M04n65K97K98L58o10o41L28k17k16n81L88L87L88n80L87Q11q03j157j90J161
+-6629A82J94j70j69j28j30j114N00L39L38j05j074O01O01N6N6l88N80j486J26j003J903R36
+-6607F45o77l94l95J70J70l14l14L12L11P95q17l04O64N63m05P4P5l69l70n11J102R82j277
+-6584b84R7R7m5m4J27J26J27J27j42j42j41j43J10J10O54l13l17l15O51l16n3n4M90m76n50
+-6559f19M20O20O21l68l67q11J57k14J400j262L51R05p08j393Q66l21O49n02n02M36J404k09
+-6537E53k10n26M41j64j63P33k35J49q19n08J105N61j052J87J88m57N10J85J86M4r24k48P19
+-6514B55N39j075k12k12J038P1j62j61k21k22O07O08p85p83K45J212m62m60L3L3N77l91j07
+-6491c5j08p14K55M62M61K00p68J056Q9p19K50j090j22J41J40M63n05N23N23m42m42L65L64
+-6468C47K64K64k81k81K05p63k60J354n22M47LLp1p0p0p1l42l42m03m04J178K09l75l75O9
+-6443b87O8O12l55k89k89M56M56j68j69j68j68P65P67K0K1r59J0O56O56q78R1q77P36l1l0
+-6418F46o75o76K09J177L71n98m55m57O12O13l61l60L45L46Q09q04l81l80r2r2R36l2M0L9
+-6394G80o27L42k2r89j22Q45n05n05K257o47L20o50q30J37j4j3N30m37P11k56J68J68J6r51
+-6370b94n69J045M07n62m60N06J04J04J65J65j33j33o17R96L01o68n05M61o72K96j89j88L86
+-6347e4L86R92K3j63Q05P25K339M548J4558L4940J3307l2776k2120r225k445j426j425j164
+-6329A825M51L2r36k91k90j30j29M16n53k03k02K20K21J30J30k94k94r94k6J122j135J062
+-6307A32R5o31o32J313J314o85o84m21J192l01l01M81j132lJ610m37m37l36l35P62P63o90
+-6285F37o89j04j05j05j04j61j60O47O46K94K94j91j90K68K68n39n40k4k5J247j014o79o81
+-6262a010R54R53J27J27n80n79o62R50r65O49P09r04N87N88j88j89o32L35j095N17M77M77
+-6240F46k32k33k31k33M43M44l64l62M02M03q1q1n64n66K42K42j87j87K97K97N5N5N40N39
+-6216A284q1q1n65n65J9K0K0K0J10J11J10J11L62L63m45m44K26K27K26K27j87j88j87j87K7
+-6191E33K7l3l3N7r10p90Q24K01K01j41Q26q47P65o26L42J96J96k28k28n60n61N09N07J03
+-6167C30q65q67J072j00Q68n82L84m3m2o47J288N33m36n78n76J39J38J168p69K40p28m86M82
+-6144g7O77j258M36n33N07N06l9l8p86p88R89R87l13l12J70J71j51j50j51j51N89N91R33j003
+-6120H06o94K75j48j49pqM77M77l70l71qpp13J222j08j09q19q19J89J89J172p63m62N07M15
+-6095A74M15K34K34m72m73J2J2Q3Q3j067r9J126q09k66k65J266o69P22k45L69L69j75j75j50
+-6071B34j51J53J53j027o0J292o43K81K83q1q1J26J27M08j527M66M66j39j39Q4Q3Q3Q3q9r0
+-6046B95o94K74N35m31J11J081l52l52J93J93l07l06J78J78m95m93k53k52K63K62K62K62o9
+-6023H3o8l69N96o27o28J470j44n64n64M64M63n63n65N65N65m76m76Q74r2N8N8o2R05j84j83
+-5998E36M82m87q03J64O48l20l82N84k62k61L47L49k37k37J312l03q48q47L58L57J084J16
+-5976A350j1r79j0j1M1M0k03k02O3O3R51j955k55P14M7M8Q8J056K7K7m36m37M8M7J40J39m04
+-5949a4N62r2r3n15n17k4k4M60M58m77m79O52O51n1n1n1n1r6r7l37l39j69j70L15L15j8j8
+-5922b70J63J63Q65j03m3m3K3K3l60l61r6J516n20n21o91o93P01O99P64k04k65P04K30p39
+-5898I42p3j041r9j00p04p05J434M64P89q26n17n18K90K89o18R94J49J48n74L94r1q9j059
+-5875a121r0J32J745Q92p23j529P30P10k59l80l78j82j81k43P27O14O16n15n14L36o30q7q8
+-5852d18L68L66j18j17L62L62l85l84m45N23N84l85l93N73P0P0p06R07m85m84K56K56K57K57
+-5828H91m00l99l58O09r19O92K70K70K09p59p58K09J25J25p23Q92M27M27n61M07J137J69j164
+-5805H18j95n58M11M71m98j81j81O67r47o05o05M25M24M04M02J42q27j0j0p0p1j16j16Q51
+-5781B5j15N90l79m38N29m97m98m98M70O7O7O72k96J52J52N16N15J53q16j70j71j131M82L82
+-5757b37L80j03j02L80n87K65p03l81J233K86o83L86L86M78m91N4N3j47j48o32L36j087j18
+-5734a182O88k80M96m72N57N56j008m1M84M82L93n76N14m54l47l47P6P6N30N30j224J034n44
+-5711e9n44Q1Q2K32K32K93K94j149j81P26P27Q2Q1k42j209Q56j12L72L73k63k64k63k62j12
+-5687b29j12p58K11R87o26n66J049N64N66j41j41l73l73m33m34P17k52J200m13j01j00Q88
+-5665A130q0p70J99N02j111k04k05M42M40K99o69M19n47M6M7j4j4J51J51O96k72o1o0o05L63
+-5640B73j05Q64j05j04l78l77J08J07K81K81n26n25k93k94N13N12k28k27J102j155k89O79
+-5618A14j398K16L19L20M21M19o37o39J68J68N27N26l42l40L14o53L75L74KKn42M25j89j90
+-5594b40K94K94L89n79l5j002O31l37O30l36M50n16l3l3L71L70j404K09Q35j33K7K8q3q3R45
+-5569F59k3k80k80q85Q4N37N36J3r55N13N13k14k13j251J008K80K81m47N20Q84p30K49K48
+-5546A047k36k36j380K34M55M54R2R2R2R3K8K8K9K8p69p67k85k84J69J70r20J017N13N12J49
+-5521C25J49k49k48k49k49l10l09J324o12n21M47M47n21n62J374L46o21k56P13J08J07l86
+-5499B47l86R8R7M51M50l56l56m56m58K8K7k83k84N24N25K50K52k33k32p6p6p7p6Q5Q5Q6Q5
+-5472e9O12O14q39q39k44k44K40K41R10R11k19k19l90l90P39P40n21n21n21n19J85J85O5O4
+-5448a9J284o52P20j217k37k39J25J25O83O85j23j23l55l55l54l55M10M12p2p3K61K60k24
+-5425E67k24m91m91O38O37k70k70J425n12j232P02k2k3k75k74j304O33m24N44O05O04j32j32
+-5402B79M13M13j007l9r8r9n8n9N46m21m16N53QQl44O23p68Q45q26J42Q1Q1Q48p66l42l42
+-5376g45K52K52K51K53k92k93r0Q76J54q14p54K15J000J002l91l91j45j44k04k05Q84q4o68
+-5353h1o69L04L05L03L05p64p65R50R50M34n35n1n0k62j230L43L43J051n63m00m01p44K24
+-5330a003M87M87j67j67L17L16L07L07k98O70j04j072n27M41N61N61n07n08j1j2N34m35L9
+-5307B16L9L9L9o08L58j84j85N40N41J17J17r29L9k1k2M93M93n76n75n39M30j15j14J77J78
+-5282e2J025j234n01M67N87N89p44p42M87J455n92n92j08j07M06n61L86n81O91j567K29J195
+-5260A36j84j85M19n48m7m6j08j07J55J55N18j095Q82q6o7o6k37P29J86J86r07r09J61J61
+-5236i04P96j72J340L73m99j468q22J46Q63p52K78K77r18N1J180K12K71K73m95m93p27Q87
+-5214c03q1q1N63m03J047n65j27j26l48O18P41k27j07j06r8r8L87n82K65p02L26o43M30M28
+-5190B08j15j14J25J27O6O6N91l77r22M6J47q22M6J014QQR17o98P14k54k95k94N9N9m1m2J028
+-5163A255n86N9r08m2m2m1m2l64O04O03l65n00n01J44J45J687P3p93p93M91M93QQK40K41L41
+-5137A415j274p0p1M74m93o96R17n94L73l38l38J174m38o70K97J366k47o43o42M87J454k09
+-5115A234k10k09k09j69j137M36n32N37N37o12L54L18o50m5m5K57K56K57K58k58k57o80R32
+-5092C63k87k87l07O59N30m40l78l79N58m08J36J35M30M31k76k75o08J005R8R7l8l9l8l9J2
+-5067F55J2J2J2o06o05P45k22Q0Q0m64N03q65J03J03J03J12J13P18k51m81M85o63L05R1R3
+-5042A68P59k10j269l01KKJ03J716l21l21j44j45o88K79J28J28Q34j35p05R08J211j049O1
+-5019A011O1j049N65K70o98n3n3QQQQJ43J43p65Q49k81k80L03L04j72j73J079J10jj614J632
+-4993A363o26k97k96m97m98J196K28l57l56J41J43O87k81J63J63m43N26l80l80l78N88J35
+-4971E44J35k29k28k85O81l47l45R6R7N81l87M84m85J01J01j170M43n85L83J331L62m84m85
+-4948C09Q1Q0p26p27P68P67K83o85r16O97N95N97o38L32j53j53n66M01P66q49k46k45J98p71
+-4924h01J27J28R74o39o77o77J159J90L41o26k03k03N80l89P00k68J16J15R62o51j9j8j026
+-4901h05N87l11l11K74K75J94J93J94J95o43o43M87M86n21n23K85K86p9p8M06M05L71L70p60
+-4877C34p59N7N8N7N7k06k06K78K78j15j16N30m37p60Q55o58L10L21L19m25m27K61K62K60
+-4853A28K61k2k1k2k1n23n23K84K84o0n9p05K64J569m4k06k05K08K08k76k77k99l00N06N07
+-4828F56o03o02K05K04K18K20n26n28J8R85Q66p50K51K51l34l34j93j92K90K92L01L02j83
+-4805H14j83n16n15l1l2K78K76K77K78k67k68k66k68k01k02K82K83l84l83J01J01J84J84J84
+-4781b74J84l30l30M76M76QPM92M92m77m77O9O8m91M75n51n52M16M15l90l91O8O8M92M91K70
+-4755G04o99L31L30j077j079J344L73j198M15N75N77l35l33J49J50j22j21L61L62j46j45j45
+-4733B71j45k04k06L99n68RR76o56L11RRm75M92m02m03M65M64l82l83R68Jl78l76J06q62N10
+-4707d50N09Q74p41J89J89N73l96J18q50M42M41l73l73N0N0K83o85M02n64L95L95o93K73K24
+-4683B82K24Q29j39j92j93q57J09L12o55M93M94k12P58n95n95P2P1P1P1q5q5q5q5k4k4M58
+-4657D18M60J62J62m23m23L94j219K32K33m78M89n4n5j36j35n80L89l40J274M87m81j18j18
+-4634A40M88j126M12M10RR76m20m21K45j368J110J42k22k21L6L6k5k4M09n59p4p5L68n99M28
+-4609G5M30M51M50l56l56k66k65K19K19j63j62j129M83N39m29j27j26J035n78j54j55K29K28
+-4586I2L91n78q21P92O7O5J67J67K28p40k46k46Q43p70j70j71M36M35J172m42J44q24M71m96
+-4562c4J68J69M75m93N2N2j15j15k35P32K41p28j82P85l80l79l18O48q54J14j29j29M47M45
+-4538B37j38j38J116m97l15O53r15N3O58l10q45J22Q68j00m12m12n33M35l0l1J32J31j070
+-4515a341N45m03J209r6Q69r64O48K45K45k39k39J89j425k55P13M55M56n73J041r05O4M3M4
+-4492C26J178K10o98o98k3k4N22m47J88J89l56l57j55j56L26L28k01k01K81K83O7O6j14j15
+-4468D19k51P18l72l73N01m69m68m68R03o5K37K38J14J14j458P99L11o57R56j2j130J128J81
+-4445H96J81O71r44M48M48q73q72J183K17j402m35O34l32J69J68j34j33O8O7Q56j14o48o48
+-4422e29n87J026Q85p29n06M60O8O8O8O8P38k30o8o8j117M95O18O18N42j072l46l46J38J107
+-4398A301P8P8p55p53N96l71K82K83k63k63J01J01l84l83L04L03l00l02J393n44j027R09K62
+-4375F46K62j189P45j61j62m0m0k0k1j169P67M33n34J31J31L06L06q22q24M4M4Q52Q50l03
+-4351B32l02l03l03J01J00J01J00R32R33l99l98j185P50q82Q5j5j4N29N30l18l16N49N50p21
+-4327C36K48R13j024j366N71r6j064N78N79L3L3k7k7L4L3o38L32p59J179m67N03P9P8j19j20
+-4302a78J090q46q35J100j10j077Q13j55k16P52n47n49J408n29k23k25J288o48k35P34J29
+-4281I41q40Q8Q9K7K8M8M8n56J378p0p0r17J020q78J060j461m94q44J093O3O4L3L4j056Q81
+-4256b91O0O1J80J82m53m54O76O75j62j61j61j61M63M64k0k0o0o0o0o0j40j41l42l42J979
+-4231A652j249k41k39L14L14j69j70J61J61P66j171M13M13n15n14j6j6j6j6J96J96j67j67
+-4208h0l17J619n99o00K48K48k37k36M25M26n9n8rqj097Q39J57J58k06k05J68J67j405N31
+-4184a30P33P34n98n98l24l25M81M81O8O7O8O7l3l4q39q41K68K68K68K67j04j05n90n90P05
+-4159f36P03O64j272Q9Q9l2l3L37L35l49l50j168P70M88M86L95L95j057j059R00Q98n54n52
+-4136e13l93l92P38P37N36N36k71k71M61M62l46l45j14j13j14j13n22n22J051q84J03J04N86
+-4113D01N88j192P43l46l44K39K39K40K39p59p58L71L69k43k45N62N62K6K6p80p82P6P7m5
+-4089g36m5J645k92o55o55K73K73K72K73q6q6L97L98o31o30M98M99p7p6p6p7o10o11J96J96
+-4064d23M77M77J14J14j226P08l79l80j07j07L78L77L57L58L58L57o08o09J99J98m67m66J7
+-4041b83J7P1P1J92J92j249O86M03M05K11K11n96n95l64l63P66P65l13l13l13l14J31J30J220
+-4017G68p17j17j18N67N68m41m40M3M4L8L9L8L8m54m56L51L50k85k86k4R43q90q92K99K99
+-3992g35j40j40Q89q0K33K33l71N96m47m45O42l25P9P7n26M41L75L76J74p95l80l81M3M3j0
+-3967e74j0K52J220k42k42k83k81L92j220P17k52O04O05k01k02n15M52j53Q16n36n35K70K71
+-3944C53J0r57O75k92j81P86Q0Q1M60j154K37K38L89L89J87p81r90k2M42M41M73m97N94l76
+-3920E85K10K10k74k74o07L61k43k44L97n70r34O80K97K97o31L38N15N17R2R3m32m31N96l71
+-3896A77O22O23j174k05P8q90P82P84k56j223m78M90R44k4k26k25J9J9J9J9k84k83J107n05
+-3872i0j55j56k57k56P22P21K37K38J09J09o98o97M11M12L71j565O97O97n53n53L23L24L24
+-3849G15L24o74o74k11P57N87j350K23K23R21m7j399N38J13J14K36K35j31j30j31j30p0o9
+-3826c0L52o13R05j030M81m85P84j83l04O63K33p36j30j30J01J02N85N85k54k55k55k55j2
+-3803A19j3p3p2P93j74j262O73K79o88M61n06L57o12R62r74M78M77m50m50L52L51j31j33l34
+-3779e70l34M73M72m69m69J5J5O51O50l5l6q97J039n1n0n84n86K22K22L49L49j35j35k04k06
+-3754c04J58J56Q89j047M2M2n0m9m9m9J78J78p89J146q20J116o59o58J58J59J58J57j33j34
+-3730b04L49L50P5P6n30J408l58l59k37k37N8N8m26m25PQM91M92k87k87J97J97j65j66j65
+-3705h0j66M11M12M11M12j041j040Q9Q9l93l92P38P37N2N1j037Q99j55j55l4l4L28L30m77
+-3681d5m78j91j90K94K93l11l12L75L75O91j244O52O51m17m17O7O7P3P2m10m11L76L76j09
+-3657a73j08L29L31j54j54Q8Q8Q9Q8R6R6R6R5p61p61J66J67o76J260r17J018l22l23O05O05
+-3632H68k90k90J94J94n8n8n8n8J99K00k85k85k84k85J99J98J4J3J3J4j98j98p8p7j162P75
+-3606g83K91o78j08Q61k89O79J89J90RQn30n32m7m7L72L71L71L71k74k74K10K10Q1Q1Q0Q1
+-3580H93n35n33n1n0k85k85J99J99O3O3L06L04j11j11j10j11L12L12j71j72o8o7N2N3P04j233
+-3554d33j43j44K76K77k08k08K62K61N03N03K39K39q92q90K79K78P03k66P46j192Q0Q0n40
+-3531a90n41K67K66L39L39j45j44L39L40m68m66O25O27M86m83j552L84K64p05K34K32l10l12
+-3508e74L65L63L65L64J68J68l17l17m4m4n27n29M38M37m7m7o2o1J19J20N37m31J021n93l36
+-3483E36l36O53l15l29O41m50m48j16j17n5n6k82O86L04o64o95R19j10j10P26k41k40P26j20
+-3459E07j20j20j20J58q08L40o28l50O18K54K55n27n27O03O01j52j54J49J47m99M67j7j6p57
+-3435f96K10J017M9k68k69j297L17Q46j22j83j83l68J245R5R6J0J0J11J10o38R76l15l16j091
+-3411f54N22R65lm23m22N44m23m5m5P6P6k26j195R24m5M38j174M60n09K98K98J266K99l98
+-3387F04l98K6K6k69k69P4P4q05Q11J43J45k52k52J72J70L53o14l13l13K00J99J833j072J13
+-3363C86J14M76m91n19n20r6r5N29N29k77k77j74j74p19K50N82N82j03j03n34M33M33M34r17
+-3339b51N0j71P96m48N19J56q11m90M80o71K97K33K33k52P16l78l76p5p5j46j46k06P62j00
+-3315c54j00M44M44m31m29J021J022j389j388P09P09k8k7k7k7m04m06m66N03J48J48l3l4M75
+-3291H0M76Q40p75j45j112J38J38Q04Q04k66k65l09O60l68l69l14l12n1R16k53k52J10q57
+-3268f82L42L41j9k1P49k18K86o83P10r03k99k99N10N10J661j245J1J1j10j09q59J09L70L71
+-3244E34k24k24L21L21j131j64M22M21K8K8K8K9j64j64k24P43J54J54o33L35k0r88n04M64
+-3220d58R98L0j71j72J69J68p4p4k70k70M75M77M15n53N2r15L2L2L95L95q5j054K37K36N50
+-3195E65m18J26J26n44n45K62K63R1Q9l92l94J088J088j232k63K60K62j857J048P16k50K53
+-3173C42j360O98O96k71k70P95j73m95m96P55k13o97K71lmJ085J17n08n07l47J266m84m83
+-3150b86J01J00j71j72K53K51L35o32Q19p94k80k80O49l21M00L98L99n69R2R1k9l0L04o64
+-3126c6J21J21K74K73M35n34r50O64o07L61R9R9q68R9j10j10P96j69o00L69L08o59L56L56
+-3102H8j47Q20j338K76N17m49M76J447o12o12j18j18j78P91j61j62o44L22j00j00J61q06j089
+-3079a736J170j61j61O86O86o0o1o67L00k45k45K89K89L50o17M70M72O12j001k76J340m77
+-3057I57m78n12n13K34K34k9r97K54K53J229l84L22o46l1R36L93n76P3P3m72M96l00O68j8
+-3033A166r87o62L04M05M06O08j007r86J273J461j53j202j201L31L31k73O93M78m91J14J15
+-3012G23m10m10j47Q19M05M04o65o65K03K03l42O26q2q2n67M02m15m14Q35Q35j032o3n47n47
+-2988i33j44Q24M20M21j813M46M66n02Q19j48j50j49N03N04r48r49M13M13M13M12k43k42N64
+-2965C97N64k53k52k53k52q4q4q4q4J99J98P7P8R80r56K54K54j208P27l60l61N92N94k14k13
+-2940B56L81L82m26m25N38N38N4N4n62n62n61n61O49O48l60l59n01J435L46L47r83r82P92
+-2917A38P92j35j35j36j35l69l67J972L5j175P61n70n70O89j248L26L24L66L65p64p63J87
+-2895d12J86J276o61L18L17o10o10k57k57K27K27k47k47K37K37K39K37K39K39k05k05K79K79
+-2872H26k48k48k48k47N08N09J45J46j699K37N99O00r6r6r6r6k63k61K21K22J91J92k33k32
+-2848C33l09O60j640O19K87K85n7n7POOPr5r4L89L90k78k78k78k78l6l6Q72p42o1o1L22L22
+-2820B05Q0Q0n65M02R01p13k29k28L45L47n22n21Q68j00l62l63M34M34k11j179P65k05K80
+-2797e7K79J39J39P44k25r53J5J16J16O00j013j438Q23J103J36J4J5k78k78k78k78J53J54
+-2774b52l31O36p23K44L45L44j060N55J91p78M94M93J71p97K2K2l8l9K85K83j58Q08r52O60
+-2750D25P83j86j76j144j76P92J032n82J25q45J55J54J55J54p64K02J151m63j087N25m82m83
+-2728g35J45J45l40J275k7r94J95p73L11L11J218p18M82j454L21L21l7l7l7l7O98O99m30m31
+-2704G1N20N20o09o09P6P5P7P6p3p2p2p2l45l45J39J40L26L25l39O28J133q04M07n62N1N1
+-2678G13j0rm64m62l22O45J276o62j084Q51l6l6Q5Q5o6o6o6o7K07K06r23r24J06J06J06J06
+-2652g05R6R6N79N80n80n79K27K27M07M09l38l38o3R05P65j173j515M21j44Q24q97P1L93L93
+-2628F1K92K93R59r79r38L1N54N55j018n1J422n15o41J297p21p21j26j26j26j26M73M72j2
+-2605C09j1Q9R0R0Q9k86k87J98J98J7J6q50q51Q98p0p1Q98J0J0P1q96P03k65l24O43k35k33
+-2578e0L70L71q59J08M8M6O8O8O8O7J21J21O66l03m75m74J0J0n47M22j23j23K61K59O84r29
+-2552a15L6L6mnK6R94r63NP16k53j32j31k1k1Q0Q0n34J078o37o35N84N84O0r08P5J041j015
+-2525B1N98P71j99K4K4r33L7n08n09O72O71n18n18j27j096O80O80m70J144k49k47k38k38N09
+-2501a9N07N5r13P60P60k0k0m64N04j089N24L23o45m59J155p82J86l07O61k07k07l75J238
+-2478A166n38n37N32m36J08J09l56l55m16m16J128J58m26m26L4L4L4L4j07j07L77L77M6M6
+-2454F3N92l77K48K49J88J87p03p03J03J04l21l20O48l20N69l97Q5Q6M88M90o41o40L9L9J40
+-2429a04J38q28P86L60o06J209K40q29j796P65P64m2m2p09K58L19o50k76O92j4j5P07r07N46
+-2405c4m23J93J93J31J32o0o0n43n44J139J141j119M95q46P66K1r47J12J12N1N1N10N12k96
+-2381F87k96j44j45P64q51K52K52O35l34L02o66L62o06K97K98q52J15M48n19m59N08R8R8R8
+-2357C42R8N52m16m17N53M2M3J03q66K35p34P18k50O69k99j7r84p7Q90p42K25Q6Q6m59J477
+-2332H58j26j26M79M79J75J76n51J386K566Q379L1625K0648l751l9267j2994l307j077j077
+-2314D495r56r56l71l70l71l71K04K05k80k80J90J91k94k94L9L9L9L9K79K79k06k05l57l57
+-2290C31M50M50m00l99Q4Q5p7p7M07M07K19K18j356N81J98J98q11q09L81L83j01j02K82K82
+-2266H24N04j433Q31j37R53r84n60M07k58k57K14K15K15K15k29k28k29k28L75L77L76L77j79
+-2243A161j78L06L05k28k29k29k29p83p84J314J315p88p88L43L42j11j12j12j11N14N14o16
+-2221H16o17Q1Q0m1m1Q02j133L78n89M59j476R03o5k06k06N40N40l77l78J196p40J73J75J75
+-2197D49J74p62J172p23p22R2R3M55M56P79j159n52n53M16M14o8o8J62J63l20l21K21K20K21
+-2173B39K21l1l2o36o36J613l23m0m0k12k10k12k12J54J54P59j177N17N16L3L3r43R91r6r7
+-2148C33r7r7R92r44m37m39p5p5L39L39L37L39j5j4j5j4J6J5J6J6m83m81KKK54K53K54K54
+-2120E75k98k97k99k98O10O09j98j97L44L44p86p84Q77Q79k51k51J1J2J1J1O2O1m22m22M57
+-2095C60M57k6k7O19O19n11n11l04l04o66o68j63J774j23j22M40M40o90o89L69L69n4n4p14
+-2071a79K52l91l92O67r47O2O1n57J057p59Q55j34j34N12m56J74J74J73J74n87L80j63j64
+-2048c22P5P5j67j67L01L01M23n44l42O27R30o85l96l96O31O32j93j94m36m35J14J14l70l71
+-2024g95L87L86m21m20M3M3P89P90n8j027Q69r9n17n17P72j95NMp21Q92k52k53J51J49k78
+-1999b73O88l7l7l25O44M02n67J45J46l39l38l38O29l99l98M9M9K92K90l58l59L87L86L46
+-1975F85o23L46L46o3j031n47M22M06M05j146J111Q76p39j14j13k21P48k81k81k90k91J100
+-1953G05n13j20j19p65K03L19L18O82k86r3r4K70K70k19j187P68j98J50J120r38O76k93j260
+-1930f04N14N14M91M90o39o40j04j04M39n27P28P28j39j38k25k25j031j031J07J07M09M10
+-1908d70j9R49j81j148O77O76j420J92K18K19q92P22J012M4m41m39Q45Q46q28J39j09j10M35
+-1885I17M35q36q35N15m52K76K78n29n30J52J119O35l33l2l2K10p59l49l49O78k89n04M65
+-1862a49r28J332K23K22j81j81k0r89J41J108Q1Q0K01p67J57J57O22r93n99J014OO%JL84L85
+-1836A313j0j622L1L1J021N4j176M36N53m15m96J118N94l75n36n35M3M4R53o63M7M7j15Q54
+-1812A196n08n09L7L6M68M67M4M3j157j88n31M37M91m75J89J90q18J49M12M11J14J15p92Q20
+-1788F41l39l39L06o61K61K60L01L02q99P15q58q59K022q82J45J115J77p92j87j87j84j83
+-1766a25j24j23m26N42j44j44J107j152O62l04n3n3L70L71k98k96k98k98L68L69J65q01o0
+-1743g45R07l42O24M34j179K11K11J029O1p47K22j41j41k0k1m62N04m0l9m63m63n24M44L64
+-1719c16L63o04L64j51j50r1r0O44O43J59J60p08p07j23Q44l03l05M01n66m86J127P04k64
+-1696E45j27j28K97K96j27j28j27j27o62o62P91P90k69k68k68k69P0O9RRK20p48J693k43r7
+-1671E39r7k19k18M4M5M4M4J91J91k93k92k1k1k1k1m6m6m6m6l28l29M79M77J31J30J51j785
+-1644a363L22J290n04n06J16J15J16J15m6m6J164p73j287O49J012r24M47M47p62J172n66n66
+-1622c78P44P45q79Q9J50j787N31N31p5p5N60N61n69n68L4L3R5R4J45J112k034r7R18n0J31
+-1597c9J30o55o56P97P97k10k08K74K75j49j49j49j48K06K07q82J054k48k47j25j26k47k47
+-1574g45K37K37M18M18M19M19q07q06%Jq6q5Q01j66r07P06K83o85K17K16J57J57K32K33L73
+-1549A237L74j739N19N5N6k87k86R5R6j442Q18n14M54l30l29K15K15M87M87LLK8K9K8K8j28
+-1523A72j28j035N79NOK88K87K13p55L33L33n79L88R34l4j184k17K08p61m44m43J010J008
+-1500A84k60P06l83l82L75n91j08Q60j83j84j22j23J33J32j08j09N71N72p80p79l89J224k27
+-1477B9k27M73m95n1J563j79j78K25p44L21L21p08K61p48K19K81o87M76M78n52M17j165j98
+-1454h68l6j004K087j72m14m14K36K37J76J75M23n45K41K41O88O88m42m42k55k55K28K29l91
+-1431D11l92M16M15k80k81k81k79N34N36N1N1n85n83j01j00M50M48o19o20n89L79m49J488
+-1408B0j08j09J2J2L04L04j79j80K01K01Q07j131k52k53M33M33mmmll47l46J37J37Q4Q5Q4
+-1381C34Q5j27j28j27j27J24J24J24J24j18j18j17j17M8M8M8M9J8J8J9J8M8M8j525M11Q05
+-1355a1Q03J19J18m03m04Q1Q1q1q1M04M03k89k90J95J95m91m90ppN19N20k87k87J17J17l68
+-1329A76l66L8L8Q45Q46l70l71j28j28J37J37l47l48k40k42O25O26q21J47j4j4O62r52L38
+-1305B74L39M12j201r00O9J113J45m60J153O67l01j007l9L39L40N21m47l24O45n06n05N9r08
+-1282e22l64l64L3L2L3L3j34j34J08J09L42L43j41j42L69L68M68j145l96l97O93O93o39L29
+-1258d25J076J07L6r32Q42j26J47q21l37l38N78N77n51n52J44J44j58j59P41k28J4J4J098
+-1235H91J30r39K9o51L17P5q94O60l09M18M17L37L37j074j07M87m79k38P29K82o85k1k0J10
+-1211a98J078q58P56Q4Q4n7n7m41m39M3M3J40J39m2m2q03J65j18Q50n85n86O05O04j11j12
+-1186A42j018N95L76L78ooMNo81o82m72J463j08j09j55j55Q8Q7L69L70m37m36K54K53k29k31
+-1160c41L57L57m49m49N18N18k88k87L80L81j04j03q13q15L15L16K65K64K3K3k3k2k3k1m17
+-1135d38m16J157p78N82N83k3k2n32n31N97N98l66l66m25m26M09n59Q33j104P07P07r87R48
+-1112A48J66J66j97j98k87k88o31J305M63n06J59J60k14k13N93N94o41o41j56j57K52K50M94
+-1089F21M94m28m27m27m28N31N30M6M7J15J14j27j28j58j58Q5Q4l56l56l56l57N87N86J03
+-1065B37J02j0j1m94m96N0N0O54O55j225P10o60J276k68k67j46j47M39M39j66j67J403n35
+-1042A423n75n75j84j82N8N8L8L9L8L9p8p7l19l20O78O80P3P4P79j159l10l10M75M76l31l31
+-1016A77j04j03l47l46K95K94j90j89R3R3R4R3J98K00J38J39j68j135J466j761O54O54l2l1
+-992A82jkjjk2k1k2k1L78L79K37p32r12J023j26j26J96J95k89k89K67K66k19k18Q7Q7p19p20
+-964a144L90L89r4r5J18J17l67l67P7P7N61N60l28l29J55J55k89k89N19N17k74k73o18J319
+-940D87L11o58k93O73l68l66o5o5J52J52L93L94L58L58m49m49J21J21l63l63R2R2p14p15M15
+-915g49M15p0o9P24P25p27p27M43M41m1m2l10l09L74L76P60j178n72n73Q70Q69O2O2l41l41
+-890G2J43J43K29K29k55k56J49J48l36l35j4j3M70M71m62m61k20k20j20j19L65L65r3r4r4
+-865c08r4K54K53K54K54q14q16O38O37l15l16J68J68J07J08k54k56q23J113m60m60N58N58
+-842A54k47k49K74K73K73K74l82l81K22K23o34J301n94n94J16J16r72R63J95J95P4P4K00K00
+-818A074k85k84J09J09j2j2Q56j082j080Q54N0N0l13l13J41J39l42l44N13N11K9K8k03k03
+-794a0K79K81j27j26j27j27M28M28n6n6m49m48L57L59m49m48Q41p71L80j232L81L80n27n27
+-770a366O03O03r3r3L31j283K81K80J80J80p0p0M14M13l61l63J22J22K31K33k52k50N54N56
+-746I02k52k51m50m51m51J163j247L66L66L66N1N1N1N1l72l72J11J12j61j61j61j60L84L84
+-722a31o25R88N00j113k67J347R6q71k26k27P2P1N55N55J42J42o65o65N08N08o22o21l89l90
+-698a328P40P40n7n7n6n6Q3Q5l99m00K27K27J66J66L48o19p62J497j265L48m19m19K17K17
+-674g76k67k67o0o0n45J071J351L84k61P07j150j80q0Q87q25q27L03L04P08k59j98j98m61
+-651f99m61J213K45k64k64J60J59l04l05J40q30J351k61M83M85O66r49n24n24k42k42K42K42
+-628d83N94N96k12k12NOR14p01J6J6n69L98m12N55m74M95j30j31n13M54q06Q06j01j01J21
+-603A31q46K42p26K87K88P71j96L5L4N20m49K50K49j060r4n67J046J99J99j87j85j87j87J47
+-579b86J46J45J47m96m97L71L70r3Q74K10j404k32J381L73L74o87o86P07r07M02M04j21j21
+-556C74q17J52O95k73l72N94o14L52L83n84n24M44llN8N8L25L25l81l79r46O68O3O3l45O23
+-530f4J045P9K7r42K7K7R8R8j173J086m41m42J83J84K7K7P53k15J55q11R5R5M17n49J75J75
+-504A36P46k22r68jj67Q00P5P5k20k20K2K2m00m02k00P69N00m66J98J98o07L59j84j85l6l6
+-478d14N08N09p97J71M9N0M18n50k47k48M03M02R27j331j08Q60J3r54o33R81N58N58n21M47
+-454A051L26j288m66m66M63M61Q30p85j18j18K3K3K63K65n41n42Q08j59J14J14j90j88l49
+-431d69l50P5P4J45q23l7l6O52O52j55j56J48J48Q73r5L6r32n69L99Q77r0L1L1Q4Q4K3K3N03
+-403A146m66j535P25O66r47l83l83j76j76OOJ211K43o0R08L13o55m73m73Q7J054K7K6n58n58
+-378d25K6R95l50l48k7R41n81n80k79k79K22K22k0k0O14O16j92j92l90l91N77l90M15n51M76
+-353H9M76j024n6P91q22k58k58J66J133j72j140k73O96O94O96n35M33q17J51l34O34m13N53
+-330D10o55L11n30M39J95p72N19m49m50m50P7P7N62N61N10N10l57l56K13p55L34o34J02J02
+-306d86O46l20j52Q17j119J139r6j063J66J67j19Q49LKj74j142l76J239K19K20m24m26q3Q85
+-282C72J9r50Q75r3L92n77N83l85R9R9m42m44J02J01j9R48l42l42m53N14P1P1r77O37K11K13
+-256B83k90k91K54p14L75L75j037o9K62K62Q66j02m1m1%jn24J088O65r49o15L51k92k93ll
+-230d84J38J38j103J157M30n37J68J68l76l76q4q4n68J046R14n4p59K09l36l36J015M7K59
+-207E92p08p10p09P84P83M61n07R97L0r39L0N14j100j1r79K02J170K0K1N74l94l32l33J16
+-183d28J16P21k47m18N49q62q63L99L99N60m09q22P92K47K47K41p25j21j21j62Q07K62K62
+-160D24Q4Q5n21n20J405n30N58N59j88j88j277O59N4N5l09l09M26M26n8n8l81l81l80l80J08
+-135f37J08J09J08j33j34j34j33J18J18J207p28k75k76P33P34o4o3j152P83L8L7l26l24P5
+-111b11P5P6P4J5J5M99M99m90m89m89m90K17K17J305o31m93m95N15N14j21j20j21j21O1O1
+-86a28O0O1k12k11K72K72R6R6R6R6m39m38M6M5L17L18m88m89K68K67K67K67l22l22J62J61
+-60A18j61j61j61j61O27O29j79j79k49k49Q40j096K57K57J37J36n28n30m89J447k19k18p03
+-37h35p04J616l19r25J012J426n09n50n49J053q82K05K07l57l59NNJ094q42k37k37K7K8K7
+-13f00K8M01M00K80K79O89j249j59j58N66N68L150J2837J7777k1615p690l170m56m56j74j73
+7A075l05l04N02N03o78o78J29J30J72J72l12l12k31k31j11j10o00J337K48K47k26k26k26k26
+31b61L75L77j197P39K25K25O29j308K80K81l25l24M11M12p3p2K82K83K82K83k02k02o86o85
+55b51L19L21L20L20k75k75k74k74n6n5n6n5J66J66o40o41J052J051p24p23k30k29N78N76k00
+80h9k01q0q0j382N56N96N95L86L87r8r8l90l90l90l90R41R41p94J74M17n52N38N38l47l48
+105D40j254L59N59N61o90K77J01J00K21K22o06L62p86J80Q89p8q26J43j29j28qrj77P90k98
+130B15O70r84r84l99N69O98k71j50j49j40j39J151J83N58m11m70M97qpp52p54K85K86J192
+154F86m20l49l51L4L3j81j81P66P68j613O47l63O05M19M20k67k67n78L88j56j55J40J42l42
+178a75l43K92K92p36K32j86j87m5R22q82J376K27K27j251k84P85j83J50q18p1Q95R5R5q13
+202c86J55o12L57j27j27K66K66J113n01J45q23L66L67j70j138K13K13L35L33j057N56K98K99
+225C41q4q5k34k36k36k35K91K92j93j93N34N32l74N94j164P72J67q00R43r92r93k4N05N05
+249c67J170p66l81l83O27O25l19l18M88M88r7r6r7r7N5N4N5N4oom90m89L68L70l16l15j023
+276a212R15O31O32p17p16R0Q9K42K40k42k43J02J03J02J03L45L45j40j39j56j56j55j55j76
+300b68j76L08L08k4k3k3k4o27o29k66J671l66l68k47k46M09M09J135q01n86J350K61p07o16
+324a46L51K92o76m30m30O40O38j17j17j77j77O50l17q02J134NR74n80n80m51m53K94K94J63
+348a8q06P28j209J694Q1n84n85P1P1O75k91m08N60N5N6j154M59L6L5N15N14L1L0k41k42l42
+374b69l43J083n30m90m90R52j6O49l19p44K23M25M25p04p05M86M85n32M36J244K75o43o43
+397B55J03J04J0J0n33M33l73l73J140m74o01L66p62K06j07Q61m29m30k85k84J39J39R66kO03
+422F82l65j81j81K42K43J41J42l42l43N45N46o46o44L93n74n74L94L91L91Q8q78Q24p88O02
+446A08O04j155j87M59M58n60M08j36j37n30n30O00N99J16J16m28m29O72k95P94j75J08J09
+469E89l77l75j54Q14k76O94m77m77m77M92j32j33p1p2K51K50k32P35q58J10M9M9O34l34O95
+494I17k74J89p80J89J89P7P8q29P83j52j52n1n1J0J0P0P0n27M40j03j03j74j75j74j75O67
+520c1O66n23n23N95l71J72J72k95k95k35k35J08J076k75k75N85N87M1j572K53K53J52J52m10
+544b28m12P3P3L56L54j29Q40j202k35Q8Q8J89J88k94O72j071j05J086J18k16k15q80Q8O12
+568a62l57K49K49r4r4j55j54O89k77K66K67k89k87q93P5P90j79j18j18O99k68K74K76k49k49
+593a09j88j89m51N18k7k7J42J42m03N65O1O1p25Q88n50M16N19m50n7n7o00L67K19J188J19
+618A372q50n57n57m16N53J61q07P07P05j250L64J01q68m59J156J86J87L78L78M39n29k25k25
+641e6k25k25m67N01N61m06o43L24P48k19L54L55p34K33l55l56J88J89L99M01K99L00J43j470
+665a61N65N67m01m02m01m01P31P33k97O72q31q30J98p71R73NK26p41O20O20n30M39J62q05
+689f0k00k01l82l83M25M25J29J28O72k95l3l3j54j53K02p65k82O88l63l62J372M05m28m27
+713g5J16q51K18J186m48m47q79P37p17K52L73L73n1n1j29j29n72L95r71O43N7J026k22k23
+737c89m05m05L27L27j58j57P2P2N56N56rrm92m93j91j92K93K93j16j16J26J27K5K5N09N10
+763F86m74m73L32L33J24J24l61l59l86l85j44j43M8M8N33N31k68k70N37N37l73l72J12J10
+787D7l72l73J11J11O51O51j003j004m03J534m0m0K87K87M6M5l43l42P46j190r3r4K70K70m8
+812b89m8M36M36k0k0k63k61k17k17J46J47K89j646p4p3Q55Q55L70j565Q84j053M01M00L60
+836a67L58j24j24K48K49p59p61n98J338k35k36K89K89j95j95j50j50O58O56l16l15p4p5P17
+860C28P18l51l52o96K71k74k74j53j53L32L32R9R9R9R9n35n36K71K71r5r4R33l4n48n49j25
+886i17j25L59L60j86P82l26l26k67k66M06M06Q29p83K59K59q3q3K24K25j59j59q09Q04n87
+910a63n87L48L48N08m58r89O26k02k02J230l83n04M64l93l93J018N0k38k36n6n6K01K01P46
+934H80k23k57k58k57k58l99N70l6l6M78m89m90M79k98k98o61R53J93J94J54J52J193j068k79
+958f1k81j67j68L17L16k88k89M58M57j09j078m9m9N16N15q35J33o48o48Q65Q65k44k45O23
+982i4O23m24N45m24m22m34N35j0j0j69j70k30P37j68j70qqr2J522q99q97Q66j02O0O0r38O76
+1009d5L11L12m35N35j1j1n35n35n35n36R38R37J039n76q14q13P61k08K3K4l7l6L81L82o46
+1034a30L20n2n2R17o98k34k34q81Q9R85R86j012m2K71o95j51j52O36l34k72k73L77L77M36
+1058A82M37p62K04Q5Q4M6r21M30M28k65k67k66k66J8J9N03N02k43k44j43j42o0J554m84m82
+1083e3K22K23K83K84j321l53N55N54o85o87k01k02K80K80P04P02M32n38o37L30J233l81m41
+1106E83m42j358K55J121J123n43n42J173m42p23p23L05L04m21m23KJN87l82J63J62j14j15
+1129d49n4n4n18M50L90L89J38J37j24j093j55j55L30o40N11N11l4l3K89K88L49L50j090j22
+1153c89p67Q47R0R0k32k33n41M29M68M68q02Q11j57j56N07m58l99N68p01K67k18k17L37L38
+1177e0k08P60l49l47k88k89M54M52M53M53m54m55n75L93J14q53K37K36K36K36j47j47r36O78
+1201c96K54K53l00l01K44p25O83O81k85k85R14p00j082N32j132M83K20K21l85N83R46o66L65
+1224A22L67p02R11N28m41r23r25P04P03R9j515J137J69j94j93Q1Q0Q1Q1J42J42j210k42K24
+1248g74K23K85K83K43K44n62n64Q5Q5Q5Q4L5L4L5L4J07J06J07J06n88n89k26J710k26k26j05
+1274C1j04j05j05R23j012L52o16K91K92m1m2m1m1j53j52j52j52P15P14m14m14k34k34K50K50
+1299a94J79J79J79J79p60p62L69L69NNm79m79K66K66K66K66l90l90M17M17l78l77K28K28j215
+1324a606P22P83j85r19J019j32j31L93L92n74J361j561L76P57k09P3P2m72m71N5N4N4N4J75
+1348H0J75P20j216L91n75j53j52L01L02n06n06j77j76J276J276n50n49o6o5q4q3q3q3p3p4
+1373f50M72M71m81M86M67j147m72J142J33J34k72k73K12K12p25p27Q1Q1l96l96P94P95k35
+1396b94P33p18Q95l69l67L78n90p01R13M28M29k9k8k8k9k00k00j99j99l9l8l9l8J13J13J11
+1422HJ13l29l29J54J55P3P4N17m50M11j202j53Q15Q05j64k03j172Q45j24p29K39O23l46k25
+1446e94k25K70K70k15k15J79J79J78J78l59l59J24J25J04J05J04J04L71L72n2n2q79R0o17
+1470h14R96M41n28K20K19j849k34K49K49J169K02j069N45J027n85M23M24l03l03l03l02L82
+1492B56L83m24m23L34L35m71m72k70k70P59P58q4j697K39K40J106n07m06m06J94J93N58j058
+1515a133M36n32N17m52p0Q98K93K92m03m03j41Q27k5k5L6L5o5o5r73O41J46J45j6r85M08M08
+1541b06p7p7l79N89M5M4n50n51L17L16K0R88l64l62j1j0r19O96L28L27M5M5r53O60k47k48
+1567e34J32J31P1P1J91p75J92J92O83k85k23k24j3j2N32m36O47O47q05q05l92N77J93p75M2
+1592i78J655m43m41r9j00l8l9l66O04lkO13l56l54O12J67J67j225k57J124m88mnN65N66j048
+1618a73p9q77R2Q99p0Q02j66L19L19n99n99M29n38L62L62n04n05N53N55q37P75j92j93j51
+1642a6j52K61p06K62K61Qr61L91L91M8M8O92k75q74P38k89k90M16n52N37m31P0P0q99P16O64
+1668A28O66J81p88q4q4j43j45N8N7m27m27j8j8Q29p85R20m9M55M56o94K74l31l30N46m21m62
+1694f36m63J132m81j19Q48m10m11J33J33l51l51M57M56n23n22l8l8J80J80J80J80K71K70l34
+1718b57O33L74n94J1J1J02J02K02j410L43L43J81J81K0r47M04M02k21k22k22k22L53L53L53
+1742B73L53q0p9r87O26p9p9l9l9N70l97Q7Q7j95j163J055Q6L02L01q88q89n2n2M33M33K00
+1768b12K01J99K01o2o2o2o2q35q36R40R38n12n13K94K93K7K6K7K5L50L49j35j35p4p4p4p4
+1795A48n88n89K19K18M48M48l7l6j47j46j48j47L52L51j32j32m34m34L72L72q1q2q2q1k74
+1820f42k73K11K11k21k21K64K64J93J93J91J93n04n06L01L02Q8R0Q9R0j55j55j54j56J18J17
+1845g2l67l67L39L40L38L39J7J6m68m67m3m3m3m2p4p3p3p3J56J57J56J57K36K37k47k47m59
+1872f70m59L48L48K58K56k26k27j19j18j19j18N17N16k89k90J52J53l32l31j10j10O98O96
+1895D24p14p15R2R2N26N25M1M2l50l50l51l50M06M06p8p9N47N47k60k60l79l81J03J04R7R7
+1921b18l86l87J27J28J28J27J89J88k96k96j45j45L40L39k44k44K40K40J49J49J48J49k16
+1944F4k16K67K67j25j26j26j25J01R9J01J00J01J01J00J01j92j92j92j91m04m04M03M03Q9
+1968DR0R0R0p97p98O55O55O3O5O5O4q7q6q6q7q8q8q9q8O3O3O3O3k87k88J97J97M88M90NNl81
+2000B25l80M25M26m81m81L24L26l66l65J19J18k85k85N22N21n19n20l6l7N09N08L07o61k15
+2024c01P52l96l96P93j75M91m78p70J97O81k87o0R08n04n03k09k09R4R4o83K85K25K25K00
+2048b6J98J8J8p53K15j89j89J006o06n47M21L66o02l00O69L40L41o26L41l99m00J44J45j33
+2072e48j32k54P14O23l44k23k23K1K1l9l9P36k30p15K54m43m43R70Jj81j80N05N05L82n87
+2097A51n25n26L97L97q7q7J42J42l9l9k96O71m17N50j15j14n5n4k20k20N65m01l45l44J9J9
+2123h31L62o07J80J81M37M37l68l70J00R9m85m86J355k58J66J64m29m30N99l70K28K27J66
+2146F7J67m6m5M40M39n09n10k4k4J40J42j01j00l91l91R3R3K24K24K24K24j87j86N4N5l07
+2172b35l08M99M98K2K2k20k20j68j70j70j69l1l1k73k73N09N09K4K5J67J67l15l17J68J68
+2197a22l17l17L25L24j60j61K49K47POj94j95K89K88k10k09k10k10j93j92K92K92J70J71l14
+2222c44l13K40K40K39K40j93j93j94j94P1P1P2P1L42L44j41j41j98j97j98j98m7m6M37M37
+2247B07k93k94N13N13J35J35l49l50l37l38r6r6L84L82j01j00K1K0m64m64M03M04%
+2270a65
+##$OBSERVEDMULTIPLETS=	
+(1, 119.08817369696070898, 119.49861564401855674, 119.34975680364019013, 1, 1, d, 5, 21.1064)
+(2, 116.71544306547771441, 117.68088818614084801, 117.29884834517153536, 0.92968206688115939684, 1, d, 1, 22.5225)
+(3, 133.46269328666636511, 134.04878711392541391, 133.73193945017112583, 0.96240578937041276752, 1, s, 4)
+(4, 163.05303665421848791, 167.16881864482544984, 165.54329333841153016, 0.054497583380662413532, 0, d, 6, 244.668)
+(5, 140.82665009455683958, 141.20380799945624517, 141.04519888142414175, 2.1505622692435548693, 2, d, 2, 8.7207)
+(6, 126.21752515173064069, 126.62820357294384621, 126.49677575157147658, 1.3813855179773690818, 1, d, 3, 2.74609)
+##$OBSERVEDMULTIPLETSPEAKS=	
+(1, 119.43367184905656586, 761620846.42419886589)
+(1, 119.2658417582238144, 793463509.73034381866)
+(2, 117.38839668546150108, 715792432.77882647514)
+(2, 117.20930000488158385, 860039562.17701137066)
+(3, 133.73193945017112583, 784777363.80831301212)
+(4, 166.51607399812689891, 346788258.95923060179)
+(4, 164.5705126786961614, 348372467.33887052536)
+(5, 141.07987651151844943, 231011590.44851329923)
+(5, 141.01052125132980564, 271470436.37990057468)
+(6, 126.50769493841009705, 878403395.82199156284)
+(6, 126.4858565647328561, 815421233.65408980846)
+##$PREDICTEDPEAKS=	(X Y T A)
+(112.6341705322265625,  , 9.5999999999999996447, <1>)
+(143.13348388671875,  , 10.900000000000000355, <2>)
+(120.86682891845703125,  , 6.5499999999999998224, <3>)
+(129.759368896484375,  , 6.5499999999999998224, <4>)
+(113.23944091796875,  , 4.5, <5>)
+(162.3918914794921875,  , 5.75, <6>)
+(-100000,  , 2, <7>)
+(83.6585235595703125,  , 9.5999999999999996447, <8>)
+(66.51415252685546875,  , 6.5499999999999998224, <10>)
+(42.6606903076171875,  , 6.2000000000000001776, <11>)
+(52.419567108154296875,  , 6.2000000000000001776, <13>)
+(15.704555511474609375,  , 4.5999999999999996447, <14>)
+##$PREDICTEDCOUPLINGCONSTANTS=	J(A,B)	$$ (Hz)
+20(1, 7)
+8(2, 7)
+3(3, 7)
+8(4, 7)
+20(5, 7)
+252(6, 7)
+20(7, 1)
+8(7, 2)
+3(7, 3)
+8(7, 4)
+20(7, 5)
+252(7, 6)
+4(7, 8)
+4(8, 7)
+##END=	
+##TITLE=	S2015_1275_1.120.1.1r
+##JCAMPDX=	6.0	$$ NMR Plug-in 1.12 of MestReNova 10.0.0-14381
+##BLOCKID=	4
+##CROSS REFERENCE=	NMRPEAKASSIGNMENTS: BLOCKID = 2
+##DATATYPE=	NMRPEAKTABLE
+##DATACLASS=	PEAKTABLE
+##.OBSERVEFREQUENCY=	125.75743003422999777
+##.OBSERVENUCLEUS=	^13C
+##NPOINTS=	16
+##FIRSTX=	16.910634771759230688
+##LASTX=	166.51607399812689891
+##XFACTOR=	1
+##YFACTOR=	1
+##FIRSTY=	1230228250.7456896305
+##XUNITS=	PPM
+##YUNITS=	ARBITRARY UNITS
+##PEAKTABLE=	(XY..XY)
+16.910634771759230688, 1230228250.7456896305
+46.180918434384835791, 1339386657.5590164661
+57.61857281783312601, 1505579033.2687625885
+66.669633350504511782, 757346774.86084973812
+84.064276563187860347, 590337881.90927815437
+117.20930000488158385, 860039562.17701137066
+117.38839668546150108, 715792432.77882647514
+119.2658417582238144, 793463509.73034381866
+119.43367184905656586, 761620846.42419886589
+126.4858565647328561, 815421233.65408980846
+126.50769493841009705, 878403395.82199156284
+133.73193945017112583, 784777363.80831301212
+141.01052125132980564, 271470436.37990057468
+141.07987651151844943, 231011590.44851329923
+164.5705126786961614, 348372467.33887052536
+166.51607399812689891, 346788258.95923060179
+##END=	
+##END=	

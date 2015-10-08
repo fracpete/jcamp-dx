@@ -539,7 +539,7 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * find child blocks within <code>start</code> and <code>end</code> of
+	 * Finds child blocks within <code>start</code> and <code>end</code> of
 	 * <code>jcamp</code> string. collects remaining labels in string
 	 * <code>data</code>
 	 */

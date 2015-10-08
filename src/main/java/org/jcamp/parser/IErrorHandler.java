@@ -8,7 +8,10 @@
 package org.jcamp.parser;
 
 /**
- * error handling for JCAMP parsing.
+ * Error handling for JCAMP parsing.
+ * 
+ * @deprecated
+ * 
  * @author Thomas Weber
  */
 public interface IErrorHandler {

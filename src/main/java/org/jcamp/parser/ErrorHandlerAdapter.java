@@ -8,7 +8,10 @@
 package org.jcamp.parser;
 
 /**
- * default implementation of IErrorHandler
+ * Default implementation of {@link IErrorHandler}.
+ * 
+ * @deprecated
+ * 
  * @author Thomas Weber
  */
 public class ErrorHandlerAdapter implements IErrorHandler {

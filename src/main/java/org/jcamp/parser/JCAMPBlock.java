@@ -26,11 +26,19 @@ import org.apache.commons.logging.LogFactory;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 
 /**
- * class for handling JCAMP blocks.
+ * 
  * 
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class JCAMPBlock {
+	@Override
+	public String toString() {
+		return "JCAMPBlock [start=" + start + ", end=" + end + ", data=" + data
+				+ "]";
+	}
+
 	private ASDFDecoder asdfDecoder = new ASDFDecoder();
 	private static Log log = LogFactory.getLog(JCAMPBlock.class);
 	private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
@@ -140,7 +148,17 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * create JCAMPBlock from substring.
+	 * Create a {@code JCAMPBlock} from a JCAMP substring.
+	 * 
+	 * @param jcamp
+	 *            string representing a JCAMP file
+	 * @param start
+	 *            first index of substring, inclusive
+	 * @param end
+	 *            last index of substring, exclusive
+	 * @param parent
+	 *            parent {@code JCAMPBlock}
+	 * @see java.lang.String#substring(int, int)
 	 */
 	public JCAMPBlock(JCAMPBlock parent, String jcamp, int start, int end,
 			IErrorHandler errorHandler) throws JCAMPException {
@@ -175,7 +193,15 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * create JCAMPBlock from substring.
+	 * Create a {@code JCAMPBlock} from a JCAMP substring.
+	 * 
+	 * @param jcamp
+	 *            string representing a JCAMP file
+	 * @param start
+	 *            first index of substring, inclusive
+	 * @param end
+	 *            last index of substring, exclusive
+	 * @see java.lang.String#substring(int, int)
 	 */
 	public JCAMPBlock(String jcamp, int start, int end,
 			IErrorHandler errorHandler) throws JCAMPException {
@@ -183,10 +209,10 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * create JCAMPBlock from String
+	 * Create JCAMPBlock from a JCAMP string.
 	 * 
 	 * @param jcamp
-	 *            java.lang.String
+	 *            JCAMP string
 	 */
 	public JCAMPBlock(String jcamp, IErrorHandler errorHandler)
 			throws JCAMPException {
@@ -678,9 +704,8 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * checks if block is a JCAMP link block.
+	 * Check if block is a JCAMP link block.
 	 * 
-	 * @return boolean
 	 */
 	public boolean isLinkBlock() {
 		return this.type.equals(Type.LINK);

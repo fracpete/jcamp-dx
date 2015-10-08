@@ -163,6 +163,6 @@ public class TestJCAMPReader {
 						.read(
 				new File(
 								"src/test/resources/testdata2/S2015_1275_1 3-fpm mit Struc.jcamp")));
-		System.out.println(b);
+		assertNotNull(b);
 	}
 }

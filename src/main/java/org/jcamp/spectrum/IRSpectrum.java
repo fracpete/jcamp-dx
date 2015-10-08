@@ -77,19 +77,11 @@ public class IRSpectrum extends OpticalSpectrum1D {
 		return spectrum;
 	}
 
-	/**
-	 * gets spectrum ID
-	 * 
-	 * @return int
-	 */
 	@Override
 	public int getIdentifier() {
 		return ISpectrumIdentifier.IR;
 	}
 
-	/**
-	 * isSameType method comment.
-	 */
 	@Override
 	public boolean isSameType(Spectrum otherSpectrum) {
 		if (otherSpectrum instanceof IRSpectrum)

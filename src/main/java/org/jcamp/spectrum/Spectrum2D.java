@@ -75,6 +75,11 @@ abstract public class Spectrum2D extends Spectrum {
 		return false;
 	}
 
+	@Override
+	public Peak[] getPeakTable() {
+		return null;
+	}
+
 	/**
 	 * gets label on x-axis.
 	 * 

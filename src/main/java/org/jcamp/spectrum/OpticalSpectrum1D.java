@@ -25,23 +25,18 @@ public abstract class OpticalSpectrum1D extends Spectrum1D {
 	/** for serialization. */
 	private static final long serialVersionUID = -6989200995078011258L;
 
-	/**
-	 * default ctor.
-	 * 
-	 * @param x
-	 *            org.jcamp.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            org.jcamp.spectrum.IDataArray1D
-	 */
 	protected OpticalSpectrum1D(IOrderedDataArray1D x, IDataArray1D y) {
 		super(x, y);
 	}
 
-	/**
-	 * default ctor.
-	 */
 	protected OpticalSpectrum1D() {
 		super();
+	}
+
+	@Override
+	public String toString() {
+		return "OpticalSpectrum1D [getXData()=" + getXData() + ", getYData()="
+				+ getYData() + "]";
 	}
 
 	@Override
@@ -135,16 +130,6 @@ public abstract class OpticalSpectrum1D extends Spectrum1D {
 			return false;
 	}
 
-	/**
-	 * default ctor.
-	 * 
-	 * @param x
-	 *            org.jcamp.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            org.jcamp.spectrum.IDataArray1D
-	 * @param fullSpectrum
-	 *            boolean
-	 */
 	protected OpticalSpectrum1D(IOrderedDataArray1D x, IDataArray1D y,
 			boolean fullSpectrum) {
 		super(x, y, fullSpectrum);

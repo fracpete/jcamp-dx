@@ -145,7 +145,8 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 		try {
 			x = new Double(s);
 		} catch (NumberFormatException e) {
-			throw new JCAMPException("bad number format");
+			throw new JCAMPException(e.getLocalizedMessage(), e);
+			
 		}
 		return x;
 	}
@@ -457,8 +458,8 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 				if (inDataValue) {
 					inDataValue = false;
 					j++;
-					if (j >= groupLength)
-						throw new JCAMPException("extra commas in data");
+//					if (j >= groupLength)
+//						throw new JCAMPException("extra commas in data");
 					normal.append(',');
 				}
 				continue;

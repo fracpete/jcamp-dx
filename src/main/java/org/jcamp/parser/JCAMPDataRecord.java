@@ -69,11 +69,9 @@ public class JCAMPDataRecord {
 
 	@Override
 	public String toString() {
-		return "JCAMPDataRecord [isData=" + isData + ", key=" + key
-				+ ", value=" + value + ", content=" + content + ", " + "start="
-				+ start
-				+ ", end=" + end + ", index=" + index + ", blockIndex="
-				+ blockIndex + ", next=" + next + ", prev=" + prev + "]";
+		return "JCAMPDataRecord [isData=" + isData() + ", key=" + getKey()
+				+ ", value=" + getValue() + ", blockIndex=" + getBlockIndex()
+				+ "]";
 	}
 
 	class Iterator implements ListIterator<JCAMPDataRecord> {
@@ -176,7 +174,6 @@ public class JCAMPDataRecord {
 		}
 	};
 
-
 	JCAMPDataRecord(String jcamp, int start, int end, int blockIndex) {
 		super();
 		this.jcamp = jcamp;
@@ -193,6 +190,8 @@ public class JCAMPDataRecord {
 		 * Start at pos. 2, since label starts always with "##"
 		 */
 		this.key = Utils.normalizeLabel(label.substring(2, equalSignPos));
+
+		// assign value not before first access, see #getValue.
 		// this.value = label.substring(equalSignPos+1);
 		if (xyDataRE.match(this.key) || xyPointsRE.match(this.key)
 				|| this.key.equals("DATATABLE") || this.key.equals("PEAKTABLE")
@@ -219,20 +218,20 @@ public class JCAMPDataRecord {
 	}
 
 	/**
-	 * gets comments in data (all concatenated).
+	 * Gets comments in data (all concatenated).
 	 * 
-	 * @return java.lang.String
+	 * 
 	 */
 	public String getComments() {
 		return Utils.extractComments(getValue());
 	}
 
 	/**
-	 * gets data content (value without comments).
+	 * Gets data content (value without comments).
 	 * 
-	 * @return java.lang.String
+	 * 
 	 */
-	public String getContent() {
+	public synchronized String getContent() {
 		if (content == null)
 			content = Utils.removeComments(getValue()).trim();
 		return content;
@@ -297,11 +296,10 @@ public class JCAMPDataRecord {
 	}
 
 	/**
-	 * gets content of LDR.
+	 * Gets content of LDR.
 	 * 
-	 * @return java.lang.String
 	 */
-	public java.lang.String getValue() {
+	public synchronized String getValue() {
 		if (value == null) {
 			value = jcamp.substring(start + equalSignPos + 1, end);
 		}

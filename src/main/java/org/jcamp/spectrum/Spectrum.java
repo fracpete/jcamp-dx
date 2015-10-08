@@ -24,6 +24,7 @@ import org.jcamp.spectrum.notes.NoteDescriptor;
  * 
  * @see Spectrum1D
  * @see Spectrum2D
+ * @see IRSpectrum
  * 
  * @author Thomas Weber
  * 

@@ -35,14 +35,17 @@ public class JCAMPDataRecord {
 			XYDATA_REPRG = compiler.compile(XYDATA_RE);
 			XYPOINTS_REPRG = compiler.compile(XYPOINTS_RE);
 		} catch (RESyntaxException e) {
-			throw new Error("bad RE in DataVariableInfo");
+			throw new RuntimeException("bad RE in DataVariableInfo");
 		}
 	}
 	private RE xyDataRE = new RE(XYDATA_REPRG);
 	private RE xyPointsRE = new RE(XYPOINTS_REPRG);
 	// flag if data LDR
 	private boolean isData = false;
-	// normalized key
+	/*
+	 * normalized key, e.g. "TITLE", parsed from
+	 * "##TITLE=	S2015_1275_1.120.1.1r".
+	 */
 	private String key;
 	// value of LDR
 	private String value;
@@ -66,10 +69,9 @@ public class JCAMPDataRecord {
 
 	@Override
 	public String toString() {
-		return "JCAMPDataRecord [xyDataRE=" + xyDataRE + ", xyPointsRE="
-				+ xyPointsRE + ", isData=" + isData + ", key=" + key
-				+ ", value=" + value + ", content=" + content + ", jcamp="
-				+ jcamp + ", start=" + start + ", equalSignPos=" + equalSignPos
+		return "JCAMPDataRecord [isData=" + isData + ", key=" + key
+				+ ", value=" + value + ", content=" + content + ", " + "start="
+				+ start
 				+ ", end=" + end + ", index=" + index + ", blockIndex="
 				+ blockIndex + ", next=" + next + ", prev=" + prev + "]";
 	}
@@ -174,9 +176,7 @@ public class JCAMPDataRecord {
 		}
 	};
 
-	/**
-	 * JCAMPLabel constructor comment.
-	 */
+
 	JCAMPDataRecord(String jcamp, int start, int end, int blockIndex) {
 		super();
 		this.jcamp = jcamp;
@@ -188,6 +188,10 @@ public class JCAMPDataRecord {
 		this.blockIndex = blockIndex;
 		String label = jcamp.substring(start, end);
 		this.equalSignPos = label.indexOf('=');
+
+		/*
+		 * Start at pos. 2, since label starts always with "##"
+		 */
 		this.key = Utils.normalizeLabel(label.substring(2, equalSignPos));
 		// this.value = label.substring(equalSignPos+1);
 		if (xyDataRE.match(this.key) || xyPointsRE.match(this.key)

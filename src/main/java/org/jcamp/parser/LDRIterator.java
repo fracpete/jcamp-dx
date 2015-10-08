@@ -11,9 +11,13 @@ import org.apache.regexp.RE;
 import org.apache.regexp.RECompiler;
 import org.apache.regexp.REProgram;
 import org.apache.regexp.RESyntaxException;
+
 /**
- * Iterator returning LDRs.
+ * {@link java.util.Interator Iterator} returning LDRs.
+ * 
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class LDRIterator implements IStringIterator {
     private static String labelRegExp = "##[^=\\n\\r]*=";
@@ -23,16 +27,14 @@ public class LDRIterator implements IStringIterator {
         try {
             labelProgram = compiler.compile(labelRegExp);
         } catch (RESyntaxException e) {
-            e.printStackTrace();
+			throw new RuntimeException(e);
         }
     }
     private RE labelRE = new RE(labelProgram, RE.MATCH_CASEINDEPENDENT);
     private int start = 0;
     private int end = -1;
     private String jcamp;
-    /**
-     * LDRIterator constructor comment.
-     */
+
     public LDRIterator() {
         super();
     }
@@ -55,18 +57,14 @@ public class LDRIterator implements IStringIterator {
             return;
         }
     }
-    /**
-     * @see com.creon.chem.jcamp.IStringIterator
-     */
+
     public int getOffset() {
         if (jcamp != null && start < jcamp.length()) {
             return start;
         }
         return -1;
     }
-    /**
-     * @see com.creon.chem.jcamp.IStringIterator
-     */
+
     public boolean hasNext() {
         if (jcamp == null)
             return false;
@@ -74,9 +72,7 @@ public class LDRIterator implements IStringIterator {
             return false;
         return true;
     }
-    /**
-     * @see com.creon.chem.jcamp.IStringIterator
-     */
+
     public String next() {
         String ldr = null;
         //System.out.println(" start = " + start + " end = " + end);

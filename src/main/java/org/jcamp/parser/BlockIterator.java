@@ -8,8 +8,11 @@
 package org.jcamp.parser;
 
 /**
- * iterator over JCAMP blocks.
+ * {@link java.util.Iterator Iterator} over JCAMP blocks.
+ * 
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class BlockIterator implements IStringIterator {
     private int start = 0;

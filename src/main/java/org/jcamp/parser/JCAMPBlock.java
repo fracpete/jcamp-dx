@@ -110,12 +110,28 @@ public class JCAMPBlock {
 	private final static String CRLF = "\r\n";
 	private final int start;
 	private final int end;
+
+	/*
+	 * JCAMP file content.
+	 */
 	private final String jcamp;
+
+	/*
+	 * If this {@code JCAMPBlock} is part of a multi-block file, {@code parent}
+	 * is the reference to the first block in this file. If this {@code
+	 * JCAMPBlock} is the first block in a multi-block file, {@code parent} is
+	 * {@code null}.
+	 */
 	private final JCAMPBlock parent;
 	private int numDataRecords;
 	private Type type;
 	private int spectrumID;
 	private String data;
+
+	/*
+	 * A {@link java.util.Map map} storing references to all child blocks. Key
+	 * is a block's ID (e.g. {@code ##BLOCKID= 1}).
+	 */
 	private Hashtable<Integer, JCAMPBlock> childBlocks = new Hashtable<Integer, JCAMPBlock>(
 			10);
 	// hashtable containing all data records (or list of data records for

@@ -20,11 +20,19 @@ import org.jcamp.spectrum.notes.Note;
 import org.jcamp.spectrum.notes.NoteDescriptor;
 
 /**
- * abstract base class for spectra data.
+ * Prototype implementation for spectra data.
+ * 
+ * @see Spectrum1D
+ * @see Spectrum2D
  * 
  * @author Thomas Weber
+ * 
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public abstract class Spectrum implements Cloneable, Serializable {
+
+	public abstract boolean hasPeakTable();
 
 	/** for serialization. */
 	private static final long serialVersionUID = -8843455456952718734L;
@@ -41,18 +49,10 @@ public abstract class Spectrum implements Cloneable, Serializable {
 
 	protected ArrayList<Note> notes = new ArrayList<Note>(20);
 
-	/**
-	 * Spectrum constructor comment.
-	 */
 	Spectrum() {
 		super();
 	}
 
-	/**
-	 * cloning of spectra.
-	 * 
-	 * @return java.lang.Object
-	 */
 	@Override
 	public Object clone() {
 		Spectrum spectrum = null;

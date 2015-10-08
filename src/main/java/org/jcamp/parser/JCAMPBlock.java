@@ -24,6 +24,8 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jcamp.spectrum.ISpectrumIdentifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -33,14 +35,18 @@ import org.jcamp.spectrum.ISpectrumIdentifier;
  *         Kerner</a>
  */
 public class JCAMPBlock {
+
 	@Override
 	public String toString() {
-		return "JCAMPBlock [start=" + start + ", end=" + end + ", data=" + data
-				+ "]";
+		return "JCAMPBlock,SpecID=" + spectrumID + ", " + data;
 	}
 
 	private ASDFDecoder asdfDecoder = new ASDFDecoder();
+
 	private static Log log = LogFactory.getLog(JCAMPBlock.class);
+
+	private final static Logger lg = LoggerFactory.getLogger(JCAMPBlock.class);
+
 	private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
 		@Override
 		public void fatal(String msg) throws JCAMPException {
@@ -564,7 +570,7 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * iterator over all data records and store them into the hashtable
+	 * Iterates over all data records and stores them in {@link #ldrs}.
 	 * <code>dataRecords</code>
 	 */
 	private void initLDRs() {
@@ -576,6 +582,9 @@ public class JCAMPBlock {
 			String ldr = ldrIter.next();
 			JCAMPDataRecord dataRecord = new JCAMPDataRecord(this.data, offset,
 					offset + ldr.length(), blockIndex);
+			if (lg.isDebugEnabled()) {
+				lg.debug("New data record: " + dataRecord);
+			}
 			JCAMPDataRecord ldrList = this.dataRecords.get(dataRecord.getKey());
 			if (ldrList == null) {
 				this.dataRecords.put(dataRecord.getKey(), dataRecord);
@@ -585,7 +594,13 @@ public class JCAMPBlock {
 			tmp.add(dataRecord);
 			blockIndex++;
 		}
+		if (blockIndex != tmp.size()) {
+			throw new RuntimeException();
+		}
 		this.numDataRecords = blockIndex;
+		if (lg.isDebugEnabled()) {
+			lg.debug("numDataRecords=" + numDataRecords);
+		}
 		this.ldrs = new JCAMPDataRecord[tmp.size()];
 		for (int i = 0; i < tmp.size(); i++)
 			this.ldrs[i] = tmp.get(i);

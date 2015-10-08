@@ -18,6 +18,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.Spectrum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Reader for the JCAMP-DX spectrum format.
@@ -109,17 +111,20 @@ public class JCAMPReader {
 		super();
 	}
 
+	private final static Logger lg = LoggerFactory
+			.getLogger(JCAMPReader.class);
+
 	/**
-	 * create spectrum from JCAMPBlock.
+	 * Create {@link Spectrum} from {@link JCAMPBlock}.
 	 * 
-	 * @return Spectrum
-	 * @param blockID
-	 *            int
+	 * @return {@link Spectrum}
+	 * @throws JCAMPException
 	 */
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.isLinkBlock()) {
-			errorHandler
-					.warn("compound JCAMP encountered: using first spectrum block");
+			if (lg.isWarnEnabled()) {
+				lg.warn("compound JCAMP encountered: using first spectrum block");
+			}
 			rootblock = block;
 			block = findFirstSpectrumBlock(block);
 		}
@@ -144,13 +149,13 @@ public class JCAMPReader {
 	}
 
 	/**
-	 * Create spectrum from JCAMP-DX reader. Caller must close reader.
+	 * Create spectrum from {@link Reader reader}. Caller must close reader.
 	 * 
-	 * @return Spectrum
+	 * @return {@link Spectrum}
 	 * @param reader
-	 *            JCAMP-DX source
+	 *            {@link Reader reader}
 	 * @throws JCAMPException
-	 *             The exception description.
+	 * @throws IOException
 	 */
 	public Spectrum createSpectrum(Reader reader) throws IOException,
 			JCAMPException {
@@ -172,13 +177,13 @@ public class JCAMPReader {
 	}
 
 	/**
-	 * create spectrum from JCAMP-DX string.
+	 * Create {@link Spectrum} from JCAMP-DX string.
 	 * 
-	 * @return Spectrum
+	 * @return {@link Spectrum}
 	 * @param jcamp
-	 *            JCAMP-DX source
+	 *            JCAMP-DX string JCAMP-DX source
 	 * @throws JCAMPException
-	 *             The exception description.
+	 *
 	 */
 	public Spectrum createSpectrum(String jcamp) throws JCAMPException {
 		JCAMPBlock block = new JCAMPBlock(jcamp, errorHandler);

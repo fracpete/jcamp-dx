@@ -399,6 +399,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	 * 
 	 * @return com.creon.chem.spectrum.IOrderedDataArray1D
 	 */
+	@Override
 	public IOrderedDataArray1D getXData() {
 		return xData;
 	}
@@ -439,6 +440,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	 * 
 	 * @return com.creon.chem.spectrum.IDataArray1D
 	 */
+	@Override
 	public IDataArray1D getYData() {
 		return yData;
 	}

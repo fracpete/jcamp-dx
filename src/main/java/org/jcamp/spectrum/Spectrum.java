@@ -37,6 +37,10 @@ public abstract class Spectrum implements Cloneable, Serializable {
 
 	public abstract Peak[] getPeakTable();
 
+	public abstract Object getXData();
+
+	public abstract Object getYData();
+
 	/** for serialization. */
 	private static final long serialVersionUID = -8843455456952718734L;
 

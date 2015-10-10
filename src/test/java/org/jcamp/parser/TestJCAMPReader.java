@@ -43,14 +43,25 @@ public class TestJCAMPReader {
 	}
 
 	@Test
-	public final void testCreateSpectrumInconsitentNumberOfHeaderColumns01()
-			throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader
-				.getInstance()
-				.createSpectrum(
-						new File(
-								"src/test/resources/testdata_BLAAF/BLAAF172ripac.jdx"));
-		System.out.println(s);
+	public final void testAccessPeakList01() throws IOException, JCAMPException {
+		Spectrum s = JCAMPReader.getInstance().createSpectrum(
+				new File("src/test/resources/testdata/1567755.jdx"));
+		assertNotNull(s);
+		assertTrue(s.hasPeakTable());
+		assertNotNull(s.getPeakTable());
+		assertEquals(54, s.getPeakTable().length);
+	}
+
+	@Test
+	public final void testCreateBlock13() throws IOException, JCAMPException {
+		JCAMPBlock b = new JCAMPBlock(
+				new LazyStringReader()
+				.read(new File(
+						"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+		assertNotNull(b);
+		for (JCAMPBlock bb : b.getBlocks()) {
+
+		}
 	}
 
 	@Test
@@ -125,14 +136,6 @@ public class TestJCAMPReader {
 		System.out.println(s);
 	}
 
-	@Test
-	public final void testCreateSpectrumInconsitentNumberOfHeaderColumns02()
-			throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_LEV/LEVLA2hri.jdx"));
-		System.out.println(s);
-	}
-
 	@Ignore("Fails for now, fix ASAP")
 	@Test
 	public final void testCreateSpectrum11() throws IOException, JCAMPException {
@@ -162,25 +165,6 @@ public class TestJCAMPReader {
 	}
 
 	@Test
-	public final void testCreateBlock13() throws IOException, JCAMPException {
-		JCAMPBlock b = new JCAMPBlock(
-				new LazyStringReader()
-						.read(new File(
-								"src/test/resources/testdata2/S2015_1275_1 3-fpm mit Struc.jcamp")));
-		assertNotNull(b);
-	}
-
-	@Test
-	public final void testAccessPeakList01() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata/1567755.jdx"));
-		assertNotNull(s);
-		assertTrue(s.hasPeakTable());
-		assertNotNull(s.getPeakTable());
-		assertEquals(54, s.getPeakTable().length);
-	}
-
-	@Test
 	public final void testCreateSpectrum14() throws IOException, JCAMPException {
 		Spectrum s = JCAMPReader.getInstance().createSpectrum(
 				new File("src/test/resources/testdata2/PE1800.DX"));
@@ -188,5 +172,24 @@ public class TestJCAMPReader {
 		assertNotNull(s.getXData());
 		assertNotNull(s.getYData());
 
+	}
+
+	@Test
+	public final void testCreateSpectrumInconsitentNumberOfHeaderColumns01()
+			throws IOException, JCAMPException {
+		Spectrum s = JCAMPReader
+				.getInstance()
+				.createSpectrum(
+						new File(
+								"src/test/resources/testdata_BLAAF/BLAAF172ripac.jdx"));
+		System.out.println(s);
+	}
+
+	@Test
+	public final void testCreateSpectrumInconsitentNumberOfHeaderColumns02()
+			throws IOException, JCAMPException {
+		Spectrum s = JCAMPReader.getInstance().createSpectrum(
+				new File("src/test/resources/testdata_LEV/LEVLA2hri.jdx"));
+		System.out.println(s);
 	}
 }

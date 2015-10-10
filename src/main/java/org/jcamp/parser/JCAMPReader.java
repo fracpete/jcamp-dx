@@ -143,7 +143,7 @@ public class JCAMPReader {
 	}
 
 	public Spectrum createSpectrum(File file) throws IOException,
-	JCAMPException {
+			JCAMPException {
 		return createSpectrum(new FileReader(file));
 
 	}
@@ -166,7 +166,7 @@ public class JCAMPReader {
 		if (reader == null) {
 			throw new IllegalArgumentException("spectrum type not implemented");
 		}
-		errorHandler.fatal("spectrum type not implemented");
+		// errorHandler.fatal("spectrum type not implemented");
 		return reader.createSpectrum(block);
 	}
 
@@ -194,7 +194,7 @@ public class JCAMPReader {
 	 * @throws IOException
 	 */
 	public Spectrum createSpectrum(Reader reader) throws IOException,
-	JCAMPException {
+			JCAMPException {
 		StringBuilder fileData = new StringBuilder();
 		char[] buf = new char[1024];
 		int numRead = 0;

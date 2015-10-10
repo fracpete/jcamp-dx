@@ -53,22 +53,23 @@ public class TestJCAMPReader {
 	}
 
 	@Test
-	public final void testCreateBlock13() throws IOException, JCAMPException {
-		JCAMPBlock b = new JCAMPBlock(
-				new LazyStringReader()
-				.read(new File(
-						"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+	public final void testCreateBlock01() throws IOException, JCAMPException {
+		JCAMPBlock b = new JCAMPBlock(new LazyStringReader().read(new File(
+				"src/test/resources/testdata_BLAAF/BLAAF172rpac.jdx")));
 		assertNotNull(b);
-		for (JCAMPBlock bb : b.getChildBlocks()) {
-
-		}
 	}
 
 	@Test
-	public final void testCreateSpectrum01() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF172rpac.jdx"));
-		System.out.println(s);
+	public final void testCreateBlock13() throws IOException, JCAMPException {
+		JCAMPBlock b = new JCAMPBlock(
+				new LazyStringReader()
+						.read(new File(
+								"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+		assertNotNull(b);
+		// System.out.println(b);
+		for (JCAMPBlock bb : b.getChildBlocks()) {
+			// System.out.println(bb);
+		}
 	}
 
 	@Test

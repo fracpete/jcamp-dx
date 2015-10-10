@@ -11,10 +11,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Vector;
+
+import net.sf.kerner.utils.collections.trasformer.ToString;
+import net.sf.kerner.utils.collections.trasformer.TransformerEnumerationToIterable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -100,7 +106,7 @@ public class JCAMPBlock {
 	 * A {@link java.util.Map map} storing references to all child blocks. Key
 	 * is a block's ID (e.g. {@code ##BLOCKID= 1}).
 	 */
-	private Hashtable<Integer, JCAMPBlock> childBlocks = new Hashtable<Integer, JCAMPBlock>(
+	private Map<Integer, JCAMPBlock> childBlocks = new LinkedHashMap<Integer, JCAMPBlock>(
 			10);
 	private String data;
 	// hashtable containing all data records (or list of data records for
@@ -354,12 +360,12 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * gets blocks within block.
-	 *
-	 * @return java.util.Enumeration
+	 * Returns a direct reference to {@code this} child blocks.
+	 * 
+	 * @return a direct reference to {@code this} child blocks
 	 */
-	public Enumeration<JCAMPBlock> getBlocks() {
-		return this.childBlocks.elements();
+	public Collection<JCAMPBlock> getBlocks() {
+		return this.childBlocks.values();
 	}
 
 	/**
@@ -814,6 +820,11 @@ public class JCAMPBlock {
 
 	@Override
 	public String toString() {
-		return "JCAMPBlock,SpecID=" + spectrumID + ", " + data;
+		return "JCAMPBlock,SpecID="
+				+ spectrumID
+				+ ", dataRecords="
+				+ new ToString()
+		.toString(new TransformerEnumerationToIterable<String>()
+				.transform(dataRecords.keys()));
 	}
 }

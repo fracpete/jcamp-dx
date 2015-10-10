@@ -231,5 +231,10 @@
 			<version>0.5.3</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.sf.kerner-utils-collections</groupId>
+			<artifactId>kerner-utils-collections</artifactId>
+			<version>0.27.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

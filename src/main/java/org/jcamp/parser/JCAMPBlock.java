@@ -10,14 +10,9 @@ package org.jcamp.parser;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
@@ -28,32 +23,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 
- * 
+ *
+ *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
  *         Kerner</a>
  */
 public class JCAMPBlock {
 
-	@Override
-	public String toString() {
-		return "JCAMPBlock,SpecID=" + spectrumID + ", " + data;
-	}
-
-	private ASDFDecoder asdfDecoder = new ASDFDecoder();
-
-	private static Log log = LogFactory.getLog(JCAMPBlock.class);
-
-	private final static Logger lg = LoggerFactory.getLogger(JCAMPBlock.class);
+	private final static String CRLF = "\r\n";
 
 	private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
-		@Override
-		public void fatal(String msg) throws JCAMPException {
-			log.fatal(msg);
-			throw new JCAMPException("FATAL ERROR! " + msg);
-		}
-
 		@Override
 		public void error(String msg) throws JCAMPException {
 			log.error(msg);
@@ -61,78 +41,60 @@ public class JCAMPBlock {
 		}
 
 		@Override
+		public void fatal(String msg) throws JCAMPException {
+			log.fatal(msg);
+			throw new JCAMPException("FATAL ERROR! " + msg);
+		}
+
+		@Override
 		public void warn(String msg) throws JCAMPException {
 			log.warn(msg);
 		}
 	};
-	private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
 
-	public final static class Type implements Serializable {
-		private static final long serialVersionUID = -8081269600789693382L;
-		private final String key;
-		private final int ordinal;
+	private final static Logger lg = LoggerFactory.getLogger(JCAMPBlock.class);
 
-		private Type(int ordinal, String key) {
-			this.ordinal = ordinal;
-			this.key = key;
+	private static Log log = LogFactory.getLog(JCAMPBlock.class);
+
+	/**
+	 * testing.
+	 *
+	 * @param args
+	 *            java.lang.String[]
+	 */
+	public static void main(String[] args) {
+		String jcamp = null;
+		try {
+			File dxFile = new java.io.File(args[0]);
+			FileReader dxIn = new FileReader(dxFile);
+			if (dxIn != null) {
+				int size;
+				int read;
+				int r;
+				char[] data;
+				size = (int) dxFile.length();
+				read = 0;
+				data = new char[size];
+				do {
+					r = dxIn.read(data, read, size - read);
+					read += r;
+				} while (r > 0);
+				dxIn.close();
+				jcamp = String.valueOf(data);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-
-		@Override
-		public String toString() {
-			return key;
+		try {
+			JCAMPBlock block = new JCAMPBlock(jcamp);
+			System.out.println("Block Data:\n" + block.data);
+			System.out.println("Child Blocks: " + block.childBlocks.size());
+		} catch (JCAMPException e) {
+			e.printStackTrace();
 		}
-
-		public Collection<Type> types() {
-			return TYPES_LIST;
-		}
-
-		private Object readResolve() throws java.io.ObjectStreamException {
-			return TYPES[ordinal];
-		}
-
-		@Override
-		public final int hashCode() {
-			return ordinal;
-		}
-
-		@Override
-		public final boolean equals(Object obj) {
-			if (obj instanceof Type && ((Type) obj) == this)
-				return true;
-			return false;
-		}
-
-		public final static Type LINK = new Type(0, "link");
-		public final static Type STRUCTURE = new Type(1, "structure");
-		public final static Type FULLSPECTRUM = new Type(2, "full spectrum");
-		public final static Type PEAKTABLE = new Type(3, "peak table");
-		public final static Type ASSIGNMENT = new Type(4, "assignment");
-		private final static Type[] TYPES = new Type[] { LINK, STRUCTURE,
-				FULLSPECTRUM, PEAKTABLE, ASSIGNMENT };
-		private final static List<Type> TYPES_LIST = Collections
-				.unmodifiableList(Arrays.asList(TYPES));
 	}
 
-	private final static String CRLF = "\r\n";
-	private final int start;
-	private final int end;
-
-	/*
-	 * JCAMP file content.
-	 */
-	private final String jcamp;
-
-	/*
-	 * If this {@code JCAMPBlock} is part of a multi-block file, {@code parent}
-	 * is the reference to the first block in this file. If this {@code
-	 * JCAMPBlock} is the first block in a multi-block file, {@code parent} is
-	 * {@code null}.
-	 */
-	private final JCAMPBlock parent;
-	private int numDataRecords;
-	private Type type;
-	private int spectrumID;
-	private String data;
+	private ASDFDecoder asdfDecoder = new ASDFDecoder();
 
 	/*
 	 * A {@link java.util.Map map} storing references to all child blocks. Key
@@ -140,17 +102,38 @@ public class JCAMPBlock {
 	 */
 	private Hashtable<Integer, JCAMPBlock> childBlocks = new Hashtable<Integer, JCAMPBlock>(
 			10);
+	private String data;
 	// hashtable containing all data records (or list of data records for
 	// multiple records with same key)
 	private Hashtable<String, JCAMPDataRecord> dataRecords = new Hashtable<String, JCAMPDataRecord>(
 			50);
+
+	private final int end;
+
+	private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
+	private boolean isValidating = true;
+	/*
+	 * JCAMP file content.
+	 */
+	private final String jcamp;
 	// array of data records with duplicate keys
 	private JCAMPDataRecord[] ldrs;
-	private JCAMPBlock[] references = null;
-	private boolean ntupleBlock = false;
 	private JCAMPNTuple ntuple;
+
+	private boolean ntupleBlock = false;
+	private int numDataRecords;
+	/*
+	 * If this {@code JCAMPBlock} is part of a multi-block file, {@code parent}
+	 * is the reference to the first block in this file. If this {@code
+	 * JCAMPBlock} is the first block in a multi-block file, {@code parent} is
+	 * {@code null}.
+	 */
+	private final JCAMPBlock parent;
+	private JCAMPBlock[] references = null;
+	private int spectrumID;
+	private final int start;
+	private Type type;
 	private JCAMPVariable[] vars = null;
-	private boolean isValidating = true;
 
 	/**
 	 * create JCAMPBlock from substring.
@@ -171,7 +154,7 @@ public class JCAMPBlock {
 
 	/**
 	 * Create a {@code JCAMPBlock} from a JCAMP substring.
-	 * 
+	 *
 	 * @param jcamp
 	 *            string representing a JCAMP file
 	 * @param start
@@ -199,12 +182,23 @@ public class JCAMPBlock {
 
 	/**
 	 * create JCAMPBlock from String
-	 * 
+	 *
 	 * @param jcamp
 	 *            java.lang.String
 	 */
 	public JCAMPBlock(String jcamp) throws JCAMPException {
 		this(jcamp, 0, jcamp.length());
+	}
+
+	/**
+	 * Create JCAMPBlock from a JCAMP string.
+	 *
+	 * @param jcamp
+	 *            JCAMP string
+	 */
+	public JCAMPBlock(String jcamp, IErrorHandler errorHandler)
+			throws JCAMPException {
+		this(jcamp, 0, jcamp.length(), errorHandler);
 	}
 
 	/**
@@ -216,7 +210,7 @@ public class JCAMPBlock {
 
 	/**
 	 * Create a {@code JCAMPBlock} from a JCAMP substring.
-	 * 
+	 *
 	 * @param jcamp
 	 *            string representing a JCAMP file
 	 * @param start
@@ -228,17 +222,6 @@ public class JCAMPBlock {
 	public JCAMPBlock(String jcamp, int start, int end,
 			IErrorHandler errorHandler) throws JCAMPException {
 		this(null, jcamp, start, end, errorHandler);
-	}
-
-	/**
-	 * Create JCAMPBlock from a JCAMP string.
-	 * 
-	 * @param jcamp
-	 *            JCAMP string
-	 */
-	public JCAMPBlock(String jcamp, IErrorHandler errorHandler)
-			throws JCAMPException {
-		this(jcamp, 0, jcamp.length(), errorHandler);
 	}
 
 	/**
@@ -273,7 +256,7 @@ public class JCAMPBlock {
 
 	/**
 	 * analyze ##DATATYPE= LDR for spectrum type.
-	 * 
+	 *
 	 * @param datatype
 	 *            java.lang.String
 	 */
@@ -303,9 +286,9 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * gets block as a simple JCAMP string
-	 * 
-	 * @return java.lang.String
+	 * Gets block as a simple JCAMP string
+	 *
+	 *
 	 */
 	public String asSimpleJCAMP() {
 		return this.data;
@@ -313,7 +296,7 @@ public class JCAMPBlock {
 
 	/**
 	 * change a data record to a new value and return modified JCAMPBlock.
-	 * 
+	 *
 	 * @return JCAMPBlock modified block
 	 * @param key
 	 *            java.lang.String normalized key
@@ -343,7 +326,7 @@ public class JCAMPBlock {
 
 	/**
 	 * get all data records, including records with duplicate key.
-	 * 
+	 *
 	 * @return com.labcontrol.jcamp.reader.JCAMPDataRecord[]
 	 */
 	public JCAMPDataRecord[] getAllDataRecords() {
@@ -352,7 +335,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets current ASDF decoder.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.ASDFDecoder
 	 */
 	public ASDFDecoder getASDFDecoder() {
@@ -361,7 +344,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets block by block ID.
-	 * 
+	 *
 	 * @return JCAMPBlock
 	 * @param id
 	 *            int
@@ -372,7 +355,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets blocks within block.
-	 * 
+	 *
 	 * @return java.util.Enumeration
 	 */
 	public Enumeration<JCAMPBlock> getBlocks() {
@@ -381,7 +364,7 @@ public class JCAMPBlock {
 
 	/**
 	 * get data record by index within block (counting all duplicates).
-	 * 
+	 *
 	 * @return JCAMPDataRecord
 	 * @param index
 	 *            int
@@ -392,7 +375,7 @@ public class JCAMPBlock {
 
 	/**
 	 * get data records by normalized key
-	 * 
+	 *
 	 * @return JCAMPDataRecord
 	 * @param key
 	 *            java.lang.String
@@ -403,7 +386,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets LDRs for block.
-	 * 
+	 *
 	 * @return java.util.Enumeration
 	 */
 	public Enumeration<JCAMPDataRecord> getDataRecords() {
@@ -412,7 +395,7 @@ public class JCAMPBlock {
 
 	/**
 	 * Insert the method's description here.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.IErrorHandler
 	 */
 	public IErrorHandler getErrorHandler() {
@@ -421,7 +404,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets block ID.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int getID() {
@@ -435,7 +418,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets JCAMP string containing block.
-	 * 
+	 *
 	 * @return java.lang.String
 	 */
 	public String getJCAMP() {
@@ -444,7 +427,7 @@ public class JCAMPBlock {
 
 	/**
 	 * get ntuple of block.
-	 * 
+	 *
 	 * @return com.labcontrol.jcamp.reader.JCAMPNTuple
 	 */
 	public JCAMPNTuple getNTuple() {
@@ -453,7 +436,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets crossreferences, works only with SpecInfo convention!
-	 * 
+	 *
 	 * @return JCAMPBlock[]
 	 */
 	public JCAMPBlock[] getReferences() {
@@ -490,7 +473,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets spectrum identifier.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int getSpectrumID() {
@@ -499,7 +482,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets block type.
-	 * 
+	 *
 	 * @return JCAMPBlock.Type
 	 */
 	public Type getType() {
@@ -508,7 +491,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets the variable for symbol symbol.
-	 * 
+	 *
 	 * @param String
 	 *            symbol
 	 * @return com.creon.chem.jcamp.JCAMPVariable
@@ -528,7 +511,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets the variable array
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.JCAMPVariable[]
 	 */
 	public JCAMPVariable[] getVariables() {
@@ -563,6 +546,9 @@ public class JCAMPBlock {
 				id--;
 			} else
 				id = blockID;
+			if (lg.isDebugEnabled()) {
+				lg.debug("New block " + jcampBlock);
+			}
 			childBlocks.put(new Integer(id), jcampBlock);
 		}
 		tmp.append(jcamp.substring(o0, this.end));
@@ -638,23 +624,8 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * Parses the string as double.
-	 * 
-	 * @param s
-	 *            the string to parse
-	 * @return the parsed double
-	 */
-	private Double parseDouble(String s) {
-		try {
-			return new Double(s);
-		} catch (NumberFormatException e) {
-			return new Double(s.replace(",", "."));
-		}
-	}
-
-	/**
 	 * find definitions for all variables.
-	 * 
+	 *
 	 * @exception com.creon.chem.jcamp.JCAMPException
 	 *                parsing errors.
 	 */
@@ -736,7 +707,7 @@ public class JCAMPBlock {
 
 	/**
 	 * Check if block is a JCAMP link block.
-	 * 
+	 *
 	 */
 	public boolean isLinkBlock() {
 		return this.type.equals(Type.LINK);
@@ -744,7 +715,7 @@ public class JCAMPBlock {
 
 	/**
 	 * indicates a block containing ntuples.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean isNTupleBlock() {
@@ -753,54 +724,20 @@ public class JCAMPBlock {
 
 	/**
 	 * checks if block is a JCAMP structure block.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean isStructureBlock() {
 		return this.type.equals(Type.STRUCTURE);
 	}
 
-	/**
-	 * testing.
-	 * 
-	 * @param args
-	 *            java.lang.String[]
-	 */
-	public static void main(String[] args) {
-		String jcamp = null;
-		try {
-			File dxFile = new java.io.File(args[0]);
-			FileReader dxIn = new FileReader(dxFile);
-			if (dxIn != null) {
-				int size;
-				int read;
-				int r;
-				char[] data;
-				size = (int) dxFile.length();
-				read = 0;
-				data = new char[size];
-				do {
-					r = dxIn.read(data, read, size - read);
-					read += r;
-				} while (r > 0);
-				dxIn.close();
-				jcamp = String.valueOf(data);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			JCAMPBlock block = new JCAMPBlock(jcamp);
-			System.out.println("Block Data:\n" + block.data);
-			System.out.println("Child Blocks: " + block.childBlocks.size());
-		} catch (JCAMPException e) {
-			e.printStackTrace();
-		}
+	public boolean isValidating() {
+		return isValidating;
 	}
 
 	/**
 	 * gets number of child blocks.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int numBlocks() {
@@ -809,7 +746,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets number of LDRs.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int numDataRecords() {
@@ -818,7 +755,7 @@ public class JCAMPBlock {
 
 	/**
 	 * gets number of LDRs.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int numVariables() {
@@ -826,8 +763,23 @@ public class JCAMPBlock {
 	}
 
 	/**
+	 * Parses the string as double.
+	 *
+	 * @param s
+	 *            the string to parse
+	 * @return the parsed double
+	 */
+	private Double parseDouble(String s) {
+		try {
+			return new Double(s);
+		} catch (NumberFormatException e) {
+			return new Double(s.replace(",", "."));
+		}
+	}
+
+	/**
 	 * sets ASDFDecoder
-	 * 
+	 *
 	 * @param newAsdfDecoder
 	 *            com.creon.chem.jcamp.ASDFDecoder
 	 */
@@ -837,7 +789,7 @@ public class JCAMPBlock {
 
 	/**
 	 * sets error handler.
-	 * 
+	 *
 	 * @param newErrorHandler
 	 *            com.creon.chem.jcamp.IErrorHandler
 	 */
@@ -847,7 +799,7 @@ public class JCAMPBlock {
 
 	/**
 	 * sets spectrum identifier.
-	 * 
+	 *
 	 * @param newSpectrumID
 	 *            int
 	 */
@@ -855,12 +807,13 @@ public class JCAMPBlock {
 		spectrumID = newSpectrumID;
 	}
 
-	public boolean isValidating() {
-		return isValidating;
-	}
-
 	public void setValidating(boolean useCheckValues) {
 		this.isValidating = useCheckValues;
 		this.asdfDecoder.enableValidation(useCheckValues);
+	}
+
+	@Override
+	public String toString() {
+		return "JCAMPBlock,SpecID=" + spectrumID + ", " + data;
 	}
 }

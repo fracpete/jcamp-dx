@@ -70,7 +70,7 @@ public class JCAMPDataRecord {
 	// previous JCAMPDataRecord with same key
 	private JCAMPDataRecord prev = null;
 
-	private boolean normalizeValueString = true;
+	private boolean normalizeValueString = DEFAULT_NORMALIZE_VALUE_STRING;
 
 	public synchronized boolean isNormalizeValueString() {
 		return normalizeValueString;
@@ -82,10 +82,14 @@ public class JCAMPDataRecord {
 	}
 
 	@Override
-	public String toString() {
-		return "JCAMPDataRecord [isData=" + isData() + ", key=" + getKey()
-				+ ", value=" + getValue(true) + ", blockIndex="
-				+ getBlockIndex() + "]";
+	public synchronized String toString() {
+		final String dataString;
+		if (isData())
+			dataString = "..data-not-shown..";
+		else
+			dataString = getValue(true);
+		return "blockIndex=" + getBlockIndex() + ", isData=" + isData()
+				+ ", key=" + getKey() + ", value=" + dataString;
 	}
 
 	class Iterator implements ListIterator<JCAMPDataRecord> {
@@ -322,13 +326,18 @@ public class JCAMPDataRecord {
 	 * 
 	 */
 	public synchronized String getValue(boolean normalized) {
+
+		// Get value string if not cached
 		if (value == null) {
 			value = jcamp.substring(start + equalSignPos + 1, end);
 		}
+
+		String result = value;
+
 		if (normalized) {
-			value = getNormalizedValueString(value);
+			result = getNormalizedValueString(result);
 		}
-		return value;
+		return result;
 	}
 
 	String getNormalizedValueString(String value) {

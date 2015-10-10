@@ -26,14 +26,21 @@ import org.jcamp.spectrum.Peak1D;
 import org.jcamp.spectrum.Spectrum;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
- * adapter between NMR spectrum class and JCAMPReader.
+ * Adapter between NMR spectrum class and JCAMPReader.
  *
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		ISpectrumJCAMPReader {
+
+	private final static Logger lg = LoggerFactory
+			.getLogger(NMRJCAMPReader.class);
 
 	private static Log log = LogFactory.getLog(NMRJCAMPReader.class);
 
@@ -49,7 +56,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * create NMR FID spectrum from JCAMPBlock.
-	 * 
+	 *
 	 * @return NMRSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -142,10 +149,10 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			JCAMPNTuplePage page0 = block.getNTuple().getPage(0);
 			JCAMPNTuplePage page1 = block.getNTuple().getPage(1);
 			if (page0.getDatatableVariableSymbols()[1].equalsIgnoreCase("I")) { // swap
-																				// pages,
-																				// imaginary
-																				// is
-																				// first
+				// pages,
+				// imaginary
+				// is
+				// first
 				JCAMPNTuplePage tmp = page0;
 				page0 = page1;
 				page1 = tmp;
@@ -164,7 +171,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * create NMR full spectrum from JCAMPBlock.
-	 * 
+	 *
 	 * @return NMRSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -209,9 +216,11 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				double xy[][] = getXYPoints(block, nPoints, xFactor, yFactor);
 				x = new OrderedArrayData(xy[0], xUnit);
 				y = new ArrayData(xy[1], yUnit);
-			} else
-				block.getErrorHandler().fatal(
-						"missing data: ##XYDATA= or ##XYPOINTS= required.");
+			} else {
+				if (lg.isErrorEnabled()) {
+					lg.error("missing data: ##XYDATA= or ##XYPOINTS= required.");
+				}
+			}
 
 			double reference = Double.NaN;
 			try {
@@ -283,7 +292,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * create NMR peak table (peak spectrum) from JCAMPBlock.
-	 * 
+	 *
 	 * @return NMRSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -386,7 +395,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * gets ##$OFFSET= content (Bruker specific)
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -403,7 +412,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * gets ##$SF= content (Bruker specific)
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -420,7 +429,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * gets ##$SW= content (Bruker specific)
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -437,7 +446,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * gets ##.OBSERVEFREQUENCY= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -470,7 +479,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * find linked peak tables and assignments.
 	 *
 	 * NOTE: works only with SpecInfo convention
-	 * 
+	 *
 	 * @param block
 	 *            com.creon.chem.jcamp.JCAMPBlock
 	 * @param spectrum
@@ -506,7 +515,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * gets ##.OBSERVENUCLEUS= content
-	 * 
+	 *
 	 * @return java.lang.String
 	 * @param block
 	 *            JCAMPBlock
@@ -526,7 +535,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * spec. With standard JCAMP 5.00 it is not possible to specify a reference
 	 * point, with 5.01 it is possible, but the resp. label ##.SHIFTREFERENCE0
 	 * is marked as optional instead of required.
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -563,7 +572,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * spec. With standard JCAMP 5.00 it is not possible to specify a reference
 	 * point, with 5.01 it is possible, but the resp. label ##.SHIFTREFERENCE0
 	 * is marked as optional instead of required.
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -601,7 +610,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * spec. With standard JCAMP 5.00 it is not possible to specify a reference
 	 * point, with 5.01 it is possible, but the resp. label ##.SHIFTREFERENCE0
 	 * is marked as optional instead of required.
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -631,7 +640,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * spec. With standard JCAMP 5.00 it is not possible to specify a reference
 	 * point, with 5.01 it is possible, but the resp. label ##.SHIFTREFERENCE=
 	 * is marked as optional instead of required.
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock

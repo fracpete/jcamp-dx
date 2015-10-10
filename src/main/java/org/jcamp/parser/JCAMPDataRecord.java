@@ -25,6 +25,9 @@ import org.apache.regexp.RESyntaxException;
  * @see JCAMPBlock
  */
 public class JCAMPDataRecord {
+
+	public final static boolean DEFAULT_NORMALIZE_VALUE_STRING = false;
+
 	private final static String XYDATA_RE = "^([:alpha:][:digit:]*)([:alpha:][:digit:]*)DATA$";
 	private final static String XYPOINTS_RE = "^([:alpha:][:digit:]*)([:alpha:][:digit:]*)POINTS$";
 	private final static REProgram XYDATA_REPRG;
@@ -67,11 +70,22 @@ public class JCAMPDataRecord {
 	// previous JCAMPDataRecord with same key
 	private JCAMPDataRecord prev = null;
 
+	private boolean normalizeValueString = true;
+
+	public synchronized boolean isNormalizeValueString() {
+		return normalizeValueString;
+	}
+
+	public synchronized void setNormalizeValueString(
+			boolean normalizeValueString) {
+		this.normalizeValueString = normalizeValueString;
+	}
+
 	@Override
 	public String toString() {
 		return "JCAMPDataRecord [isData=" + isData() + ", key=" + getKey()
-				+ ", value=" + getValue() + ", blockIndex=" + getBlockIndex()
-				+ "]";
+				+ ", value=" + getValue(true) + ", blockIndex="
+				+ getBlockIndex() + "]";
 	}
 
 	class Iterator implements ListIterator<JCAMPDataRecord> {
@@ -300,10 +314,25 @@ public class JCAMPDataRecord {
 	 * 
 	 */
 	public synchronized String getValue() {
+		return getValue(isNormalizeValueString());
+	}
+
+	/**
+	 * Gets content of LDR.
+	 * 
+	 */
+	public synchronized String getValue(boolean normalized) {
 		if (value == null) {
 			value = jcamp.substring(start + equalSignPos + 1, end);
 		}
+		if (normalized) {
+			value = getNormalizedValueString(value);
+		}
 		return value;
+	}
+
+	String getNormalizedValueString(String value) {
+		return value.replace("\n", "").replace("\r", "");
 	}
 
 	/**

@@ -163,8 +163,10 @@ public class JCAMPReader {
 			block = findFirstSpectrumBlock(block);
 		}
 		ISpectrumJCAMPReader reader = findAdapter(block.getSpectrumID());
-		if (reader == null)
-			errorHandler.fatal("spectrum type not implemented");
+		if (reader == null) {
+			throw new IllegalArgumentException("spectrum type not implemented");
+		}
+		errorHandler.fatal("spectrum type not implemented");
 		return reader.createSpectrum(block);
 	}
 

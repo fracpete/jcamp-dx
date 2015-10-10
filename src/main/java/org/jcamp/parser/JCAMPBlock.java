@@ -361,7 +361,7 @@ public class JCAMPBlock {
 
 	/**
 	 * Returns a direct reference to {@code this} child blocks.
-	 * 
+	 *
 	 * @return a direct reference to {@code this} child blocks
 	 */
 	public Collection<JCAMPBlock> getChildBlocks() {
@@ -649,7 +649,7 @@ public class JCAMPBlock {
 			if (ldr.isData()) {
 				if (dataLDR != null) {
 					errorHandler
-							.error("more than one data LDR in block: use compound JCAMP");
+					.error("more than one data LDR in block: use compound JCAMP");
 					break; // use first data block encountered
 				} else
 					dataLDR = ldr;
@@ -712,7 +712,7 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * Check if block is a JCAMP link block.
+	 * Checks if block is a JCAMP link block.
 	 *
 	 */
 	public boolean isLinkBlock() {
@@ -824,7 +824,7 @@ public class JCAMPBlock {
 				+ spectrumID
 				+ ", dataRecords="
 				+ new ToString()
-		.toString(new TransformerEnumerationToIterable<String>()
-				.transform(dataRecords.keys()));
+						.toString(new TransformerEnumerationToIterable<String>()
+								.transform(dataRecords.keys()));
 	}
 }

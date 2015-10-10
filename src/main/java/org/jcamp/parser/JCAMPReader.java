@@ -242,7 +242,7 @@ public class JCAMPReader {
 	private JCAMPBlock findFirstSpectrumBlock(JCAMPBlock block)
 			throws JCAMPException {
 		// first try, returning only full spectra
-		Collection<JCAMPBlock> blocks = block.getBlocks();
+		Collection<JCAMPBlock> blocks = block.getChildBlocks();
 		Iterator<JCAMPBlock> it = blocks.iterator();
 		if (blocks != null) {
 			while (it.hasNext()) {
@@ -261,7 +261,7 @@ public class JCAMPReader {
 			}
 		}
 		// second try, returning any spectrum
-		blocks = block.getBlocks();
+		blocks = block.getChildBlocks();
 		Iterator<JCAMPBlock> it2 = blocks.iterator();
 		if (blocks != null) {
 			while (it2.hasNext()) {

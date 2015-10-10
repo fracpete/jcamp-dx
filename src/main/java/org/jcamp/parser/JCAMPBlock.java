@@ -364,7 +364,7 @@ public class JCAMPBlock {
 	 * 
 	 * @return a direct reference to {@code this} child blocks
 	 */
-	public Collection<JCAMPBlock> getBlocks() {
+	public Collection<JCAMPBlock> getChildBlocks() {
 		return this.childBlocks.values();
 	}
 

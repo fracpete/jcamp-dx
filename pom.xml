@@ -226,15 +226,20 @@
 			<version>1.1.3</version>
 		</dependency>
 		<dependency>
-			<groupId>net.sf.kerner-utils-io</groupId>
-			<artifactId>kerner-utils-io</artifactId>
-			<version>0.5.3</version>
-			<scope>test</scope>
+			<groupId>net.sf.kerner-utils</groupId>
+			<artifactId>kerner-utils</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.kerner-utils-collections</groupId>
 			<artifactId>kerner-utils-collections</artifactId>
-			<version>0.27.1-SNAPSHOT</version>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.kerner-utils-io</groupId>
+			<artifactId>kerner-utils-io</artifactId>
+			<version>0.5.3</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>

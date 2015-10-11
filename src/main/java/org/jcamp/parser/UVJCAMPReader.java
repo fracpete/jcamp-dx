@@ -20,14 +20,21 @@ import org.jcamp.spectrum.Spectrum;
 import org.jcamp.spectrum.UVSpectrum;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * adapter between UV spectrum class and JCAMPReader.
  *
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
-		ISpectrumJCAMPReader {
+ISpectrumJCAMPReader {
+
+	private final static Logger log = LoggerFactory
+			.getLogger(UVJCAMPReader.class);
 
 	/**
 	 * UVJCAMPAdapter constructor comment.
@@ -38,7 +45,7 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * read UV full spectrum.
-	 * 
+	 *
 	 * @return com.creon.chem.spectrum.UVSpectrum
 	 * @param block
 	 *            com.creon.chem.jcamp.JCAMPBlock
@@ -79,7 +86,7 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * create UV peak table (peak spectrum) from JCAMPBlock.
-	 * 
+	 *
 	 * @return UVSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -100,10 +107,11 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 		Object[] tables = getPeaktable(block, nPoints, xFactor, yFactor);
 		Peak1D[] peaks = (Peak1D[]) tables[0];
 		if (peaks.length != nPoints) {
-			block.getErrorHandler().error(
-					"incorrect ##NPOINTS=: expected "
-							+ Integer.toString(nPoints) + " but got "
-							+ Integer.toString(peaks.length));
+			if (log.isErrorEnabled()) {
+				log.error("incorrect ##NPOINTS=: expected "
+						+ Integer.toString(nPoints) + " but got "
+						+ Integer.toString(peaks.length));
+			}
 			nPoints = peaks.length;
 		}
 		double[][] xy = peakTableToPeakSpectrum(peaks);
@@ -125,7 +133,7 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumID() != ISpectrumIdentifier.UV)
-			block.getErrorHandler().fatal("JCAMP reader adapter missmatch");
+			throw new JCAMPException("JCAMP reader adapter missmatch");
 		UVSpectrum spectrum = null;
 		Type type = block.getType();
 		if (type.equals(Type.FULLSPECTRUM))
@@ -136,7 +144,7 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 			spectrum = createPeakTable(block);
 		else
 			// never reached
-			block.getErrorHandler().fatal("illegal block type");
+			throw new JCAMPException("illegal block type");
 		setNotes(block, spectrum);
 		return spectrum;
 	}

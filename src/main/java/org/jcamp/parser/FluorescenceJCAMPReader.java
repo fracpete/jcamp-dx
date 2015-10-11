@@ -32,9 +32,11 @@ import org.jcamp.units.Unit;
  * adapter between fluorescence spectrum class and JCAMPReader. NON STANDARD
  *
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
-		implements ISpectrumJCAMPReader {
+implements ISpectrumJCAMPReader {
 
 	private static Log log = LogFactory.getLog(FluorescenceJCAMPReader.class);
 
@@ -46,7 +48,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 
 	/**
 	 * read Fluorescence full spectrum.
-	 * 
+	 *
 	 * @return FluorescenceSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -89,7 +91,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 
 	/**
 	 * read Fluorescence full spectrum.
-	 * 
+	 *
 	 * @return Fluorescence2DSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -247,7 +249,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 
 	/**
 	 * create Fluorescence peak table (peak spectrum) from JCAMPBlock.
-	 * 
+	 *
 	 * @return FluorescenceSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -269,10 +271,11 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 		Object[] tables = getPeaktable(block, nPoints, xFactor, yFactor);
 		Peak1D[] peaks = (Peak1D[]) tables[0];
 		if (nPoints != peaks.length) {
-			block.getErrorHandler().error(
-					"incorrect ##NPOINTS=: expected "
-							+ Integer.toString(nPoints) + " but got "
-							+ Integer.toString(peaks.length));
+			if (log.isErrorEnabled()) {
+				log.error("incorrect ##NPOINTS=: expected "
+						+ Integer.toString(nPoints) + " but got "
+						+ Integer.toString(peaks.length));
+			}
 			nPoints = peaks.length;
 		}
 		Arrays.sort(peaks);
@@ -301,7 +304,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumID() != ISpectrumIdentifier.FLUORESCENCE)
-			block.getErrorHandler().fatal("JCAMP reader adapter missmatch");
+			throw new JCAMPException("JCAMP reader adapter missmatch");
 		if (block.isNTupleBlock()) { // 2D
 			Fluorescence2DSpectrum spectrum = createFS2D(block);
 			// setNotes(block, spectrum);
@@ -317,7 +320,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 			spectrum = createPeakTable(block);
 		else
 			// never reached
-			block.getErrorHandler().fatal("illegal block type");
+			throw new JCAMPException("illegal block type");
 		return spectrum;
 	}
 }

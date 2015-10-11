@@ -143,13 +143,13 @@ public class JCAMPReader {
 	}
 
 	public Spectrum createSpectrum(File file) throws IOException,
-			JCAMPException {
+	JCAMPException {
 		return createSpectrum(new FileReader(file));
 
 	}
 
 	/**
-	 * Create {@link Spectrum} from {@link JCAMPBlock}.
+	 * Create a {@link Spectrum} from a {@link JCAMPBlock}.
 	 *
 	 * @return {@link Spectrum}
 	 * @throws JCAMPException
@@ -166,7 +166,6 @@ public class JCAMPReader {
 		if (reader == null) {
 			throw new IllegalArgumentException("spectrum type not implemented");
 		}
-		// errorHandler.fatal("spectrum type not implemented");
 		return reader.createSpectrum(block);
 	}
 
@@ -194,7 +193,7 @@ public class JCAMPReader {
 	 * @throws IOException
 	 */
 	public Spectrum createSpectrum(Reader reader) throws IOException,
-			JCAMPException {
+	JCAMPException {
 		StringBuilder fileData = new StringBuilder();
 		char[] buf = new char[1024];
 		int numRead = 0;
@@ -222,11 +221,9 @@ public class JCAMPReader {
 	}
 
 	/**
-	 * find JCAMPAdapter for specific spectrum ID.
+	 * Finds JCAMPAdapter for specific spectrum ID.
 	 *
-	 * @return ISpectrumJCAMPReader
-	 * @param spectrumID
-	 *            int
+	 *
 	 */
 	private ISpectrumJCAMPReader findAdapter(int spectrumID) {
 		ISpectrumJCAMPReader adapter = adapters.get(new Integer(spectrumID));

@@ -20,19 +20,25 @@ import org.jcamp.math.IArray2D;
 import org.jcamp.math.LinearGrid1D;
 import org.jcamp.math.OrderedArray1D;
 import org.jcamp.math.XYArray2D;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * class for reading JCAMP NTUPLE pages. JCAMPDataRecord objects are constructed
  * by the containing JCAMPBlock class
- * 
+ *
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  * @see JCAMPBlock
  */
 public class JCAMPNTuplePage {
-	private final static String VAR_RE = "([:alpha:][:digit:]*)[:space:]*=";
 	private final static String CONTENT_RE = "[:alpha:][:digit:]*[:space:]*=([^,]*)";
-	private final static REProgram VAR_REPRG;
 	private final static REProgram CONTENT_REPRG;
+	private final static Logger log = LoggerFactory
+			.getLogger(JCAMPNTuplePage.class);
+	private final static String VAR_RE = "([:alpha:][:digit:]*)[:space:]*=";
+	private final static REProgram VAR_REPRG;
 	static {
 		try {
 			RECompiler compiler = new RECompiler();
@@ -43,16 +49,17 @@ public class JCAMPNTuplePage {
 		}
 	}
 	private RE contentRE = new RE(CONTENT_REPRG);
-	private RE varRE = new RE(VAR_REPRG);
 
-	private JCAMPDataRecord startLDR;
+	private JCAMPDataRecord dataLDR;
 	private JCAMPDataRecord endLDR;
 	private JCAMPNTuple ntuple;
+	private JCAMPDataRecord startLDR;
 	private String[] symbols;
 	private String[] values;
-	private JCAMPDataRecord dataLDR;
 	private DataVariableInfo varInfo;
+	private RE varRE = new RE(VAR_REPRG);
 	private JCAMPVariable xVar;
+
 	private JCAMPVariable yVar;
 
 	/**
@@ -69,7 +76,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * parse variable values and store them into <code>values</code>
-	 * 
+	 *
 	 * @param varlist
 	 *            java.lang.String
 	 */
@@ -88,7 +95,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * parse variable names and store them into <code>symbols</code>
-	 * 
+	 *
 	 * @param varlist
 	 *            java.lang.String
 	 */
@@ -110,12 +117,10 @@ public class JCAMPNTuplePage {
 		JCAMPBlock block = this.ntuple.getBlock();
 		dataLDR = getDataRecord("DATATABLE");
 		if (dataLDR == null)
-			block.getErrorHandler()
-					.fatal("missing required label ##DATATABLE=");
+			throw new JCAMPException("missing required label ##DATATABLE=");
 		varInfo = new DataVariableInfo(dataLDR);
-		if (varInfo.getSymbols().length != 2)
-			block.getErrorHandler().error(
-					"page ##DATATABLE= must be 2 dimensional");
+		if (varInfo.getSymbols().length != 2 && log.isErrorEnabled())
+			log.error("page ##DATATABLE= must be 2 dimensional");
 		xVar = this.ntuple.getVariable(varInfo.getSymbols()[0]);
 		// always assume first is logical x
 		yVar = this.ntuple.getVariable(varInfo.getSymbols()[1]);
@@ -123,7 +128,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * gets LDR by key within NTUPLE page.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.JCAMPDataRecord
 	 * @param key
 	 *            java.lang.String
@@ -139,7 +144,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * gets data records within page (inclusive ##PAGE= itself).
-	 * 
+	 *
 	 * @return JCAMPDataRecord[]
 	 */
 	public JCAMPDataRecord[] getDataRecords() {
@@ -152,7 +157,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * DATATABLE variable list.
-	 * 
+	 *
 	 * @return java.lang.String[]
 	 */
 	public String[] getDatatableVariableSymbols() {
@@ -161,7 +166,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * accessor to container.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.JCAMPNTuple
 	 */
 	public JCAMPNTuple getNTuple() {
@@ -170,7 +175,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * gets variable symbols occuring in ##PAGE= LDR.
-	 * 
+	 *
 	 * @return java.lang.String[]
 	 */
 	public String[] getPageVariableSymbols() {
@@ -180,7 +185,7 @@ public class JCAMPNTuplePage {
 	/**
 	 * get content of page variable e.g. for ##PAGE= t=10.0
 	 * getPageVariableValue("T") returns "10.0"
-	 * 
+	 *
 	 * @return java.lang.String
 	 * @param symbol
 	 *            java.lang.String
@@ -195,7 +200,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * gets variable values occuring in ##PAGE= LDR.
-	 * 
+	 *
 	 * @return java.lang.String[]
 	 */
 	public String[] getPageVariableValues() {
@@ -204,7 +209,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * get numerical x/y data of page
-	 * 
+	 *
 	 * @return com.creon.math.IArray2D
 	 */
 	public IArray2D getXYData() throws JCAMPException {
@@ -226,7 +231,7 @@ public class JCAMPNTuplePage {
 			} else {
 				// otherwise check NTUPLE header
 				if (xVar.getFirst() == null)
-					block.getErrorHandler().fatal(
+					throw new JCAMPException(
 							"missing first value for incremental variable "
 									+ xVar.getSymbol());
 				xFirst = xVar.getFirst().doubleValue();
@@ -241,7 +246,7 @@ public class JCAMPNTuplePage {
 			} else {
 				// otherwise check NTUPLE header
 				if (xVar.getLast() == null)
-					block.getErrorHandler().fatal(
+					throw new JCAMPException(
 							"missing last value for incremental variable "
 									+ xVar.getSymbol());
 				xLast = xVar.getLast().doubleValue();
@@ -256,7 +261,7 @@ public class JCAMPNTuplePage {
 			} else {
 				// otherwise check NTUPLE header
 				if (xVar.getDimension() == null)
-					block.getErrorHandler().fatal(
+					throw new JCAMPException(
 							"missing dimension for incremental variable "
 									+ xVar.getSymbol());
 				xDim = xVar.getDimension().intValue();
@@ -325,7 +330,7 @@ public class JCAMPNTuplePage {
 
 	/**
 	 * initialize page variables.
-	 * 
+	 *
 	 */
 	private void init() throws JCAMPException {
 		String pageContent = startLDR.getContent();

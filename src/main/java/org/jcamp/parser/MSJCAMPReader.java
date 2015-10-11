@@ -41,7 +41,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * gets mass spectrum.
-	 * 
+	 *
 	 * @return com.creon.chem.spectrum.MassSpectrum
 	 * @param block
 	 *            com.creon.chem.jcamp.JCAMPBlock
@@ -82,7 +82,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * NTUPLE mass spectra.
-	 * 
+	 *
 	 * @return com.creon.chem.spectrum.GCMSSpectrum
 	 * @param block
 	 *            com.creon.chem.jcamp.JCAMPBlock
@@ -132,7 +132,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * create mass spectrum peak spectrum from JCAMPBlock.
-	 * 
+	 *
 	 * @return MassSpectrum
 	 * @param block
 	 *            JCAMPBlock
@@ -212,7 +212,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumID() != ISpectrumIdentifier.MS)
-			block.getErrorHandler().fatal("JCAMP reader adapter missmatch");
+			throw new JCAMPException("JCAMP reader adapter missmatch");
 		if (block.isNTupleBlock()) { // chromatogram!
 			GCMSSpectrum spectrum = createGCMS(block);
 			setNotes(block, spectrum);
@@ -228,7 +228,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 				spectrum = createPeakTable(block);
 			else
 				// never reached
-				block.getErrorHandler().fatal("illegal block type");
+				throw new JCAMPException("illegal block type");
 			setNotes(block, spectrum);
 			return spectrum;
 		}
@@ -236,7 +236,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * get retention times for GC/MS
-	 * 
+	 *
 	 * @return double[]
 	 */
 	private double[] getRetentionTimes(JCAMPNTuple ntuple) {
@@ -270,7 +270,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	/**
 	 * get total ion counts for GC/MS
-	 * 
+	 *
 	 * @return double[]
 	 */
 	private double[] getTICs(JCAMPNTuple ntuple) {

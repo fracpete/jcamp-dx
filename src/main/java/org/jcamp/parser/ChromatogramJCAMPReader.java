@@ -20,14 +20,21 @@ import org.jcamp.spectrum.Peak1D;
 import org.jcamp.spectrum.Spectrum;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * adapter between chromatography class and JCAMPReader.
  *
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
-		implements ISpectrumJCAMPReader {
+implements ISpectrumJCAMPReader {
+
+	private final static Logger log = LoggerFactory
+			.getLogger(ChromatogramJCAMPReader.class);
 
 	protected ChromatogramJCAMPReader() {
 		super();
@@ -35,7 +42,7 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 
 	/**
 	 * read chromatogram full spectrum.
-	 * 
+	 *
 	 * @return Chromatogram
 	 * @param block
 	 *            JCAMPBlock
@@ -56,10 +63,11 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 		double[] intensities = getXYData(block, firstX, lastX, nPoints,
 				xFactor, yFactor);
 		if (intensities.length != nPoints) {
-			block.getErrorHandler().error(
-					"incorrect ##NPOINTS=: expected "
-							+ Integer.toString(nPoints) + " but got "
-							+ Integer.toString(intensities.length));
+			if (log.isErrorEnabled()) {
+				log.error("incorrect ##NPOINTS=: expected "
+						+ Integer.toString(nPoints) + " but got "
+						+ Integer.toString(intensities.length));
+			}
 			nPoints = intensities.length;
 		}
 		IOrderedDataArray1D x = new EquidistantData(firstX, lastX, nPoints,
@@ -71,7 +79,7 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 
 	/**
 	 * create chromatogram peak table (peak spectrum) from JCAMPBlock.
-	 * 
+	 *
 	 * @return chromatogram
 	 * @param block
 	 *            JCAMPBlock
@@ -93,10 +101,11 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 		Object[] tables = getPeaktable(block, nPoints, xFactor, yFactor);
 		Peak1D[] peaks = (Peak1D[]) tables[0];
 		if (peaks.length != nPoints) {
-			block.getErrorHandler().error(
-					"incorrect ##NPOINTS=: expected "
-							+ Integer.toString(nPoints) + " but got "
-							+ Integer.toString(peaks.length));
+			if (log.isErrorEnabled()) {
+				log.error("incorrect ##NPOINTS=: expected "
+						+ Integer.toString(nPoints) + " but got "
+						+ Integer.toString(peaks.length));
+			}
 			nPoints = peaks.length;
 		}
 		double[][] xy = peakTableToPeakSpectrum(peaks);
@@ -118,7 +127,7 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumID() != ISpectrumIdentifier.CHROMATOGRAM)
-			block.getErrorHandler().fatal("JCAMP reader adapter missmatch");
+			throw new JCAMPException("JCAMP reader adapter missmatch");
 		Chromatogram spectrum = null;
 		Type type = block.getType();
 		if (type.equals(Type.FULLSPECTRUM))
@@ -129,7 +138,7 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 			spectrum = createPeakTable(block);
 		else
 			// never reached
-			block.getErrorHandler().fatal("illegal block type");
+			throw new JCAMPException("illegal block type");
 		setNotes(block, spectrum);
 		return spectrum;
 	}

@@ -24,13 +24,86 @@ import org.jcamp.spectrum.assignments.AtomReference;
 import org.jcamp.spectrum.notes.NoteDescriptor;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * common implementation of JCAMPReader, implements shorthands for common LDRs.
- * 
+ *
  * @author Thomas Weber
+ * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
+ *         Kerner</a>
  */
 abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
+
+	private final static Logger log = LoggerFactory
+			.getLogger(CommonSpectrumJCAMPReader.class);
+
+	/**
+	 * analyse assignment text for targets.
+	 *
+	 * currently assumes SpecInfo convention of a list of integer atom numbers
+	 *
+	 * @return IAssignmentTarget[]
+	 * @param assign
+	 *            java.lang.String
+	 */
+	protected static IAssignmentTarget[] parseAssignment(String assign) {
+		ArrayList<AtomReference> targets = new ArrayList<AtomReference>(5);
+		StringTokenizer tokenizer = new StringTokenizer(assign, ",");
+		while (tokenizer.hasMoreTokens()) {
+			String target = tokenizer.nextToken();
+			try {
+				int atomNo = Integer.parseInt(target.trim());
+				targets.add(new AtomReference(null, atomNo));
+			} catch (Exception e) {
+			}
+		}
+		IAssignmentTarget[] assigns = new IAssignmentTarget[targets.size()];
+		for (int i = 0; i < targets.size(); i++)
+			assigns[i] = targets.get(i);
+		return assigns;
+	}
+
+	/**
+	 * create peak spectrum from peak table. adds all intensities belonging to
+	 * the same x-position up
+	 *
+	 * @param peaks
+	 *            Peak1D[]
+	 * @return double[][] array of {x, y}
+	 */
+	protected static double[][] peakTableToPeakSpectrum(Peak1D[] peaks)
+			throws JCAMPException {
+		int n = peaks.length;
+		if (n == 0)
+			throw new JCAMPException("empty peak table");
+		Arrays.sort(peaks);
+		ArrayList<Double> px = new ArrayList<Double>(n);
+		ArrayList<Double> py = new ArrayList<Double>(n);
+		double x0 = peaks[0].getPosition()[0];
+		double y0 = peaks[0].getHeight();
+		for (int i = 1; i < n; i++) {
+			double x = peaks[i].getPosition()[0];
+			double y = peaks[i].getHeight();
+			if (x - x0 > Double.MIN_VALUE) {
+				px.add(new Double(x0));
+				py.add(new Double(y0));
+				x0 = x;
+				y0 = y;
+			} else {
+				y0 += y;
+			}
+		}
+		px.add(new Double(x0));
+		py.add(new Double(y0));
+		double[][] xy = new double[2][px.size()];
+		for (int i = 0; i < px.size(); i++) {
+			xy[0][i] = px.get(i).doubleValue();
+			xy[1][i] = py.get(i).doubleValue();
+		}
+		return xy;
+	}
 
 	/**
 	 * CommonJCAMPAdapter constructor comment.
@@ -49,7 +122,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##LASTX= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -59,14 +132,16 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected double getFirstX(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
 		if (x == null || x.getFirst() == null) {
-			block.getErrorHandler().error("missing first x");
+			if (log.isErrorEnabled()) {
+				log.error("missing first x");
+			}
 		}
 		return x.getFirst().doubleValue();
 	}
 
 	/**
 	 * gets ##FIRSTY= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -76,14 +151,16 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected double getFirstY(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable y = block.getVariable("Y");
 		if (y == null || y.getFirst() == null) {
-			block.getErrorHandler().error("missing first y");
+			if (log.isErrorEnabled()) {
+				log.error("missing first y");
+			}
 		}
 		return y.getFirst().doubleValue();
 	}
 
 	/**
 	 * gets ##LASTX= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -93,14 +170,16 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected double getLastX(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
 		if (x == null || x.getLast() == null) {
-			block.getErrorHandler().error("missing last x");
+			if (log.isErrorEnabled()) {
+				log.error("missing last x");
+			}
 		}
 		return x.getLast().doubleValue();
 	}
 
 	/**
 	 * gets ##NPOINTS= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -110,7 +189,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected int getNPoints(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrNPoints = block.getDataRecord("NPOINTS");
 		if (ldrNPoints == null) {
-			block.getErrorHandler().error("missing required label ##NPOINTS=");
+			if (log.isErrorEnabled()) {
+				log.error("missing required label ##NPOINTS=");
+			}
 		}
 		String nPoints = ldrNPoints.getContent();
 		return Integer.parseInt(nPoints);
@@ -118,7 +199,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets NTuple Page data.
-	 * 
+	 *
 	 * @param block
 	 *            com.creon.chem.jcamp.JCAMPBlock
 	 * @param page
@@ -132,7 +213,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##DATATABLE= content
-	 * 
+	 *
 	 * @return double[]
 	 * @param block
 	 *            JCAMPBlock
@@ -159,13 +240,11 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 		JCAMPDataRecord ldrXYData = page.getDataRecord("DATATABLE");
 		if (ldrXYData == null) {
-			block.getErrorHandler()
-					.fatal("missing required label ##DATATABLE=");
-			return null;
+			throw new JCAMPException("missing required label ##DATATABLE=");
 		}
 		DataVariableInfo varInfo = new DataVariableInfo(ldrXYData);
 		if (!varInfo.isIncremental())
-			block.getErrorHandler().fatal("data form missmatch");
+			throw new JCAMPException("data form missmatch");
 
 		double[] y = block.getASDFDecoder().decode(ldrXYData, firstX, lastX,
 				xFactor, nPoints);
@@ -178,7 +257,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##DATATABLE= content
-	 * 
+	 *
 	 * @return double[]
 	 * @param block
 	 *            JCAMPBlock
@@ -193,9 +272,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			JCAMPNTuplePage page) throws JCAMPException {
 		JCAMPDataRecord ldrPeaktable = page.getDataRecord("DATATABLE");
 		if (ldrPeaktable == null) {
-			block.getErrorHandler()
-					.fatal("missing required label ##DATATABLE=");
-			return null;
+			throw new JCAMPException("missing required label ##DATATABLE=");
 		}
 		double[][] xy = new double[2][];
 		ArrayList<Double> x = new ArrayList<Double>(20);
@@ -217,7 +294,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##ORIGIN= content
-	 * 
+	 *
 	 * @return java.lang.String
 	 * @param block
 	 *            JCAMPBlock
@@ -227,7 +304,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected String getOrigin(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrOrigin = block.getDataRecord("ORIGIN");
 		if (ldrOrigin == null) {
-			block.getErrorHandler().warn("missing required label ##ORIGIN=");
+			if (log.isWarnEnabled()) {
+				log.warn("missing required label ##ORIGIN=");
+			}
 			return "UNKNOWN ORIGIN";
 		}
 		return ldrOrigin.getContent();
@@ -235,7 +314,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##OWNER= content
-	 * 
+	 *
 	 * @return java.lang.String
 	 * @param block
 	 *            JCAMPBlock
@@ -245,7 +324,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected String getOwner(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrOwner = block.getDataRecord("OWNER");
 		if (ldrOwner == null) {
-			block.getErrorHandler().warn("missing required label ##OWNER=");
+			if (log.isWarnEnabled()) {
+				log.warn("missing required label ##OWNER=");
+			}
 			return "COPYRIGHT UNKNOWN";
 		}
 		return ldrOwner.getContent();
@@ -253,7 +334,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##PEAKTABLE= or ##PEAKASSIGNMENTS= content
-	 * 
+	 *
 	 * @return Object[] array of Peak[], Pattern[], Assignment[]
 	 * @param block
 	 *            JCAMPBlock
@@ -276,9 +357,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 		if (ldrPeaktable == null)
 			ldrPeaktable = block.getDataRecord("XYDATA");
 		if (ldrPeaktable == null) {
-			block.getErrorHandler().fatal("missing peak table");
-			return null;
-
+			throw new JCAMPException("missing peak table");
 		}
 		DatatableTokenizer tokenizer = new DatatableTokenizer(ldrPeaktable);
 		if (tokenizer.getType().equals(DataType.XY)) {
@@ -393,14 +472,13 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			}
 			return new Object[] { peaks, pattern, assigns };
 		} else {
-			block.getErrorHandler().fatal("unknown peaktable");
-			return null;
+			throw new JCAMPException("unknown peaktable");
 		}
 	}
 
 	/**
 	 * gets ##TITLE= content
-	 * 
+	 *
 	 * @return java.lang.String
 	 * @param block
 	 *            JCAMPBlock
@@ -410,14 +488,14 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected String getTitle(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrTitle = block.getDataRecord("TITLE");
 		if (ldrTitle == null) { // should never happen here
-			block.getErrorHandler().fatal("missing required label ##TITLE=");
+			throw new JCAMPException("missing required label ##TITLE=");
 		}
 		return ldrTitle.getContent();
 	}
 
 	/**
 	 * gets ##XFACTOR= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -427,7 +505,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected double getXFactor(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
 		if (x == null || x.getFactor() == null) {
-			block.getErrorHandler().warn("missing x factor, assuming 1.0");
+			if (log.isWarnEnabled()) {
+				log.warn("missing x factor, assuming 1.0");
+			}
 			return 1.0;
 		}
 		return x.getFactor().doubleValue();
@@ -435,7 +515,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##XUNITS= content
-	 * 
+	 *
 	 * @return Unit
 	 * @param block
 	 *            JCAMPBlock
@@ -445,7 +525,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected Unit getXUnits(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
 		if (x == null || x.getUnit() == null) {
-			block.getErrorHandler().warn("missing x unit");
+			if (log.isWarnEnabled()) {
+				log.warn("missing x unit");
+			}
 			return CommonUnit.generic;
 		}
 		return x.getUnit();
@@ -454,7 +536,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * gets ##XYDATA= content fast implementation assumes ASCII encoded text
 	 * (required by JCAMP standard)
-	 * 
+	 *
 	 * @return double[]
 	 * @param block
 	 *            JCAMPBlock
@@ -475,8 +557,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			int nPoints, double xFactor, double yFactor) throws JCAMPException {
 		JCAMPDataRecord ldrXYData = block.getDataRecord("XYDATA");
 		if (ldrXYData == null) {
-			block.getErrorHandler().fatal("missing required label ##XYDATA=");
-			return null;
+			throw new JCAMPException("missing required label ##XYDATA=");
+
 		}
 		double[] y = block.getASDFDecoder().decode(ldrXYData, firstX, lastX,
 				xFactor, nPoints);
@@ -490,7 +572,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##XYPOINTS= content
-	 * 
+	 *
 	 * @return double[]
 	 * @param block
 	 *            JCAMPBlock
@@ -523,8 +605,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 		;
 		JCAMPDataRecord ldrXYPoints = block.getDataRecord("XYPOINTS");
 		if (ldrXYPoints == null) {
-			block.getErrorHandler().fatal("missing required label ##XYPOINTS=");
-			return null;
+			throw new JCAMPException("missing required label ##XYPOINTS=");
+
 		}
 
 		int i = 0;
@@ -536,8 +618,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 					* group.getValue(1)));
 		}
 		if (data.size() != nPoints)
-			block.getErrorHandler().error(
-					"bad ##NPOINTS= or duplicate X values");
+			if (log.isErrorEnabled()) {
+				log.error("bad ##NPOINTS= or duplicate X values");
+			}
 		double[][] xy = new double[2][data.size()];
 		for (Iterator<XYPair> it = data.iterator(); it.hasNext();) {
 			XYPair p = it.next();
@@ -549,7 +632,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##XFACTOR= content
-	 * 
+	 *
 	 * @return double
 	 * @param block
 	 *            JCAMPBlock
@@ -559,7 +642,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected double getYFactor(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable y = block.getVariable("Y");
 		if (y == null || y.getFactor() == null) {
-			block.getErrorHandler().warn("missing y factor, assuming 1.0");
+			if (log.isWarnEnabled()) {
+				log.warn("missing y factor, assuming 1.0");
+			}
 			return 1.0;
 		}
 		return y.getFactor().doubleValue();
@@ -567,7 +652,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	/**
 	 * gets ##YUNITS= content
-	 * 
+	 *
 	 * @return Unit
 	 * @param block
 	 *            JCAMPBlock
@@ -577,81 +662,17 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	protected Unit getYUnits(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable y = block.getVariable("Y");
 		if (y == null || y.getUnit() == null) {
-			block.getErrorHandler().warn("missing y unit");
+			if (log.isWarnEnabled()) {
+				log.warn("missing y unit");
+			}
 			return CommonUnit.generic;
 		}
 		return y.getUnit();
 	}
 
 	/**
-	 * analyse assignment text for targets.
-	 *
-	 * currently assumes SpecInfo convention of a list of integer atom numbers
-	 * 
-	 * @return IAssignmentTarget[]
-	 * @param assign
-	 *            java.lang.String
-	 */
-	protected static IAssignmentTarget[] parseAssignment(String assign) {
-		ArrayList<AtomReference> targets = new ArrayList<AtomReference>(5);
-		StringTokenizer tokenizer = new StringTokenizer(assign, ",");
-		while (tokenizer.hasMoreTokens()) {
-			String target = tokenizer.nextToken();
-			try {
-				int atomNo = Integer.parseInt(target.trim());
-				targets.add(new AtomReference(null, atomNo));
-			} catch (Exception e) {
-			}
-		}
-		IAssignmentTarget[] assigns = new IAssignmentTarget[targets.size()];
-		for (int i = 0; i < targets.size(); i++)
-			assigns[i] = targets.get(i);
-		return assigns;
-	}
-
-	/**
-	 * create peak spectrum from peak table. adds all intensities belonging to
-	 * the same x-position up
-	 * 
-	 * @param peaks
-	 *            Peak1D[]
-	 * @return double[][] array of {x, y}
-	 */
-	protected static double[][] peakTableToPeakSpectrum(Peak1D[] peaks)
-			throws JCAMPException {
-		int n = peaks.length;
-		if (n == 0)
-			throw new JCAMPException("empty peak table");
-		Arrays.sort(peaks);
-		ArrayList<Double> px = new ArrayList<Double>(n);
-		ArrayList<Double> py = new ArrayList<Double>(n);
-		double x0 = peaks[0].getPosition()[0];
-		double y0 = peaks[0].getHeight();
-		for (int i = 1; i < n; i++) {
-			double x = peaks[i].getPosition()[0];
-			double y = peaks[i].getHeight();
-			if (x - x0 > Double.MIN_VALUE) {
-				px.add(new Double(x0));
-				py.add(new Double(y0));
-				x0 = x;
-				y0 = y;
-			} else {
-				y0 += y;
-			}
-		}
-		px.add(new Double(x0));
-		py.add(new Double(y0));
-		double[][] xy = new double[2][px.size()];
-		for (int i = 0; i < px.size(); i++) {
-			xy[0][i] = px.get(i).doubleValue();
-			xy[1][i] = py.get(i).doubleValue();
-		}
-		return xy;
-	}
-
-	/**
 	 * set spectrum note
-	 * 
+	 *
 	 * @param block
 	 *            JCAMPBlock
 	 * @param ldr
@@ -679,13 +700,15 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			StringBuilder msg = new StringBuilder("bad ")
 					.append(descr.getName()).append(" note:\n")
 					.append(ex.getMessage());
-			block.getErrorHandler().warn(msg.toString());
+			if (log.isWarnEnabled()) {
+				log.warn(msg.toString());
+			}
 		}
 	}
 
 	/**
 	 * after creation of spectrum, add other notes
-	 * 
+	 *
 	 * @param block
 	 *            com.creon.chem.jcamp.JCAMPBlock
 	 * @param spectrum

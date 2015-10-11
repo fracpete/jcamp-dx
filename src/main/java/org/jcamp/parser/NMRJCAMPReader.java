@@ -9,8 +9,6 @@ package org.jcamp.parser;
 
 import java.util.StringTokenizer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jcamp.math.IArray1D;
 import org.jcamp.spectrum.ArrayData;
 import org.jcamp.spectrum.Assignment;
@@ -39,10 +37,8 @@ import org.slf4j.LoggerFactory;
 public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		ISpectrumJCAMPReader {
 
-	private final static Logger lg = LoggerFactory
+	private final static Logger log = LoggerFactory
 			.getLogger(NMRJCAMPReader.class);
-
-	private static Log log = LogFactory.getLog(NMRJCAMPReader.class);
 
 	private String mode;
 
@@ -69,8 +65,10 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double reference = getShiftReference(block);
 		double freq = getFrequency(block);
 		if (!block.isNTupleBlock()) {
-			block.getErrorHandler().warn(
-					"illegal FID, assuming y values are real FID part");
+			if (log.isWarnEnabled()) {
+				log.warn("illegal FID, assuming y values are real FID part");
+			}
+
 			// this should never be happen, let's assume we have only real part
 			// of FID
 			Unit xUnit = getXUnits(block);
@@ -107,42 +105,43 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			JCAMPVariable r = block.getVariable("R");
 			JCAMPVariable i = block.getVariable("I");
 			if (x == null)
-				block.getErrorHandler().fatal("missing X variable");
+				throw new JCAMPException("missing X variable");
 			if (r == null)
-				block.getErrorHandler().fatal("missing real fid");
+				throw new JCAMPException("missing real fid");
 			if (i == null)
-				block.getErrorHandler().fatal("missing imaginary fid");
+				throw new JCAMPException("missing imaginary fid");
 			Double firstX = x.getFirst();
 			if (firstX == null)
-				block.getErrorHandler()
-						.fatal("missing required ##FIRST= for X");
+				throw new JCAMPException("missing required ##FIRST= for X");
 			Double lastX = x.getLast();
 			if (lastX == null)
-				block.getErrorHandler().fatal("missing required ##LAST= for X");
+				throw new JCAMPException("missing required ##LAST= for X");
 			Double xFactor = x.getFactor();
 			if (xFactor == null) {
-				block.getErrorHandler().error(
-						"missing required ##FACTOR= for X");
+				if (log.isErrorEnabled()) {
+					log.error("missing required ##FACTOR= for X");
+				}
 				xFactor = new Double(1.0);
 			}
 
 			Double rFactor = r.getFactor();
 			if (rFactor == null) {
-				block.getErrorHandler().error(
-						"missing required ##FACTOR= for R");
+				if (log.isErrorEnabled()) {
+					log.error("missing required ##FACTOR= for R");
+				}
 				rFactor = new Double(1.0);
 			}
 			Double iFactor = i.getFactor();
 			if (iFactor == null) {
-				block.getErrorHandler().error(
-						"missing required ##FACTOR= for I");
+				if (log.isErrorEnabled()) {
+					log.error("missing required ##FACTOR= for I");
+				}
 				iFactor = new Double(1.0);
 			}
 
 			Integer dim = x.getDimension();
 			if (dim == null)
-				block.getErrorHandler().fatal(
-						"missing required ##VARDIM= for X");
+				throw new JCAMPException("missing required ##VARDIM= for X");
 			int nPoints = dim.intValue();
 			Unit xUnit = x.getUnit();
 			Unit rUnit = r.getUnit();
@@ -217,8 +216,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				x = new OrderedArrayData(xy[0], xUnit);
 				y = new ArrayData(xy[1], yUnit);
 			} else {
-				if (lg.isErrorEnabled()) {
-					lg.error("missing data: ##XYDATA= or ##XYPOINTS= required.");
+				if (log.isErrorEnabled()) {
+					log.error("missing data: ##XYDATA= or ##XYPOINTS= required.");
 				}
 			}
 
@@ -238,33 +237,33 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			JCAMPVariable x = block.getVariable("X");
 			JCAMPVariable r = block.getVariable("R");
 			if (x == null)
-				block.getErrorHandler().fatal("missing X variable");
+				throw new JCAMPException("missing X variable");
 			if (r == null)
-				block.getErrorHandler().fatal("missing real part");
+				throw new JCAMPException("missing real part");
 			Double firstX = x.getFirst();
 			if (firstX == null)
-				block.getErrorHandler()
-						.fatal("missing required ##FIRST= for X");
+				throw new JCAMPException("missing required ##FIRST= for X");
 			Double lastX = x.getLast();
 			if (lastX == null)
-				block.getErrorHandler().fatal("missing required ##LAST= for X");
+				throw new JCAMPException("missing required ##LAST= for X");
 			Double xFactor = x.getFactor();
 			if (xFactor == null) {
-				block.getErrorHandler().error(
-						"missing required ##FACTOR= for X");
+				if (log.isErrorEnabled()) {
+					log.error("missing required ##FACTOR= for X");
+				}
 				xFactor = new Double(1.0);
 			}
 
 			Double rFactor = r.getFactor();
 			if (rFactor == null) {
-				block.getErrorHandler().error(
-						"missing required ##FACTOR= for R");
+				if (log.isErrorEnabled()) {
+					log.error("missing required ##FACTOR= for R");
+				}
 				rFactor = new Double(1.0);
 			}
 			Integer dim = x.getDimension();
 			if (dim == null)
-				block.getErrorHandler().fatal(
-						"missing required ##VARDIM= for X");
+				throw new JCAMPException("missing required ##VARDIM= for X");
 			int nPoints = dim.intValue();
 			Unit xUnit = x.getUnit();
 			Unit rUnit = r.getUnit();
@@ -329,8 +328,12 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		try {
 			freq = getFrequency(block);
 		} catch (JCAMPException e) {
-			// often observe frequency is missing in peak tables
-			block.getErrorHandler().warn(e.getMessage());
+			// often observe frequency is missing in peak tables TODO: make
+			// separate exception for that, don't catch all errors here
+
+			if (log.isErrorEnabled()) {
+				log.error(e.getLocalizedMessage());
+			}
 		}
 		spectrum = new NMRSpectrum(x, y, nucleus, freq, reference, false, mode);
 		spectrum.setPeakTable(peaks);
@@ -348,7 +351,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumID() != ISpectrumIdentifier.NMR)
-			block.getErrorHandler().fatal("adapter missmatch");
+			throw new JCAMPException("adapter missmatch");
 		boolean isFID = false;
 		NMRSpectrum spectrum = null;
 		JCAMPDataRecord ldrDataType = block.getDataRecord("DATATYPE");
@@ -364,12 +367,14 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		if (!isFID && block.isNTupleBlock()) {
 			JCAMPVariable x = block.getNTuple().getVariable("X");
 			if (x.getUnit().equals(CommonUnit.second)) {
-				block.getErrorHandler().warn(
-						"NMR FID without NMR FID data type");
+				if (log.isWarnEnabled()) {
+					log.warn("NMR FID without NMR FID data type");
+				}
 				isFID = true;
 			}
-			block.getErrorHandler().warn(
-					"nD NMR or NMR spectra with real and imaginary part");
+			if (log.isWarnEnabled()) {
+				log.warn("nD NMR or NMR spectra with real and imaginary part");
+			}
 		}
 		if (isFID) {
 			spectrum = createFID(block);
@@ -383,7 +388,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				spectrum = createPeakTable(block);
 			else
 				// never reached
-				block.getErrorHandler().fatal("illegal block type");
+				throw new JCAMPException("illegal block type");
 		}
 		String solvent = getSolvent(block);
 		spectrum.setSolvent(solvent);
@@ -462,12 +467,12 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				freq = getBrukerSF(block);
 			} catch (JCAMPException n) {
 				// again an error, throw original exception
-				block.getErrorHandler().fatal(
+				throw new JCAMPException(
 						"missing required label ##.OBSERVEFREQUENCY=");
-				return 0;
 			}
-			block.getErrorHandler()
-					.warn("missing required label ##.OBSERVEFREQUENCY=, using Bruker custom labels");
+			if (log.isWarnEnabled()) {
+				log.warn("missing required label ##.OBSERVEFREQUENCY=, using Bruker custom labels");
+			}
 			return freq;
 		} else {
 			freq = Double.valueOf(ldrFrequency.getContent()).doubleValue();
@@ -548,19 +553,22 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		try {
 			double freq = getBrukerSF(block);
 			reference = freq * (getBrukerSW(block) - getBrukerOffset(block));
-			block.getErrorHandler().warn(
-					"missing ##.SHIFTREFERENCE=, using Bruker custom labels");
+			if (log.isWarnEnabled()) {
+				log.warn("missing ##.SHIFTREFERENCE=, using Bruker custom labels");
+			}
 			return reference;
 		} catch (JCAMPException e) {
 			JCAMPDataRecord ldrReferencePoint = block
 					.getDataRecord("$REFERENCEPOINT");
 			if (ldrReferencePoint == null) {
-				block.getErrorHandler().warn(
-						"missing shift reference: assuming 0.0 Hz");
+				if (log.isWarnEnabled()) {
+					log.warn("missing shift reference: assuming 0.0 Hz");
+				}
 				return 0.0;
 			} else {
-				block.getErrorHandler()
-						.warn("missing ##.SHIFTREFERENCE=, using SpecInfo ##$REFERENCEPOINT=");
+				if (log.isWarnEnabled()) {
+					log.warn("missing ##.SHIFTREFERENCE=, using SpecInfo ##$REFERENCEPOINT=");
+				}
 				return Double.valueOf(ldrReferencePoint.getContent())
 						.doubleValue();
 			}
@@ -658,8 +666,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				if (solvent.equals("TMS"))
 					return 0.0;
 				else {
-					block.getErrorHandler()
-							.warn("missing required label for non-TMS solvent: ##.SOLVENTREFERENCE=, setting reference to 0.0");
+					if (log.isWarnEnabled()) {
+						log.warn("missing required label for non-TMS solvent: ##.SOLVENTREFERENCE=, setting reference to 0.0");
+					}
 					return 0.0;
 				}
 			} else

@@ -22,8 +22,6 @@ import java.util.Vector;
 import net.sf.kerner.utils.collections.trasformer.ToString;
 import net.sf.kerner.utils.collections.trasformer.TransformerEnumerationToIterable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,28 +37,7 @@ public class JCAMPBlock {
 
 	private final static String CRLF = "\r\n";
 
-	private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
-		@Override
-		public void error(String msg) throws JCAMPException {
-			log.error(msg);
-			throw new JCAMPException("ERROR! " + msg);
-		}
-
-		@Override
-		public void fatal(String msg) throws JCAMPException {
-			log.fatal(msg);
-			throw new JCAMPException("FATAL ERROR! " + msg);
-		}
-
-		@Override
-		public void warn(String msg) throws JCAMPException {
-			log.warn(msg);
-		}
-	};
-
 	private final static Logger lg = LoggerFactory.getLogger(JCAMPBlock.class);
-
-	private static Log log = LogFactory.getLog(JCAMPBlock.class);
 
 	/**
 	 * testing.
@@ -116,7 +93,6 @@ public class JCAMPBlock {
 
 	private final int end;
 
-	private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
 	private boolean isValidating = true;
 	/*
 	 * JCAMP file content.
@@ -178,7 +154,6 @@ public class JCAMPBlock {
 		this.start = start;
 		this.end = end;
 		this.parent = parent;
-		this.errorHandler = errorHandler;
 		initBlocks();
 		initLDRs();
 		analyzeBlockType();
@@ -313,7 +288,9 @@ public class JCAMPBlock {
 			throws JCAMPException {
 		JCAMPDataRecord oldLDR = getDataRecord(key);
 		if (oldLDR == null) {
-			errorHandler.error("LDR \"##" + key + "=\" not found in block");
+			if (lg.isErrorEnabled()) {
+				lg.error("LDR \"##" + key + "=\" not found in block");
+			}
 			return new JCAMPBlock(this.getJCAMP());
 		}
 		StringBuilder newJCAMP = new StringBuilder();
@@ -397,15 +374,6 @@ public class JCAMPBlock {
 	 */
 	public Enumeration<JCAMPDataRecord> getDataRecords() {
 		return this.dataRecords.elements();
-	}
-
-	/**
-	 * Insert the method's description here.
-	 *
-	 * @return com.creon.chem.jcamp.IErrorHandler
-	 */
-	public IErrorHandler getErrorHandler() {
-		return errorHandler;
 	}
 
 	/**
@@ -611,19 +579,26 @@ public class JCAMPBlock {
 			if (getDataRecord("SYMBOL") != null) {
 				// assume NTUPLE block, but treat as error
 				this.ntupleBlock = true;
-				errorHandler.error("missing ##NTUPLES=");
+				if (lg.isErrorEnabled()) {
+					lg.error("missing ##NTUPLES=");
+				}
+
 			}
 			if (getDataRecord("VARDIM") != null) {
 				// assume NTUPLE block, but treat as error
 				this.ntupleBlock = true;
-				errorHandler.error("missing ##NTUPLES=");
+				if (lg.isErrorEnabled()) {
+					lg.error("missing ##NTUPLES=");
+				}
 			}
 			if (!this.ntupleBlock)
 				return;
 		}
 		JCAMPDataRecord endNTupleLDR = getDataRecord("ENDNTUPLES");
 		if (endNTupleLDR == null) {
-			errorHandler.error("missing ##END NTUPLES=");
+			if (lg.isErrorEnabled()) {
+				lg.error("missing ##END NTUPLES=");
+			}
 		}
 		this.ntuple = new JCAMPNTuple(this, startNTupleLDR, endNTupleLDR);
 		this.ntupleBlock = true;
@@ -648,21 +623,22 @@ public class JCAMPBlock {
 			JCAMPDataRecord ldr = records.nextElement();
 			if (ldr.isData()) {
 				if (dataLDR != null) {
-					errorHandler
-					.error("more than one data LDR in block: use compound JCAMP");
+					if (lg.isErrorEnabled()) {
+						lg.error("more than one data LDR in block: use compound JCAMP");
+					}
 					break; // use first data block encountered
 				} else
 					dataLDR = ldr;
 			}
 		}
 		if (dataLDR == null) {
-			errorHandler.fatal("missing data LDR");
+			throw new JCAMPException("missing data LDR");
 		}
 		DataVariableInfo info = new DataVariableInfo(dataLDR);
 		String[] symbols = info.getSymbols();
 		JCAMPDataRecord ldr = getDataRecord("NPOINTS");
 		if (ldr == null)
-			errorHandler.fatal("missing required label ##NPOINTS=");
+			throw new JCAMPException("missing required label ##NPOINTS=");
 		int nPoints = Integer.parseInt(ldr.getContent());
 		vars = new JCAMPVariable[symbols.length];
 		for (int i = 0; i < symbols.length; i++) {
@@ -794,16 +770,6 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * sets error handler.
-	 *
-	 * @param newErrorHandler
-	 *            com.creon.chem.jcamp.IErrorHandler
-	 */
-	public void setErrorHandler(IErrorHandler newErrorHandler) {
-		errorHandler = newErrorHandler;
-	}
-
-	/**
 	 * sets spectrum identifier.
 	 *
 	 * @param newSpectrumID
@@ -822,9 +788,11 @@ public class JCAMPBlock {
 	public String toString() {
 		return "JCAMPBlock,SpecID="
 				+ spectrumID
+				+ ", title="
+				+ getDataRecord("TITLE").getValue(true)
 				+ ", dataRecords="
 				+ new ToString()
-						.toString(new TransformerEnumerationToIterable<String>()
-								.transform(dataRecords.keys()));
+		.toString(new TransformerEnumerationToIterable<String>()
+				.transform(dataRecords.keys()));
 	}
 }

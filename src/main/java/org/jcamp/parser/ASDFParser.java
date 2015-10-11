@@ -24,43 +24,64 @@ import antlr.TokenStreamException;
 import antlr.collections.impl.BitSet;
 
 public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes {
-	private static Log log = LogFactory.getLog(ASDFParser.class);
-	protected final static ASDFCheckHandler IGNORE_HANDLER = new ASDFCheckHandler() {
-		@Override
-		public int check(ASDFParseState state) {
-			return ASDFCheckHandler.IGNORE;
-		}
-	};
-
 	private static class LineContent {
 		public double xCheck;
 		public Vector<Double> yVector = null;
-	};
+	}
 
-	/**
-	 * current difdup mode
-	 */
-	protected boolean currentInDIF = false;
-	protected boolean lastInDIF = false;
-	/**
-	 * accumulated y values
-	 */
-	protected Vector<Double> yValues = new Vector<Double>();
-	/**
-	 * parsing state for checks
-	 */
-	protected ASDFParseState state = null;
-	/**
-	 * handler performing x-sequence and y-value checks
-	 */
-	protected ASDFCheckHandler checkHandler = IGNORE_HANDLER;
 	public static final String[] _tokenNames = { "<0>", "EOF", "<2>",
 			"NULL_TREE_LOOKAHEAD", "DIGIT", "SIGN", "EOL", "XCHECK", "PAC",
 			"POSSQZ", "NEGSQZ", "POSDIF", "NEGDIF", "DUP", "WS", "ERROR",
 			"SL_COMMENT" };
 
 	private static final long _tokenSet_0_data_[] = { 50944L, 0L };
+	
 	public static final BitSet _tokenSet_0 = new BitSet(_tokenSet_0_data_);
+
+	protected final static ASDFCheckHandler IGNORE_HANDLER = new ASDFCheckHandler() {
+		@Override
+		public int check(ASDFParseState state) {
+			return ASDFCheckHandler.IGNORE;
+		}
+	};
+	private static Log log = LogFactory.getLog(ASDFParser.class);
+
+	/**
+	 * parsing from standard in
+	 */
+	public static void main(String[] args) {
+		ASDFLexer lexer = new ASDFLexer(System.in);
+		ASDFParser parser = new ASDFParser(lexer);
+		try {
+			parser.parse();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+		double[] y = parser.getYData();
+		for (int i = 0; i < y.length; i++) {
+			System.out.println(i + "\t" + y[i]);
+		}
+	}
+
+	/**
+	 * handler performing x-sequence and y-value checks
+	 */
+	protected ASDFCheckHandler checkHandler = IGNORE_HANDLER;
+	/**
+	 * current difdup mode
+	 */
+	protected boolean currentInDIF = false;
+
+	protected boolean lastInDIF = false;
+	/**
+	 * parsing state for checks
+	 */
+	protected ASDFParseState state = null;
+
+	/**
+	 * accumulated y values
+	 */
+	protected Vector<Double> yValues = new Vector<Double>();
 
 	public ASDFParser(ParserSharedInputState state) {
 		super(state, 1);
@@ -220,7 +241,7 @@ public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes 
 		int d = 0;
 		int u = 0;
 		v = new Vector<Double>(80); // initial capacity of 80 data points per
-									// line
+		// line
 
 		{
 			switch (LA(1)) {
@@ -349,7 +370,7 @@ public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes 
 
 	/**
 	 * gets array of parsed y-data
-	 * 
+	 *
 	 * @return int[]
 	 */
 	public double[] getYData() {
@@ -441,23 +462,6 @@ public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes 
 		return lineContent;
 	}
 
-	/**
-	 * parsing from standard in
-	 */
-	public static void main(String[] args) {
-		ASDFLexer lexer = new ASDFLexer(System.in);
-		ASDFParser parser = new ASDFParser(lexer);
-		try {
-			parser.parse();
-		} catch (Exception e) {
-			System.err.println(e);
-		}
-		double[] y = parser.getYData();
-		for (int i = 0; i < y.length; i++) {
-			System.out.println(i + "\t" + y[i]);
-		}
-	}
-
 	protected final double pacNumber() throws RecognitionException,
 			TokenStreamException {
 		double v;
@@ -494,7 +498,7 @@ public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes 
 
 		double p = 0;
 		v = new Vector<Double>(80); // initial capacity of 80 data points per
-									// line
+		// line
 
 		{
 			int _cnt28 = 0;
@@ -531,7 +535,7 @@ public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes 
 
 	/**
 	 * parses with an expected size of 32000 data points
-	 * 
+	 *
 	 * @param int expectedSize
 	 */
 	public void parse() throws JCAMPException {
@@ -540,7 +544,7 @@ public class ASDFParser extends antlr.LLkParser implements ASDFParserTokenTypes 
 
 	/**
 	 * parses an ASDF block
-	 * 
+	 *
 	 * @param int expectedSize
 	 */
 	public void parse(int expectedSize) throws JCAMPException {

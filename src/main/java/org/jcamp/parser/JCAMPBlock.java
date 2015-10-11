@@ -79,6 +79,7 @@ public class JCAMPBlock {
 
 	private ASDFDecoder asdfDecoder = new ASDFDecoder();
 
+	private BlockType blockType;
 	/*
 	 * A {@link java.util.Map map} storing references to all child blocks. Key
 	 * is a block's ID (e.g. {@code ##BLOCKID= 1}).
@@ -86,13 +87,13 @@ public class JCAMPBlock {
 	private Map<Integer, JCAMPBlock> childBlocks = new LinkedHashMap<Integer, JCAMPBlock>(
 			10);
 	private String data;
+
 	// hashtable containing all data records (or list of data records for
 	// multiple records with same key)
 	private Hashtable<String, JCAMPDataRecord> dataRecords = new Hashtable<String, JCAMPDataRecord>(
 			50);
 
 	private final int end;
-
 	private boolean isValidating = true;
 	/*
 	 * JCAMP file content.
@@ -100,8 +101,8 @@ public class JCAMPBlock {
 	private final String jcamp;
 	// array of data records with duplicate keys
 	private JCAMPDataRecord[] ldrs;
-	private JCAMPNTuple ntuple;
 
+	private JCAMPNTuple ntuple;
 	private boolean ntupleBlock = false;
 	private int numDataRecords;
 	/*
@@ -112,9 +113,8 @@ public class JCAMPBlock {
 	 */
 	private final JCAMPBlock parent;
 	private JCAMPBlock[] references = null;
-	private int spectrumID;
+	private int spectrumType;
 	private final int start;
-	private Type type;
 	private JCAMPVariable[] vars = null;
 
 	/**
@@ -211,26 +211,26 @@ public class JCAMPBlock {
 	private void analyzeBlockType() throws JCAMPException {
 		JCAMPDataRecord ldrJCAMPCS = getDataRecord("JCAMPCS");
 		if (ldrJCAMPCS != null)
-			this.type = Type.STRUCTURE;
+			this.blockType = BlockType.STRUCTURE;
 		else {
 			JCAMPDataRecord ldrDataType = getDataRecord("DATATYPE");
 			if (ldrDataType == null)
 				throw new JCAMPException("missing ##DATATYPE=");
 			String dtype = ldrDataType.getContent().toUpperCase();
 			if (dtype.indexOf("LINK") >= 0) {
-				this.type = Type.LINK;
+				this.blockType = BlockType.LINK;
 			} else if (dtype.indexOf("TABLE") >= 0) {
-				this.type = Type.PEAKTABLE;
+				this.blockType = BlockType.PEAKTABLE;
 				analyzeSpectrumID(dtype);
 			} else if (dtype.indexOf("ASSIGNMENT") >= 0) {
-				this.type = Type.ASSIGNMENT;
+				this.blockType = BlockType.ASSIGNMENT;
 				analyzeSpectrumID(dtype);
 			} else {
-				this.type = Type.FULLSPECTRUM;
+				this.blockType = BlockType.FULLSPECTRUM;
 				analyzeSpectrumID(dtype);
-				if (spectrumID == ISpectrumIdentifier.MASS
+				if (spectrumType == ISpectrumIdentifier.MASS
 						&& dtype.indexOf("CONTINUOUS") < 0)
-					this.type = Type.PEAKTABLE;
+					this.blockType = BlockType.PEAKTABLE;
 			}
 		}
 	}
@@ -245,23 +245,23 @@ public class JCAMPBlock {
 		if (dataType != null) {
 			dataType = dataType.toUpperCase();
 			if (dataType.indexOf("NMR") > -1) {
-				spectrumID = ISpectrumIdentifier.NMR;
+				spectrumType = ISpectrumIdentifier.NMR;
 			} else if (dataType.indexOf("MASS") > -1) {
-				spectrumID = ISpectrumIdentifier.MASS;
+				spectrumType = ISpectrumIdentifier.MASS;
 			} else if (dataType.indexOf("INFRARED") > -1) {
-				spectrumID = ISpectrumIdentifier.IR;
+				spectrumType = ISpectrumIdentifier.IR;
 			} else if (dataType.indexOf("IR") > -1) {
-				spectrumID = ISpectrumIdentifier.IR;
+				spectrumType = ISpectrumIdentifier.IR;
 			} else if (dataType.indexOf("UV") > -1) {
-				spectrumID = ISpectrumIdentifier.UV;
+				spectrumType = ISpectrumIdentifier.UV;
 			} else if (dataType.indexOf("ULTRAVIOLET") > -1) {
-				spectrumID = ISpectrumIdentifier.UV;
+				spectrumType = ISpectrumIdentifier.UV;
 			} else if (dataType.indexOf("RAMAN") > -1) {
-				spectrumID = ISpectrumIdentifier.RAMAN;
+				spectrumType = ISpectrumIdentifier.RAMAN;
 			} else if (dataType.indexOf("FLUORESCENCE") > -1) {
-				spectrumID = ISpectrumIdentifier.FLUORESCENCE;
+				spectrumType = ISpectrumIdentifier.FLUORESCENCE;
 			} else if (dataType.indexOf("CHROMATOGRAM") > -1) {
-				spectrumID = ISpectrumIdentifier.CHROMATOGRAM;
+				spectrumType = ISpectrumIdentifier.CHROMATOGRAM;
 			}
 		}
 	}
@@ -334,6 +334,10 @@ public class JCAMPBlock {
 	 */
 	public JCAMPBlock getBlock(int id) {
 		return this.childBlocks.get(new Integer(id));
+	}
+
+	public BlockType getBlockType() {
+		return this.blockType;
 	}
 
 	/**
@@ -445,22 +449,8 @@ public class JCAMPBlock {
 		return this.references;
 	}
 
-	/**
-	 * gets spectrum identifier.
-	 *
-	 * @return int
-	 */
-	public int getSpectrumID() {
-		return spectrumID;
-	}
-
-	/**
-	 * gets block type.
-	 *
-	 * @return JCAMPBlock.Type
-	 */
-	public Type getType() {
-		return this.type;
+	public int getSpectrumType() {
+		return spectrumType;
 	}
 
 	/**
@@ -648,13 +638,13 @@ public class JCAMPBlock {
 				v.setType(JCAMPVariable.Type.DEPENDENT);
 			else
 				v.setType(JCAMPVariable.Type.INDEPENDENT);
-			if (getType().equals(Type.FULLSPECTRUM)) {
+			if (getBlockType().equals(BlockType.FULLSPECTRUM)) {
 				if (info.isIncremental())
 					v.setFormat(JCAMPVariable.Format.ASDF);
 				else
 					v.setFormat(JCAMPVariable.Format.AFFN);
-			} else if (getType().equals(Type.PEAKTABLE)
-					|| getType().equals(Type.ASSIGNMENT)) {
+			} else if (getBlockType().equals(BlockType.PEAKTABLE)
+					|| getBlockType().equals(BlockType.ASSIGNMENT)) {
 				if (symbol.equals("X") || symbol.equals("Y")
 						|| symbol.equals("W"))
 					v.setFormat(JCAMPVariable.Format.AFFN);
@@ -692,7 +682,7 @@ public class JCAMPBlock {
 	 *
 	 */
 	public boolean isLinkBlock() {
-		return this.type.equals(Type.LINK);
+		return this.blockType.equals(BlockType.LINK);
 	}
 
 	/**
@@ -710,7 +700,7 @@ public class JCAMPBlock {
 	 * @return boolean
 	 */
 	public boolean isStructureBlock() {
-		return this.type.equals(Type.STRUCTURE);
+		return this.blockType.equals(BlockType.STRUCTURE);
 	}
 
 	public boolean isValidating() {
@@ -769,14 +759,8 @@ public class JCAMPBlock {
 		asdfDecoder = newAsdfDecoder;
 	}
 
-	/**
-	 * sets spectrum identifier.
-	 *
-	 * @param newSpectrumID
-	 *            int
-	 */
-	public void setSpectrumID(int newSpectrumID) {
-		spectrumID = newSpectrumID;
+	public void setSpectrumType(int newSpectrumID) {
+		spectrumType = newSpectrumID;
 	}
 
 	public void setValidating(boolean useCheckValues) {
@@ -787,12 +771,12 @@ public class JCAMPBlock {
 	@Override
 	public String toString() {
 		return "JCAMPBlock,SpecID="
-				+ spectrumID
+				+ JCAMPReader.findAdapter(spectrumType)
 				+ ", title="
 				+ getDataRecord("TITLE").getValue(true)
 				+ ", dataRecords="
 				+ new ToString()
-		.toString(new TransformerEnumerationToIterable<String>()
-				.transform(dataRecords.keys()));
+						.toString(new TransformerEnumerationToIterable<String>()
+								.transform(dataRecords.keys()));
 	}
 }

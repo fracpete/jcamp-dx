@@ -350,7 +350,7 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 */
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-		if (block.getSpectrumID() != ISpectrumIdentifier.NMR)
+		if (block.getSpectrumType() != ISpectrumIdentifier.NMR)
 			throw new JCAMPException("adapter missmatch");
 		boolean isFID = false;
 		NMRSpectrum spectrum = null;
@@ -379,12 +379,12 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		if (isFID) {
 			spectrum = createFID(block);
 		} else {
-			Type type = block.getType();
-			if (type.equals(Type.FULLSPECTRUM))
+			BlockType type = block.getBlockType();
+			if (type.equals(BlockType.FULLSPECTRUM))
 				spectrum = createFS(block);
-			else if (type.equals(Type.PEAKTABLE))
+			else if (type.equals(BlockType.PEAKTABLE))
 				spectrum = createPeakTable(block);
-			else if (type.equals(Type.ASSIGNMENT))
+			else if (type.equals(BlockType.ASSIGNMENT))
 				spectrum = createPeakTable(block);
 			else
 				// never reached
@@ -496,10 +496,10 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		for (int i = 0; i < linked.length; i++) {
 			if (linked[i].isStructureBlock() || linked[i].isLinkBlock())
 				continue;
-			Type type = linked[i].getType();
-			if (linked[i].getSpectrumID() != ISpectrumIdentifier.NMR)
+			BlockType type = linked[i].getBlockType();
+			if (linked[i].getSpectrumType() != ISpectrumIdentifier.NMR)
 				continue;
-			if (type.equals(Type.PEAKTABLE) || type.equals(Type.ASSIGNMENT)) {
+			if (type.equals(BlockType.PEAKTABLE) || type.equals(BlockType.ASSIGNMENT)) {
 				NMRSpectrum linkSpectrum = createPeakTable(linked[i]);
 				// check if nucleus, frequency, and solvent reference are equal
 				if (!linkSpectrum.getNucleus().equals(spectrum.getNucleus()))

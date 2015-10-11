@@ -148,15 +148,15 @@ ISpectrumJCAMPReader {
 	 */
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-		if (block.getSpectrumID() != ISpectrumIdentifier.IR)
+		if (block.getSpectrumType() != ISpectrumIdentifier.IR)
 			throw new JCAMPException("JCAMP reader adapter missmatch");
 		IRSpectrum spectrum = null;
-		Type type = block.getType();
-		if (type.equals(Type.FULLSPECTRUM))
+		BlockType type = block.getBlockType();
+		if (type.equals(BlockType.FULLSPECTRUM))
 			spectrum = createFS(block);
-		else if (type.equals(Type.PEAKTABLE))
+		else if (type.equals(BlockType.PEAKTABLE))
 			spectrum = createPeakTable(block);
-		else if (type.equals(Type.ASSIGNMENT))
+		else if (type.equals(BlockType.ASSIGNMENT))
 			spectrum = createPeakTable(block);
 		else
 			// never reached

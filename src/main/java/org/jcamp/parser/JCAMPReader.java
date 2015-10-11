@@ -52,6 +52,7 @@ public class JCAMPReader {
 			log.warn(msg);
 		}
 	};
+
 	private static boolean isValidating = true;
 	private final static Logger lg = LoggerFactory.getLogger(JCAMPReader.class);
 	private static Log log = LogFactory.getLog(JCAMPReader.class);
@@ -65,6 +66,20 @@ public class JCAMPReader {
 	 */
 	public final static String STRICT = "strict";
 	private static JCAMPReader theInstance = null;
+
+	static {
+		initAdapters();
+	}
+
+	/**
+	 * Finds JCAMPAdapter for specific spectrum ID.
+	 *
+	 *
+	 */
+	public static ISpectrumJCAMPReader findAdapter(int spectrumID) {
+		ISpectrumJCAMPReader adapter = adapters.get(new Integer(spectrumID));
+		return adapter;
+	}
 
 	/**
 	 * access method for JCAMPReader singleton instance. gives a validating
@@ -143,7 +158,7 @@ public class JCAMPReader {
 	}
 
 	public Spectrum createSpectrum(File file) throws IOException,
-	JCAMPException {
+			JCAMPException {
 		return createSpectrum(new FileReader(file));
 
 	}
@@ -162,7 +177,7 @@ public class JCAMPReader {
 			rootblock = block;
 			block = findFirstSpectrumBlock(block);
 		}
-		ISpectrumJCAMPReader reader = findAdapter(block.getSpectrumID());
+		ISpectrumJCAMPReader reader = findAdapter(block.getSpectrumType());
 		if (reader == null) {
 			throw new IllegalArgumentException("spectrum type not implemented");
 		}
@@ -193,7 +208,7 @@ public class JCAMPReader {
 	 * @throws IOException
 	 */
 	public Spectrum createSpectrum(Reader reader) throws IOException,
-	JCAMPException {
+			JCAMPException {
 		StringBuilder fileData = new StringBuilder();
 		char[] buf = new char[1024];
 		int numRead = 0;
@@ -218,16 +233,6 @@ public class JCAMPReader {
 		JCAMPBlock block = new JCAMPBlock(jcamp, errorHandler);
 		block.setValidating(JCAMPReader.isValidating);
 		return createSpectrum(block);
-	}
-
-	/**
-	 * Finds JCAMPAdapter for specific spectrum ID.
-	 *
-	 *
-	 */
-	private ISpectrumJCAMPReader findAdapter(int spectrumID) {
-		ISpectrumJCAMPReader adapter = adapters.get(new Integer(spectrumID));
-		return adapter;
 	}
 
 	/**

@@ -6,35 +6,35 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Type implements Serializable {
-	public final static Type ASSIGNMENT = new Type(4, "assignment");
-	public final static Type FULLSPECTRUM = new Type(2, "full spectrum");
-	public final static Type LINK = new Type(0, "link");
+public class BlockType implements Serializable {
+	public final static BlockType ASSIGNMENT = new BlockType(4, "assignment");
+	public final static BlockType FULLSPECTRUM = new BlockType(2, "full spectrum");
+	public final static BlockType LINK = new BlockType(0, "link");
 
-	public final static Type PEAKTABLE = new Type(3, "peak table");
+	public final static BlockType PEAKTABLE = new BlockType(3, "peak table");
 
 	private static final long serialVersionUID = -8081269600789693382L;
 
-	public final static Type STRUCTURE = new Type(1, "structure");
+	public final static BlockType STRUCTURE = new BlockType(1, "structure");
 
-	private final static Type[] TYPES = new Type[] { LINK, STRUCTURE,
+	private final static BlockType[] TYPES = new BlockType[] { LINK, STRUCTURE,
 			FULLSPECTRUM, PEAKTABLE, ASSIGNMENT };
 
-	private final static List<Type> TYPES_LIST = Collections
+	private final static List<BlockType> TYPES_LIST = Collections
 			.unmodifiableList(Arrays.asList(TYPES));
 
 	private final String key;
 
 	private final int ordinal;
 
-	private Type(int ordinal, String key) {
+	private BlockType(int ordinal, String key) {
 		this.ordinal = ordinal;
 		this.key = key;
 	}
 
 	@Override
 	public final boolean equals(Object obj) {
-		if (obj instanceof Type && ((Type) obj) == this)
+		if (obj instanceof BlockType && ((BlockType) obj) == this)
 			return true;
 		return false;
 	}
@@ -53,7 +53,7 @@ public class Type implements Serializable {
 		return key;
 	}
 
-	public Collection<Type> types() {
+	public Collection<BlockType> types() {
 		return TYPES_LIST;
 	}
 }

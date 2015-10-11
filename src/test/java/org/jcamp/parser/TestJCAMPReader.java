@@ -16,6 +16,7 @@ import java.io.IOException;
 
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
 
+import org.jcamp.VisitorJCAMPBlock;
 import org.jcamp.spectrum.Spectrum;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,6 +26,13 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestJCAMPReader {
+
+	static void iterateAll(JCAMPBlock b, VisitorJCAMPBlock visitor) {
+		visitor.transform(b);
+		for (JCAMPBlock bb : b.getChildBlocks()) {
+			iterateAll(bb, visitor);
+		}
+	}
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -53,18 +61,11 @@ public class TestJCAMPReader {
 	}
 
 	@Test
-	public final void testCreateBlock01() throws IOException, JCAMPException {
-		JCAMPBlock b = new JCAMPBlock(new LazyStringReader().read(new File(
-				"src/test/resources/testdata_BLAAF/BLAAF172rpac.jdx")));
-		assertNotNull(b);
-	}
-
-	@Test
 	public final void testCreateBlock13() throws IOException, JCAMPException {
 		JCAMPBlock b = new JCAMPBlock(
 				new LazyStringReader()
-						.read(new File(
-								"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+				.read(new File(
+						"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
 		assertNotNull(b);
 		// System.out.println(b);
 		for (JCAMPBlock bb : b.getChildBlocks()) {
@@ -192,5 +193,31 @@ public class TestJCAMPReader {
 		Spectrum s = JCAMPReader.getInstance().createSpectrum(
 				new File("src/test/resources/testdata_LEV/LEVLA2hri.jdx"));
 		System.out.println(s);
+	}
+
+	@Test
+	public final void testWrongSpectrumType01() throws IOException,
+			JCAMPException {
+		JCAMPBlock b = new JCAMPBlock(new LazyStringReader().read(new File(
+				"src/test/resources/testdata_BLAAF/BLAAF172rpac.jdx")));
+		assertNotNull(b);
+		iterateAll(b, new VisitorJCAMPBlock() {
+			@Override
+			public Void transform(JCAMPBlock element, int cnt) {
+				// third block contains peak table
+				if (cnt == 2) {
+					try {
+						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+								element);
+						assertNotNull(s);
+						assertNotNull(s.getPeakTable());
+					} catch (JCAMPException e) {
+						throw new RuntimeException(e);
+					}
+				}
+				return null;
+			}
+
+		});
 	}
 }

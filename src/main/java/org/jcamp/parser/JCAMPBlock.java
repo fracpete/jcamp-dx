@@ -214,12 +214,20 @@ public class JCAMPBlock {
 			this.blockType = BlockType.STRUCTURE;
 		else {
 			JCAMPDataRecord ldrDataType = getDataRecord("DATATYPE");
-			if (ldrDataType == null)
-				throw new JCAMPException("missing ##DATATYPE=");
+
+			JCAMPDataRecord peaktable = getDataRecord("PEAKTABLE");
+
+			if (ldrDataType == null) {
+				if (lg.isWarnEnabled()) {
+					lg.warn("missing ##DATATYPE=");
+				}
+			}
+
 			String dtype = ldrDataType.getContent().toUpperCase();
+
 			if (dtype.indexOf("LINK") >= 0) {
 				this.blockType = BlockType.LINK;
-			} else if (dtype.indexOf("TABLE") >= 0) {
+			} else if (dtype.indexOf("TABLE") >= 0 || peaktable != null) {
 				this.blockType = BlockType.PEAKTABLE;
 				analyzeSpectrumID(dtype);
 			} else if (dtype.indexOf("ASSIGNMENT") >= 0) {
@@ -361,11 +369,9 @@ public class JCAMPBlock {
 	}
 
 	/**
-	 * get data records by normalized key
+	 * Gets data records by normalized key
 	 *
-	 * @return JCAMPDataRecord
-	 * @param key
-	 *            java.lang.String
+	 *
 	 */
 	public JCAMPDataRecord getDataRecord(String key) {
 		return dataRecords.get(key);
@@ -770,13 +776,13 @@ public class JCAMPBlock {
 
 	@Override
 	public String toString() {
-		return "JCAMPBlock,SpecID="
+		return "JCAMPBlock,SpecType="
 				+ JCAMPReader.findAdapter(spectrumType)
 				+ ", title="
 				+ getDataRecord("TITLE").getValue(true)
 				+ ", dataRecords="
 				+ new ToString()
-						.toString(new TransformerEnumerationToIterable<String>()
-								.transform(dataRecords.keys()));
+		.toString(new TransformerEnumerationToIterable<String>()
+				.transform(dataRecords.keys()));
 	}
 }

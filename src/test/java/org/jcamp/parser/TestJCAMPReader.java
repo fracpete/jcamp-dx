@@ -162,7 +162,7 @@ public class TestJCAMPReader {
 				.getInstance()
 				.createSpectrum(
 						new File(
-								"src/test/resources/testdata2/S2015_1275_1 3-fpm mit Struc.jcamp"));
+								"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp"));
 		assertNotNull(s);
 	}
 

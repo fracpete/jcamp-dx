@@ -17,12 +17,13 @@ import java.io.IOException;
 import net.sf.kerner.utils.io.lazy.LazyStringReader;
 
 import org.jcamp.VisitorJCAMPBlock;
+import org.jcamp.spectrum.IRSpectrum;
+import org.jcamp.spectrum.NMRSpectrum;
 import org.jcamp.spectrum.Spectrum;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestJCAMPReader {
@@ -61,118 +62,111 @@ public class TestJCAMPReader {
 	}
 
 	@Test
-	public final void testCreateBlock13() throws IOException, JCAMPException {
+	public final void testAccessPeakList02() throws IOException, JCAMPException {
 		JCAMPBlock b = new JCAMPBlock(
 				new LazyStringReader()
 				.read(new File(
-						"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+						"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/2-MAPB.jcamp")));
 		assertNotNull(b);
-		// System.out.println(b);
-		for (JCAMPBlock bb : b.getChildBlocks()) {
-			// System.out.println(bb);
-		}
+		iterateAll(b, new VisitorJCAMPBlock() {
+
+			@Override
+			public Void transform(JCAMPBlock element, int cnt) {
+				// 4th block contains peak table
+				if (cnt == 4) {
+					try {
+						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+								element);
+						assertNotNull(s);
+						assertNotNull(s.getPeakTable());
+					} catch (JCAMPException e) {
+						throw new RuntimeException(e);
+					}
+				}
+				return null;
+			}
+		});
+	}
+
+	@Test
+	public final void testAccessPeakList03() throws IOException, JCAMPException {
+		JCAMPBlock b = new JCAMPBlock(
+				new LazyStringReader()
+				.read(new File(
+						"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+		assertNotNull(b);
+		iterateAll(b, new VisitorJCAMPBlock() {
+
+			@Override
+			public Void transform(JCAMPBlock element, int cnt) {
+				// 4th block contains peak table
+				if (cnt == 4) {
+					try {
+						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+								element);
+						assertNotNull(s);
+						assertNotNull(s.getPeakTable());
+					} catch (JCAMPException e) {
+						throw new RuntimeException(e);
+					}
+				}
+				return null;
+			}
+		});
+
+	}
+
+	@Test
+	public final void testAccessPeakList04() throws IOException, JCAMPException {
+		JCAMPBlock b = new JCAMPBlock(
+				new LazyStringReader()
+				.read(new File(
+						"/home/alex/sources/jcamp-dx/src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx")));
+		assertNotNull(b);
+		iterateAll(b, new VisitorJCAMPBlock() {
+
+			@Override
+			public Void transform(JCAMPBlock element, int cnt) {
+				// 3th block contains peak table
+				if (cnt == 3) {
+					try {
+						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+								element);
+						assertNotNull(s);
+						assertNotNull(s.getPeakTable());
+					} catch (JCAMPException e) {
+						throw new RuntimeException(e);
+					}
+				}
+				return null;
+			}
+		});
+
+	}
+
+	@Test
+	public final void testCreateSpectrum01() throws IOException, JCAMPException {
+		Spectrum s = JCAMPReader
+				.getInstance()
+				.createSpectrum(
+						new File(
+								"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/S2014_5533_94 AM-1220_aceton-HSQC.jcamp"));
+		assertNotNull(s);
+
 	}
 
 	@Test
 	public final void testCreateSpectrum02() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum03() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h-b.jdx"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum04() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h-c.jdx"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum05() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h-d.jdx"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum06() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h-e.jdx"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum07() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h-own.jdx"));
-		System.out.println(s);
-	}
-
-	@Ignore
-	// TODO: Cannot read binary
-	@Test
-	public final void testCreateSpectrum08() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF41h.esp"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum09() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_BLAAF/BLAAF42h.jdx"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum10() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata_LEV/LEVLA2h.jdx"));
-		System.out.println(s);
-	}
-
-	@Ignore("Fails for now, fix ASAP")
-	@Test
-	public final void testCreateSpectrum11() throws IOException, JCAMPException {
 		Spectrum s = JCAMPReader
 				.getInstance()
 				.createSpectrum(
 						new File(
-								"src/test/resources/testdata2/S2014_5533_94 AM-1220_aceton-HSQC.jcamp"));
-		System.out.println(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum12() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata2/2-MAPB.jcamp"));
+								"/home/alex/sources/jcamp-dx/src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx"));
 		assertNotNull(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum13() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader
-				.getInstance()
-				.createSpectrum(
-						new File(
-								"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp"));
-		assertNotNull(s);
-	}
-
-	@Test
-	public final void testCreateSpectrum14() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
-				new File("src/test/resources/testdata2/PE1800.DX"));
-		assertNotNull(s);
-		assertNotNull(s.getXData());
-		assertNotNull(s.getYData());
+		assertEquals(NMRSpectrum.class, s.getClass());
+		NMRSpectrum ns = (NMRSpectrum) s;
+		assertNotNull(ns.getXData());
+		assertNotNull(ns.getYData());
 
 	}
 
@@ -184,7 +178,7 @@ public class TestJCAMPReader {
 				.createSpectrum(
 						new File(
 								"src/test/resources/testdata_BLAAF/BLAAF172ripac.jdx"));
-		System.out.println(s);
+		assertNotNull(s);
 	}
 
 	@Test
@@ -192,7 +186,21 @@ public class TestJCAMPReader {
 			throws IOException, JCAMPException {
 		Spectrum s = JCAMPReader.getInstance().createSpectrum(
 				new File("src/test/resources/testdata_LEV/LEVLA2hri.jdx"));
-		System.out.println(s);
+		assertNotNull(s);
+	}
+
+	@Test
+	public final void testCreateSpectrumInfrared01() throws IOException,
+	JCAMPException {
+		Spectrum s = JCAMPReader
+				.getInstance()
+				.createSpectrum(
+						new File(
+								"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/PE1800.DX"));
+		assertNotNull(s);
+		assertEquals(IRSpectrum.class, s.getClass());
+		assertNotNull(s.getXData());
+		assertNotNull(s.getYData());
 	}
 
 	@Test

@@ -42,9 +42,6 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 	private String mode;
 
-	/**
-	 * NMRJCAMPAdapter constructor comment.
-	 */
 	protected NMRJCAMPReader(String mode) {
 		super();
 		this.mode = mode;
@@ -53,11 +50,11 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	/**
 	 * create NMR FID spectrum from JCAMPBlock.
 	 *
-	 * @return NMRSpectrum
+	 * @return {@link NMRSpectrum}
 	 * @param block
 	 *            JCAMPBlock
 	 * @exception JCAMPException
-	 *                exception thrown if parsing fails.
+	 *                if parsing fails
 	 */
 	private NMRSpectrum createFID(JCAMPBlock block) throws JCAMPException {
 		NMRSpectrum spectrum = null;
@@ -322,6 +319,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			refPoint = getShiftReferencePoint(block);
 			reference = x.pointAt(refPoint);
 		} catch (JCAMPException e) {
+			if (log.isErrorEnabled()) {
+				log.error(e.getLocalizedMessage(), e);
+			}
 			// often solventreference is missing in peak tables
 			reference = getShiftReference(block);
 		}
@@ -416,18 +416,13 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	}
 
 	/**
-	 * gets ##$SF= content (Bruker specific)
+	 * Gets ##$SF= content (Bruker specific)
 	 *
-	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
 	 */
 	private double getBrukerSF(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrSF = block.getDataRecord("$SF");
 		if (ldrSF == null)
-			throw new JCAMPException();
+			throw new JCAMPException("No data record for $SF");
 		String sf = ldrSF.getContent();
 		return Double.valueOf(sf).doubleValue();
 	}
@@ -499,7 +494,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			BlockType type = linked[i].getBlockType();
 			if (linked[i].getSpectrumType() != ISpectrumIdentifier.NMR)
 				continue;
-			if (type.equals(BlockType.PEAKTABLE) || type.equals(BlockType.ASSIGNMENT)) {
+			if (type.equals(BlockType.PEAKTABLE)
+					|| type.equals(BlockType.ASSIGNMENT)) {
 				NMRSpectrum linkSpectrum = createPeakTable(linked[i]);
 				// check if nucleus, frequency, and solvent reference are equal
 				if (!linkSpectrum.getNucleus().equals(spectrum.getNucleus()))
@@ -558,6 +554,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			}
 			return reference;
 		} catch (JCAMPException e) {
+			if (log.isErrorEnabled()) {
+				log.error(e.getLocalizedMessage(), e);
+			}
 			JCAMPDataRecord ldrReferencePoint = block
 					.getDataRecord("$REFERENCEPOINT");
 			if (ldrReferencePoint == null) {
@@ -591,8 +590,11 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		JCAMPDataRecord ldrShiftReference = block
 				.getDataRecord(".SHIFTREFERENCE");
 		if (ldrShiftReference == null) {
-			// block.getErrorHandler().warn("missing ##.SHIFTREFERENCE=");
-			throw new JCAMPException();
+			if (log.isWarnEnabled()) {
+				log.warn("Missing data record .SHIFTREFERENCE, assuming 0");
+			}
+			return 0;
+
 		} else {
 			String shiftRef = ldrShiftReference.getContent();
 			StringTokenizer commaTokenizer = new java.util.StringTokenizer(

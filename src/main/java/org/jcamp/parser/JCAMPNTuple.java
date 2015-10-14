@@ -7,24 +7,25 @@
  ******************************************************************************/
 package org.jcamp.parser;
 
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
 /**
  * class for reading a NTUPLE table.
- * 
+ *
  * @author Thomas Weber
  */
 public class JCAMPNTuple {
 
-	private JCAMPDataRecord startLDR; // ##NTUPLES=
-	private JCAMPDataRecord endLDR; // ##ENDNTUPLES=
 	private JCAMPBlock containingBlock;
-	private JCAMPDataRecord[] headers;
-	private JCAMPNTuplePage[] pages;
-	private JCAMPVariable[] vars;
-	private int numHeaders;
+	private JCAMPDataRecord endLDR; // ##ENDNTUPLES=
 	private int firstIndex;
+	private JCAMPDataRecord[] headers;
 	private int lastIndex;
+	private int numHeaders;
+	private JCAMPNTuplePage[] pages;
+	private JCAMPDataRecord startLDR; // ##NTUPLES=
+	private JCAMPVariable[] vars;
 
 	/**
 	 * JCAMPNTuple constructor comment.
@@ -40,7 +41,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets containing block.
-	 * 
+	 *
 	 * @return JCAMPBlock
 	 */
 	public JCAMPBlock getBlock() {
@@ -49,7 +50,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets a header LDR.
-	 * 
+	 *
 	 * @return JCAMPDataRecord
 	 * @param key
 	 *            java.lang.String
@@ -65,7 +66,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets array of NTUPLE headers.
-	 * 
+	 *
 	 * @return JCAMPDataRecord[]
 	 */
 	public JCAMPDataRecord[] getHeaders() {
@@ -74,7 +75,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets containing JCAMP
-	 * 
+	 *
 	 * @return java.lang.String
 	 */
 	public String getJCAMP() {
@@ -83,7 +84,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets NTUPLE page number <code>index</code>.
-	 * 
+	 *
 	 * @return com.labcontrol.jcamp.reader.JCAMPNTuplePage
 	 * @param index
 	 *            int
@@ -96,7 +97,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets array of NTUPLE pages.
-	 * 
+	 *
 	 * @return JCAMPNTuplePage[]
 	 */
 	public JCAMPNTuplePage[] getPages() {
@@ -105,7 +106,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets the variable by symbol <code>symbol</code>.
-	 * 
+	 *
 	 * @param String
 	 *            symbol
 	 * @return com.creon.chem.jcamp.JCAMPVariable
@@ -116,12 +117,12 @@ public class JCAMPNTuple {
 			if (symbol.equals(vars[i].getSymbol()))
 				return vars[i];
 		}
-		return null;
+		throw new NoSuchElementException("No JCAMPVariable for " + symbol);
 	}
 
 	/**
 	 * gets variable by name.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.JCAMPVariable
 	 * @param name
 	 *            java.lang.String
@@ -137,7 +138,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets array of variables defined in NTUPLE.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.JCAMPVariable[]
 	 */
 	public JCAMPVariable[] getVariables() {
@@ -146,7 +147,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * get variable value array in page dimension.
-	 * 
+	 *
 	 * @return java.lang.String[]
 	 * @param ldrKey
 	 *            java.lang.String
@@ -171,7 +172,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * initialize headers.
-	 * 
+	 *
 	 */
 	private void initHeaders() {
 		JCAMPDataRecord[] blockLDR = containingBlock.getAllDataRecords();
@@ -188,7 +189,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * collect header LDRs
-	 * 
+	 *
 	 */
 	private void initialize() throws JCAMPException {
 		firstIndex = startLDR.getBlockIndex() + 1;
@@ -202,7 +203,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * initialize pages.
-	 * 
+	 *
 	 */
 	private void initPages() throws JCAMPException {
 		JCAMPDataRecord[] blockLDR = containingBlock.getAllDataRecords();
@@ -230,7 +231,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * init variables for NTUPLE block.
-	 * 
+	 *
 	 * @exception com.creon.chem.jcamp.JCAMPException
 	 *                incorrect variable declarations.
 	 */
@@ -364,7 +365,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets number of header LDRs.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int numHeaders() {
@@ -373,7 +374,7 @@ public class JCAMPNTuple {
 
 	/**
 	 * gets number of pages.
-	 * 
+	 *
 	 * @return int
 	 */
 	public int numPages() {

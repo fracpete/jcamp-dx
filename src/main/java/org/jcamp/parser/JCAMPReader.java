@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ *****************************************************************************
+ */
 package org.jcamp.parser;
 
 import java.io.File;
@@ -27,10 +28,11 @@ import org.slf4j.LoggerFactory;
  *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
- *         Kerner</a>
+ * Kerner</a>
  */
 public class JCAMPReader {
 
+	private static CommonSpectrumJCAMPReader fallbackReader = new CommonSpectrumJCAMPReader();
 	private static Hashtable<Integer, ISpectrumJCAMPReader> adapters = new Hashtable<Integer, ISpectrumJCAMPReader>(
 			20);
 
@@ -78,6 +80,9 @@ public class JCAMPReader {
 	 */
 	public static ISpectrumJCAMPReader findAdapter(int spectrumID) {
 		ISpectrumJCAMPReader adapter = adapters.get(new Integer(spectrumID));
+		if (adapter == null) {
+			adapter = fallbackReader;
+		}
 		return adapter;
 	}
 
@@ -99,9 +104,8 @@ public class JCAMPReader {
 	/**
 	 * access method for JCAMPReader singleton instance.
 	 *
-	 * @param isValidating
-	 *            should the parser be validating? often files are not strictly
-	 *            correct
+	 * @param isValidating should the parser be validating? often files are not
+	 * strictly correct
 	 * @return JCAMPReader
 	 */
 	public static JCAMPReader getInstance(boolean isValidating, String mode) {
@@ -147,9 +151,8 @@ public class JCAMPReader {
 	/**
 	 * JCAMPReader constructor comment.
 	 *
-	 * @param isValidating
-	 *            should the parser be validating? often files are not strictly
-	 *            correct
+	 * @param isValidating should the parser be validating? often files are not
+	 * strictly correct
 	 */
 	private JCAMPReader(boolean isValidating, String mode) {
 		super();
@@ -188,10 +191,8 @@ public class JCAMPReader {
 	 * create spectrum from JCAMPBlock.
 	 *
 	 * @return Spectrum
-	 * @param block
-	 *            JCAMPBlock
-	 * @param blockID
-	 *            int
+	 * @param block JCAMPBlock
+	 * @param blockID int
 	 */
 	public Spectrum createSpectrum(JCAMPBlock block, int blockID)
 			throws JCAMPException {
@@ -202,8 +203,7 @@ public class JCAMPReader {
 	 * Create spectrum from {@link Reader reader}. Caller must close reader.
 	 *
 	 * @return {@link Spectrum}
-	 * @param reader
-	 *            {@link Reader reader}
+	 * @param reader {@link Reader reader}
 	 * @throws JCAMPException
 	 * @throws IOException
 	 */
@@ -224,8 +224,7 @@ public class JCAMPReader {
 	 * Create {@link Spectrum} from JCAMP-DX string.
 	 *
 	 * @return {@link Spectrum}
-	 * @param jcamp
-	 *            JCAMP-DX string JCAMP-DX source
+	 * @param jcamp JCAMP-DX string JCAMP-DX source
 	 * @throws JCAMPException
 	 *
 	 */
@@ -240,8 +239,7 @@ public class JCAMPReader {
 	 * to find a full spectrum block, otherwise uses first block encountered
 	 *
 	 * @return com.creon.chem.jcamp.JCAMPBlock
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
 	 */
 	private JCAMPBlock findFirstSpectrumBlock(JCAMPBlock block)
 			throws JCAMPException {
@@ -251,15 +249,18 @@ public class JCAMPReader {
 		if (blocks != null) {
 			while (it.hasNext()) {
 				JCAMPBlock b = it.next();
-				if (b.isStructureBlock() || b.isLinkBlock())
+				if (b.isStructureBlock() || b.isLinkBlock()) {
 					continue;
+				}
 				JCAMPDataRecord dataTypeLDR = b.getDataRecord("DATATYPE");
-				if (dataTypeLDR == null)
+				if (dataTypeLDR == null) {
 					continue; // bad block
+				}
 				String dataType = dataTypeLDR.getContent().toUpperCase();
 				if (dataType.endsWith("TABLE")
-						|| dataType.endsWith("ASSIGNMENTS"))
+						|| dataType.endsWith("ASSIGNMENTS")) {
 					continue;
+				}
 				idoffirstspectrum = b.getID();
 				return b;
 			}
@@ -270,8 +271,9 @@ public class JCAMPReader {
 		if (blocks != null) {
 			while (it2.hasNext()) {
 				JCAMPBlock b = it2.next();
-				if (b.isStructureBlock() || b.isLinkBlock())
+				if (b.isStructureBlock() || b.isLinkBlock()) {
 					continue;
+				}
 				return b;
 			}
 		}
@@ -315,8 +317,7 @@ public class JCAMPReader {
 	/**
 	 * sets the error handler.
 	 *
-	 * @param newErrorHandler
-	 *            com.creon.chem.jcamp.IErrorHandler
+	 * @param newErrorHandler com.creon.chem.jcamp.IErrorHandler
 	 */
 	public void setErrorHandler(IErrorHandler newErrorHandler) {
 		errorHandler = newErrorHandler;

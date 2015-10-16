@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import org.jcamp.math.IArray2D;
@@ -43,17 +44,19 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * gets mass spectrum.
 	 *
 	 * @return com.creon.chem.spectrum.MassSpectrum
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
 	 */
-	private MassSpectrum createFS(JCAMPBlock block) throws JCAMPException {
+	@Override
+	protected MassSpectrum createFS(JCAMPBlock block) throws JCAMPException {
 		MassSpectrum spectrum;
 		Unit xUnit = getXUnits(block);
-		if (xUnit == null)
+		if (xUnit == null) {
 			xUnit = CommonUnit.mz;
+		}
 		Unit yUnit = getYUnits(block);
-		if (yUnit == null)
+		if (yUnit == null) {
 			yUnit = CommonUnit.percentIntensity;
+		}
 		double xFactor = getXFactor(block);
 		double yFactor = getYFactor(block);
 		int nPoints = getNPoints(block);
@@ -64,18 +67,20 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 			double lastX = getLastX(block);
 			double[] intensities = getXYData(block, firstX, lastX, nPoints,
 					xFactor, yFactor);
-			if (intensities.length != nPoints)
+			if (intensities.length != nPoints) {
 				throw new JCAMPException(
 						"incorrect ##NPOINTS= or bad ##XYDATA=");
+			}
 			x = new EquidistantData(firstX, lastX, nPoints, xUnit);
 			y = new ArrayData(intensities, yUnit);
 		} else if (block.getDataRecord("XYPOINTS") != null) {
 			double xy[][] = getXYPoints(block, nPoints, xFactor, yFactor);
 			x = new OrderedArrayData(xy[0], xUnit);
 			y = new ArrayData(xy[1], yUnit);
-		} else
+		} else {
 			throw new JCAMPException(
 					"missing data: ##XYDATA= or ##XYPOINTS= required.");
+		}
 		spectrum = new MassSpectrum(x, y, true);
 		return spectrum;
 	}
@@ -84,8 +89,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * NTUPLE mass spectra.
 	 *
 	 * @return com.creon.chem.spectrum.GCMSSpectrum
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
 	 */
 	private GCMSSpectrum createGCMS(JCAMPBlock block) throws JCAMPException {
 		GCMSSpectrum spectrum;
@@ -97,13 +101,15 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double[] times = getRetentionTimes(ntuple);
 		double[] tics = getTICs(ntuple);
 		Unit xUnit = getXUnits(block);
-		if (xUnit == null)
+		if (xUnit == null) {
 			xUnit = CommonUnit.mz;
+		}
 		Unit yUnit = getYUnits(block);
-		if (yUnit == null)
+		if (yUnit == null) {
 			yUnit = CommonUnit.relativeAbundance;
+		}
 		for (int i = 0; i < nPages; i++) {
-			JCAMPNTuplePage page = block.getNTuple().getPage(i);
+			JCAMPNTuplePage page = ntuple.getPage(i);
 			IArray2D msxy = page.getXYData();
 			/*
 			 * double[][] msxy = getNTupleXYPoints(block, page); for (int j = 0;
@@ -115,18 +121,20 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 			IDataArray1D y = new ArrayData(msxy.getYArray(), yUnit);
 
 			ms[i] = new MassSpectrum(x, y, false);
-			if (Double.isNaN(times[i]))
+			if (Double.isNaN(times[i])) {
 				ms[i].setTitle(title + "(mass spectrum [" + i + "]");
-			else
+			} else {
 				ms[i].setTitle(title + "(mass spectrum [" + i + "]: t="
 						+ times[i] + ")");
+			}
 		}
 		IOrderedDataArray1D x = new OrderedArrayData(times, CommonUnit.second);
 		if (tics != null) {
 			IDataArray1D y = new ArrayData(tics, CommonUnit.intensity);
 			spectrum = new GCMSSpectrum(x, y, ms);
-		} else
+		} else {
 			spectrum = new GCMSSpectrum(x, ms);
+		}
 		return spectrum;
 	}
 
@@ -134,12 +142,11 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * create mass spectrum peak spectrum from JCAMPBlock.
 	 *
 	 * @return MassSpectrum
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                exception thrown if parsing fails.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException exception thrown if parsing fails.
 	 */
-	private MassSpectrum createPeakTable(JCAMPBlock block)
+	@Override
+	protected MassSpectrum createPeakTable(JCAMPBlock block)
 			throws JCAMPException {
 		MassSpectrum spectrum = null;
 		String title = getTitle(block);
@@ -169,8 +176,9 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		}
 		int nPoints = getNPoints(block);
 		Object[] tables = getPeaktable(block, nPoints, xFactor, yFactor);
-		if (tables == null)
+		if (tables == null) {
 			throw new JCAMPException("missing data table");
+		}
 		Peak1D[] peaks = (Peak1D[]) tables[0];
 		double[][] xy = peakTableToPeakSpectrum(peaks);
 		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
@@ -182,12 +190,14 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			Pattern[] pattern = (Pattern[]) tables[1];
-			if (pattern != null && pattern.length < 50)
+			if (pattern != null && pattern.length < 50) {
 				spectrum.setPatternTable(pattern);
+			}
 			if (tables.length > 2) {
 				Assignment[] assigns = (Assignment[]) tables[2];
-				if (assigns != null && assigns.length < 50)
+				if (assigns != null && assigns.length < 50) {
 					spectrum.setAssignments(assigns);
+				}
 			}
 		}
 		spectrum.setTitle(title);
@@ -211,8 +221,9 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 */
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-		if (block.getSpectrumType() != ISpectrumIdentifier.MS)
+		if (block.getSpectrumType() != ISpectrumIdentifier.MS) {
 			throw new JCAMPException("JCAMP reader adapter missmatch");
+		}
 		if (block.isNTupleBlock()) { // chromatogram!
 			GCMSSpectrum spectrum = createGCMS(block);
 			setNotes(block, spectrum);
@@ -220,15 +231,16 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		} else {
 			MassSpectrum spectrum = null;
 			BlockType type = block.getBlockType();
-			if (type.equals(BlockType.FULLSPECTRUM))
+			if (type.equals(BlockType.FULLSPECTRUM)) {
 				spectrum = createFS(block);
-			else if (type.equals(BlockType.PEAKTABLE))
+			} else if (type.equals(BlockType.PEAKTABLE)) {
 				spectrum = createPeakTable(block);
-			else if (type.equals(BlockType.ASSIGNMENT))
+			} else if (type.equals(BlockType.ASSIGNMENT)) {
 				spectrum = createPeakTable(block);
-			else
-				// never reached
+			} else // never reached
+			{
 				throw new JCAMPException("illegal block type");
+			}
 			setNotes(block, spectrum);
 			return spectrum;
 		}
@@ -249,20 +261,24 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double lastTime = Double.NaN;
 		double deltaTime = 0.;
 		if (vTime != null) {
-			if (vTime.getFactor() != null)
+			if (vTime.getFactor() != null) {
 				timeFactor = vTime.getFactor().doubleValue();
-			if (vTime.getFirst() != null)
+			}
+			if (vTime.getFirst() != null) {
 				firstTime = vTime.getFirst().doubleValue();
-			if (vTime.getLast() != null)
+			}
+			if (vTime.getLast() != null) {
 				lastTime = vTime.getLast().doubleValue();
+			}
 			deltaTime = (lastTime - firstTime) / nPages;
 		}
 
 		for (int i = 0; i < times.length; i++) {
-			if (timeValues[i] != null)
+			if (timeValues[i] != null) {
 				times[i] = Double.parseDouble(timeValues[i]) * timeFactor;
-			else
+			} else {
 				times[i] = firstTime + i * deltaTime;
+			}
 		}
 
 		return times;
@@ -281,19 +297,22 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double ticFactor = 1.0;
 		boolean hasTIC = false;
 		if (vtic != null) {
-			if (vtic.getFactor() != null)
+			if (vtic.getFactor() != null) {
 				ticFactor = vtic.getFactor().doubleValue();
+			}
 		}
 		for (int i = 0; i < tics.length; i++) {
 			if (ticValues[i] != null) {
 				hasTIC = true;
 				tics[i] = Double.parseDouble(ticValues[i]) * ticFactor;
-			} else
+			} else {
 				tics[i] = Double.NaN;
+			}
 		}
-		if (hasTIC)
+		if (hasTIC) {
 			return tics;
-		else
+		} else {
 			return null;
+		}
 	}
 }

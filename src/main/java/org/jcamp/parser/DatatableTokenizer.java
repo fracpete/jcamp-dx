@@ -1,17 +1,19 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
+import java.util.Iterator;
 import org.jcamp.spectrum.Multiplicity;
 
 /**
  * tokenizer (parser) that handles data in peak tables and peak assignments.
- * 
+ *
  * @author Thomas Weber
  */
 public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
@@ -29,10 +31,11 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 			throws JCAMPException {
 		super();
 		this.type = checkSymbols(symbols);
-		if (this.type == null)
+		if (this.type == null) {
 			this.varSymbols = symbols;
-		else
+		} else {
 			this.varSymbols = this.type.getSymbols();
+		}
 		this.data = normalizeData(varSymbols.length, data);
 		this.length = this.data.length();
 	}
@@ -44,10 +47,11 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 		super();
 		DataVariableInfo varInfo = new DataVariableInfo(ldr);
 		this.type = checkSymbols(varInfo.getSymbols());
-		if (this.type == null)
+		if (this.type == null) {
 			this.varSymbols = varInfo.getSymbols();
-		else
+		} else {
 			this.varSymbols = this.type.getSymbols();
+		}
 		String ldrData = ldr.getContent();
 		LineTokenizer lt = new LineTokenizer(ldrData);
 		lt.nextLine(); // skip variable declaration
@@ -58,55 +62,60 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * check for errornous symbols or standard symbols.
-	 * 
+	 *
 	 */
 	private static DataType checkSymbols(String[] varSymbols)
 			throws JCAMPException {
 		DataType dataType = null;
-		if (varSymbols == null || varSymbols.length == 0)
+		if (varSymbols == null || varSymbols.length == 0) {
 			throw new JCAMPException("bad variable declaration");
+		}
 		if (varSymbols.length == 2) {
 			if (varSymbols[0].equalsIgnoreCase("X")
-					&& varSymbols[1].equalsIgnoreCase("Y"))
+					&& varSymbols[1].equalsIgnoreCase("Y")) {
 				dataType = DataType.XY;
+			}
 		} else if (varSymbols.length == 3) {
 			if (varSymbols[0].equalsIgnoreCase("X")
 					&& varSymbols[1].equalsIgnoreCase("Y")
-					&& varSymbols[2].equalsIgnoreCase("W"))
+					&& varSymbols[2].equalsIgnoreCase("W")) {
 				dataType = DataType.XYW;
-			else if (varSymbols[0].equalsIgnoreCase("X")
+			} else if (varSymbols[0].equalsIgnoreCase("X")
 					&& varSymbols[1].equalsIgnoreCase("Y")
-					&& varSymbols[2].equalsIgnoreCase("M"))
+					&& varSymbols[2].equalsIgnoreCase("M")) {
 				dataType = DataType.XYM;
-			else if (varSymbols[0].equalsIgnoreCase("X")
+			} else if (varSymbols[0].equalsIgnoreCase("X")
 					&& varSymbols[1].equalsIgnoreCase("Y")
-					&& varSymbols[2].equalsIgnoreCase("A"))
+					&& varSymbols[2].equalsIgnoreCase("A")) {
 				dataType = DataType.XYA;
+			}
 		} else if (varSymbols.length == 4) {
 			if (varSymbols[0].equalsIgnoreCase("X")
 					&& varSymbols[1].equalsIgnoreCase("Y")
 					&& varSymbols[2].equalsIgnoreCase("W")
-					&& varSymbols[3].equalsIgnoreCase("A"))
+					&& varSymbols[3].equalsIgnoreCase("A")) {
 				dataType = DataType.XYWA;
-			else if (varSymbols[0].equalsIgnoreCase("X")
+			} else if (varSymbols[0].equalsIgnoreCase("X")
 					&& varSymbols[1].equalsIgnoreCase("Y")
 					&& varSymbols[2].equalsIgnoreCase("M")
-					&& varSymbols[3].equalsIgnoreCase("A"))
+					&& varSymbols[3].equalsIgnoreCase("A")) {
 				dataType = DataType.XYMA;
+			}
 		} else if (varSymbols.length == 5) {
 			if (varSymbols[0].equalsIgnoreCase("X")
 					&& varSymbols[1].equalsIgnoreCase("Y")
 					&& varSymbols[2].equalsIgnoreCase("M")
 					&& varSymbols[3].equalsIgnoreCase("W")
-					&& varSymbols[4].equalsIgnoreCase("A"))
+					&& varSymbols[4].equalsIgnoreCase("A")) {
 				dataType = DataType.XYMWA;
+			}
 		}
 		return dataType;
 	}
 
 	/**
 	 * Insert the method's description here.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataType
 	 */
 	public final DataType getType() {
@@ -115,7 +124,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * returns <code>true</code> if more data is available.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	@Override
@@ -125,18 +134,19 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * returns <code>true</code> if more data is available.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean hasMoreGroups() {
-		if (pos < length)
+		if (pos < length) {
 			return true;
+		}
 		return false;
 	}
 
 	/**
 	 * parse next double
-	 * 
+	 *
 	 * @return double
 	 */
 	private Double nextDouble(char delimiter) throws JCAMPException {
@@ -146,14 +156,14 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 			x = new Double(s);
 		} catch (NumberFormatException e) {
 			throw new JCAMPException(e.getLocalizedMessage(), e);
-			
+
 		}
 		return x;
 	}
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return Object
 	 */
 	@Override
@@ -167,26 +177,34 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataGroup
 	 */
 	public DataGroup nextGroup() throws JCAMPException {
-		if (pos >= length)
-			throw new JCAMPException("parsed beyond end of data block");
-		if (type.equals(DataType.XY))
+		if (pos >= length) {
+			throw new JCAMPException("Parsed beyond end of data block");
+		}
+		if (type.equals(DataType.XY)) {
 			return nextXYGroup();
-		if (type.equals(DataType.XYW))
+		}
+		if (type.equals(DataType.XYW)) {
 			return nextXYWGroup();
-		if (type.equals(DataType.XYM))
+		}
+		if (type.equals(DataType.XYM)) {
 			return nextXYMGroup();
-		if (type.equals(DataType.XYA))
+		}
+		if (type.equals(DataType.XYA)) {
 			return nextXYAGroup();
-		if (type.equals(DataType.XYWA))
+		}
+		if (type.equals(DataType.XYWA)) {
 			return nextXYWAGroup();
-		if (type.equals(DataType.XYMA))
+		}
+		if (type.equals(DataType.XYMA)) {
 			return nextXYMAGroup();
-		if (type.equals(DataType.XYMWA))
+		}
+		if (type.equals(DataType.XYMWA)) {
 			return nextXYMWAGroup();
+		}
 		int n = varSymbols.length;
 		Object[] values = new Object[n];
 		for (int i = 0; i < n - 1; i++) {
@@ -218,32 +236,29 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * parse next multiplet char.
-	 * 
+	 *
 	 * @return char
-	 * @param delimiter
-	 *            char
+	 * @param delimiter char
 	 */
 	private char nextMulti(char delimiter) throws JCAMPException {
-		char m;
 		String s = nextString(delimiter);
 		if (s.length() == 1) {
-			m = s.charAt(0);
-			if (!(m == 'S' || m == 'D' || m == 'T' || m == 'Q' || m == 'M' || m == 'U'))
-				throw new JCAMPException("bad multiplet data: \"" + s + "\"");
-		} else {
-			throw new JCAMPException("bad multiplet data: \"" + s + "\"");
+			for (Iterator<Multiplicity> it = Multiplicity.TYPES_LIST.iterator(); it.hasNext();) {
+				Multiplicity multiplicity = it.next();
+				if (s.equals(multiplicity.getSymbol())) {
+					return multiplicity.getSymbol().charAt(0);
+				}
+			}
 		}
-		return m;
+		return 'U';
 	}
 
 	/**
 	 * parse next quoted string.
-	 * 
+	 *
 	 * @return java.lang.String
-	 * @param delimiter
-	 *            char
-	 * @exception com.creon.chem.jcamp.JCAMPException
-	 *                The exception description.
+	 * @param delimiter char
+	 * @exception com.creon.chem.jcamp.JCAMPException The exception description.
 	 */
 	private String nextQString(char delimiter) throws JCAMPException {
 		String a;
@@ -251,13 +266,15 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 		if (data.charAt(pos) == '<') { // strings are quoted
 			pos++;
 			p = data.indexOf('>', pos);
-			if (p < 0)
+			if (p < 0) {
 				throw new JCAMPException("missing closing '>' quote");
+			}
 			a = data.substring(pos, p);
 			pos = p + 1;
 			p = data.indexOf(delimiter, pos);
-			if (p < 0)
+			if (p < 0) {
 				throw new JCAMPException("bad data");
+			}
 			pos = p + 1;
 		} else {
 			throw new JCAMPException("unquoted string");
@@ -267,19 +284,18 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * parse next unquoted string.
-	 * 
+	 *
 	 * @return java.lang.String
-	 * @param delimiter
-	 *            char
-	 * @exception com.creon.chem.jcamp.JCAMPException
-	 *                The exception description.
+	 * @param delimiter char
+	 * @exception com.creon.chem.jcamp.JCAMPException The exception description.
 	 */
 	private String nextString(char delimiter) throws JCAMPException {
 		String a;
 		int p;
 		p = data.indexOf(delimiter, pos);
-		if (p < 0)
+		if (p < 0) {
 			throw new JCAMPException("missing data");
+		}
 		a = data.substring(pos, p);
 		pos = p + 1;
 		return a;
@@ -287,7 +303,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataGroup
 	 */
 	private DataGroup nextXYAGroup() throws JCAMPException {
@@ -302,7 +318,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.AFFNGroup
 	 */
 	private DataGroup nextXYGroup() throws JCAMPException {
@@ -315,7 +331,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataGroup
 	 */
 	private DataGroup nextXYMAGroup() throws JCAMPException {
@@ -332,7 +348,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataGroup
 	 */
 	private DataGroup nextXYMGroup() throws JCAMPException {
@@ -347,7 +363,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataGroup
 	 */
 	private DataGroup nextXYMWAGroup() throws JCAMPException {
@@ -366,7 +382,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.DataGroup
 	 */
 	private DataGroup nextXYWAGroup() throws JCAMPException {
@@ -383,7 +399,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 
 	/**
 	 * gets next data group.
-	 * 
+	 *
 	 * @return com.creon.chem.jcamp.AFFNGroup
 	 */
 	private DataGroup nextXYWGroup() throws JCAMPException {
@@ -400,10 +416,9 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 	 * normalize data block in standard form: values are separated by ',',
 	 * groups are separated by ';' whitespace is skipped outside quotes quotes
 	 * are '&lt;','&gt;' as defined in JCAMP standard
-	 * 
+	 *
 	 * @return java.lang.String
-	 * @param orig
-	 *            java.lang.String
+	 * @param orig java.lang.String
 	 */
 	private static String normalizeData(int groupLength, String orig)
 			throws JCAMPException {
@@ -426,15 +441,16 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 				normal.append(c);
 				continue;
 			}
-			if (c == '(' || c == ')')
+			if (c == '(' || c == ')') {
 				continue;
+			}
 			if (Character.isWhitespace(c)) {
 				if (inDataValue) {
 					inDataValue = false;
 					j++;
-					if (j < groupLength)
+					if (j < groupLength) {
 						normal.append(',');
-					else {
+					} else {
 						normal.append(';');
 						j = 0;
 					}
@@ -445,23 +461,21 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 				if (inDataValue) {
 					inDataValue = false;
 					j++;
-					if (j < groupLength)
+					if (j < groupLength) {
 						throw new JCAMPException("missing numbers in data");
-					if (j > groupLength)
+					}
+					if (j > groupLength) {
 						throw new JCAMPException("extra numbers in data");
+					}
 					normal.append(';');
 					j = 0;
 				}
 				continue;
 			}
 			if (c == ',') {
-				if (inDataValue) {
-					inDataValue = false;
-					j++;
-//					if (j >= groupLength)
-//						throw new JCAMPException("extra commas in data");
-					normal.append(',');
-				}
+				inDataValue = false;
+				j++;
+				normal.append(',');
 				continue;
 			}
 			if (Character.isLetterOrDigit(c) || c == '.' || c == '+'

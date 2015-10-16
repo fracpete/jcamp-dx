@@ -1,14 +1,17 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import java.util.NoSuchElementException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * class for reading a NTUPLE table.
@@ -52,15 +55,16 @@ public class JCAMPNTuple {
 	 * gets a header LDR.
 	 *
 	 * @return JCAMPDataRecord
-	 * @param key
-	 *            java.lang.String
+	 * @param key java.lang.String
 	 */
 	public JCAMPDataRecord getHeader(String key) {
-		if (headers != null)
+		if (headers != null) {
 			for (int i = 0; i < headers.length; i++) {
-				if (key.equals(headers[i].getKey()))
+				if (key.equals(headers[i].getKey())) {
 					return headers[i];
+				}
 			}
+		}
 		return null;
 	}
 
@@ -86,12 +90,12 @@ public class JCAMPNTuple {
 	 * gets NTUPLE page number <code>index</code>.
 	 *
 	 * @return com.labcontrol.jcamp.reader.JCAMPNTuplePage
-	 * @param index
-	 *            int
+	 * @param index int
 	 */
 	public JCAMPNTuplePage getPage(int index) {
-		if (this.pages != null)
+		if (this.pages != null) {
 			return this.pages[index];
+		}
 		return null;
 	}
 
@@ -107,31 +111,32 @@ public class JCAMPNTuple {
 	/**
 	 * gets the variable by symbol <code>symbol</code>.
 	 *
-	 * @param String
-	 *            symbol
+	 * @param String symbol
 	 * @return com.creon.chem.jcamp.JCAMPVariable
 	 */
 	public JCAMPVariable getVariable(String symbol) {
 		symbol = symbol.toUpperCase();
 		for (int i = 0; i < vars.length; i++) {
-			if (symbol.equals(vars[i].getSymbol()))
+			if (symbol.equals(vars[i].getSymbol())) {
 				return vars[i];
+			}
 		}
-		throw new NoSuchElementException("No JCAMPVariable for " + symbol);
+		Logger.getLogger(getClass().getName()).log(Level.WARNING, "No JCAMPVariable for {0}", symbol);
+		return null;
 	}
 
 	/**
 	 * gets variable by name.
 	 *
 	 * @return com.creon.chem.jcamp.JCAMPVariable
-	 * @param name
-	 *            java.lang.String
+	 * @param name java.lang.String
 	 */
 	public JCAMPVariable getVariableByName(String name) {
 		name = name.toUpperCase();
 		for (int i = 0; i < vars.length; i++) {
-			if (name.equals(vars[i].getName()))
+			if (name.equals(vars[i].getName())) {
 				return vars[i];
+			}
 		}
 		return null;
 	}
@@ -149,10 +154,8 @@ public class JCAMPNTuple {
 	 * get variable value array in page dimension.
 	 *
 	 * @return java.lang.String[]
-	 * @param ldrKey
-	 *            java.lang.String
-	 * @param v
-	 *            JCAMPVariable
+	 * @param ldrKey java.lang.String
+	 * @param v JCAMPVariable
 	 */
 	public String[] getVariableValues(String ldrKey, JCAMPVariable v) {
 		String[] values = new String[numPages()];
@@ -161,8 +164,9 @@ public class JCAMPNTuple {
 			if (ldr == null) {
 				if (v != null) {
 					values[i] = pages[i].getPageVariableValue(v.getSymbol());
-				} else
+				} else {
 					values[i] = null;
+				}
 			} else {
 				values[i] = ldr.getContent();
 			}
@@ -194,8 +198,9 @@ public class JCAMPNTuple {
 	private void initialize() throws JCAMPException {
 		firstIndex = startLDR.getBlockIndex() + 1;
 		lastIndex = endLDR.getBlockIndex() - 1;
-		if (firstIndex > lastIndex)
+		if (firstIndex > lastIndex) {
 			return;
+		}
 		initHeaders();
 		initVariables();
 		initPages();
@@ -225,20 +230,22 @@ public class JCAMPNTuple {
 			tmp.addElement(ntuplePage);
 		}
 		pages = new JCAMPNTuplePage[tmp.size()];
-		for (int i = 0; i < pages.length; i++)
+		for (int i = 0; i < pages.length; i++) {
 			pages[i] = (JCAMPNTuplePage) tmp.elementAt(i);
+		}
 	}
 
 	/**
 	 * init variables for NTUPLE block.
 	 *
-	 * @exception com.creon.chem.jcamp.JCAMPException
-	 *                incorrect variable declarations.
+	 * @exception com.creon.chem.jcamp.JCAMPException incorrect variable
+	 * declarations.
 	 */
 	private void initVariables() throws JCAMPException {
 		JCAMPDataRecord ldr = getHeader("SYMBOL");
-		if (ldr == null)
+		if (ldr == null) {
 			throw new JCAMPException("missing variable declaration in NTUPLES");
+		}
 		String[] symbols = Utils.splitStringCSV(ldr.getContent());
 		vars = new JCAMPVariable[symbols.length];
 		for (int i = 0; i < vars.length; i++) {
@@ -248,10 +255,8 @@ public class JCAMPNTuple {
 		ldr = getHeader("VARNAME");
 		if (ldr != null) {
 			String[] labels = Utils.splitStringCSV(ldr.getContent());
-			// if (labels.length != vars.length)
-			// throw new JCAMPException(
-			// "bad ##VARNAME=: number of name entries != number of variables");
-			for (int i = 0; i < labels.length; i++) {
+			int iMax = Math.min(labels.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
 				vars[i].setLabel(labels[i]);
 				vars[i].setName(Utils.normalizeLabel(labels[i]));
 			}
@@ -259,108 +264,121 @@ public class JCAMPNTuple {
 		ldr = getHeader("VARTYPE");
 		if (ldr != null) {
 			String[] types = Utils.splitStringCSV(ldr.getContent());
-			if (types.length != vars.length)
-				throw new JCAMPException(
-						"bad ##VARTYPE=: number of type entries != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				if (types[i].equalsIgnoreCase("INDEPENDENT"))
+			int iMax = Math.min(types.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				if (types[i].equalsIgnoreCase("INDEPENDENT")) {
 					vars[i].setType(JCAMPVariable.Type.INDEPENDENT);
-				else if (types[i].equalsIgnoreCase("DEPENDENT"))
+				} else if (types[i].equalsIgnoreCase("DEPENDENT")) {
 					vars[i].setType(JCAMPVariable.Type.DEPENDENT);
-				else if (types[i].equalsIgnoreCase("PAGE"))
+				} else if (types[i].equalsIgnoreCase("PAGE")) {
 					vars[i].setType(JCAMPVariable.Type.PAGE);
+				}
 			}
 		}
 		ldr = getHeader("VARFORM");
 		if (ldr != null) {
 			String[] forms = Utils.splitStringCSV(ldr.getContent());
-			if (forms.length != vars.length)
-				throw new JCAMPException(
-						"bad ##VARFORM=: number of varform entries != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				if ("AFFN".equalsIgnoreCase(forms[i]))
+			int iMax = Math.min(forms.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				if ("AFFN".equalsIgnoreCase(forms[i])) {
 					vars[i].setFormat(JCAMPVariable.Format.AFFN);
-				else if ("ASDF".equalsIgnoreCase(forms[i]))
+				} else if ("ASDF".equalsIgnoreCase(forms[i])) {
 					vars[i].setFormat(JCAMPVariable.Format.ASDF);
-				else if ("STRING".equalsIgnoreCase(forms[i]))
+				} else if ("STRING".equalsIgnoreCase(forms[i])) {
 					vars[i].setFormat(JCAMPVariable.Format.STRING);
-				else
+				} else {
 					vars[i].setFormat(JCAMPVariable.Format.TEXT);
+				}
 			}
 		}
 		ldr = getHeader("VARDIM");
 		if (ldr != null) {
 			String[] dims = Utils.splitStringCSV(ldr.getContent());
-			if (dims.length != vars.length)
-				throw new JCAMPException(
-						"bad ##VARDIM=: number of dimension entries != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				vars[i].setDimension(Integer.parseInt(dims[i]));
+			int iMax = Math.min(dims.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				try {
+					vars[i].setDimension(Integer.parseInt(dims[i]));
+				} catch (NumberFormatException ex) {
+					// fail silently
+					vars[i].setDimension(null);
+				}
 			}
 		}
 		ldr = getHeader("FIRST");
 		if (ldr != null) {
 			String[] firsts = Utils.splitStringCSV(ldr.getContent());
-			if (firsts.length != vars.length)
-				throw new JCAMPException(
-						"bad ##FIRST=: number of first values != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				vars[i].setFirst(new Double(firsts[i]));
+			int iMax = Math.min(firsts.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				try {
+					vars[i].setFirst(new Double(firsts[i]));
+				} catch (NumberFormatException ex) {
+					// fail silently
+					vars[i].setFirst(null);
+				}
 			}
 		}
 		ldr = getHeader("LAST");
 		if (ldr != null) {
 			String[] lasts = Utils.splitStringCSV(ldr.getContent());
-			if (lasts.length != vars.length)
-				throw new JCAMPException(
-						"bad ##LAST=: number of last values != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				vars[i].setLast(new Double(lasts[i]));
+			int iMax = Math.min(lasts.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				try {
+					vars[i].setLast(new Double(lasts[i]));
+				} catch (NumberFormatException ex) {
+					// fail silently
+					vars[i].setLast(null);
+				}
 			}
 		}
 
 		ldr = getHeader("MIN");
 		if (ldr != null) {
 			String[] mins = Utils.splitStringCSV(ldr.getContent());
-			if (mins.length != vars.length)
-				throw new JCAMPException(
-						"bad ##MIN=: number of min values != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				vars[i].setMin(new Double(mins[i]));
+			int iMax = Math.min(mins.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				try {
+					vars[i].setMin(new Double(mins[i]));
+				} catch (NumberFormatException ex) {
+					// fail silently
+					vars[i].setMin(null);
+				}
 			}
 		}
 
 		ldr = getHeader("MAX");
 		if (ldr != null) {
 			String[] maxs = Utils.splitStringCSV(ldr.getContent());
-			if (maxs.length != vars.length)
-				throw new JCAMPException(
-						"bad ##MAX=: number of max values != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				vars[i].setMax(new Double(maxs[i]));
+			int iMax = Math.min(maxs.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				try {
+					vars[i].setMax(new Double(maxs[i]));
+				} catch (NumberFormatException ex) {
+					// fail silently
+					vars[i].setMax(null);
+				}
 			}
 		}
 		ldr = getHeader("FACTOR");
 		if (ldr != null) {
 			String[] factors = Utils.splitStringCSV(ldr.getContent());
-			if (factors.length != vars.length)
-				throw new JCAMPException(
-						"bad ##FACTOR=: number of factor values != number of variables");
-			for (int i = 0; i < vars.length; i++) {
-				vars[i].setFactor(new Double(factors[i]));
+			int iMax = Math.min(factors.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
+				try {
+					vars[i].setFactor(new Double(factors[i]));
+				} catch (NumberFormatException ex) {
+					// fail silently
+					vars[i].setFactor(null);
+				}
 			}
 		}
 		ldr = getHeader("UNITS");
 		if (ldr != null) {
 			String[] units = Utils.splitStringCSV(ldr.getContent());
-			// if (units.length != vars.length)
-			// throw new JCAMPException(
-			// "bad ##UNITS=: number of unit entries != number of variables");
-			for (int i = 0; i < units.length; i++) {
+			int iMax = Math.min(units.length, vars.length);
+			for (int i = 0; i < iMax; i++) {
 				vars[i].setUnit(units[i]);
 			}
 		}
-
 	}
 
 	/**
@@ -378,8 +396,9 @@ public class JCAMPNTuple {
 	 * @return int
 	 */
 	public int numPages() {
-		if (pages == null)
+		if (pages == null) {
 			return 0;
+		}
 		return pages.length;
 	}
 }

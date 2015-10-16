@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ *****************************************************************************
+ */
 package org.jcamp.spectrum;
 
 import org.jcamp.math.IrregularAxisMap;
@@ -16,17 +17,19 @@ import org.jcamp.units.Unit;
 
 /**
  * IR spectra.
- * 
+ *
  * @author Thomas Weber
  */
 public class IRSpectrum extends OpticalSpectrum1D {
 
-	/** for serialization. */
+	/**
+	 * for serialization.
+	 */
 	private static final long serialVersionUID = 2377464639384336853L;
 
-	private final static double[] DEFAULT_WAVENUMBERS = new double[] { 4000.0,
-			3500.0, 3000.0, 2500.0, 2000.0, 1800, 1600, 1400, 1200, 1000, 800,
-			600, 400 };
+	private final static double[] DEFAULT_WAVENUMBERS = new double[]{4000.0,
+		3500.0, 3000.0, 2500.0, 2000.0, 1800, 1600, 1400, 1200, 1000, 800,
+		600, 400};
 
 	private final static IrregularGrid1D DEFAULT_XGRID = new IrregularGrid1D(
 			DEFAULT_WAVENUMBERS);
@@ -36,18 +39,16 @@ public class IRSpectrum extends OpticalSpectrum1D {
 	public final static Unit DEFAULT_YUNIT = CommonUnit.intensity;
 
 	/**
-   */
+	 */
 	protected IRSpectrum() {
 		super();
 	}
 
 	/**
 	 * standard ctor.
-	 * 
-	 * @param x
-	 *            org.jcamp.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            org.jcamp.spectrum.IDataArray1D
+	 *
+	 * @param x org.jcamp.spectrum.IOrderedDataArray1D
+	 * @param y org.jcamp.spectrum.IDataArray1D
 	 */
 	public IRSpectrum(IOrderedDataArray1D x, IDataArray1D y) {
 		super(x, y);
@@ -55,13 +56,10 @@ public class IRSpectrum extends OpticalSpectrum1D {
 
 	/**
 	 * standard ctor.
-	 * 
-	 * @param x
-	 *            org.jcamp.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            org.jcamp.spectrum.IDataArray1D
-	 * @param fullSpectrum
-	 *            boolean
+	 *
+	 * @param x org.jcamp.spectrum.IOrderedDataArray1D
+	 * @param y org.jcamp.spectrum.IDataArray1D
+	 * @param fullSpectrum boolean
 	 */
 	public IRSpectrum(IOrderedDataArray1D x, IDataArray1D y,
 			boolean fullSpectrum) {
@@ -80,13 +78,6 @@ public class IRSpectrum extends OpticalSpectrum1D {
 	@Override
 	public int getIdentifier() {
 		return ISpectrumIdentifier.IR;
-	}
-
-	@Override
-	public boolean isSameType(Spectrum otherSpectrum) {
-		if (otherSpectrum instanceof IRSpectrum)
-			return true;
-		return false;
 	}
 
 	/**

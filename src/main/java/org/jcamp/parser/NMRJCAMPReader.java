@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import java.util.StringTokenizer;
@@ -32,7 +33,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
- *         Kerner</a>
+ * Kerner</a>
  */
 public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		ISpectrumJCAMPReader {
@@ -51,10 +52,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * create NMR FID spectrum from JCAMPBlock.
 	 *
 	 * @return {@link NMRSpectrum}
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                if parsing fails
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException if parsing fails
 	 */
 	private NMRSpectrum createFID(JCAMPBlock block) throws JCAMPException {
 		NMRSpectrum spectrum = null;
@@ -69,11 +68,13 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			// this should never be happen, let's assume we have only real part
 			// of FID
 			Unit xUnit = getXUnits(block);
-			if (xUnit == null)
+			if (xUnit == null) {
 				xUnit = CommonUnit.hertz;
+			}
 			Unit yUnit = getYUnits(block);
-			if (yUnit == null)
+			if (yUnit == null) {
 				yUnit = CommonUnit.intensity;
+			}
 			double xFactor = getXFactor(block);
 			double yFactor = getYFactor(block);
 			int nPoints = getNPoints(block);
@@ -84,35 +85,42 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				double lastX = getLastX(block);
 				double[] intensities = getXYData(block, firstX, lastX, nPoints,
 						xFactor, yFactor);
-				if (intensities.length != nPoints)
+				if (intensities.length != nPoints) {
 					throw new JCAMPException(
 							"incorrect ##NPOINTS= or bad ##XYDATA=");
+				}
 				x = new EquidistantData(firstX, lastX, nPoints, xUnit);
 				y = new ArrayData(intensities, yUnit);
 			} else if (block.getDataRecord("XYPOINTS") != null) {
 				double xy[][] = getXYPoints(block, nPoints, xFactor, yFactor);
 				x = new OrderedArrayData(xy[0], xUnit);
 				y = new ArrayData(xy[1], yUnit);
-			} else
+			} else {
 				throw new JCAMPException(
 						"missing data: ##XYDATA= or ##XYPOINTS= required.");
+			}
 			spectrum = new NMRFIDSpectrum(x, y, nucleus, freq, reference);
 		} else {
 			JCAMPVariable x = block.getVariable("X");
 			JCAMPVariable r = block.getVariable("R");
 			JCAMPVariable i = block.getVariable("I");
-			if (x == null)
+			if (x == null) {
 				throw new JCAMPException("missing X variable");
-			if (r == null)
+			}
+			if (r == null) {
 				throw new JCAMPException("missing real fid");
-			if (i == null)
+			}
+			if (i == null) {
 				throw new JCAMPException("missing imaginary fid");
+			}
 			Double firstX = x.getFirst();
-			if (firstX == null)
+			if (firstX == null) {
 				throw new JCAMPException("missing required ##FIRST= for X");
+			}
 			Double lastX = x.getLast();
-			if (lastX == null)
+			if (lastX == null) {
 				throw new JCAMPException("missing required ##LAST= for X");
+			}
 			Double xFactor = x.getFactor();
 			if (xFactor == null) {
 				if (log.isErrorEnabled()) {
@@ -137,8 +145,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			}
 
 			Integer dim = x.getDimension();
-			if (dim == null)
+			if (dim == null) {
 				throw new JCAMPException("missing required ##VARDIM= for X");
+			}
 			int nPoints = dim.intValue();
 			Unit xUnit = x.getUnit();
 			Unit rUnit = r.getUnit();
@@ -169,21 +178,22 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * create NMR full spectrum from JCAMPBlock.
 	 *
 	 * @return NMRSpectrum
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                exception thrown if parsing fails.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException exception thrown if parsing fails.
 	 */
-	private NMRSpectrum createFS(JCAMPBlock block) throws JCAMPException {
+	@Override
+	protected NMRSpectrum createFS(JCAMPBlock block) throws JCAMPException {
 		NMRSpectrum spectrum = null;
 		String nucleus = getNucleus(block);
 		if (!block.isNTupleBlock()) { // standard JCAMP
 			Unit xUnit = getXUnits(block);
-			if (xUnit == null)
+			if (xUnit == null) {
 				xUnit = CommonUnit.hertz;
+			}
 			Unit yUnit = getYUnits(block);
-			if (yUnit == null)
+			if (yUnit == null) {
 				yUnit = CommonUnit.intensity;
+			}
 			double xFactor = getXFactor(block);
 			double yFactor = getYFactor(block);
 			int nPoints = getNPoints(block);
@@ -233,16 +243,20 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			// workaround for Bruker WinNMR real+imag 1D NMR spectra
 			JCAMPVariable x = block.getVariable("X");
 			JCAMPVariable r = block.getVariable("R");
-			if (x == null)
+			if (x == null) {
 				throw new JCAMPException("missing X variable");
-			if (r == null)
+			}
+			if (r == null) {
 				throw new JCAMPException("missing real part");
+			}
 			Double firstX = x.getFirst();
-			if (firstX == null)
+			if (firstX == null) {
 				throw new JCAMPException("missing required ##FIRST= for X");
+			}
 			Double lastX = x.getLast();
-			if (lastX == null)
+			if (lastX == null) {
 				throw new JCAMPException("missing required ##LAST= for X");
+			}
 			Double xFactor = x.getFactor();
 			if (xFactor == null) {
 				if (log.isErrorEnabled()) {
@@ -259,15 +273,17 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 				rFactor = new Double(1.0);
 			}
 			Integer dim = x.getDimension();
-			if (dim == null)
+			if (dim == null) {
 				throw new JCAMPException("missing required ##VARDIM= for X");
+			}
 			int nPoints = dim.intValue();
 			Unit xUnit = x.getUnit();
 			Unit rUnit = r.getUnit();
 			// first page are reals (TODO: check)
 			JCAMPNTuplePage page = block.getNTuple().getPage(0);
-			if (page.getDatatableVariableSymbols()[1].equalsIgnoreCase("I"))
+			if (page.getDatatableVariableSymbols()[1].equalsIgnoreCase("I")) {
 				page = block.getNTuple().getPage(1);
+			}
 			IArray1D reals = page.getXYData().getYArray();
 			IOrderedDataArray1D xData = new EquidistantData(
 					firstX.doubleValue(), lastX.doubleValue(), nPoints, xUnit);
@@ -290,20 +306,21 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * create NMR peak table (peak spectrum) from JCAMPBlock.
 	 *
 	 * @return NMRSpectrum
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                exception thrown if parsing fails.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException exception thrown if parsing fails.
 	 */
-	private NMRSpectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
+	@Override
+	protected NMRSpectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
 		NMRSpectrum spectrum = null;
 		String nucleus = getNucleus(block);
 		Unit xUnit = getXUnits(block);
-		if (xUnit == null)
+		if (xUnit == null) {
 			xUnit = CommonUnit.hertz;
+		}
 		Unit yUnit = getYUnits(block);
-		if (yUnit == null)
+		if (yUnit == null) {
 			yUnit = CommonUnit.intensity;
+		}
 		double xFactor = getXFactor(block);
 		double yFactor = getYFactor(block);
 		int refPoint;
@@ -339,8 +356,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);
-			if (tables.length > 2)
+			if (tables.length > 2) {
 				spectrum.setAssignments((Assignment[]) tables[2]);
+			}
 		}
 		return spectrum;
 	}
@@ -350,14 +368,16 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 */
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-		if (block.getSpectrumType() != ISpectrumIdentifier.NMR)
+		if (block.getSpectrumType() != ISpectrumIdentifier.NMR) {
 			throw new JCAMPException("adapter missmatch");
+		}
 		boolean isFID = false;
 		NMRSpectrum spectrum = null;
 		JCAMPDataRecord ldrDataType = block.getDataRecord("DATATYPE");
 		String dataType = ldrDataType.getContent().toUpperCase();
-		if (dataType.indexOf("FID") >= 0)
+		if (dataType.indexOf("FID") >= 0) {
 			isFID = true;
+		}
 		// currently many NMR with NTUPLES are FIDs, should generate an error
 		// when 2D NMR is available
 		//
@@ -366,29 +386,43 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 
 		if (!isFID && block.isNTupleBlock()) {
 			JCAMPVariable x = block.getNTuple().getVariable("X");
-			if (x.getUnit().equals(CommonUnit.second)) {
-				if (log.isWarnEnabled()) {
-					log.warn("NMR FID without NMR FID data type");
+			if (x != null) {
+				if (x.getUnit().equals(CommonUnit.second)) {
+					if (log.isWarnEnabled()) {
+						log.warn("NMR FID without NMR FID data type");
+					}
+					isFID = true;
 				}
-				isFID = true;
-			}
-			if (log.isWarnEnabled()) {
-				log.warn("nD NMR or NMR spectra with real and imaginary part");
+				if (log.isWarnEnabled()) {
+					log.warn("nD NMR or NMR spectra with real and imaginary part");
+				}
+			} else {
+				// might be 2D
+//				JCAMPVariable[] vars = block.getNTuple().getVariables();
+				JCAMPVariable f1 = block.getNTuple().getVariable("F1"),
+						f2 = block.getNTuple().getVariable("F2");
+				JCAMPNTuple ntuple = block.getNTuple();
+				int nPages = ntuple.numPages();
+				for (int i = 0; i < nPages; i++) {
+					JCAMPNTuplePage page = ntuple.getPage(i);
+					
+				}
 			}
 		}
 		if (isFID) {
 			spectrum = createFID(block);
 		} else {
 			BlockType type = block.getBlockType();
-			if (type.equals(BlockType.FULLSPECTRUM))
+			if (type.equals(BlockType.FULLSPECTRUM)) {
 				spectrum = createFS(block);
-			else if (type.equals(BlockType.PEAKTABLE))
+			} else if (type.equals(BlockType.PEAKTABLE)) {
 				spectrum = createPeakTable(block);
-			else if (type.equals(BlockType.ASSIGNMENT))
+			} else if (type.equals(BlockType.ASSIGNMENT)) {
 				spectrum = createPeakTable(block);
-			else
-				// never reached
+			} else // never reached
+			{
 				throw new JCAMPException("illegal block type");
+			}
 		}
 		String solvent = getSolvent(block);
 		spectrum.setSolvent(solvent);
@@ -402,15 +436,14 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * gets ##$OFFSET= content (Bruker specific)
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private double getBrukerOffset(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrOffset = block.getDataRecord("$OFFSET");
-		if (ldrOffset == null)
+		if (ldrOffset == null) {
 			throw new JCAMPException();
+		}
 		String os = ldrOffset.getContent();
 		return Double.valueOf(os).doubleValue();
 	}
@@ -421,8 +454,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 */
 	private double getBrukerSF(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrSF = block.getDataRecord("$SF");
-		if (ldrSF == null)
+		if (ldrSF == null) {
 			throw new JCAMPException("No data record for $SF");
+		}
 		String sf = ldrSF.getContent();
 		return Double.valueOf(sf).doubleValue();
 	}
@@ -431,15 +465,14 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * gets ##$SW= content (Bruker specific)
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private double getBrukerSW(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrSW = block.getDataRecord("$SW");
-		if (ldrSW == null)
+		if (ldrSW == null) {
 			throw new JCAMPException();
+		}
 		String sw = ldrSW.getContent();
 		return Double.valueOf(sw).doubleValue();
 	}
@@ -448,10 +481,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * gets ##.OBSERVEFREQUENCY= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private double getFrequency(JCAMPBlock block) throws JCAMPException {
 		double freq = Double.NaN;
@@ -480,36 +511,44 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 *
 	 * NOTE: works only with SpecInfo convention
 	 *
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
-	 * @param spectrum
-	 *            com.creon.chem.spectrum.NMRSpectrum
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
+	 * @param spectrum com.creon.chem.spectrum.NMRSpectrum
 	 */
 	private void getLinkedAssignments(JCAMPBlock block, NMRSpectrum spectrum)
 			throws JCAMPException {
 		JCAMPBlock[] linked = block.getReferences();
 		for (int i = 0; i < linked.length; i++) {
-			if (linked[i].isStructureBlock() || linked[i].isLinkBlock())
+			if (linked[i].isStructureBlock() || linked[i].isLinkBlock()) {
 				continue;
+			}
 			BlockType type = linked[i].getBlockType();
-			if (linked[i].getSpectrumType() != ISpectrumIdentifier.NMR)
+			if (linked[i].getSpectrumType() != ISpectrumIdentifier.NMR) {
 				continue;
+			}
 			if (type.equals(BlockType.PEAKTABLE)
 					|| type.equals(BlockType.ASSIGNMENT)) {
 				NMRSpectrum linkSpectrum = createPeakTable(linked[i]);
 				// check if nucleus, frequency, and solvent reference are equal
-				if (!linkSpectrum.getNucleus().equals(spectrum.getNucleus()))
+				if (!linkSpectrum.getNucleus().equals(spectrum.getNucleus())) {
 					continue;
+				}
 				if (linkSpectrum.getFrequency() != linkSpectrum.getFrequency()) // Double.NaN
+				{
 					linkSpectrum.setFrequency(spectrum.getFrequency());
+				}
 				if (linkSpectrum.getReference() != linkSpectrum.getReference()) // Double.NaN
+				{
 					linkSpectrum.setReference(spectrum.getReference());
-				if (linkSpectrum.hasPeakTable())
+				}
+				if (linkSpectrum.hasPeakTable()) {
 					spectrum.setPeakTable(linkSpectrum.getPeakTable());
-				if (linkSpectrum.hasPatternTable())
+				}
+				if (linkSpectrum.hasPatternTable()) {
 					spectrum.setPatternTable(linkSpectrum.getPatternTable());
-				if (linkSpectrum.hasAssignments())
+				}
+				if (linkSpectrum.hasAssignments()) {
 					spectrum.setAssignments(linkSpectrum.getAssignments());
+				}
 			}
 		}
 	}
@@ -518,16 +557,15 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * gets ##.OBSERVENUCLEUS= content
 	 *
 	 * @return java.lang.String
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private String getNucleus(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrNucleus = block.getDataRecord(".OBSERVENUCLEUS");
-		if (ldrNucleus == null)
+		if (ldrNucleus == null) {
 			throw new JCAMPException(
 					"missing required label: ##.OBSERVENUCLEUS=");
+		}
 		return ldrNucleus.getContent();
 	}
 
@@ -538,10 +576,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * is marked as optional instead of required.
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private double getShiftReference(JCAMPBlock block) throws JCAMPException {
 		double reference = Double.NaN;
@@ -581,10 +617,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * is marked as optional instead of required.
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private int getShiftReferencePoint(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrShiftReference = block
@@ -622,19 +656,18 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * is marked as optional instead of required.
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	private String getSolvent(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldr = block.getDataRecord(".SHIFTREFERENCE");
 		if (ldr == null) {
 			ldr = block.getDataRecord("$SOLVENT"); // Bruker??? or SpecInfo???
-			if (ldr == null)
+			if (ldr == null) {
 				return "TMS";
-			else
+			} else {
 				return ldr.getContent();
+			}
 		} else {
 			String shiftRef = ldr.getContent();
 			StringTokenizer commaTokenizer = new java.util.StringTokenizer(
@@ -652,12 +685,9 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * is marked as optional instead of required.
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @param solvent
-	 *            the solvent
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @param solvent the solvent
+	 * @exception JCAMPException The exception description.
 	 */
 	private double getSolventReference(JCAMPBlock block, String solvent)
 			throws JCAMPException {
@@ -665,16 +695,17 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		if (ldr == null) {
 			ldr = block.getDataRecord(".SOLVENTREFERENCE");
 			if (ldr == null) {
-				if (solvent.equals("TMS"))
+				if (solvent.equals("TMS")) {
 					return 0.0;
-				else {
+				} else {
 					if (log.isWarnEnabled()) {
 						log.warn("missing required label for non-TMS solvent: ##.SOLVENTREFERENCE=, setting reference to 0.0");
 					}
 					return 0.0;
 				}
-			} else
+			} else {
 				return Double.parseDouble(ldr.getContent());
+			}
 
 		} else {
 			String shiftRef = ldr.getContent();

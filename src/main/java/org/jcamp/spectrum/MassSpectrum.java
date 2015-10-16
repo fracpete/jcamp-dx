@@ -68,14 +68,4 @@ public class MassSpectrum
   public int getIdentifier() {
     return ISpectrumIdentifier.MS;
   }
-
-  /**
-   * isSameType method comment.
-   */
-  @Override
-  public boolean isSameType(Spectrum otherSpectrum) {
-    if (otherSpectrum instanceof MassSpectrum)
-      return true;
-    return false;
-  }
 }

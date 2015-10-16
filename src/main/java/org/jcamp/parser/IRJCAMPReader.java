@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import org.jcamp.spectrum.ArrayData;
@@ -17,7 +18,6 @@ import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.OrderedArrayData;
 import org.jcamp.spectrum.Pattern;
 import org.jcamp.spectrum.Peak1D;
-import org.jcamp.spectrum.Spectrum;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
 import org.slf4j.Logger;
@@ -28,10 +28,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
- *         Kerner</a>
+ * Kerner</a>
  */
 public class IRJCAMPReader extends CommonSpectrumJCAMPReader implements
-ISpectrumJCAMPReader {
+		ISpectrumJCAMPReader {
 
 	private final static Logger log = LoggerFactory
 			.getLogger(IRJCAMPReader.class);
@@ -47,10 +47,10 @@ ISpectrumJCAMPReader {
 	 * read IR full spectrum.
 	 *
 	 * @return com.creon.chem.spectrum.IRSpectrum
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
 	 */
-	private IRSpectrum createFS(JCAMPBlock block) throws JCAMPException {
+	@Override
+	protected IRSpectrum createFS(JCAMPBlock block) throws JCAMPException {
 		IRSpectrum spectrum;
 		Unit xUnit = null;
 		try {
@@ -82,9 +82,10 @@ ISpectrumJCAMPReader {
 			double lastX = getLastX(block);
 			double[] intensities = getXYData(block, firstX, lastX, nPoints,
 					xFactor, yFactor);
-			if (intensities.length != nPoints)
+			if (intensities.length != nPoints) {
 				throw new JCAMPException(
 						"incorrect ##NPOINTS= or bad ##XYDATA=");
+			}
 			IOrderedDataArray1D x = new EquidistantData(firstX, lastX, nPoints,
 					xUnit);
 			IDataArray1D y = new ArrayData(intensities, yUnit);
@@ -94,9 +95,10 @@ ISpectrumJCAMPReader {
 			IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
 			IDataArray1D y = new ArrayData(xy[1], yUnit);
 			spectrum = new IRSpectrum(x, y, false);
-		} else
+		} else {
 			throw new JCAMPException(
 					"missing data: ##XYDATA= or ##XYPOINTS= required.");
+		}
 		return spectrum;
 	}
 
@@ -104,19 +106,20 @@ ISpectrumJCAMPReader {
 	 * create IR peak table (peak spectrum) from JCAMPBlock.
 	 *
 	 * @return IRSpectrum
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                exception thrown if parsing fails.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException exception thrown if parsing fails.
 	 */
-	private IRSpectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
+	@Override
+	protected IRSpectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
 		IRSpectrum spectrum = null;
 		Unit xUnit = getXUnits(block);
-		if (xUnit == null)
+		if (xUnit == null) {
 			xUnit = CommonUnit.hertz;
+		}
 		Unit yUnit = getYUnits(block);
-		if (yUnit == null)
+		if (yUnit == null) {
 			yUnit = CommonUnit.intensity;
+		}
 		double xFactor = getXFactor(block);
 		double yFactor = getYFactor(block);
 		int nPoints = getNPoints(block);
@@ -137,31 +140,15 @@ ISpectrumJCAMPReader {
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);
-			if (tables.length > 2)
+			if (tables.length > 2) {
 				spectrum.setAssignments((Assignment[]) tables[2]);
+			}
 		}
 		return spectrum;
 	}
 
-	/**
-	 * createSpectrum method comment.
-	 */
 	@Override
-	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-		if (block.getSpectrumType() != ISpectrumIdentifier.IR)
-			throw new JCAMPException("JCAMP reader adapter missmatch");
-		IRSpectrum spectrum = null;
-		BlockType type = block.getBlockType();
-		if (type.equals(BlockType.FULLSPECTRUM))
-			spectrum = createFS(block);
-		else if (type.equals(BlockType.PEAKTABLE))
-			spectrum = createPeakTable(block);
-		else if (type.equals(BlockType.ASSIGNMENT))
-			spectrum = createPeakTable(block);
-		else
-			// never reached
-			throw new JCAMPException("illegal block type");
-		setNotes(block, spectrum);
-		return spectrum;
+	protected int getExpectedSpectrumType() {
+		return ISpectrumIdentifier.IR;
 	}
 }

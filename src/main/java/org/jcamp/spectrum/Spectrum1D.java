@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.spectrum;
 
 import java.util.Arrays;
@@ -16,12 +17,14 @@ import org.jcamp.math.Range2D;
 
 /**
  * 1D spectra.
- * 
+ *
  * @author Thomas Weber
  */
-public abstract class Spectrum1D extends Spectrum implements Cloneable {
+public class Spectrum1D extends Spectrum implements Cloneable {
 
-	/** for serialization. */
+	/**
+	 * for serialization.
+	 */
 	private static final long serialVersionUID = 6979128235728631212L;
 
 	IOrderedDataArray1D xData;
@@ -64,11 +67,9 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * standard ctor.
-	 * 
-	 * @param x
-	 *            com.creon.chem.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            com.creon.chem.spectrum.IDataArray1D
+	 *
+	 * @param x com.creon.chem.spectrum.IOrderedDataArray1D
+	 * @param y com.creon.chem.spectrum.IDataArray1D
 	 */
 	public Spectrum1D(IOrderedDataArray1D x, IDataArray1D y) {
 		this(x, y, !(x instanceof EquidistantData));
@@ -76,13 +77,10 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * standard ctor.
-	 * 
-	 * @param x
-	 *            com.creon.chem.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            com.creon.chem.spectrum.IDataArray1D
-	 * @param fullSpectrum
-	 *            boolean indicates a full spectrum vs. peak spectrum
+	 *
+	 * @param x com.creon.chem.spectrum.IOrderedDataArray1D
+	 * @param y com.creon.chem.spectrum.IDataArray1D
+	 * @param fullSpectrum boolean indicates a full spectrum vs. peak spectrum
 	 */
 	public Spectrum1D(IOrderedDataArray1D x, IDataArray1D y,
 			boolean fullSpectrum) {
@@ -141,7 +139,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * cloning.
-	 * 
+	 *
 	 * @return java.lang.Object
 	 */
 	@Override
@@ -159,9 +157,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * deep copy of assignment table.
-	 * 
-	 * @param assignments
-	 *            com.labcontrol.spectrum.Assignment[]
+	 *
+	 * @param assignments com.labcontrol.spectrum.Assignment[]
 	 */
 	protected void copyAssignments(Assignment[] assignments) {
 		if (assignments == null) {
@@ -177,9 +174,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * deep copy of pattern table.
-	 * 
-	 * @param patternTable
-	 *            Pattern[]
+	 *
+	 * @param patternTable Pattern[]
 	 */
 	protected void copyPatternTable(Pattern[] patternTable) {
 		if (patternTable == null) {
@@ -195,9 +191,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * deep copy of peak table.
-	 * 
-	 * @param peakTable
-	 *            Peak1D[]
+	 *
+	 * @param peakTable Peak1D[]
 	 */
 	protected void copyPeakTable(Peak1D[] peakTable) {
 		if (peakTable == null) {
@@ -213,16 +208,15 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * find index of label nearest to position.
-	 * 
+	 *
 	 * @return ISpectrumLabel
-	 * @param ISpectrumLabel
-	 *            []
-	 * @param pos
-	 *            double
+	 * @param ISpectrumLabel []
+	 * @param pos double
 	 */
 	private static int findLabelIndexNearestTo(ISpectrumLabel[] array,
 			double pos) {
 		class SearchKey implements ISpectrumLabel {
+
 			double[] position = new double[1];
 
 			SearchKey(double pos) {
@@ -243,10 +237,12 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 			public int compareTo(ISpectrumLabel o) {
 				double p0 = position[0];
 				double p1 = o.getPosition()[0];
-				if (p0 < p1)
+				if (p0 < p1) {
 					return -1;
-				if (p1 > p0)
+				}
+				if (p1 > p0) {
 					return 1;
+				}
 				return 0;
 			}
 
@@ -256,19 +252,21 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 		}
 		SearchKey key = new SearchKey(pos);
 		int index = Arrays.binarySearch(array, key);
-		if (index < 0)
+		if (index < 0) {
 			index = -index - 1;
-		if (index >= array.length)
+		}
+		if (index >= array.length) {
 			return array.length - 1;
-		else {
+		} else {
 			if (index <= 0) {
 				return 0;
 			} else {
 				if (pos - array[index - 1].getPosition()[0] < array[index]
-						.getPosition()[0] - pos)
+						.getPosition()[0] - pos) {
 					return index - 1;
-				else
+				} else {
 					return index;
+				}
 			}
 		}
 	}
@@ -276,12 +274,10 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * find spectrum label (peak, pattern, assignment) nearest to position
 	 * <code>pos</code>.
-	 * 
+	 *
 	 * @return ISpectrumLabel
-	 * @param array
-	 *            ISpectrumLabel[]
-	 * @param pos
-	 *            double
+	 * @param array ISpectrumLabel[]
+	 * @param pos double
 	 */
 	public ISpectrumLabel findNearestLabel(ISpectrumLabel[] array, double pos) {
 		int index = findLabelIndexNearestTo(array, pos);
@@ -290,20 +286,20 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * return assignment nearest to position <code>pos</code>.
-	 * 
+	 *
 	 * @return Assignment
-	 * @param pos
-	 *            double
+	 * @param pos double
 	 */
 	public Assignment getAssignmentNearestTo(double pos) {
-		if (assignments == null)
+		if (assignments == null) {
 			return null;
+		}
 		return (Assignment) findNearestLabel(assignments, pos);
 	}
 
 	/**
 	 * return assignment table.
-	 * 
+	 *
 	 * @return Assignment[]
 	 */
 	public Assignment[] getAssignments() {
@@ -312,7 +308,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * gets data range.
-	 * 
+	 *
 	 * @return Range2D.Double
 	 */
 	public Range2D.Double getDataRange() {
@@ -322,7 +318,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * return range of mapped xy-data in full view
-	 * 
+	 *
 	 * @return Range2D.Double
 	 */
 	public Range2D.Double getFullViewRange() {
@@ -331,14 +327,14 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * returns pattern nearest to postion <code>pos</code>.
-	 * 
+	 *
 	 * @return Assignment
-	 * @param pos
-	 *            double
+	 * @param pos double
 	 */
 	public Pattern getPatternNearestTo(double pos) {
-		if (patternTable == null)
+		if (patternTable == null) {
 			return null;
+		}
 		return (Pattern) findNearestLabel(patternTable, pos);
 	}
 
@@ -351,20 +347,20 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * return peak nearest to position <code>pos</code>.
-	 * 
+	 *
 	 * @return Assignment
-	 * @param pos
-	 *            double
+	 * @param pos double
 	 */
 	public Peak1D getPeakNearestTo(double pos) {
-		if (peakTable == null)
+		if (peakTable == null) {
 			return null;
+		}
 		return (Peak1D) findNearestLabel(peakTable, pos);
 	}
 
 	/**
 	 * return peak table.
-	 * 
+	 *
 	 * @return Peak1D[]
 	 */
 	@Override
@@ -374,15 +370,16 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * gets label on x-axis.
-	 * 
+	 *
 	 * @return java.lang.String
 	 */
 	@Override
 	public String getXAxisLabel() {
-		if (xData != null)
+		if (xData != null) {
 			return xData.getLabel();
-		else
+		} else {
 			return "";
+		}
 	}
 
 	/**
@@ -396,7 +393,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * Insert the method's description here.
-	 * 
+	 *
 	 * @return com.creon.chem.spectrum.IOrderedDataArray1D
 	 */
 	@Override
@@ -406,7 +403,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * gets x range in full view
-	 * 
+	 *
 	 * @see com.creon.chem.spectrum.Spectrum1D
 	 */
 	public Range1D.Double getXFullViewRange() {
@@ -415,15 +412,16 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * gets label on y-axis.
-	 * 
+	 *
 	 * @return java.lang.String
 	 */
 	@Override
 	public String getYAxisLabel() {
-		if (yData != null)
+		if (yData != null) {
 			return yData.getLabel();
-		else
+		} else {
 			return "";
+		}
 	}
 
 	/**
@@ -437,7 +435,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * Insert the method's description here.
-	 * 
+	 *
 	 * @return com.creon.chem.spectrum.IDataArray1D
 	 */
 	@Override
@@ -448,7 +446,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * return an integer array of the y data (intensities) e.g. for writing to
 	 * JCAMP
-	 * 
+	 *
 	 * @param int[] integer array
 	 * @return double y factor
 	 */
@@ -457,7 +455,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 		Range1D.Double yRange = yData.getRange1D();
 		double yWidth = Math.max(yRange.getXMax(), -yRange.getXMin());
 		double shortIntWidth = 2 << 14; // JCAMP requires 16bit signed int
-										// precision?
+		// precision?
 		double yf = shortIntWidth / yWidth;
 		for (int i = 0; i < n; i++) {
 			y[i] = (int) (yData.pointAt(i) * yf + .5);
@@ -468,7 +466,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * return an integer array of the y data (intensities) e.g. for writing to
 	 * JCAMP (using non-std. 32 bit precision)
-	 * 
+	 *
 	 * @param int[] integer array
 	 * @return double y factor
 	 */
@@ -493,7 +491,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * flag indicating assignments.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean hasAssignments() {
@@ -502,7 +500,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * flag indictating a pattern table.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean hasPatternTable() {
@@ -511,7 +509,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * flag indicating a peak table.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	@Override
@@ -521,7 +519,7 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * flag indicating a full spectrum.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	@Override
@@ -531,9 +529,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * remove assignment nearest to position <code>pos</code>.
-	 * 
-	 * @param pos
-	 *            double
+	 *
+	 * @param pos double
 	 */
 	public void removeAssignmentAt(double pos) {
 		if (this.assignments != null && this.assignments.length > 0) {
@@ -548,9 +545,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * remove pattern nearest to position <code>pos</code>.
-	 * 
-	 * @param pos
-	 *            double
+	 *
+	 * @param pos double
 	 */
 	public void removePatternAt(double pos) {
 		if (this.patternTable != null && this.patternTable.length > 0) {
@@ -565,9 +561,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * remove peak nearest to position <code>pos</code>.
-	 * 
-	 * @param pos
-	 *            double
+	 *
+	 * @param pos double
 	 */
 	public void removePeakAt(double pos) {
 		if (this.peakTable != null && this.peakTable.length > 0) {
@@ -582,16 +577,16 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * sets assignment array.
-	 * 
-	 * @param newAssignments
-	 *            Assignment[]
+	 *
+	 * @param newAssignments Assignment[]
 	 */
 	public void setAssignments(Assignment[] newAssignments) {
 		if (assignments != newAssignments) {
 			assignments = newAssignments;
 			if (assignments != null) {
-				for (int i = 0; i < assignments.length; i++)
+				for (int i = 0; i < assignments.length; i++) {
 					assignments[i].setSpectrum(this);
+				}
 				Arrays.sort(newAssignments);
 			}
 		}
@@ -599,11 +594,9 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * sets data arrays.
-	 * 
-	 * @param x
-	 *            com.creon.math.IOrderedDataArray1D
-	 * @param y
-	 *            com.creon.math.IDataArray1D
+	 *
+	 * @param x com.creon.math.IOrderedDataArray1D
+	 * @param y com.creon.math.IDataArray1D
 	 */
 	public void setData(IOrderedDataArray1D x, IDataArray1D y) {
 		this.xData = x;
@@ -612,9 +605,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * set full spectrum flag
-	 * 
-	 * @param newFullSpectrum
-	 *            boolean
+	 *
+	 * @param newFullSpectrum boolean
 	 */
 	protected void setFullSpectrum(boolean newFullSpectrum) {
 		fullSpectrum = newFullSpectrum;
@@ -622,9 +614,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * set full view data range in mapping should be overloaded
-	 * 
-	 * @param range
-	 *            Range2D.Double
+	 *
+	 * @param range Range2D.Double
 	 */
 	public void setFullViewRange(Range2D.Double range) {
 		setXFullViewRange(range.getXRange());
@@ -633,40 +624,41 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 
 	/**
 	 * sets a new pattern table.
-	 * 
-	 * @param newPatternTable
-	 *            Pattern[]
+	 *
+	 * @param newPatternTable Pattern[]
 	 */
 	public void setPatternTable(Pattern[] newPatternTable) {
 		if (newPatternTable != patternTable) {
 			patternTable = newPatternTable;
-			if (patternTable != null)
-				for (int i = 0; i < patternTable.length; i++)
+			if (patternTable != null) {
+				for (int i = 0; i < patternTable.length; i++) {
 					patternTable[i].setSpectrum(this);
+				}
+			}
 		}
 	}
 
 	/**
 	 * sets a new peak table.
-	 * 
-	 * @param newPeakTable
-	 *            Peak1D[]
+	 *
+	 * @param newPeakTable Peak1D[]
 	 */
 	public void setPeakTable(Peak1D[] newPeakTable) {
 		if (newPeakTable != peakTable) {
 			peakTable = newPeakTable;
-			if (peakTable != null)
-				for (int i = 0; i < peakTable.length; i++)
+			if (peakTable != null) {
+				for (int i = 0; i < peakTable.length; i++) {
 					peakTable[i].setSpectrum(this);
+				}
+			}
 		}
 	}
 
 	/**
 	 * set xy-mapping with a data range of <code>dataRange</code>. mappings are
 	 * linear mapping in <code>dataRange</code> bounds. mapping: x := indepData
-	 * 
-	 * @param dataRange
-	 *            Range1D.Double
+	 *
+	 * @param dataRange Range1D.Double
 	 */
 	public void setXFullViewRange(Range1D.Double dataRange) {
 		this.xAxisMap = new LinearAxisMap(xData, dataRange);
@@ -682,9 +674,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * insertion sort for peak tables (assuming most peak tables are already
 	 * sorted) sort by first dimension
-	 * 
-	 * @param array
-	 *            double[][]
+	 *
+	 * @param array double[][]
 	 */
 	static void sort(double[][] array) {
 		int i, j, n;
@@ -708,9 +699,8 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * translate x values by <code>amount</code> together with all associated
 	 * data e.g. for calibration
-	 * 
-	 * @param amount
-	 *            double
+	 *
+	 * @param amount double
 	 */
 	public void translate(double amount) {
 		double[] tvec = new double[2];
@@ -733,5 +723,18 @@ public abstract class Spectrum1D extends Spectrum implements Cloneable {
 			}
 		}
 		adjustFullViewRange();
+	}
+
+	@Override
+	public int getIdentifier() {
+		return -1;
+	}
+
+	@Override
+	public boolean isSameType(Spectrum otherSpectrum) {
+		if (otherSpectrum == null) {
+			return false;
+		}
+		return getClass().equals(otherSpectrum.getClass());
 	}
 }

@@ -93,14 +93,4 @@ public class Chromatogram
   public int getIdentifier() {
     return ISpectrumIdentifier.CHROMATOGRAM;
   }
-
-  /**
-   * isSameType method comment.
-   */
-  @Override
-  public boolean isSameType(Spectrum otherSpectrum) {
-    if (otherSpectrum instanceof Chromatogram)
-      return true;
-    return false;
-  }
 }

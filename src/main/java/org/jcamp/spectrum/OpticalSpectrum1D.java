@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.spectrum;
 
 import org.jcamp.math.Array1D;
@@ -17,12 +18,14 @@ import org.jcamp.units.Unit;
 /**
  * Prototype implementation for all optical spectrum types with 1 independent
  * variable.
- * 
+ *
  * @author Thomas Weber
  */
 public abstract class OpticalSpectrum1D extends Spectrum1D {
 
-	/** for serialization. */
+	/**
+	 * for serialization.
+	 */
 	private static final long serialVersionUID = -6989200995078011258L;
 
 	protected OpticalSpectrum1D(IOrderedDataArray1D x, IDataArray1D y) {
@@ -84,31 +87,27 @@ public abstract class OpticalSpectrum1D extends Spectrum1D {
 		}
 	}
 
-	@Override
-	public abstract int getIdentifier();
-
-	@Override
-	public abstract boolean isSameType(Spectrum otherSpectrum);
-
 	/**
 	 * heuristical check for transmission spectrum
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean isTransmission() {
 		Unit yunit = yData.getUnit();
 		if (yunit.equals(CommonUnit.percentTransmittance)
-				|| yunit.equals(CommonUnit.transmittance))
+				|| yunit.equals(CommonUnit.transmittance)) {
 			return true;
+		}
 		if (yunit.equals(CommonUnit.percentAbsorbance)
-				|| yunit.equals(CommonUnit.absorbance))
+				|| yunit.equals(CommonUnit.absorbance)) {
 			return false;
+		}
 		return isTransmission(yData);
 	}
 
 	/**
 	 * simple test if spectrum is a transmission spectrum.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	private static boolean isTransmission(IArray1D data) {
@@ -119,15 +118,17 @@ public abstract class OpticalSpectrum1D extends Spectrum1D {
 		int nhigh = 0;
 		for (int i = 0; i < data.getLength(); i++) {
 			double y = data.pointAt(i);
-			if (y > yhigh)
+			if (y > yhigh) {
 				nhigh++;
-			else if (y < ylow)
+			} else if (y < ylow) {
 				nlow++;
+			}
 		}
-		if (nhigh > nlow)
+		if (nhigh > nlow) {
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 
 	protected OpticalSpectrum1D(IOrderedDataArray1D x, IDataArray1D y,
@@ -146,20 +147,24 @@ public abstract class OpticalSpectrum1D extends Spectrum1D {
 			ref = 100.;
 		} else if (data.getUnit().equals(CommonUnit.transmittance)) {
 			ref = 1.;
-		} else
+		} else {
 			return data;
+		}
 
 		double[] y = new double[n];
 		for (int i = 0; i < n; i++) {
 			double t = data.pointAt(i);
-			if (t < 0)
+			if (t < 0) {
 				t = 0;
-			if (t > ref)
+			}
+			if (t > ref) {
 				t = ref;
-			if (t > 0)
+			}
+			if (t > 0) {
 				y[i] = Math.max(0., Math.log(ref / t) / Math.log(10.));
-			else
+			} else {
 				y[i] = 1;
+			}
 		}
 		return new ArrayData(new Array1D(y, false), CommonUnit.absorbance);
 	}
@@ -190,15 +195,18 @@ public abstract class OpticalSpectrum1D extends Spectrum1D {
 			double[] y = new double[n];
 			for (int i = 0; i < n; i++) {
 				double a = data.pointAt(i);
-				if (a > 1)
+				if (a > 1) {
 					a = 1;
-				if (a < 0)
+				}
+				if (a < 0) {
 					a = 0;
+				}
 				y[i] = 100.0 / Math.pow(10, a);
 			}
 			return new ArrayData(new Array1D(y, false),
 					CommonUnit.percentTransmittance);
-		} else
+		} else {
 			return data;
+		}
 	}
 }

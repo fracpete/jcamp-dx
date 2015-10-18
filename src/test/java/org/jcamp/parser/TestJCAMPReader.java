@@ -24,6 +24,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestJCAMPReader {
@@ -66,7 +67,7 @@ public class TestJCAMPReader {
 		JCAMPBlock b = new JCAMPBlock(
 				new LazyStringReader()
 				.read(new File(
-						"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/2-MAPB.jcamp")));
+						"src/test/resources/testdata2/2-MAPB.jcamp")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
 
@@ -93,7 +94,7 @@ public class TestJCAMPReader {
 		JCAMPBlock b = new JCAMPBlock(
 				new LazyStringReader()
 				.read(new File(
-						"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+						"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
 
@@ -121,7 +122,7 @@ public class TestJCAMPReader {
 		JCAMPBlock b = new JCAMPBlock(
 				new LazyStringReader()
 				.read(new File(
-						"/home/alex/sources/jcamp-dx/src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx")));
+						"src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
 
@@ -144,13 +145,14 @@ public class TestJCAMPReader {
 
 	}
 
+	@Ignore
 	@Test
 	public final void testCreateSpectrum01() throws IOException, JCAMPException {
 		Spectrum s = JCAMPReader
 				.getInstance()
 				.createSpectrum(
 						new File(
-								"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/S2014_5533_94 AM-1220_aceton-HSQC.jcamp"));
+								"src/test/resources/testdata2/S2014_5533_94 AM-1220_aceton-HSQC.jcamp"));
 		assertNotNull(s);
 
 	}
@@ -161,7 +163,7 @@ public class TestJCAMPReader {
 				.getInstance()
 				.createSpectrum(
 						new File(
-								"/home/alex/sources/jcamp-dx/src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx"));
+								"src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx"));
 		assertNotNull(s);
 		assertEquals(NMRSpectrum.class, s.getClass());
 		NMRSpectrum ns = (NMRSpectrum) s;
@@ -196,7 +198,7 @@ public class TestJCAMPReader {
 				.getInstance()
 				.createSpectrum(
 						new File(
-								"/home/alex/sources/jcamp-dx/src/test/resources/testdata2/PE1800.DX"));
+								"src/test/resources/testdata2/PE1800.DX"));
 		assertNotNull(s);
 		assertEquals(IRSpectrum.class, s.getClass());
 		assertNotNull(s.getXData());

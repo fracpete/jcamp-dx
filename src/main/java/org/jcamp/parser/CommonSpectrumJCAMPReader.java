@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import java.util.ArrayList;
@@ -12,14 +13,21 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
+import java.util.logging.Level;
 
 import org.jcamp.math.IArray2D;
+import org.jcamp.spectrum.ArrayData;
 import org.jcamp.spectrum.Assignment;
+import org.jcamp.spectrum.EquidistantData;
 import org.jcamp.spectrum.IAssignmentTarget;
+import org.jcamp.spectrum.IDataArray1D;
+import org.jcamp.spectrum.IOrderedDataArray1D;
 import org.jcamp.spectrum.Multiplicity;
+import org.jcamp.spectrum.OrderedArrayData;
 import org.jcamp.spectrum.Pattern;
 import org.jcamp.spectrum.Peak1D;
 import org.jcamp.spectrum.Spectrum;
+import org.jcamp.spectrum.Spectrum1D;
 import org.jcamp.spectrum.assignments.AtomReference;
 import org.jcamp.spectrum.notes.NoteDescriptor;
 import org.jcamp.units.CommonUnit;
@@ -32,9 +40,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
- *         Kerner</a>
+ * Kerner</a>
  */
-abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
+public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 
 	private final static Logger log = LoggerFactory
 			.getLogger(CommonSpectrumJCAMPReader.class);
@@ -45,8 +53,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * currently assumes SpecInfo convention of a list of integer atom numbers
 	 *
 	 * @return IAssignmentTarget[]
-	 * @param assign
-	 *            java.lang.String
+	 * @param assign java.lang.String
 	 */
 	protected static IAssignmentTarget[] parseAssignment(String assign) {
 		ArrayList<AtomReference> targets = new ArrayList<AtomReference>(5);
@@ -60,8 +67,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			}
 		}
 		IAssignmentTarget[] assigns = new IAssignmentTarget[targets.size()];
-		for (int i = 0; i < targets.size(); i++)
+		for (int i = 0; i < targets.size(); i++) {
 			assigns[i] = targets.get(i);
+		}
 		return assigns;
 	}
 
@@ -69,15 +77,15 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * create peak spectrum from peak table. adds all intensities belonging to
 	 * the same x-position up
 	 *
-	 * @param peaks
-	 *            Peak1D[]
+	 * @param peaks Peak1D[]
 	 * @return double[][] array of {x, y}
 	 */
 	protected static double[][] peakTableToPeakSpectrum(Peak1D[] peaks)
 			throws JCAMPException {
 		int n = peaks.length;
-		if (n == 0)
+		if (n == 0) {
 			throw new JCAMPException("empty peak table");
+		}
 		Arrays.sort(peaks);
 		ArrayList<Double> px = new ArrayList<Double>(n);
 		ArrayList<Double> py = new ArrayList<Double>(n);
@@ -117,17 +125,120 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 */
 	@Override
 	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
-		throw new JCAMPException("unimplemented adapter method");
+		int expectedSpectrumType = getExpectedSpectrumType();
+		if (expectedSpectrumType != -1
+				&& block.getSpectrumType() != expectedSpectrumType) {
+			throw new JCAMPException("JCAMP reader adapter missmatch");
+		}
+		Spectrum spectrum = null;
+		BlockType type = block.getBlockType();
+		if (type.equals(BlockType.FULLSPECTRUM)) {
+			spectrum = createFS(block);
+		} else if (type.equals(BlockType.PEAKTABLE)) {
+			spectrum = createPeakTable(block);
+		} else if (type.equals(BlockType.ASSIGNMENT)) {
+			spectrum = createPeakTable(block);
+		} else {
+			if (!type.equals(BlockType.STRUCTURE)) {
+				java.util.logging.Logger.getLogger(getClass().getName()).log(Level.WARNING, "Illegal block type");
+			}
+			return null;
+		}
+		setNotes(block, spectrum);
+		return spectrum;
+	}
+
+	protected int getExpectedSpectrumType() {
+		return -1;
+	}
+
+	protected Spectrum createFS(JCAMPBlock block) throws JCAMPException {
+		Spectrum1D spectrum;
+		Unit xUnit = null;
+		try {
+			xUnit = getXUnits(block);
+		} catch (JCAMPException e) {
+		}
+		Unit yUnit = null;
+		try {
+			yUnit = getYUnits(block);
+		} catch (JCAMPException e) {
+		}
+		double xFactor;
+		try {
+			xFactor = getXFactor(block);
+		} catch (JCAMPException e) {
+			xFactor = 1.0;
+		}
+		double yFactor;
+		try {
+			yFactor = getYFactor(block);
+		} catch (JCAMPException e) {
+			yFactor = 1.0;
+		}
+		int nPoints = getNPoints(block);
+		if (block.getDataRecord("XYDATA") != null) {
+			double firstX = getFirstX(block);
+			double lastX = getLastX(block);
+			double[] intensities = getXYData(block, firstX, lastX, nPoints,
+					xFactor, yFactor);
+			if (intensities.length != nPoints) {
+				throw new JCAMPException(
+						"incorrect ##NPOINTS= or bad ##XYDATA=");
+			}
+			IOrderedDataArray1D x = new EquidistantData(firstX, lastX, nPoints,
+					xUnit);
+			IDataArray1D y = new ArrayData(intensities, yUnit);
+			spectrum = new Spectrum1D(x, y, true);
+		} else if (block.getDataRecord("XYPOINTS") != null) {
+			double xy[][] = getXYPoints(block, nPoints, xFactor, yFactor);
+			IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
+			IDataArray1D y = new ArrayData(xy[1], yUnit);
+			spectrum = new Spectrum1D(x, y, false);
+		} else {
+			throw new JCAMPException(
+					"missing data: ##XYDATA= or ##XYPOINTS= required.");
+		}
+		return spectrum;
+	}
+
+	protected Spectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
+		Spectrum1D spectrum = null;
+		Unit xUnit = getXUnits(block),
+				yUnit = getYUnits(block);
+		double xFactor = getXFactor(block);
+		double yFactor = getYFactor(block);
+		int nPoints = getNPoints(block);
+		Object[] tables = getPeaktable(block, nPoints, xFactor, yFactor);
+		Peak1D[] peaks = (Peak1D[]) tables[0];
+		if (nPoints != peaks.length) {
+			if (log.isErrorEnabled()) {
+				log.error("incorrect ##NPOINTS=: expected "
+						+ Integer.toString(nPoints) + " but got "
+						+ Integer.toString(peaks.length));
+			}
+			nPoints = peaks.length;
+		}
+		double[][] xy = peakTableToPeakSpectrum(peaks);
+		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
+		IDataArray1D y = new ArrayData(xy[1], yUnit);
+		spectrum = new Spectrum1D(x, y, false);
+		spectrum.setPeakTable(peaks);
+		if (tables.length > 1) {
+			spectrum.setPatternTable((Pattern[]) tables[1]);
+			if (tables.length > 2) {
+				spectrum.setAssignments((Assignment[]) tables[2]);
+			}
+		}
+		return spectrum;
 	}
 
 	/**
 	 * gets ##LASTX= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double getFirstX(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
@@ -143,10 +254,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##FIRSTY= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double getFirstY(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable y = block.getVariable("Y");
@@ -162,10 +271,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##LASTX= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double getLastX(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
@@ -181,10 +288,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##NPOINTS= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected int getNPoints(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrNPoints = block.getDataRecord("NPOINTS");
@@ -200,10 +305,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * gets NTuple Page data.
 	 *
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
-	 * @param page
-	 *            com.creon.chem.jcamp.JCAMPNTuplePage
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
+	 * @param page com.creon.chem.jcamp.JCAMPNTuplePage
 	 * @return IArray2D
 	 */
 	protected IArray2D getNTuplePageData(JCAMPNTuplePage page)
@@ -215,22 +318,14 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##DATATABLE= content
 	 *
 	 * @return double[]
-	 * @param block
-	 *            JCAMPBlock
-	 * @param page
-	 *            JCAMPNTuplePage
-	 * @param firstX
-	 *            double starting x value (from ##FIRSTX=)
-	 * @param lastX
-	 *            double ending x value (from ##LASTX=)
-	 * @param nPoints
-	 *            int number of data points (from ##NPOINTS=)
-	 * @param xFactor
-	 *            double factor to be applied to x values (from ##XFACTOR=)
-	 * @param yFactor
-	 *            double factor to be applied to y values (from ##YFACTOR=)
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @param page JCAMPNTuplePage
+	 * @param firstX double starting x value (from ##FIRSTX=)
+	 * @param lastX double ending x value (from ##LASTX=)
+	 * @param nPoints int number of data points (from ##NPOINTS=)
+	 * @param xFactor double factor to be applied to x values (from ##XFACTOR=)
+	 * @param yFactor double factor to be applied to y values (from ##YFACTOR=)
+	 * @exception JCAMPException The exception description.
 	 * @deprecated
 	 */
 	@Deprecated
@@ -243,15 +338,17 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			throw new JCAMPException("missing required label ##DATATABLE=");
 		}
 		DataVariableInfo varInfo = new DataVariableInfo(ldrXYData);
-		if (!varInfo.isIncremental())
+		if (!varInfo.isIncremental()) {
 			throw new JCAMPException("data form missmatch");
+		}
 
 		double[] y = block.getASDFDecoder().decode(ldrXYData, firstX, lastX,
 				xFactor, nPoints);
 		int n = y.length;
 		double[] yValues = new double[n];
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++) {
 			yValues[i] = yFactor * y[i];
+		}
 		return yValues;
 	}
 
@@ -259,12 +356,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##DATATABLE= content
 	 *
 	 * @return double[]
-	 * @param block
-	 *            JCAMPBlock
-	 * @param nPoints
-	 *            int number of data points (from ##NPOINTS=)
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @param nPoints int number of data points (from ##NPOINTS=)
+	 * @exception JCAMPException The exception description.
 	 * @deprecated
 	 */
 	@Deprecated
@@ -296,10 +390,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##ORIGIN= content
 	 *
 	 * @return java.lang.String
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected String getOrigin(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrOrigin = block.getDataRecord("ORIGIN");
@@ -316,10 +408,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##OWNER= content
 	 *
 	 * @return java.lang.String
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected String getOwner(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrOwner = block.getDataRecord("OWNER");
@@ -336,26 +426,24 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##PEAKTABLE= or ##PEAKASSIGNMENTS= content
 	 *
 	 * @return Object[] array of Peak[], Pattern[], Assignment[]
-	 * @param block
-	 *            JCAMPBlock
-	 * @param nPoints
-	 *            int number of data points (from ##NPOINTS=)
-	 * @param xFactor
-	 *            double factor to be applied to x values (from ##XFACTOR=)
-	 * @param yFactor
-	 *            double factor to be applied to y values (from ##YFACTOR=)
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @param nPoints int number of data points (from ##NPOINTS=)
+	 * @param xFactor double factor to be applied to x values (from ##XFACTOR=)
+	 * @param yFactor double factor to be applied to y values (from ##YFACTOR=)
+	 * @exception JCAMPException The exception description.
 	 */
 	protected Object[] getPeaktable(JCAMPBlock block, int nPoints,
 			double xFactor, double yFactor) throws JCAMPException {
 		JCAMPDataRecord ldrPeaktable = block.getDataRecord("PEAKTABLE");
-		if (ldrPeaktable == null)
+		if (ldrPeaktable == null) {
 			ldrPeaktable = block.getDataRecord("PEAKASSIGNMENTS");
-		if (ldrPeaktable == null)
+		}
+		if (ldrPeaktable == null) {
 			ldrPeaktable = block.getDataRecord("XYPOINTS");
-		if (ldrPeaktable == null)
+		}
+		if (ldrPeaktable == null) {
 			ldrPeaktable = block.getDataRecord("XYDATA");
+		}
 		if (ldrPeaktable == null) {
 			throw new JCAMPException("missing peak table");
 		}
@@ -370,7 +458,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				peaks[i] = new Peak1D(x, y);
 				i++;
 			}
-			return new Object[] { peaks };
+			return new Object[]{peaks};
 		} else if (tokenizer.getType().equals(DataType.XYW)) {
 			int i = 0;
 			Peak1D[] peaks = new Peak1D[nPoints];
@@ -383,7 +471,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				peaks[i] = new Peak1D(x, y, w);
 				i++;
 			}
-			return new Object[] { peaks };
+			return new Object[]{peaks};
 		} else if (tokenizer.getType().equals(DataType.XYM)) {
 			int i = 0;
 			Peak1D[] peaks = new Peak1D[nPoints];
@@ -397,7 +485,7 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				pattern[i] = new Pattern(x, m);
 				i++;
 			}
-			return new Object[] { peaks, pattern };
+			return new Object[]{peaks, pattern};
 		} else if (tokenizer.getType().equals(DataType.XYA)) {
 			int i = 0;
 			Peak1D[] peaks = new Peak1D[nPoints];
@@ -411,11 +499,11 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				peaks[i] = new Peak1D(x, y);
 				IAssignmentTarget[] targets = parseAssignment(a);
 				pattern[i] = new Pattern(x, Multiplicity.UNKNOWN,
-						new Peak1D[] { peaks[i] });
+						new Peak1D[]{peaks[i]});
 				assigns[i] = new Assignment(pattern[i], targets);
 				i++;
 			}
-			return new Object[] { peaks, pattern, assigns };
+			return new Object[]{peaks, pattern, assigns};
 		} else if (tokenizer.getType().equals(DataType.XYMA)) {
 			int i = 0;
 			Peak1D[] peaks = new Peak1D[nPoints];
@@ -429,11 +517,11 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				String a = (String) group.getValue(3);
 				IAssignmentTarget[] targets = parseAssignment(a);
 				peaks[i] = new Peak1D(x, y);
-				pattern[i] = new Pattern(x, m, new Peak1D[] { peaks[i] });
+				pattern[i] = new Pattern(x, m, new Peak1D[]{peaks[i]});
 				assigns[i] = new Assignment(pattern[i], targets);
 				i++;
 			}
-			return new Object[] { peaks, pattern, assigns };
+			return new Object[]{peaks, pattern, assigns};
 		} else if (tokenizer.getType().equals(DataType.XYWA)) {
 			int i = 0;
 			Peak1D[] peaks = new Peak1D[nPoints];
@@ -447,17 +535,17 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				IAssignmentTarget[] targets = parseAssignment(a);
 				peaks[i] = new Peak1D(x, y);
 				pattern[i] = new Pattern(x, Multiplicity.UNKNOWN,
-						new Peak1D[] { peaks[i] });
+						new Peak1D[]{peaks[i]});
 				assigns[i] = new Assignment(pattern[i], targets);
 				i++;
 			}
-			return new Object[] { peaks, pattern, assigns };
+			return new Object[]{peaks, pattern, assigns};
 		} else if (tokenizer.getType().equals(DataType.XYMWA)) {
 			int i = 0;
 			Peak1D[] peaks = new Peak1D[nPoints];
 			Pattern[] pattern = new Pattern[nPoints];
 			Assignment[] assigns = new Assignment[nPoints];
-			while (tokenizer.hasMoreGroups()) {
+			while (tokenizer.hasMoreGroups() && i < nPoints) {
 				DataGroup group = tokenizer.nextGroup();
 				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
 				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
@@ -466,11 +554,11 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				String a = (String) group.getValue(4);
 				IAssignmentTarget[] targets = parseAssignment(a);
 				peaks[i] = new Peak1D(x, y, w);
-				pattern[i] = new Pattern(x, m, new Peak1D[] { peaks[i] });
+				pattern[i] = new Pattern(x, m, new Peak1D[]{peaks[i]});
 				assigns[i] = new Assignment(pattern[i], targets);
 				i++;
 			}
-			return new Object[] { peaks, pattern, assigns };
+			return new Object[]{peaks, pattern, assigns};
 		} else {
 			throw new JCAMPException("unknown peaktable");
 		}
@@ -480,10 +568,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##TITLE= content
 	 *
 	 * @return java.lang.String
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected String getTitle(JCAMPBlock block) throws JCAMPException {
 		JCAMPDataRecord ldrTitle = block.getDataRecord("TITLE");
@@ -497,10 +583,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##XFACTOR= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double getXFactor(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
@@ -517,10 +601,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##XUNITS= content
 	 *
 	 * @return Unit
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected Unit getXUnits(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable x = block.getVariable("X");
@@ -538,20 +620,13 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * (required by JCAMP standard)
 	 *
 	 * @return double[]
-	 * @param block
-	 *            JCAMPBlock
-	 * @param firstX
-	 *            double starting x value (from ##FIRSTX=)
-	 * @param lastX
-	 *            double ending x value (from ##LASTX=)
-	 * @param nPoints
-	 *            int number of data points (from ##NPOINTS=)
-	 * @param xFactor
-	 *            double factor to be applied to x values (from ##XFACTOR=)
-	 * @param yFactor
-	 *            double factor to be applied to y values (from ##YFACTOR=)
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @param firstX double starting x value (from ##FIRSTX=)
+	 * @param lastX double ending x value (from ##LASTX=)
+	 * @param nPoints int number of data points (from ##NPOINTS=)
+	 * @param xFactor double factor to be applied to x values (from ##XFACTOR=)
+	 * @param yFactor double factor to be applied to y values (from ##YFACTOR=)
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double[] getXYData(JCAMPBlock block, double firstX, double lastX,
 			int nPoints, double xFactor, double yFactor) throws JCAMPException {
@@ -564,8 +639,9 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				xFactor, nPoints);
 		int n = y.length;
 		double[] yValues = new double[n];
-		for (int i = 0; i < n; i++)
+		for (int i = 0; i < n; i++) {
 			yValues[i] = yFactor * y[i];
+		}
 		return yValues;
 
 	}
@@ -574,16 +650,14 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##XYPOINTS= content
 	 *
 	 * @return double[]
-	 * @param block
-	 *            JCAMPBlock
-	 * @param nPoints
-	 *            int number of data points (from ##NPOINTS=)
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @param nPoints int number of data points (from ##NPOINTS=)
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double[][] getXYPoints(JCAMPBlock block, int nPoints,
 			double xFactor, double yFactor) throws JCAMPException {
 		class XYPair implements Comparable<XYPair> {
+
 			public double x;
 			public double y;
 
@@ -595,10 +669,12 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			@Override
 			public int compareTo(XYPair o) {
 				XYPair p = o;
-				if (this.x < p.x)
+				if (this.x < p.x) {
 					return -1;
-				if (this.x > p.x)
+				}
+				if (this.x > p.x) {
 					return 1;
+				}
 				return 0;
 			}
 		}
@@ -617,10 +693,11 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			data.add(new XYPair(xFactor * group.getValue(0), yFactor
 					* group.getValue(1)));
 		}
-		if (data.size() != nPoints)
+		if (data.size() != nPoints) {
 			if (log.isErrorEnabled()) {
 				log.error("bad ##NPOINTS= or duplicate X values");
 			}
+		}
 		double[][] xy = new double[2][data.size()];
 		for (Iterator<XYPair> it = data.iterator(); it.hasNext();) {
 			XYPair p = it.next();
@@ -634,10 +711,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##XFACTOR= content
 	 *
 	 * @return double
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected double getYFactor(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable y = block.getVariable("Y");
@@ -654,10 +729,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * gets ##YUNITS= content
 	 *
 	 * @return Unit
-	 * @param block
-	 *            JCAMPBlock
-	 * @exception JCAMPException
-	 *                The exception description.
+	 * @param block JCAMPBlock
+	 * @exception JCAMPException The exception description.
 	 */
 	protected Unit getYUnits(JCAMPBlock block) throws JCAMPException {
 		JCAMPVariable y = block.getVariable("Y");
@@ -673,23 +746,23 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * set spectrum note
 	 *
-	 * @param block
-	 *            JCAMPBlock
-	 * @param ldr
-	 *            JCAMPDataRecord
-	 * @param spectrum
-	 *            com.creon.chem.spectrum.Spectrum
+	 * @param block JCAMPBlock
+	 * @param ldr JCAMPDataRecord
+	 * @param spectrum com.creon.chem.spectrum.Spectrum
 	 */
 	protected void setNote(JCAMPBlock block, JCAMPDataRecord ldr,
 			Spectrum spectrum) throws JCAMPException {
 		String key = ldr.getKey();
 		if (key.length() == 0) // comment
+		{
 			return;
+		}
 
 		NoteDescriptor descr = NoteDescriptorFactory.getInstance()
 				.findByJCAMPKey(key);
-		if (descr.equals(NoteDescriptor.IGNORE))
+		if (descr.equals(NoteDescriptor.IGNORE)) {
 			return;
+		}
 
 		Object content;
 		try {
@@ -709,10 +782,8 @@ abstract class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * after creation of spectrum, add other notes
 	 *
-	 * @param block
-	 *            com.creon.chem.jcamp.JCAMPBlock
-	 * @param spectrum
-	 *            com.creon.chem.spectrum.Spectrum
+	 * @param block com.creon.chem.jcamp.JCAMPBlock
+	 * @param spectrum com.creon.chem.spectrum.Spectrum
 	 */
 	protected void setNotes(JCAMPBlock block, Spectrum spectrum)
 			throws JCAMPException {

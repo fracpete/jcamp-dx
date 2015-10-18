@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ *****************************************************************************
+ */
 package org.jcamp.spectrum;
 
 import org.jcamp.math.LinearAxisMap;
@@ -17,10 +18,10 @@ import org.jcamp.units.Unit;
 
 /**
  * 1D NMR spectrum.
- * 
+ *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
- *         Kerner</a>
+ * Kerner</a>
  */
 public class NMRSpectrum extends Spectrum1D {
 
@@ -32,7 +33,9 @@ public class NMRSpectrum extends Spectrum1D {
 				+ ", mode=" + mode + "]";
 	}
 
-	/** for serialization. */
+	/**
+	 * for serialization.
+	 */
 	private static final long serialVersionUID = -7481239141912664609L;
 
 	public final static Unit DEFAULT_YUNIT = CommonUnit.intensity;
@@ -46,24 +49,19 @@ public class NMRSpectrum extends Spectrum1D {
 	private String mode = JCAMPReader.STRICT;
 
 	/**
-   */
+	 */
 	protected NMRSpectrum() {
 		super();
 	}
 
 	/**
 	 * standard ctor.
-	 * 
-	 * @param x
-	 *            org.jcamp.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            org.jcamp.spectrum.IDataArray1D
-	 * @param nucleus
-	 *            String
-	 * @param freq
-	 *            double observe frequency
-	 * @param ref
-	 *            double reference frequency
+	 *
+	 * @param x org.jcamp.spectrum.IOrderedDataArray1D
+	 * @param y org.jcamp.spectrum.IDataArray1D
+	 * @param nucleus String
+	 * @param freq double observe frequency
+	 * @param ref double reference frequency
 	 */
 	public NMRSpectrum(IOrderedDataArray1D x, IDataArray1D y, String nucleus,
 			double freq, double ref) {
@@ -75,19 +73,13 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * standard ctor.
-	 * 
-	 * @param x
-	 *            org.jcamp.spectrum.IOrderedDataArray1D
-	 * @param y
-	 *            org.jcamp.spectrum.IDataArray1D
-	 * @param nucleus
-	 *            String
-	 * @param freq
-	 *            double observe frequency
-	 * @param ref
-	 *            double reference frequency
-	 * @param fullSpectrum
-	 *            boolean
+	 *
+	 * @param x org.jcamp.spectrum.IOrderedDataArray1D
+	 * @param y org.jcamp.spectrum.IDataArray1D
+	 * @param nucleus String
+	 * @param freq double observe frequency
+	 * @param ref double reference frequency
+	 * @param fullSpectrum boolean
 	 */
 	public NMRSpectrum(IOrderedDataArray1D x, IDataArray1D y, String nucleus,
 			double freq, double ref, boolean fullSpectrum, String mode) {
@@ -105,7 +97,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * cloning.
-	 * 
+	 *
 	 * @return java.lang.Object
 	 */
 	@Override
@@ -119,21 +111,25 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * convert x data to Hz
-	 * 
+	 *
 	 */
 	protected void convertToHertz() {
 		if (frequency != frequency) // safety check
+		{
 			return;
+		}
 
 		if (xData.getUnit().equals(CommonUnit.ppm)) {
 			// hz = freq * ppm + ref;
 			this.xData.scale(frequency);
 			if (mode == JCAMPReader.STRICT && reference == reference) // we are
-																		// notin
-																		// a
-																		// peak
-																		// table
+			// notin
+			// a
+			// peak
+			// table
+			{
 				this.xData.translate(reference);
+			}
 			this.xData.setUnit(CommonUnit.hertz);
 			adjustFullViewRange();
 		}
@@ -161,7 +157,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * convert y data to percent
-	 * 
+	 *
 	 */
 	protected void convertToPercent() {
 		if (!yData.equals(CommonUnit.percentIntensity)) {
@@ -177,36 +173,39 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * converts intensities to percentage.
-	 * 
-	 * @param intensities
-	 *            double[]
+	 *
+	 * @param intensities double[]
 	 */
 	public static void convertToPercent(double[] intensities) {
 		// rescale intensities to percent of maximum
 		double imax = Math.abs(intensities[0]);
 		for (int i = 1; i < intensities.length; i++) {
 			double iabs = Math.abs(intensities[i]);
-			if (iabs > imax)
+			if (iabs > imax) {
 				imax = iabs;
+			}
 		}
 		if (imax != 0.0) {
 			imax = 100. / imax;
-			for (int i = 0; i < intensities.length; i++)
+			for (int i = 0; i < intensities.length; i++) {
 				intensities[i] *= imax;
+			}
 		}
 	}
 
 	/**
 	 * convert x data to Hz
-	 * 
+	 *
 	 */
 	protected void convertToPPM() {
-		if (frequency != frequency)
+		if (frequency != frequency) {
 			return;
+		}
 		if (xData.getUnit().equals(CommonUnit.hertz)) {
 			// ppm = (hz - ref) / freq;
-			if (mode == JCAMPReader.STRICT && reference == reference)
+			if (mode == JCAMPReader.STRICT && reference == reference) {
 				xData.translate(-reference);
+			}
 			xData.scale(1. / frequency);
 			xData.setUnit(CommonUnit.ppm);
 			adjustFullViewRange();
@@ -244,7 +243,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * gets observe frequency.
-	 * 
+	 *
 	 * @return double
 	 */
 	public double getFrequency() {
@@ -253,7 +252,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * gets spectrum ID.
-	 * 
+	 *
 	 * @return int
 	 */
 	@Override
@@ -263,7 +262,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * gets observe nucleus
-	 * 
+	 *
 	 * @return java.lang.String
 	 */
 	public java.lang.String getNucleus() {
@@ -272,7 +271,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * gets shift reference frequency in Hz.
-	 * 
+	 *
 	 * @return double
 	 */
 	public double getReference() {
@@ -281,7 +280,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * gets solvent.
-	 * 
+	 *
 	 * @return java.lang.String
 	 */
 	public java.lang.String getSolvent() {
@@ -290,7 +289,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * gets solvent reference in ppm.
-	 * 
+	 *
 	 * @return double
 	 */
 	public double getSolventReference() {
@@ -315,7 +314,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * indicates a FID.
-	 * 
+	 *
 	 * @return boolean
 	 */
 	public boolean isFID() {
@@ -323,20 +322,9 @@ public class NMRSpectrum extends Spectrum1D {
 	}
 
 	/**
-	 * isSameType method comment.
-	 */
-	@Override
-	public boolean isSameType(Spectrum otherSpectrum) {
-		if (otherSpectrum instanceof NMRSpectrum)
-			return true;
-		return false;
-	}
-
-	/**
 	 * sets observe frequency.
-	 * 
-	 * @param newFrequency
-	 *            double
+	 *
+	 * @param newFrequency double
 	 */
 	public void setFrequency(double newFrequency) {
 		if (this.frequency != newFrequency) {
@@ -348,9 +336,8 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * sets observe nucleus.
-	 * 
-	 * @param newNucleus
-	 *            java.lang.String
+	 *
+	 * @param newNucleus java.lang.String
 	 */
 	public void setNucleus(java.lang.String newNucleus) {
 		nucleus = newNucleus;
@@ -358,9 +345,8 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * sets shift reference frequency in Hz.
-	 * 
-	 * @param newReference
-	 *            double
+	 *
+	 * @param newReference double
 	 */
 	public void setReference(double newReference) {
 		if (this.reference != newReference) {
@@ -372,9 +358,8 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * sets solvent.
-	 * 
-	 * @param newSolvent
-	 *            java.lang.String
+	 *
+	 * @param newSolvent java.lang.String
 	 */
 	public void setSolvent(java.lang.String newSolvent) {
 		solvent = newSolvent;
@@ -382,9 +367,8 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * sets solvent reference in ppm.
-	 * 
-	 * @param newSolventReference
-	 *            double
+	 *
+	 * @param newSolventReference double
 	 */
 	public void setSolventReference(double newSolventReference) {
 		solventReference = newSolventReference;
@@ -395,8 +379,9 @@ public class NMRSpectrum extends Spectrum1D {
 	 */
 	@Override
 	public void setXFullViewRange(Range1D.Double dataRange) {
-		if (dataRange.getXWidth() > 0)
+		if (dataRange.getXWidth() > 0) {
 			this.xAxisMap = new ReversedLinearAxisMap(xData, dataRange);
+		}
 	}
 
 	/**
@@ -409,7 +394,7 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * Tells if the mode is STRICT or RELAXED.
-	 * 
+	 *
 	 * @return the current mode.
 	 */
 	public String getMode() {
@@ -418,9 +403,8 @@ public class NMRSpectrum extends Spectrum1D {
 
 	/**
 	 * Sets the mode to STRICT or RELAXED.
-	 * 
-	 * @param mode
-	 *            The mode to use.
+	 *
+	 * @param mode The mode to use.
 	 */
 	public void setMode(String mode) {
 		this.mode = mode;

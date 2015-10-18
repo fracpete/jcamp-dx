@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import java.io.File;
@@ -19,9 +20,6 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import net.sf.kerner.utils.collections.trasformer.ToString;
-import net.sf.kerner.utils.collections.trasformer.TransformerEnumerationToIterable;
-
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +29,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Thomas Weber
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
- *         Kerner</a>
+ * Kerner</a>
  */
 public class JCAMPBlock {
 
@@ -42,8 +40,7 @@ public class JCAMPBlock {
 	/**
 	 * testing.
 	 *
-	 * @param args
-	 *            java.lang.String[]
+	 * @param args java.lang.String[]
 	 */
 	public static void main(String[] args) {
 		String jcamp = null;
@@ -137,14 +134,10 @@ public class JCAMPBlock {
 	/**
 	 * Create a {@code JCAMPBlock} from a JCAMP substring.
 	 *
-	 * @param jcamp
-	 *            string representing a JCAMP file
-	 * @param start
-	 *            first index of substring, inclusive
-	 * @param end
-	 *            last index of substring, exclusive
-	 * @param parent
-	 *            parent {@code JCAMPBlock}
+	 * @param jcamp string representing a JCAMP file
+	 * @param start first index of substring, inclusive
+	 * @param end last index of substring, exclusive
+	 * @param parent parent {@code JCAMPBlock}
 	 * @see java.lang.String#substring(int, int)
 	 */
 	public JCAMPBlock(JCAMPBlock parent, String jcamp, int start, int end,
@@ -164,8 +157,7 @@ public class JCAMPBlock {
 	/**
 	 * create JCAMPBlock from String
 	 *
-	 * @param jcamp
-	 *            java.lang.String
+	 * @param jcamp java.lang.String
 	 */
 	public JCAMPBlock(String jcamp) throws JCAMPException {
 		this(jcamp, 0, jcamp.length());
@@ -174,8 +166,7 @@ public class JCAMPBlock {
 	/**
 	 * Create JCAMPBlock from a JCAMP string.
 	 *
-	 * @param jcamp
-	 *            JCAMP string
+	 * @param jcamp JCAMP string
 	 */
 	public JCAMPBlock(String jcamp, IErrorHandler errorHandler)
 			throws JCAMPException {
@@ -192,12 +183,9 @@ public class JCAMPBlock {
 	/**
 	 * Create a {@code JCAMPBlock} from a JCAMP substring.
 	 *
-	 * @param jcamp
-	 *            string representing a JCAMP file
-	 * @param start
-	 *            first index of substring, inclusive
-	 * @param end
-	 *            last index of substring, exclusive
+	 * @param jcamp string representing a JCAMP file
+	 * @param start first index of substring, inclusive
+	 * @param end last index of substring, exclusive
 	 * @see java.lang.String#substring(int, int)
 	 */
 	public JCAMPBlock(String jcamp, int start, int end,
@@ -210,9 +198,9 @@ public class JCAMPBlock {
 	 */
 	private void analyzeBlockType() throws JCAMPException {
 		JCAMPDataRecord ldrJCAMPCS = getDataRecord("JCAMPCS");
-		if (ldrJCAMPCS != null)
+		if (ldrJCAMPCS != null) {
 			this.blockType = BlockType.STRUCTURE;
-		else {
+		} else {
 			JCAMPDataRecord ldrDataType = getDataRecord("DATATYPE");
 
 			JCAMPDataRecord peaktable = getDataRecord("PEAKTABLE");
@@ -237,8 +225,9 @@ public class JCAMPBlock {
 				this.blockType = BlockType.FULLSPECTRUM;
 				analyzeSpectrumID(dtype);
 				if (spectrumType == ISpectrumIdentifier.MASS
-						&& dtype.indexOf("CONTINUOUS") < 0)
+						&& dtype.indexOf("CONTINUOUS") < 0) {
 					this.blockType = BlockType.PEAKTABLE;
+				}
 			}
 		}
 	}
@@ -246,8 +235,7 @@ public class JCAMPBlock {
 	/**
 	 * analyze ##DATATYPE= LDR for spectrum type.
 	 *
-	 * @param datatype
-	 *            java.lang.String
+	 * @param datatype java.lang.String
 	 */
 	private void analyzeSpectrumID(String dataType) {
 		if (dataType != null) {
@@ -287,10 +275,8 @@ public class JCAMPBlock {
 	 * change a data record to a new value and return modified JCAMPBlock.
 	 *
 	 * @return JCAMPBlock modified block
-	 * @param key
-	 *            java.lang.String normalized key
-	 * @param newValue
-	 *            JCAMPDataRecord new data record value
+	 * @param key java.lang.String normalized key
+	 * @param newValue JCAMPDataRecord new data record value
 	 */
 	public JCAMPBlock changeDataRecord(String key, String newValue)
 			throws JCAMPException {
@@ -304,14 +290,17 @@ public class JCAMPBlock {
 		StringBuilder newJCAMP = new StringBuilder();
 		if (oldLDR.getStart() > 0) {
 			newJCAMP.append(this.jcamp.substring(0, oldLDR.getStart() - 1));
-			if (newJCAMP.charAt(newJCAMP.length() - 1) != '\n')
+			if (newJCAMP.charAt(newJCAMP.length() - 1) != '\n') {
 				newJCAMP.append(CRLF);
+			}
 		}
 		newJCAMP.append("##").append(key).append("=").append(newValue);
-		if (newJCAMP.charAt(newJCAMP.length() - 1) != '\n')
+		if (newJCAMP.charAt(newJCAMP.length() - 1) != '\n') {
 			newJCAMP.append(CRLF);
-		if (oldLDR.getEnd() < this.jcamp.length() - 1)
+		}
+		if (oldLDR.getEnd() < this.jcamp.length() - 1) {
 			newJCAMP.append(this.jcamp.substring(oldLDR.getEnd() + 1));
+		}
 		return new JCAMPBlock(newJCAMP.toString());
 	}
 
@@ -337,8 +326,7 @@ public class JCAMPBlock {
 	 * gets block by block ID.
 	 *
 	 * @return JCAMPBlock
-	 * @param id
-	 *            int
+	 * @param id int
 	 */
 	public JCAMPBlock getBlock(int id) {
 		return this.childBlocks.get(new Integer(id));
@@ -361,8 +349,7 @@ public class JCAMPBlock {
 	 * get data record by index within block (counting all duplicates).
 	 *
 	 * @return JCAMPDataRecord
-	 * @param index
-	 *            int
+	 * @param index int
 	 */
 	public JCAMPDataRecord getDataRecord(int index) {
 		return ldrs[index];
@@ -393,8 +380,9 @@ public class JCAMPBlock {
 	 */
 	public int getID() {
 		JCAMPDataRecord ldr = this.dataRecords.get("BLOCKID");
-		if (ldr == null)
+		if (ldr == null) {
 			return -1;
+		}
 		String blockID = ldr.getValue();
 		String id = Utils.removeComments(blockID).trim();
 		return Integer.parseInt(id);
@@ -462,18 +450,18 @@ public class JCAMPBlock {
 	/**
 	 * gets the variable for symbol symbol.
 	 *
-	 * @param String
-	 *            symbol
+	 * @param String symbol
 	 * @return com.creon.chem.jcamp.JCAMPVariable
 	 */
 	public JCAMPVariable getVariable(String symbol) {
-		if (isNTupleBlock())
+		if (isNTupleBlock()) {
 			return ntuple.getVariable(symbol);
-		else {
+		} else {
 			symbol = symbol.toUpperCase();
 			for (int i = 0; i < vars.length; i++) {
-				if (symbol.equals(vars[i].getSymbol()))
+				if (symbol.equals(vars[i].getSymbol())) {
 					return vars[i];
+				}
 			}
 			return null;
 		}
@@ -485,10 +473,11 @@ public class JCAMPBlock {
 	 * @return com.creon.chem.jcamp.JCAMPVariable[]
 	 */
 	public JCAMPVariable[] getVariables() {
-		if (isNTupleBlock())
+		if (isNTupleBlock()) {
 			return ntuple.getVariables();
-		else
+		} else {
 			return vars;
+		}
 	}
 
 	/**
@@ -514,8 +503,9 @@ public class JCAMPBlock {
 			int blockID = jcampBlock.getID();
 			if (blockID < 0) {
 				id--;
-			} else
+			} else {
 				id = blockID;
+			}
 			if (lg.isDebugEnabled()) {
 				lg.debug("New block " + jcampBlock);
 			}
@@ -558,16 +548,18 @@ public class JCAMPBlock {
 			lg.debug("numDataRecords=" + numDataRecords);
 		}
 		this.ldrs = new JCAMPDataRecord[tmp.size()];
-		for (int i = 0; i < tmp.size(); i++)
+		for (int i = 0; i < tmp.size(); i++) {
 			this.ldrs[i] = tmp.get(i);
+		}
 	}
 
 	/**
 	 * initialize JCAMPNTuplePages. TODO: handle multiple NTUPLES blocks?
 	 */
 	private void initNTuple() throws JCAMPException {
-		if (isStructureBlock())
+		if (isStructureBlock()) {
 			return;
+		}
 		JCAMPDataRecord startNTupleLDR = getDataRecord("NTUPLES");
 		if (startNTupleLDR == null) {
 			this.ntupleBlock = false;
@@ -587,8 +579,9 @@ public class JCAMPBlock {
 					lg.error("missing ##NTUPLES=");
 				}
 			}
-			if (!this.ntupleBlock)
+			if (!this.ntupleBlock) {
 				return;
+			}
 		}
 		JCAMPDataRecord endNTupleLDR = getDataRecord("ENDNTUPLES");
 		if (endNTupleLDR == null) {
@@ -603,16 +596,20 @@ public class JCAMPBlock {
 	/**
 	 * find definitions for all variables.
 	 *
-	 * @exception com.creon.chem.jcamp.JCAMPException
-	 *                parsing errors.
+	 * @exception com.creon.chem.jcamp.JCAMPException parsing errors.
 	 */
 	private void initVariables() throws JCAMPException {
 		if (isStructureBlock()) // JCAMP CS has no variables
+		{
 			return;
+		}
 		if (isNTupleBlock()) // NTUPLEs are already initialized
+		{
 			return;
-		if (isLinkBlock())
+		}
+		if (isLinkBlock()) {
 			return;
+		}
 		JCAMPDataRecord dataLDR = null;
 		Enumeration<JCAMPDataRecord> records = getDataRecords();
 		while (records.hasMoreElements()) {
@@ -623,8 +620,9 @@ public class JCAMPBlock {
 						lg.error("more than one data LDR in block: use compound JCAMP");
 					}
 					break; // use first data block encountered
-				} else
+				} else {
 					dataLDR = ldr;
+				}
 			}
 		}
 		if (dataLDR == null) {
@@ -633,52 +631,63 @@ public class JCAMPBlock {
 		DataVariableInfo info = new DataVariableInfo(dataLDR);
 		String[] symbols = info.getSymbols();
 		JCAMPDataRecord ldr = getDataRecord("NPOINTS");
-		if (ldr == null)
+		if (ldr == null) {
 			throw new JCAMPException("missing required label ##NPOINTS=");
+		}
 		int nPoints = Integer.parseInt(ldr.getContent());
 		vars = new JCAMPVariable[symbols.length];
 		for (int i = 0; i < symbols.length; i++) {
 			String symbol = symbols[i].toUpperCase();
 			JCAMPVariable v = new JCAMPVariable(symbol);
-			if (i > 0)
+			if (i > 0) {
 				v.setType(JCAMPVariable.Type.DEPENDENT);
-			else
+			} else {
 				v.setType(JCAMPVariable.Type.INDEPENDENT);
+			}
 			if (getBlockType().equals(BlockType.FULLSPECTRUM)) {
-				if (info.isIncremental())
+				if (info.isIncremental()) {
 					v.setFormat(JCAMPVariable.Format.ASDF);
-				else
+				} else {
 					v.setFormat(JCAMPVariable.Format.AFFN);
+				}
 			} else if (getBlockType().equals(BlockType.PEAKTABLE)
 					|| getBlockType().equals(BlockType.ASSIGNMENT)) {
 				if (symbol.equals("X") || symbol.equals("Y")
-						|| symbol.equals("W"))
+						|| symbol.equals("W")) {
 					v.setFormat(JCAMPVariable.Format.AFFN);
-				else
+				} else {
 					v.setFormat(JCAMPVariable.Format.STRING);
+				}
 			}
 			v.setDimension(nPoints);
 			ldr = getDataRecord(symbol + "LABEL");
-			if (ldr != null)
+			if (ldr != null) {
 				v.setLabel(ldr.getContent());
+			}
 			ldr = getDataRecord(symbol + "UNITS");
-			if (ldr != null)
+			if (ldr != null) {
 				v.setUnit(ldr.getContent());
+			}
 			ldr = getDataRecord("FIRST" + symbol);
-			if (ldr != null)
+			if (ldr != null) {
 				v.setFirst(parseDouble(ldr.getContent()));
+			}
 			ldr = getDataRecord("LAST" + symbol);
-			if (ldr != null)
+			if (ldr != null) {
 				v.setLast(parseDouble(ldr.getContent()));
+			}
 			ldr = getDataRecord(symbol + "FACTOR");
-			if (ldr != null)
+			if (ldr != null) {
 				v.setFactor(parseDouble(ldr.getContent()));
+			}
 			ldr = getDataRecord("MIN" + symbol);
-			if (ldr != null)
+			if (ldr != null) {
 				v.setMin(parseDouble(ldr.getContent()));
+			}
 			ldr = getDataRecord("MAX" + symbol);
-			if (ldr != null)
+			if (ldr != null) {
 				v.setMax(parseDouble(ldr.getContent()));
+			}
 			vars[i] = v;
 		}
 	}
@@ -743,12 +752,12 @@ public class JCAMPBlock {
 	/**
 	 * Parses the string as double.
 	 *
-	 * @param s
-	 *            the string to parse
+	 * @param s the string to parse
 	 * @return the parsed double
 	 */
 	private Double parseDouble(String s) {
 		try {
+			s = s.replaceAll("\\s", "");
 			return new Double(s);
 		} catch (NumberFormatException e) {
 			return new Double(s.replace(",", "."));
@@ -758,8 +767,7 @@ public class JCAMPBlock {
 	/**
 	 * sets ASDFDecoder
 	 *
-	 * @param newAsdfDecoder
-	 *            com.creon.chem.jcamp.ASDFDecoder
+	 * @param newAsdfDecoder com.creon.chem.jcamp.ASDFDecoder
 	 */
 	public void setASDFDecoder(ASDFDecoder newAsdfDecoder) {
 		asdfDecoder = newAsdfDecoder;
@@ -779,10 +787,6 @@ public class JCAMPBlock {
 		return "JCAMPBlock,SpecType="
 				+ JCAMPReader.findAdapter(spectrumType)
 				+ ", title="
-				+ getDataRecord("TITLE").getValue(true)
-				+ ", dataRecords="
-				+ new ToString()
-		.toString(new TransformerEnumerationToIterable<String>()
-				.transform(dataRecords.keys()));
+				+ getDataRecord("TITLE").getValue(true);
 	}
 }

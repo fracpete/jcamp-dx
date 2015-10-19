@@ -89,7 +89,9 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * 
 	 * @return java.lang.String
 	 */
-	public abstract int getIdentifier();
+	public int getIdentifier() {
+		return -1;
+	}
 
 	/**
 	 * get controlling master spectrum if spectrum is part of a composite.
@@ -229,7 +231,12 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param otherSpectrum
 	 *            Spectrum
 	 */
-	public abstract boolean isSameType(Spectrum otherSpectrum);
+	public boolean isSameType(Spectrum otherSpectrum) {
+		if (otherSpectrum == null) {
+			return false;
+		}
+		return getClass().equals(otherSpectrum.getClass());
+	}
 
 	/**
 	 * Insert the method's description here. Creation date: (05.04.00 11:28:16)

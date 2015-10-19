@@ -724,17 +724,4 @@ public class Spectrum1D extends Spectrum implements Cloneable {
 		}
 		adjustFullViewRange();
 	}
-
-	@Override
-	public int getIdentifier() {
-		return -1;
-	}
-
-	@Override
-	public boolean isSameType(Spectrum otherSpectrum) {
-		if (otherSpectrum == null) {
-			return false;
-		}
-		return getClass().equals(otherSpectrum.getClass());
-	}
 }

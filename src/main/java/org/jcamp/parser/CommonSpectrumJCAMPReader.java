@@ -545,7 +545,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Peak1D[] peaks = new Peak1D[nPoints];
 			Pattern[] pattern = new Pattern[nPoints];
 			Assignment[] assigns = new Assignment[nPoints];
-			while (tokenizer.hasMoreGroups()) {
+			while (tokenizer.hasMoreGroups() && i < nPoints) {
 				DataGroup group = tokenizer.nextGroup();
 				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
 				double y = yFactor * ((Double) group.getValue(1)).doubleValue();

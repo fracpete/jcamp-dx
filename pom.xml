@@ -6,9 +6,9 @@
 		<artifactId>oss-parent</artifactId>
 		<version>9</version>
 	</parent>
-	<groupId>com.github.kerner</groupId>
+	<groupId>com.github.kerner1000</groupId>
 	<artifactId>jcamp-dx</artifactId>
-	<version>0.10.2-SNAPSHOT</version>
+	<version>0.10.2</version>
 	<name>jcamp-dx</name>
 	<description>The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.</description>
 	<url>https://github.com/kerner1000/jcamp-dx</url>

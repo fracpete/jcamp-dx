@@ -11,12 +11,14 @@ package org.jcamp.parser;
 import java.util.StringTokenizer;
 
 import org.jcamp.math.IArray1D;
+import org.jcamp.math.IArray2D;
 import org.jcamp.spectrum.ArrayData;
 import org.jcamp.spectrum.Assignment;
 import org.jcamp.spectrum.EquidistantData;
 import org.jcamp.spectrum.IDataArray1D;
 import org.jcamp.spectrum.IOrderedDataArray1D;
 import org.jcamp.spectrum.ISpectrumIdentifier;
+import org.jcamp.spectrum.NMR2DSpectrum2;
 import org.jcamp.spectrum.NMRFIDSpectrum;
 import org.jcamp.spectrum.NMRSpectrum;
 import org.jcamp.spectrum.OrderedArrayData;
@@ -372,7 +374,6 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			throw new JCAMPException("adapter missmatch");
 		}
 		boolean isFID = false;
-		NMRSpectrum spectrum = null;
 		JCAMPDataRecord ldrDataType = block.getDataRecord("DATATYPE");
 		String dataType = ldrDataType.getContent().toUpperCase();
 		if (dataType.indexOf("FID") >= 0) {
@@ -385,7 +386,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		//
 
 		if (!isFID && block.isNTupleBlock()) {
-			JCAMPVariable x = block.getNTuple().getVariable("X");
+			JCAMPNTuple ntuple = block.getNTuple();
+			JCAMPVariable x = ntuple.getVariable("X");
 			if (x != null) {
 				if (x.getUnit().equals(CommonUnit.second)) {
 					if (log.isWarnEnabled()) {
@@ -399,16 +401,23 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 			} else {
 				// might be 2D
 //				JCAMPVariable[] vars = block.getNTuple().getVariables();
-				JCAMPVariable f1 = block.getNTuple().getVariable("F1"),
-						f2 = block.getNTuple().getVariable("F2");
-				JCAMPNTuple ntuple = block.getNTuple();
+				JCAMPVariable f1 = ntuple.getVariable("F1"),
+						f2 = ntuple.getVariable("F2");
+				NMR2DSpectrum2 spectrum = new NMR2DSpectrum2(new JCAMPVariable[]{f1, f2},
+						getNucleus2D(block), new double[0]);//getFrequency2D(block)
+				// values ranges for x,y,z
 				int nPages = ntuple.numPages();
 				for (int i = 0; i < nPages; i++) {
 					JCAMPNTuplePage page = ntuple.getPage(i);
-					
+					IArray2D xyData = page.getXYData();
+					spectrum.addDataRow(xyData.getYArray());
 				}
+				String solvent = getSolvent(block);
+				spectrum.setSolvent(solvent);
+				return spectrum;
 			}
 		}
+		NMRSpectrum spectrum = null;
 		if (isFID) {
 			spectrum = createFID(block);
 		} else {
@@ -569,6 +578,15 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 		return ldrNucleus.getContent();
 	}
 
+	private String[] getNucleus2D(JCAMPBlock block) throws JCAMPException {
+		JCAMPDataRecord ldrNucleus = block.getDataRecord(".NUCLEUS");
+		if (ldrNucleus == null) {
+			throw new JCAMPException(
+					"missing required label: ##.NUCLEUS=");
+		}
+		return ldrNucleus.getContent().split(",");
+	}
+
 	/**
 	 * gets ##.SHIFTREFERENCE= content NOTE: this is a open issue in the JCAMP
 	 * spec. With standard JCAMP 5.00 it is not possible to specify a reference
@@ -704,7 +722,8 @@ public class NMRJCAMPReader extends CommonSpectrumJCAMPReader implements
 					return 0.0;
 				}
 			} else {
-				return Double.parseDouble(ldr.getContent());
+				// fix for ##.SHIFT REFERENCE= (INTERNAL, CDCl3, 0, 17.4877)
+				return Double.parseDouble(ldr.getContent().replaceAll("[\\(\\)]", ""));
 			}
 
 		} else {

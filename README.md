@@ -13,8 +13,8 @@ You can use the following dependency in your pom.xml:
 
 ```xml
 <dependency>
-  <groupId>com.github.fracpete</groupId>
+  <groupId>com.github.kerner1000</groupId>
   <artifactId>jcamp-dx</artifactId>
-  <version>0.9.3</version>
+  <version>0.10.2</version>
 </dependency>
 ```

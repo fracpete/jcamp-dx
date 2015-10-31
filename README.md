@@ -15,6 +15,6 @@ You can use the following dependency in your pom.xml:
 <dependency>
   <groupId>com.github.kerner1000</groupId>
   <artifactId>jcamp-dx</artifactId>
-  <version>0.10.2</version>
+  <version>0.10.3</version>
 </dependency>
 ```

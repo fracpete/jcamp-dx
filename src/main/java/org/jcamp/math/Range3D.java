@@ -787,7 +787,7 @@ public abstract class Range3D extends Range {
 		/**
 		 * gets String representation.
 		 * 
-		 * @return java.lang.String
+		 * @return String
 		 */
 		@Override
 		public String toString() {
@@ -1637,7 +1637,7 @@ public abstract class Range3D extends Range {
 		/**
 		 * gets String representation.
 		 * 
-		 * @return java.lang.String
+		 * @return String
 		 */
 		@Override
 		public String toString() {
@@ -2648,7 +2648,7 @@ public abstract class Range3D extends Range {
 		/**
 		 * gets String representation.
 		 * 
-		 * @return java.lang.String
+		 * @return String
 		 */
 		@Override
 		public String toString() {

@@ -39,7 +39,7 @@ public class UVJCAMPWriter
   /**
    * build assignment table
    * 
-   * @return java.lang.String
+   * @return String
    * @param block int  block number (0: no xref, main block)
    * @param uv UVSpectrum
    */
@@ -71,7 +71,7 @@ public class UVJCAMPWriter
   /**
    * build full spectrum data block.
    * 
-   * @return java.lang.String
+   * @return String
    * @param uv UVSpectrum
    */
   private String buildFSData(int block, UVSpectrum uv) {
@@ -111,7 +111,7 @@ public class UVJCAMPWriter
   /**
    * build a peak table.
    * 
-   * @return java.lang.String
+   * @return String
    * @param uv UVSpectrum
    */
   private String buildPeakTable(int block, UVSpectrum uv) {
@@ -155,7 +155,7 @@ public class UVJCAMPWriter
   /**
    * gets spectrum notes in JCAMP form.
    * title note is ignored, it is handled directly
-   * @return java.lang.String
+   * @return String
    */
   @Override
   protected String getJCAMPNotes(Spectrum spectrum) {
@@ -177,7 +177,7 @@ public class UVJCAMPWriter
   /**
    * returns  standard JCAMP unit name.
    * 
-   * @return java.lang.String
+   * @return String
    * @param uv UVSpectrum
    */
   private static String getXUnitLDR(UVSpectrum uv) {
@@ -198,7 +198,7 @@ public class UVJCAMPWriter
   /**
    * return standard JCAMP unit name.
    * 
-   * @return java.lang.String
+   * @return String
    * @param uv UVSpectrum
    */
   private static String getYUnitLDR(UVSpectrum uv) {

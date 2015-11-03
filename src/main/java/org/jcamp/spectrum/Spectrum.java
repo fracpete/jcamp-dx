@@ -7,7 +7,6 @@
  ******************************************************************************/
 package org.jcamp.spectrum;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,7 +14,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jcamp.math.AxisMap;
 import org.jcamp.spectrum.notes.Note;
 import org.jcamp.spectrum.notes.NoteDescriptor;
 
@@ -31,15 +29,8 @@ import org.jcamp.spectrum.notes.NoteDescriptor;
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
  *         Kerner</a>
  */
-public abstract class Spectrum implements Cloneable, Serializable {
+public abstract class Spectrum implements ISpectrum {
 
-	public abstract boolean hasPeakTable();
-
-	public abstract Peak[] getPeakTable();
-
-	public abstract Object getXData();
-
-	public abstract Object getYData();
 
 	/** for serialization. */
 	private static final long serialVersionUID = -8843455456952718734L;
@@ -87,8 +78,9 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	/**
 	 * return integer identifier key.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
+	@Override
 	public int getIdentifier() {
 		return -1;
 	}
@@ -98,6 +90,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * 
 	 * @return Spectrum
 	 */
+	@Override
 	public Spectrum getMasterSpectrum() {
 		return masterSpectrum;
 	}
@@ -109,6 +102,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param index
 	 *            int
 	 */
+	@Override
 	public Note getNote(int index) {
 		if (index < notes.size())
 			return notes.get(index);
@@ -121,6 +115,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * 
 	 * @return java.util.Collection
 	 */
+	@Override
 	public Collection<Note> getNotes() {
 		return Collections.unmodifiableList(notes);
 	}
@@ -132,6 +127,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param NoteDescriptor
 	 *            descr
 	 */
+	@Override
 	public List<Note> getNotes(NoteDescriptor descr) {
 		ArrayList<Note> list = noteMap.get(descr);
 		if (list == null)
@@ -143,9 +139,10 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	/**
 	 * gets the creator of the spectrum.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getOrigin() {
+	@Override
+	public String getOrigin() {
 		List<Note> origin = getNotes(NoteDescriptor.ORIGIN);
 		if (origin != null)
 			return (String) origin.get(0).getValue();
@@ -156,9 +153,10 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	/**
 	 * gets the rights owner.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getOwner() {
+	@Override
+	public String getOwner() {
 		List<Note> owner = getNotes(NoteDescriptor.OWNER);
 		if (owner != null)
 			return (String) owner.get(0).getValue();
@@ -171,6 +169,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * 
 	 * @return String
 	 */
+	@Override
 	public String getTitle() {
 		List<Note> title = getNotes(NoteDescriptor.TITLE);
 		if (title != null) {
@@ -180,49 +179,17 @@ public abstract class Spectrum implements Cloneable, Serializable {
 		}
 	}
 
-	/**
-	 * get x-axis label
-	 * 
-	 * @return java.lang.String
-	 */
-	public abstract String getXAxisLabel();
-
-	/**
-	 * get x-axis mapping
-	 * 
-	 * @return AxisMap
-	 */
-	public abstract AxisMap getXAxisMap();
-
-	/**
-	 * get y-axis label
-	 * 
-	 * @return java.lang.String
-	 */
-	public abstract String getYAxisLabel();
-
-	/**
-	 * get y-axis mapping
-	 * 
-	 * @return AxisMap
-	 */
-	public abstract AxisMap getYAxisMap();
 
 	/**
 	 * flag indicating spectrum is controlled by another.
 	 * 
 	 * @return boolean
 	 */
+	@Override
 	public boolean hasMasterSpectrum() {
 		return masterSpectrum != null;
 	}
 
-	/**
-	 * flag indicating full spectra.
-	 * 
-	 * @return boolean
-	 */
-	public abstract boolean isFullSpectrum();
 
 	/**
 	 * check if same type of spectrum needed to compare multiple spectra.
@@ -231,6 +198,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param otherSpectrum
 	 *            Spectrum
 	 */
+	@Override
 	public boolean isSameType(Spectrum otherSpectrum) {
 		if (otherSpectrum == null) {
 			return false;
@@ -244,6 +212,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param newMasterSpectrum
 	 *            Spectrum
 	 */
+	@Override
 	public void setMasterSpectrum(Spectrum newMasterSpectrum) {
 		masterSpectrum = newMasterSpectrum;
 	}
@@ -253,10 +222,11 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * new value.
 	 * 
 	 * @param key
-	 *            java.lang.String
+	 *            String
 	 * @param value
 	 *            java.lang.Object
 	 */
+	@Override
 	public synchronized void setNote(NoteDescriptor descr, Object value) {
 		Note note = new Note();
 		note.setValue(value);
@@ -281,10 +251,11 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * sets note.
 	 * 
 	 * @param key
-	 *            java.lang.String
+	 *            String
 	 * @param value
 	 *            java.lang.Object
 	 */
+	@Override
 	public void setNote(String key, Object value) {
 		NoteDescriptor descr = NoteDescriptor.findByKey(key);
 		if (descr == null) // non-standard, so use default ctor
@@ -300,6 +271,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param value
 	 *            java.lang.Object
 	 */
+	@Override
 	public synchronized void setNoteValue(int index, Object value) {
 		if (index >= notes.size())
 			return;
@@ -310,9 +282,10 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * sets origin note.
 	 * 
 	 * @param newOrigin
-	 *            java.lang.String
+	 *            String
 	 */
-	public void setOrigin(java.lang.String newOrigin) {
+	@Override
+	public void setOrigin(String newOrigin) {
 		setNote(NoteDescriptor.ORIGIN, newOrigin);
 	}
 
@@ -320,9 +293,10 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * sets owner note
 	 * 
 	 * @param newOwner
-	 *            java.lang.String
+	 *            String
 	 */
-	public void setOwner(java.lang.String newOwner) {
+	@Override
+	public void setOwner(String newOwner) {
 		setNote(NoteDescriptor.OWNER, newOwner);
 	}
 
@@ -332,6 +306,7 @@ public abstract class Spectrum implements Cloneable, Serializable {
 	 * @param newTitle
 	 *            String
 	 */
+	@Override
 	public void setTitle(String newTitle) {
 		setNote(NoteDescriptor.TITLE, newTitle);
 	}

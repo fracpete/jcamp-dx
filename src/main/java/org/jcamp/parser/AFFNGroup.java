@@ -56,7 +56,7 @@ public AFFNGroup(double x, double y, double w) {
 /**
  * return variable symbols.
  * 
- * @return java.lang.String[]
+ * @return String[]
  */
 public final String[] getSymbols() {
 	return varSymbols;
@@ -82,7 +82,7 @@ public double getValue(int index) {
  * gets value for symbol c
  * 
  * @return double
- * @param c java.lang.String
+ * @param c String
  */
 public double getValue(String c) throws JCAMPException {
 	return values[indexOfSymbol(c)];
@@ -91,7 +91,7 @@ public double getValue(String c) throws JCAMPException {
  * gets index of variable symbol.
  * 
  * @return int
- * @param symbol java.lang.String
+ * @param symbol String
  */
 public int indexOfSymbol(String symbol) throws JCAMPException {
 	for (int i = 0; i < varSymbols.length; i++) {

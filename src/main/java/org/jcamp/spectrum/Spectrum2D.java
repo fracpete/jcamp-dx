@@ -83,7 +83,7 @@ abstract public class Spectrum2D extends Spectrum {
 	/**
 	 * gets label on x-axis.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String getXAxisLabel() {
@@ -122,7 +122,7 @@ abstract public class Spectrum2D extends Spectrum {
 	/**
 	 * gets label on y-axis.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String getYAxisLabel() {
@@ -161,7 +161,7 @@ abstract public class Spectrum2D extends Spectrum {
 	/**
 	 * gets label on z-axis.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	public String getZAxisLabel() {
 		if (zData != null)

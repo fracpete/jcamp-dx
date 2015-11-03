@@ -78,7 +78,7 @@ public class JCAMPNTuplePage {
 	 * parse variable values and store them into <code>values</code>
 	 *
 	 * @param varlist
-	 *            java.lang.String
+	 *            String
 	 */
 	private void analyzeContent(String varlist) {
 		values = new String[symbols.length];
@@ -97,7 +97,7 @@ public class JCAMPNTuplePage {
 	 * parse variable names and store them into <code>symbols</code>
 	 *
 	 * @param varlist
-	 *            java.lang.String
+	 *            String
 	 */
 	private void analyzeVars(String varlist) throws JCAMPException {
 		// read page variables
@@ -131,7 +131,7 @@ public class JCAMPNTuplePage {
 	 *
 	 * @return com.creon.chem.jcamp.JCAMPDataRecord
 	 * @param key
-	 *            java.lang.String
+	 *            String
 	 */
 	public JCAMPDataRecord getDataRecord(String key) {
 		JCAMPDataRecord[] ldrs = ntuple.getBlock().getAllDataRecords();
@@ -158,7 +158,7 @@ public class JCAMPNTuplePage {
 	/**
 	 * DATATABLE variable list.
 	 *
-	 * @return java.lang.String[]
+	 * @return String[]
 	 */
 	public String[] getDatatableVariableSymbols() {
 		return varInfo.getSymbols();
@@ -176,7 +176,7 @@ public class JCAMPNTuplePage {
 	/**
 	 * gets variable symbols occuring in ##PAGE= LDR.
 	 *
-	 * @return java.lang.String[]
+	 * @return String[]
 	 */
 	public String[] getPageVariableSymbols() {
 		return symbols;
@@ -186,9 +186,9 @@ public class JCAMPNTuplePage {
 	 * get content of page variable e.g. for ##PAGE= t=10.0
 	 * getPageVariableValue("T") returns "10.0"
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 * @param symbol
-	 *            java.lang.String
+	 *            String
 	 */
 	public String getPageVariableValue(String symbol) {
 		for (int i = 0; i < symbols.length; i++) {
@@ -201,7 +201,7 @@ public class JCAMPNTuplePage {
 	/**
 	 * gets variable values occuring in ##PAGE= LDR.
 	 *
-	 * @return java.lang.String[]
+	 * @return String[]
 	 */
 	public String[] getPageVariableValues() {
 		return values;

@@ -17,7 +17,7 @@ public interface IAssignmentTarget {
   /**
    * label to be displayed.
    * 
-   * @return java.lang.String
+   * @return String
    */
   String getLabel();
 }

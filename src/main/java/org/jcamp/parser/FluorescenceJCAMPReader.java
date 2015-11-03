@@ -4,7 +4,7 @@
  * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *****************************************************************************
+ * ****************************************************************************
  */
 package org.jcamp.parser;
 
@@ -21,11 +21,11 @@ import org.jcamp.spectrum.Fluorescence2DSpectrum;
 import org.jcamp.spectrum.FluorescenceSpectrum;
 import org.jcamp.spectrum.IDataArray1D;
 import org.jcamp.spectrum.IOrderedDataArray1D;
+import org.jcamp.spectrum.ISpectrum;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.OrderedArrayData;
 import org.jcamp.spectrum.Pattern;
 import org.jcamp.spectrum.Peak1D;
-import org.jcamp.spectrum.Spectrum;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
 
@@ -155,32 +155,26 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 		if (emissionFirst == null) {
 			throw new JCAMPException("missing ##FIRST= for emission");
 		}
-		double mFirst = emissionFirst.doubleValue();
 		Double emissionLast = vars[emissionIndex].getLast();
 		if (emissionLast == null) {
 			throw new JCAMPException("missing ##LAST= for emission");
 		}
-		double mLast = emissionLast.doubleValue();
 		Integer emissionDim = vars[emissionIndex].getDimension();
 		if (emissionDim == null) {
 			throw new JCAMPException("missing ##VARDIM= for emission");
 		}
-		int mDim = emissionDim.intValue();
 		Double excitationFirst = vars[excitationIndex].getFirst();
 		if (excitationFirst == null) {
 			throw new JCAMPException("missing ##FIRST= for excitation");
 		}
-		double xFirst = excitationFirst.doubleValue();
 		Double excitationLast = vars[excitationIndex].getLast();
 		if (excitationLast == null) {
 			throw new JCAMPException("missing ##LAST= for excitation");
 		}
-		double xLast = excitationLast.doubleValue();
 		Integer excitationDim = vars[excitationIndex].getDimension();
 		if (excitationDim == null) {
 			throw new JCAMPException("missing ##VARDIM= for excitation");
 		}
-		int xDim = excitationDim.intValue();
 		JCAMPNTuplePage firstPage = block.getNTuple().getPage(0);
 		boolean excitationIsX = true;
 		if (firstPage.getPageVariableSymbols()[0].equals(vars[excitationIndex]
@@ -205,9 +199,9 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 		IOrderedDataArray1D y;
 		double[] intensities;
 		if (excitationIsX) {
-			x = new EquidistantData(xFirst, xLast, xDim, excitationUnit);
+			x = new EquidistantData(excitationFirst, excitationLast, excitationDim, excitationUnit);
 			x.setLabel("Excitation [" + excitationUnit + "]");
-			y = new EquidistantData(mFirst, mLast, mDim, emissionUnit);
+			y = new EquidistantData(emissionFirst, emissionLast, emissionDim, emissionUnit);
 			y.setLabel("Emission [" + emissionUnit + "]");
 			intensities = new double[x.getLength() * y.getLength()];
 			if (nPages != emissionDim.intValue()) {
@@ -233,12 +227,12 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 				}
 			}
 		} else {
-			x = new EquidistantData(mFirst, mLast, mDim, emissionUnit);
+			x = new EquidistantData(emissionFirst, emissionLast, emissionDim, emissionUnit);
 			x.setLabel("Emission [" + emissionUnit + "]");
-			y = new EquidistantData(xFirst, xLast, xDim, excitationUnit);
+			y = new EquidistantData(excitationFirst, excitationLast, excitationDim, excitationUnit);
 			y.setLabel("Excitation [" + excitationUnit + "]");
 			intensities = new double[x.getLength() * y.getLength()];
-			if (nPages != excitationDim.intValue()) {
+			if (nPages != excitationDim) {
 				log.warn("number of pages != excitation dimension, possible missing values");
 			}
 			for (int i = 0; i < nPages; i++) {
@@ -278,7 +272,6 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 	@Override
 	protected FluorescenceSpectrum createPeakTable(JCAMPBlock block)
 			throws JCAMPException {
-		FluorescenceSpectrum spectrum = null;
 		Unit xUnit = getXUnits(block);
 		if (xUnit == null) {
 			xUnit = CommonUnit.nanometerWavelength;
@@ -309,7 +302,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 		}
 		IOrderedDataArray1D x = new OrderedArrayData(px, xUnit);
 		IDataArray1D y = new ArrayData(py, yUnit);
-		spectrum = new FluorescenceSpectrum(x, y, false);
+		FluorescenceSpectrum spectrum = new FluorescenceSpectrum(x, y, false);
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);
@@ -325,7 +318,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 	 * createSpectrum method comment.
 	 */
 	@Override
-	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
+	public ISpectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumType() != ISpectrumIdentifier.FLUORESCENCE) {
 			throw new JCAMPException("JCAMP reader adapter missmatch");
 		}
@@ -334,7 +327,7 @@ public class FluorescenceJCAMPReader extends CommonSpectrumJCAMPReader
 			// setNotes(block, spectrum);
 			return spectrum;
 		}
-		FluorescenceSpectrum spectrum = null;
+		FluorescenceSpectrum spectrum;
 		BlockType type = block.getBlockType();
 		if (type.equals(BlockType.FULLSPECTRUM)) {
 			spectrum = createFS(block);

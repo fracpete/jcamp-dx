@@ -39,7 +39,7 @@ public final class OffsetUnit
 
   /**
    * ScaledUnit constructor comment.
-   * @param identifier java.lang.String
+   * @param identifier String
    */
   public OffsetUnit(BaseUnit unit, double offset, String name, String symbol) {
     this((Unit) unit, offset, name, symbol);
@@ -47,7 +47,7 @@ public final class OffsetUnit
 
   /**
    * ScaledUnit constructor comment.
-   * @param identifier java.lang.String
+   * @param identifier String
    */
   public OffsetUnit(DerivedUnit unit, double offset, String name, String symbol) {
     this((Unit) unit, offset, name, symbol);
@@ -55,7 +55,7 @@ public final class OffsetUnit
 
   /**
    * ScaledUnit constructor comment.
-   * @param identifier java.lang.String
+   * @param identifier String
    */
   public OffsetUnit(ScaledUnit unit, double offset, String name, String symbol) {
     this((Unit) unit, offset, name, symbol);
@@ -63,7 +63,7 @@ public final class OffsetUnit
 
   /**
    * ScaledUnit constructor comment.
-   * @param identifier java.lang.String
+   * @param identifier String
    */
   private OffsetUnit(Unit unit, double offset, String name, String symbol) {
     super(name, symbol);
@@ -115,7 +115,7 @@ public final class OffsetUnit
    * getDefinition method comment.
    */
   @Override
-  public java.lang.String getName() {
+  public String getName() {
     return name;
   }
 
@@ -124,7 +124,7 @@ public final class OffsetUnit
    * @return String
    */
   @Override
-  public java.lang.String getQuantity() {
+  public String getQuantity() {
     return unit.getQuantity();
   }
 
@@ -141,7 +141,7 @@ public final class OffsetUnit
    * getDefinition method comment.
    */
   @Override
-  public java.lang.String getSymbol() {
+  public String getSymbol() {
     return symbol;
   }
 

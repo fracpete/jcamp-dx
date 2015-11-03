@@ -27,7 +27,7 @@ public class BadContentException
   
   /**
    * BadContentException constructor comment.
-   * @param s java.lang.String
+   * @param s String
    */
   public BadContentException(String s) {
     super(s);

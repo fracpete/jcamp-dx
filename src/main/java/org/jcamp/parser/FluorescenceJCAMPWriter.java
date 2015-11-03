@@ -38,7 +38,7 @@ public class FluorescenceJCAMPWriter implements ISpectrumJCAMPWriter {
 	/**
 	 * build assignment table
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param block
 	 *            int block number (0: no xref, main block)
 	 * @param uv
@@ -74,7 +74,7 @@ public class FluorescenceJCAMPWriter implements ISpectrumJCAMPWriter {
 	/**
 	 * build full spectrum data block.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param uv
 	 *            FluorescenceSpectrum
 	 */
@@ -118,7 +118,7 @@ public class FluorescenceJCAMPWriter implements ISpectrumJCAMPWriter {
 	/**
 	 * build a peak table.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param uv
 	 *            FluorescenceSpectrum
 	 */
@@ -166,7 +166,7 @@ public class FluorescenceJCAMPWriter implements ISpectrumJCAMPWriter {
 	 * gets spectrum notes in JCAMP form. title note is ignored, it is handled
 	 * directly
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	protected String getJCAMPNotes(Spectrum spectrum) {
 		StringBuilder notesStr = new StringBuilder();
@@ -189,7 +189,7 @@ public class FluorescenceJCAMPWriter implements ISpectrumJCAMPWriter {
 	/**
 	 * returns standard JCAMP unit name.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param fs
 	 *            FluorescenceSpectrum
 	 */
@@ -212,7 +212,7 @@ public class FluorescenceJCAMPWriter implements ISpectrumJCAMPWriter {
 	/**
 	 * return standard JCAMP unit name.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param fs
 	 *            FluorescenceSpectrum
 	 */

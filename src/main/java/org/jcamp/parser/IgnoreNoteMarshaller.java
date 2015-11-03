@@ -43,10 +43,10 @@ public class IgnoreNoteMarshaller implements IJCAMPNoteMarshaller {
 	/**
 	 * gets JCAMPLabel (normalized, without ## and =).
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
-	public java.lang.String getJCAMPLabel() {
+	public String getJCAMPLabel() {
 		return Utils.normalizeLabel(JCAMPlabel);
 	}
 
@@ -54,7 +54,7 @@ public class IgnoreNoteMarshaller implements IJCAMPNoteMarshaller {
 	 * set JCAMP LDR label (without ## and =).
 	 * 
 	 * @param key
-	 *            java.lang.String
+	 *            String
 	 */
 	@Override
 	public void setJCAMPLabel(String label) {
@@ -65,7 +65,7 @@ public class IgnoreNoteMarshaller implements IJCAMPNoteMarshaller {
 	 * set hashkey.
 	 * 
 	 * @param key
-	 *            java.lang.String
+	 *            String
 	 */
 	@Override
 	public void setKey(String key) {
@@ -75,7 +75,7 @@ public class IgnoreNoteMarshaller implements IJCAMPNoteMarshaller {
 	/**
 	 * gets JCAMP representation.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param value
 	 *            java.lang.Object
 	 */

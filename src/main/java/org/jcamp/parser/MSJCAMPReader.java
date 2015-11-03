@@ -16,12 +16,12 @@ import org.jcamp.spectrum.EquidistantData;
 import org.jcamp.spectrum.GCMSSpectrum;
 import org.jcamp.spectrum.IDataArray1D;
 import org.jcamp.spectrum.IOrderedDataArray1D;
+import org.jcamp.spectrum.ISpectrum;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.MassSpectrum;
 import org.jcamp.spectrum.OrderedArrayData;
 import org.jcamp.spectrum.Pattern;
 import org.jcamp.spectrum.Peak1D;
-import org.jcamp.spectrum.Spectrum;
 import org.jcamp.units.CommonUnit;
 import org.jcamp.units.Unit;
 
@@ -148,15 +148,14 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	@Override
 	protected MassSpectrum createPeakTable(JCAMPBlock block)
 			throws JCAMPException {
-		MassSpectrum spectrum = null;
 		String title = getTitle(block);
-		Unit xUnit = null;
+		Unit xUnit;
 		try {
 			xUnit = getXUnits(block);
 		} catch (JCAMPException e) {
 			xUnit = CommonUnit.mz;
 		}
-		Unit yUnit = null;
+		Unit yUnit;
 		try {
 			yUnit = getYUnits(block);
 		} catch (JCAMPException e) {
@@ -183,7 +182,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double[][] xy = peakTableToPeakSpectrum(peaks);
 		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
 		IDataArray1D y = new ArrayData(xy[1], yUnit);
-		spectrum = new MassSpectrum(x, y, false);
+		MassSpectrum spectrum = new MassSpectrum(x, y, false);
 		// shk3: removed this condition, since I see not reason for it
 		// and it breaks reading files with more than 50 peaks.
 		// if (peaks.length < 50) // save check
@@ -220,7 +219,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 * createSpectrum method comment.
 	 */
 	@Override
-	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
+	public ISpectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.getSpectrumType() != ISpectrumIdentifier.MS) {
 			throw new JCAMPException("JCAMP reader adapter missmatch");
 		}
@@ -262,13 +261,13 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double deltaTime = 0.;
 		if (vTime != null) {
 			if (vTime.getFactor() != null) {
-				timeFactor = vTime.getFactor().doubleValue();
+				timeFactor = vTime.getFactor();
 			}
 			if (vTime.getFirst() != null) {
-				firstTime = vTime.getFirst().doubleValue();
+				firstTime = vTime.getFirst();
 			}
 			if (vTime.getLast() != null) {
-				lastTime = vTime.getLast().doubleValue();
+				lastTime = vTime.getLast();
 			}
 			deltaTime = (lastTime - firstTime) / nPages;
 		}
@@ -298,7 +297,7 @@ public class MSJCAMPReader extends CommonSpectrumJCAMPReader implements
 		boolean hasTIC = false;
 		if (vtic != null) {
 			if (vtic.getFactor() != null) {
-				ticFactor = vtic.getFactor().doubleValue();
+				ticFactor = vtic.getFactor();
 			}
 		}
 		for (int i = 0; i < tics.length; i++) {

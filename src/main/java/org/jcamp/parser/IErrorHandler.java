@@ -17,19 +17,19 @@ package org.jcamp.parser;
 public interface IErrorHandler {
     /**
      * handle error condition.
-     * @param msg java.lang.String
+     * @param msg String
      */
     void error(String msg) throws JCAMPException;
     /**
      * handle fatal error
      * 
-     * @param msg java.lang.String
+     * @param msg String
      */
     void fatal(String msg) throws JCAMPException;
     /**
      * handle warning message.
      * 
-     * @param msg java.lang.String
+     * @param msg String
      */
     void warn(String msg) throws JCAMPException;
 }

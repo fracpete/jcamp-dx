@@ -58,7 +58,7 @@ public abstract class Unit
   /**
    * add alias for unit dictionary.
    * @param unit Unit
-   * @param alias java.lang.String
+   * @param alias String
    */
   public static void addAlias(Unit unit, String alias) {
     if (alias != null && alias.length() > 0) {
@@ -123,7 +123,7 @@ public abstract class Unit
   /**
    * strip any SI-prefix and try to find BaseUnit
    * @return Unit
-   * @param id java.lang.String
+   * @param id String
    */
   static Unit getBaseUnitFromKey(String id) {
     int n = SIUnitScale.prefixes.length;
@@ -147,7 +147,7 @@ public abstract class Unit
 
   /**
    * gets unit identifier (e.g. unit symbol).
-   * @return java.lang.String
+   * @return String
    */
   final String getIdentifier() {
     return identifier;
@@ -155,13 +155,13 @@ public abstract class Unit
 
   /**
    * gets unit definition (long name).
-   * @return java.lang.String
+   * @return String
    */
   public abstract String getName();
 
   /**
    * gets quantity measured by this unit.
-   * @return java.lang.String
+   * @return String
    */
   public abstract String getQuantity();
 
@@ -173,14 +173,14 @@ public abstract class Unit
 
   /**
    * gets unit symbol.
-   * @return java.lang.String
+   * @return String
    */
   public abstract String getSymbol();
 
   /**
    * get unit from unit key.
    * @return Unit
-   * @param key java.lang.String
+   * @param key String
    */
   static Unit getUnitFromKey(String key) {
     // direct test
@@ -195,7 +195,7 @@ public abstract class Unit
   /**
    * get unit from unit string.
    * @return Unit
-   * @param id java.lang.String
+   * @param id String
    */
   public static Unit getUnitFromString(String id) {
     String key = id.toUpperCase();
@@ -260,7 +260,7 @@ public abstract class Unit
 
   /**
    * gets String representation.
-   * @return java.lang.String
+   * @return String
    */
   @Override
   public final String toString() {

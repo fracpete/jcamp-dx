@@ -4,7 +4,7 @@
  * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *****************************************************************************
+ * ****************************************************************************
  */
 package org.jcamp.parser;
 
@@ -18,6 +18,7 @@ import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jcamp.spectrum.ISpectrum;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.Spectrum;
 import org.slf4j.Logger;
@@ -94,7 +95,7 @@ public class JCAMPReader {
 	 */
 	public static JCAMPReader getInstance() {
 		if (theInstance == null || JCAMPReader.isValidating != true
-				|| JCAMPReader.mode != JCAMPReader.STRICT) {
+				|| !JCAMPReader.STRICT.equals(JCAMPReader.mode)) {
 			theInstance = new JCAMPReader(true, JCAMPReader.STRICT);
 			initAdapters();
 		}
@@ -160,7 +161,7 @@ public class JCAMPReader {
 		JCAMPReader.mode = mode;
 	}
 
-	public Spectrum createSpectrum(File file) throws IOException,
+	public ISpectrum createSpectrum(File file) throws IOException,
 			JCAMPException {
 		return createSpectrum(new FileReader(file));
 
@@ -172,7 +173,7 @@ public class JCAMPReader {
 	 * @return {@link Spectrum}
 	 * @throws JCAMPException
 	 */
-	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
+	public ISpectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		if (block.isLinkBlock()) {
 			if (lg.isWarnEnabled()) {
 				lg.warn("compound JCAMP encountered: using first spectrum block");
@@ -194,7 +195,7 @@ public class JCAMPReader {
 	 * @param block JCAMPBlock
 	 * @param blockID int
 	 */
-	public Spectrum createSpectrum(JCAMPBlock block, int blockID)
+	public ISpectrum createSpectrum(JCAMPBlock block, int blockID)
 			throws JCAMPException {
 		return createSpectrum(block.getBlock(blockID));
 	}
@@ -207,7 +208,7 @@ public class JCAMPReader {
 	 * @throws JCAMPException
 	 * @throws IOException
 	 */
-	public Spectrum createSpectrum(Reader reader) throws IOException,
+	public ISpectrum createSpectrum(Reader reader) throws IOException,
 			JCAMPException {
 		StringBuilder fileData = new StringBuilder();
 		char[] buf = new char[1024];
@@ -228,7 +229,7 @@ public class JCAMPReader {
 	 * @throws JCAMPException
 	 *
 	 */
-	public Spectrum createSpectrum(String jcamp) throws JCAMPException {
+	public ISpectrum createSpectrum(String jcamp) throws JCAMPException {
 		JCAMPBlock block = new JCAMPBlock(jcamp, errorHandler);
 		block.setValidating(JCAMPReader.isValidating);
 		return createSpectrum(block);

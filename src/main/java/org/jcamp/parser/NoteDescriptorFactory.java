@@ -35,7 +35,7 @@ public class NoteDescriptorFactory {
    * accessor method to hashtable.
    * 
    * @return com.creon.chem.spectrum.NoteDescriptor
-   * @param jcampKey java.lang.String
+   * @param jcampKey String
    */
   public NoteDescriptor findByJCAMPKey(String jcampKey) {
     NoteDescriptor descr = (NoteDescriptor) jcampKeys.get(jcampKey);

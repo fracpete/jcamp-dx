@@ -18,8 +18,8 @@ public class Utils {
   
   /**
    * remove JCAMP line comments from String <code>text</code>
-   * @return java.lang.String
-   * @param text java.lang.String
+   * @return String
+   * @param text String
    */
   public static String extractComments(String text) {
     StringBuilder tmp = new StringBuilder();
@@ -77,8 +77,8 @@ public class Utils {
   /**
    * change all whitespace chars to ' ', collapsing more than one ws into one.
    * 
-   * @return java.lang.String
-   * @param orig java.lang.String
+   * @return String
+   * @param orig String
    */
   public static String normalizeWhitespace(String orig) {
     StringBuilder normal = new StringBuilder();
@@ -97,8 +97,8 @@ public class Utils {
   }
   /**
    * remove JCAMP line comments from String <code>text</code>
-   * @return java.lang.String
-   * @param text java.lang.String
+   * @return String
+   * @param text String
    */
   public static String removeComments(String text) {
     StringBuilder tmp = new StringBuilder();

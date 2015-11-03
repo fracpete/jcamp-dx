@@ -108,7 +108,7 @@ public class DataVariableInfo {
 	 * attribute.
 	 * 
 	 * @param varlist
-	 *            java.lang.String
+	 *            String
 	 */
 	private void analyzeVarList(String varlist) {
 		Vector<String> tmp = new Vector<String>();
@@ -127,9 +127,9 @@ public class DataVariableInfo {
 	/**
 	 * gets recognized variable symbols
 	 * 
-	 * @return java.lang.String[]
+	 * @return String[]
 	 */
-	public java.lang.String[] getSymbols() {
+	public String[] getSymbols() {
 		return symbols;
 	}
 
@@ -145,7 +145,7 @@ public class DataVariableInfo {
 	/**
 	 * output of symbols
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String toString() {

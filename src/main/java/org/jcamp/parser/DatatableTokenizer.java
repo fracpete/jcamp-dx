@@ -256,7 +256,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 	/**
 	 * parse next quoted string.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 * @param delimiter char
 	 * @exception com.creon.chem.jcamp.JCAMPException The exception description.
 	 */
@@ -285,7 +285,7 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 	/**
 	 * parse next unquoted string.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 * @param delimiter char
 	 * @exception com.creon.chem.jcamp.JCAMPException The exception description.
 	 */
@@ -417,8 +417,8 @@ public class DatatableTokenizer implements java.util.Enumeration<DataGroup> {
 	 * groups are separated by ';' whitespace is skipped outside quotes quotes
 	 * are '&lt;','&gt;' as defined in JCAMP standard
 	 *
-	 * @return java.lang.String
-	 * @param orig java.lang.String
+	 * @return String
+	 * @param orig String
 	 */
 	private static String normalizeData(int groupLength, String orig)
 			throws JCAMPException {

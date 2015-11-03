@@ -98,7 +98,6 @@ public class RamanJCAMPReader extends CommonSpectrumJCAMPReader implements
 	@Override
 	protected RamanSpectrum createPeakTable(JCAMPBlock block)
 			throws JCAMPException {
-		RamanSpectrum spectrum = null;
 		Unit xUnit = getXUnits(block);
 		if (xUnit == null) {
 			xUnit = CommonUnit.hertz;
@@ -123,7 +122,7 @@ public class RamanJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double[][] xy = peakTableToPeakSpectrum(peaks);
 		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
 		IDataArray1D y = new ArrayData(xy[1], yUnit);
-		spectrum = new RamanSpectrum(x, y, false);
+		RamanSpectrum spectrum = new RamanSpectrum(x, y, false);
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);

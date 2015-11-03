@@ -11,25 +11,76 @@ import java.util.List;
 import org.jcamp.math.AxisMap;
 import org.jcamp.math.IArray1D;
 import org.jcamp.math.Range1D;
-import org.jcamp.math.Range2D;
+import org.jcamp.parser.JCAMPReader;
 import org.jcamp.parser.JCAMPVariable;
+import org.jcamp.units.CommonUnit;
 
 /**
  *
  * @author fr
  */
-public class NMR2DSpectrum2 extends Spectrum {
+public class NMR2DSpectrum2 extends Spectrum implements INMRSpectrum {
 
+	public static final int DIMENSION = 2;
 	protected final List<List<? extends Number>> zData = new ArrayList<List<? extends Number>>();
 	protected String solvent = "TMS";
-	protected final JCAMPVariable[] axes;
+	protected Double temperature; // in K
+	private String mode = JCAMPReader.STRICT;
+	protected final IOrderedDataArray1D xData;
+	protected final IOrderedDataArray1D yData;
 	protected final String[] nucleus;
 	protected final double[] frequency;
+	protected double[] reference;
 
-	public NMR2DSpectrum2(JCAMPVariable[] axes, String[] nucleus, double[] frequency) {
-		this.axes = axes;
+	public NMR2DSpectrum2(JCAMPVariable[] axes,
+			String[] nucleus, double[] freq, String mode) {
+		this(axes, nucleus, freq, new double[]{0.0, 0.0}, mode);
+	}
+
+	public NMR2DSpectrum2(JCAMPVariable[] axes,
+			String[] nucleus, double[] freq, double[] ref, String mode) {
+		// error checking
+		if (axes.length != DIMENSION) {
+			throw new IllegalArgumentException("axes length must be exactly " + DIMENSION);
+		}
+		if (nucleus.length != DIMENSION) {
+			throw new IllegalArgumentException("nucleus length must be exactly " + DIMENSION);
+		}
+		if (freq.length != DIMENSION) {
+			throw new IllegalArgumentException("frequency length must be exactly " + DIMENSION);
+		}
+		if (ref.length != DIMENSION) {
+			throw new IllegalArgumentException("reference length must be exactly " + DIMENSION);
+		}
+
+		// set values
+		this.xData = new EquidistantData(axes[0].getFirst(), axes[0].getLast(),
+				axes[0].getDimension(), axes[0].getUnit());
+		this.yData = new EquidistantData(axes[1].getFirst(), axes[1].getLast(),
+				axes[1].getDimension(), axes[1].getUnit());
 		this.nucleus = nucleus;
-		this.frequency = frequency;
+		this.frequency = freq;
+		this.reference = ref;
+		this.mode = mode;
+
+		// make ppm if required
+		convertToPPM(xData, frequency[0], reference[0]);
+		convertToPPM(yData, frequency[1], reference[1]);
+	}
+
+	protected void convertToPPM(IOrderedDataArray1D data, double freq, double ref) {
+		if (freq != freq
+				|| ref != ref) {
+			return;
+		}
+		if (data.getUnit().equals(CommonUnit.hertz)) {
+			// ppm = (hz - ref) / freq;
+			if (JCAMPReader.STRICT.equals(mode) && ref == ref) {
+				data.translate(-ref);
+			}
+			data.scale(1. / freq);
+			data.setUnit(CommonUnit.ppm);
+		}
 	}
 
 	@Override
@@ -44,25 +95,21 @@ public class NMR2DSpectrum2 extends Spectrum {
 
 	@Override
 	public Object getXData() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		return xData;
 	}
 
 	@Override
 	public Object getYData() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public Range2D.Double getFullViewRange() {
-		return new Range2D.Double(getXFullViewRange(), getYFullViewRange());
+		return yData;
 	}
 
 	@Override
 	public String getXAxisLabel() {
-		return axes[0].getUnit().getSymbol();
+		return xData.getUnit().getSymbol();
 	}
 
 	public Range1D.Double getXFullViewRange() {
-		return new Range1D.Double(axes[0].getMin(), axes[0].getMax());
+		return xData.getRange1D();
 	}
 
 	@Override
@@ -72,11 +119,11 @@ public class NMR2DSpectrum2 extends Spectrum {
 
 	@Override
 	public String getYAxisLabel() {
-		return axes[1].getUnit().getSymbol();
+		return yData.getUnit().getSymbol();
 	}
 
 	public Range1D.Double getYFullViewRange() {
-		return new Range1D.Double(axes[1].getMin(), axes[1].getMax());
+		return xData.getRange1D();
 	}
 
 	@Override
@@ -116,12 +163,24 @@ public class NMR2DSpectrum2 extends Spectrum {
 		return zData;
 	}
 
+	@Override
 	public String getSolvent() {
 		return solvent;
 	}
 
+	@Override
 	public void setSolvent(String solvent) {
 		this.solvent = solvent;
+	}
+
+	@Override
+	public Double getTemperature() {
+		return temperature;
+	}
+
+	@Override
+	public void setTemperature(Double temperature) {
+		this.temperature = temperature;
 	}
 
 	public String[] getNucleus() {
@@ -130,9 +189,5 @@ public class NMR2DSpectrum2 extends Spectrum {
 
 	public double[] getFrequency() {
 		return frequency;
-	}
-
-	public JCAMPVariable[] getAxes() {
-		return axes;
 	}
 }

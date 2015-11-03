@@ -224,7 +224,7 @@ public class Pattern implements ISpectrumLabel, Cloneable {
 	 * gets the label (multiplicity).
 	 */
 	@Override
-	public java.lang.String getLabel() {
+	public String getLabel() {
 		return multiplicity.getSymbol();
 	}
 
@@ -359,7 +359,7 @@ public class Pattern implements ISpectrumLabel, Cloneable {
 	/**
 	 * write debug info for label.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String toString() {

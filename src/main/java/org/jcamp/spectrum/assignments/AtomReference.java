@@ -80,17 +80,17 @@ public class AtomReference
   /**
    * gets short label for display above peak.
    * 
-   * @return java.lang.String
+   * @return String
    */
-  public java.lang.String getLabel() {
+  public String getLabel() {
     return Integer.toString(atomNo);
   }
   /**
    * gets name of target structure.
    * 
-   * @return java.lang.String
+   * @return String
    */
-  public java.lang.String getStructure() {
+  public String getStructure() {
     return structure;
   }
   /**
@@ -113,9 +113,9 @@ public class AtomReference
   /**
    * Insert the method's description here.
    * 
-   * @param newStructure java.lang.String
+   * @param newStructure String
    */
-  public void setStructure(java.lang.String newStructure) {
+  public void setStructure(String newStructure) {
     if (newStructure == null)
       structure = "unknown";
     else
@@ -124,7 +124,7 @@ public class AtomReference
   /**
    * string display
    * 
-   * @return java.lang.String
+   * @return String
    */
   @Override
   public String toString() {

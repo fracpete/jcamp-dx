@@ -26,7 +26,7 @@ public class AliasUnit
   
   /**
    * AliasUnit constructor comment.
-   * @param aliasidentifier java.lang.String
+   * @param aliasidentifier String
    */
   public AliasUnit(Unit unit, String aliasName) {
     super(unit.getIdentifier());
@@ -37,7 +37,7 @@ public class AliasUnit
   }
   /**
    * AliasUnit constructor comment.
-   * @param aliasidentifier java.lang.String
+   * @param aliasidentifier String
    */
   public AliasUnit(Unit unit, String aliasName, String aliasSymbol) {
     super(unit.getIdentifier());

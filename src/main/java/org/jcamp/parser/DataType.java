@@ -62,7 +62,7 @@ public final class DataType implements java.io.Serializable {
 	/**
 	 * gets variable symbols.
 	 * 
-	 * @return java.lang.String[]
+	 * @return String[]
 	 */
 	public String[] getSymbols() {
 		return symbols;

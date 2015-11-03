@@ -29,7 +29,7 @@ public class DefaultNoteContentParser implements INoteContentParser {
     /**
      * parse the note content.
      * @return java.lang.Object
-     * @param content java.lang.String
+     * @param content String
      * @param resultClass java.lang.Class
      */
     public Object parseContent(String content, Class resultClass) throws BadContentException {

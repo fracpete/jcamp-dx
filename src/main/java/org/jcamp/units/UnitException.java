@@ -27,7 +27,7 @@ public class UnitException
   
   /**
    * UnitException constructor comment.
-   * @param s java.lang.String
+   * @param s String
    */
   public UnitException(String s) {
     super(s);

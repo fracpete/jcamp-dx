@@ -48,7 +48,6 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 	 */
 	@Override
 	protected Chromatogram createFS(JCAMPBlock block) throws JCAMPException {
-		Chromatogram spectrum;
 		Unit xUnit = getXUnits(block);
 		if (xUnit == null) {
 			xUnit = CommonUnit.second;
@@ -75,8 +74,7 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 		IOrderedDataArray1D x = new EquidistantData(firstX, lastX, nPoints,
 				xUnit);
 		IDataArray1D y = new ArrayData(intensities, yUnit);
-		spectrum = new Chromatogram(x, y, true);
-		return spectrum;
+		return new Chromatogram(x, y, true);
 	}
 
 	/**
@@ -89,7 +87,6 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 	@Override
 	protected Chromatogram createPeakTable(JCAMPBlock block)
 			throws JCAMPException {
-		Chromatogram spectrum = null;
 		Unit xUnit = getXUnits(block);
 		if (xUnit == null) {
 			xUnit = CommonUnit.second;
@@ -114,7 +111,7 @@ public class ChromatogramJCAMPReader extends CommonSpectrumJCAMPReader
 		double[][] xy = peakTableToPeakSpectrum(peaks);
 		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
 		IDataArray1D y = new ArrayData(xy[1], yUnit);
-		spectrum = new Chromatogram(x, y, false);
+		Chromatogram spectrum = new Chromatogram(x, y, false);
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);

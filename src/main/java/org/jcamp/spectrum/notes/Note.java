@@ -53,7 +53,7 @@ public class Note
    * The addPropertyChangeListener method was generated to support the propertyChange field.
    */
   public synchronized void addPropertyChangeListener(
-      java.lang.String propertyName,
+      String propertyName,
       java.beans.PropertyChangeListener listener) {
     getPropertyChange().addPropertyChangeListener(propertyName, listener);
   }
@@ -85,7 +85,7 @@ public class Note
   /**
    * The firePropertyChange method was generated to support the propertyChange field.
    */
-  public void firePropertyChange(java.lang.String propertyName, int oldValue, int newValue) {
+  public void firePropertyChange(String propertyName, int oldValue, int newValue) {
     getPropertyChange().firePropertyChange(propertyName, oldValue, newValue);
   }
 
@@ -93,7 +93,7 @@ public class Note
    * The firePropertyChange method was generated to support the propertyChange field.
    */
   public void firePropertyChange(
-      java.lang.String propertyName,
+      String propertyName,
       java.lang.Object oldValue,
       java.lang.Object newValue) {
     getPropertyChange().firePropertyChange(propertyName, oldValue, newValue);
@@ -102,7 +102,7 @@ public class Note
   /**
    * The firePropertyChange method was generated to support the propertyChange field.
    */
-  public void firePropertyChange(java.lang.String propertyName, boolean oldValue, boolean newValue) {
+  public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
     getPropertyChange().firePropertyChange(propertyName, oldValue, newValue);
   }
 
@@ -137,7 +137,7 @@ public class Note
   /**
    * The hasListeners method was generated to support the propertyChange field.
    */
-  public synchronized boolean hasListeners(java.lang.String propertyName) {
+  public synchronized boolean hasListeners(String propertyName) {
     return getPropertyChange().hasListeners(propertyName);
   }
 
@@ -152,7 +152,7 @@ public class Note
    * The removePropertyChangeListener method was generated to support the propertyChange field.
    */
   public synchronized void removePropertyChangeListener(
-      java.lang.String propertyName,
+      String propertyName,
       java.beans.PropertyChangeListener listener) {
     getPropertyChange().removePropertyChangeListener(propertyName, listener);
   }
@@ -184,7 +184,7 @@ public class Note
   /**
    * string display.
    * 
-   * @return java.lang.String
+   * @return String
    */
   @Override
   public String toString() {

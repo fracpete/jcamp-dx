@@ -14,25 +14,25 @@ package org.jcamp.parser;
 public interface IJCAMPNoteMarshaller {
     /**
      * gets JCAMPLabel (normalized, without ## and =).
-     * @return java.lang.String
+     * @return String
      */
     String getJCAMPLabel();
     /**
      * set JCAMP LDR label (without ## and =).
      * 
-     * @param key java.lang.String
+     * @param key String
      */
     void setJCAMPLabel(String key);
     /**
      * set hashkey.
      * 
-     * @param key java.lang.String
+     * @param key String
      */
     void setKey(String key);
     /**
      * formats note to JCAMP.
      * 
-     * @return java.lang.String
+     * @return String
      * @param value java.lang.Object
      */
     String toJCAMP(Object value);

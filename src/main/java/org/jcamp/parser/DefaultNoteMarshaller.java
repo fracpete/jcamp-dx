@@ -39,33 +39,33 @@ public class DefaultNoteMarshaller
   /**
    * gets JCAMP LDR label.
    * 
-   * @return java.lang.String
+   * @return String
    */
-  public java.lang.String getJCAMPLabel() {
+  public String getJCAMPLabel() {
     return Utils.normalizeLabel(JCAMPLabel);
   }
   /**
    * gets note key.
    * 
-   * @return java.lang.String
+   * @return String
    */
-  protected java.lang.String getKey() {
+  protected String getKey() {
     return key;
   }
   /**
    * sets the JCAMP label.
    * 
-   * @param newJCAMPLabel java.lang.String
+   * @param newJCAMPLabel String
    */
-  public void setJCAMPLabel(java.lang.String newJCAMPLabel) {
+  public void setJCAMPLabel(String newJCAMPLabel) {
     JCAMPLabel = newJCAMPLabel;
   }
   /**
    * sets the note key.
    * 
-   * @param newKey java.lang.String
+   * @param newKey String
    */
-  public void setKey(java.lang.String newKey) {
+  public void setKey(String newKey) {
     key = newKey;
   }
   /**

@@ -371,7 +371,7 @@ public class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * gets label on x-axis.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String getXAxisLabel() {
@@ -413,7 +413,7 @@ public class Spectrum1D extends Spectrum implements Cloneable {
 	/**
 	 * gets label on y-axis.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String getYAxisLabel() {

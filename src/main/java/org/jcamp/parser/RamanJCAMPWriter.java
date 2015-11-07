@@ -39,7 +39,7 @@ public class RamanJCAMPWriter
   /**
    * build assignment table
    * 
-   * @return java.lang.String
+   * @return String
    * @param block int  block number (0: no xref, main block)
    * @param raman RamanSpectrum
    */
@@ -71,7 +71,7 @@ public class RamanJCAMPWriter
   /**
    * build full spectrum data block.
    * 
-   * @return java.lang.String
+   * @return String
    * @param raman RamanSpectrum
    */
   private String buildFSData(int block, RamanSpectrum raman) {
@@ -111,7 +111,7 @@ public class RamanJCAMPWriter
   /**
    * build a peak table.
    * 
-   * @return java.lang.String
+   * @return String
    * @param raman RamanSpectrum
    */
   private String buildPeakTable(int block, RamanSpectrum raman) {
@@ -155,7 +155,7 @@ public class RamanJCAMPWriter
   /**
    * gets spectrum notes in JCAMP form.
    * title note is ignored, it is handled directly
-   * @return java.lang.String
+   * @return String
    */
   @Override
   protected String getJCAMPNotes(Spectrum spectrum) {
@@ -177,7 +177,7 @@ public class RamanJCAMPWriter
   /**
    * returns  standard JCAMP unit name.
    * 
-   * @return java.lang.String
+   * @return String
    * @param raman RamanSpectrum
    */
   private static String getXUnitLDR(RamanSpectrum raman) {
@@ -198,7 +198,7 @@ public class RamanJCAMPWriter
   /**
    * return standard JCAMP unit name.
    * 
-   * @return java.lang.String
+   * @return String
    * @param raman RamanSpectrum
    */
   private static String getYUnitLDR(RamanSpectrum raman) {

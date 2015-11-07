@@ -115,9 +115,9 @@ public class NMR2DSpectrum
 	/**
 	 * Insert the method's description here. Creation date: (01/18/00 17:22:51)
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getXNucleus() {
+	public String getXNucleus() {
 		return nucleus[0];
 	}
 
@@ -150,9 +150,9 @@ public class NMR2DSpectrum
 	/**
 	 * Insert the method's description here. Creation date: (01/18/00 17:22:51)
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getYNucleus() {
+	public String getYNucleus() {
 		return nucleus[1];
 	}
 

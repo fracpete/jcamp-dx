@@ -4,7 +4,7 @@
  * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *****************************************************************************
+ * ****************************************************************************
  */
 package org.jcamp.parser;
 
@@ -97,7 +97,6 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 	 */
 	@Override
 	protected UVSpectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
-		UVSpectrum spectrum = null;
 		Unit xUnit = getXUnits(block);
 		if (xUnit == null) {
 			xUnit = CommonUnit.nanometerWavelength;
@@ -122,7 +121,7 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 		double[][] xy = peakTableToPeakSpectrum(peaks);
 		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
 		IDataArray1D y = new ArrayData(xy[1], yUnit);
-		spectrum = new UVSpectrum(x, y, false);
+		UVSpectrum spectrum = new UVSpectrum(x, y, false);
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);
@@ -133,6 +132,7 @@ public class UVJCAMPReader extends CommonSpectrumJCAMPReader implements
 		return spectrum;
 	}
 
+	@Override
 	protected int getExpectedSpectrumType() {
 		return ISpectrumIdentifier.UV;
 	}

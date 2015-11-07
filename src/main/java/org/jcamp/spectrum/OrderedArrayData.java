@@ -228,9 +228,9 @@ public class OrderedArrayData
   /**
    * gets data label
    * 
-   * @return java.lang.String
+   * @return String
    */
-  public java.lang.String getLabel() {
+  public String getLabel() {
     if (label == null)
       return unit.toString();
     return label;
@@ -289,9 +289,9 @@ public class OrderedArrayData
   /**
    * Insert the method's description here.
    * 
-   * @param newLabel java.lang.String
+   * @param newLabel String
    */
-  public void setLabel(java.lang.String newLabel) {
+  public void setLabel(String newLabel) {
     label = newLabel;
   }
   /**

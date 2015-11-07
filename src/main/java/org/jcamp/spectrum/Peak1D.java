@@ -132,7 +132,7 @@ public class Peak1D extends Peak implements Cloneable {
 	/**
 	 * gets label on peak.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String getLabel() {

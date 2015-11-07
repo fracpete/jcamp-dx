@@ -39,7 +39,7 @@ public class IRJCAMPWriter extends CommonSpectrumJCAMPWriter implements
 	/**
 	 * build assignment table
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param block
 	 *            int block number (0: no xref, main block)
 	 * @param ir
@@ -75,7 +75,7 @@ public class IRJCAMPWriter extends CommonSpectrumJCAMPWriter implements
 	/**
 	 * build full spectrum data block.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param ir
 	 *            IRSpectrum
 	 */
@@ -119,7 +119,7 @@ public class IRJCAMPWriter extends CommonSpectrumJCAMPWriter implements
 	/**
 	 * build a peak table.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param ir
 	 *            IRSpectrum
 	 */
@@ -167,7 +167,7 @@ public class IRJCAMPWriter extends CommonSpectrumJCAMPWriter implements
 	 * gets spectrum notes in JCAMP form. title note is ignored, it is handled
 	 * directly
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	protected String getJCAMPNotes(Spectrum spectrum) {
@@ -191,7 +191,7 @@ public class IRJCAMPWriter extends CommonSpectrumJCAMPWriter implements
 	/**
 	 * returns standard JCAMP unit name.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param ir
 	 *            IRSpectrum
 	 */
@@ -214,7 +214,7 @@ public class IRJCAMPWriter extends CommonSpectrumJCAMPWriter implements
 	/**
 	 * return standard JCAMP unit name.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param ir
 	 *            IRSpectrum
 	 */

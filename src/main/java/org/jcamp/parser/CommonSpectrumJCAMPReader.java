@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 import java.util.logging.Level;
+import org.apache.commons.lang3.StringUtils;
 
 import org.jcamp.math.IArray2D;
 import org.jcamp.spectrum.ArrayData;
@@ -22,6 +23,7 @@ import org.jcamp.spectrum.EquidistantData;
 import org.jcamp.spectrum.IAssignmentTarget;
 import org.jcamp.spectrum.IDataArray1D;
 import org.jcamp.spectrum.IOrderedDataArray1D;
+import org.jcamp.spectrum.ISpectrum;
 import org.jcamp.spectrum.Multiplicity;
 import org.jcamp.spectrum.OrderedArrayData;
 import org.jcamp.spectrum.Pattern;
@@ -48,12 +50,22 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			.getLogger(CommonSpectrumJCAMPReader.class);
 
 	/**
+	 * remove any remaining <>.
+	 *
+	 * @param content
+	 * @return
+	 */
+	protected static String clean(String content) {
+		return StringUtils.strip(content, "<>");
+	}
+
+	/**
 	 * analyse assignment text for targets.
 	 *
 	 * currently assumes SpecInfo convention of a list of integer atom numbers
 	 *
 	 * @return IAssignmentTarget[]
-	 * @param assign java.lang.String
+	 * @param assign String
 	 */
 	protected static IAssignmentTarget[] parseAssignment(String assign) {
 		ArrayList<AtomReference> targets = new ArrayList<AtomReference>(5);
@@ -95,20 +107,20 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			double x = peaks[i].getPosition()[0];
 			double y = peaks[i].getHeight();
 			if (x - x0 > Double.MIN_VALUE) {
-				px.add(new Double(x0));
-				py.add(new Double(y0));
+				px.add(x0);
+				py.add(y0);
 				x0 = x;
 				y0 = y;
 			} else {
 				y0 += y;
 			}
 		}
-		px.add(new Double(x0));
-		py.add(new Double(y0));
+		px.add(x0);
+		py.add(x0);
 		double[][] xy = new double[2][px.size()];
 		for (int i = 0; i < px.size(); i++) {
-			xy[0][i] = px.get(i).doubleValue();
-			xy[1][i] = py.get(i).doubleValue();
+			xy[0][i] = px.get(i);
+			xy[1][i] = py.get(i);
 		}
 		return xy;
 	}
@@ -124,13 +136,13 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	 * createSpectrum method comment.
 	 */
 	@Override
-	public Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
+	public ISpectrum createSpectrum(JCAMPBlock block) throws JCAMPException {
 		int expectedSpectrumType = getExpectedSpectrumType();
 		if (expectedSpectrumType != -1
 				&& block.getSpectrumType() != expectedSpectrumType) {
 			throw new JCAMPException("JCAMP reader adapter missmatch");
 		}
-		Spectrum spectrum = null;
+		Spectrum spectrum;
 		BlockType type = block.getBlockType();
 		if (type.equals(BlockType.FULLSPECTRUM)) {
 			spectrum = createFS(block);
@@ -203,7 +215,6 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	}
 
 	protected Spectrum createPeakTable(JCAMPBlock block) throws JCAMPException {
-		Spectrum1D spectrum = null;
 		Unit xUnit = getXUnits(block),
 				yUnit = getYUnits(block);
 		double xFactor = getXFactor(block);
@@ -222,7 +233,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 		double[][] xy = peakTableToPeakSpectrum(peaks);
 		IOrderedDataArray1D x = new OrderedArrayData(xy[0], xUnit);
 		IDataArray1D y = new ArrayData(xy[1], yUnit);
-		spectrum = new Spectrum1D(x, y, false);
+		Spectrum1D spectrum = new Spectrum1D(x, y, false);
 		spectrum.setPeakTable(peaks);
 		if (tables.length > 1) {
 			spectrum.setPatternTable((Pattern[]) tables[1]);
@@ -247,7 +258,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				log.error("missing first x");
 			}
 		}
-		return x.getFirst().doubleValue();
+		return x.getFirst();
 	}
 
 	/**
@@ -264,7 +275,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				log.error("missing first y");
 			}
 		}
-		return y.getFirst().doubleValue();
+		return y.getFirst();
 	}
 
 	/**
@@ -281,7 +292,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 				log.error("missing last x");
 			}
 		}
-		return x.getLast().doubleValue();
+		return x.getLast();
 	}
 
 	/**
@@ -380,8 +391,8 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 		xy[0] = new double[x.size()];
 		xy[1] = new double[y.size()];
 		for (int i = 0; i < x.size(); i++) {
-			xy[0][i] = x.get(i).doubleValue();
-			xy[1][i] = y.get(i).doubleValue();
+			xy[0][i] = x.get(i);
+			xy[1][i] = y.get(i);
 		}
 		return xy;
 	}
@@ -389,7 +400,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * gets ##ORIGIN= content
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 * @param block JCAMPBlock
 	 * @exception JCAMPException The exception description.
 	 */
@@ -407,7 +418,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * gets ##OWNER= content
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 * @param block JCAMPBlock
 	 * @exception JCAMPException The exception description.
 	 */
@@ -453,8 +464,8 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Peak1D[] peaks = new Peak1D[nPoints];
 			while (tokenizer.hasMoreGroups()) {
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
 				peaks[i] = new Peak1D(x, y);
 				i++;
 			}
@@ -465,9 +476,9 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			while (tokenizer.hasMoreGroups()) {
 
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
-				double w = ((Double) group.getValue(2)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
+				double w = ((Double) group.getValue(2));
 				peaks[i] = new Peak1D(x, y, w);
 				i++;
 			}
@@ -478,8 +489,8 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Pattern[] pattern = new Pattern[nPoints];
 			while (tokenizer.hasMoreGroups()) {
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
 				Multiplicity m = ((Multiplicity) group.getValue(2));
 				peaks[i] = new Peak1D(x, y);
 				pattern[i] = new Pattern(x, m);
@@ -493,8 +504,8 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Assignment[] assigns = new Assignment[nPoints];
 			while (tokenizer.hasMoreGroups()) {
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
 				String a = (String) group.getValue(2);
 				peaks[i] = new Peak1D(x, y);
 				IAssignmentTarget[] targets = parseAssignment(a);
@@ -511,8 +522,8 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Assignment[] assigns = new Assignment[nPoints];
 			while (tokenizer.hasMoreGroups()) {
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
 				Multiplicity m = ((Multiplicity) group.getValue(2));
 				String a = (String) group.getValue(3);
 				IAssignmentTarget[] targets = parseAssignment(a);
@@ -529,8 +540,8 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Assignment[] assigns = new Assignment[nPoints];
 			while (tokenizer.hasMoreGroups()) {
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
 				String a = (String) group.getValue(3);
 				IAssignmentTarget[] targets = parseAssignment(a);
 				peaks[i] = new Peak1D(x, y);
@@ -547,10 +558,10 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			Assignment[] assigns = new Assignment[nPoints];
 			while (tokenizer.hasMoreGroups() && i < nPoints) {
 				DataGroup group = tokenizer.nextGroup();
-				double x = xFactor * ((Double) group.getValue(0)).doubleValue();
-				double y = yFactor * ((Double) group.getValue(1)).doubleValue();
+				double x = xFactor * ((Double) group.getValue(0));
+				double y = yFactor * ((Double) group.getValue(1));
 				Multiplicity m = ((Multiplicity) group.getValue(2));
-				double w = ((Double) group.getValue(3)).doubleValue();
+				double w = ((Double) group.getValue(3));
 				String a = (String) group.getValue(4);
 				IAssignmentTarget[] targets = parseAssignment(a);
 				peaks[i] = new Peak1D(x, y, w);
@@ -567,7 +578,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 	/**
 	 * gets ##TITLE= content
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 * @param block JCAMPBlock
 	 * @exception JCAMPException The exception description.
 	 */
@@ -594,7 +605,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			}
 			return 1.0;
 		}
-		return x.getFactor().doubleValue();
+		return x.getFactor();
 	}
 
 	/**
@@ -722,7 +733,7 @@ public class CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
 			}
 			return 1.0;
 		}
-		return y.getFactor().doubleValue();
+		return y.getFactor();
 	}
 
 	/**

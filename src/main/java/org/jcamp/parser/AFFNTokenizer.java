@@ -80,9 +80,9 @@ public class AFFNTokenizer implements java.util.Enumeration<AFFNGroup> {
 	/**
 	 * get variable symbols.
 	 * 
-	 * @return java.lang.String[]
+	 * @return String[]
 	 */
-	public final java.lang.String[] getSymbols() {
+	public final String[] getSymbols() {
 		return varSymbols;
 	}
 
@@ -214,9 +214,9 @@ public class AFFNTokenizer implements java.util.Enumeration<AFFNGroup> {
 	 * normalize data block in standard form: values are separated by ',',
 	 * groups are separated by ';' whitespace is skipped
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 * @param orig
-	 *            java.lang.String
+	 *            String
 	 */
 	private static String normalizeData(int groupLength, String orig)
 			throws JCAMPException {

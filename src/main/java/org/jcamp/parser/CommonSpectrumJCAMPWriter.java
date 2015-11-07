@@ -30,7 +30,7 @@ public abstract class CommonSpectrumJCAMPWriter implements ISpectrumJCAMPWriter 
 	 * gets spectrum notes in JCAMP form. title note is ignored, it is handled
 	 * directly
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	protected String getJCAMPNotes(Spectrum spectrum) {
 		StringBuilder notesStr = new StringBuilder();

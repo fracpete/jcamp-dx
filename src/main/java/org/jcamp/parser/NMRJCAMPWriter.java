@@ -38,7 +38,7 @@ public class NMRJCAMPWriter
   /**
    * build assignment table
    * 
-   * @return java.lang.String
+   * @return String
    * @param block int  block number (0: no xref, main block)
    * @param nmr NMRSpectrum
    */
@@ -86,7 +86,7 @@ public class NMRJCAMPWriter
   /**
    * build FID data block.
    * 
-   * @return java.lang.String
+   * @return String
    * @param nmr NMRFIDSpectrum
    */
   private String buildFIDData(int block, NMRFIDSpectrum nmr) {
@@ -141,7 +141,7 @@ public class NMRJCAMPWriter
   /**
    * build full spectrum data block.
    * 
-   * @return java.lang.String
+   * @return String
    * @param nmr NMRSpectrum
    */
   private String buildFSData(int block, NMRSpectrum nmr) {
@@ -206,7 +206,7 @@ public class NMRJCAMPWriter
   /**
    * build pattern table
    * 
-   * @return java.lang.String
+   * @return String
    * @param block int  block number (0: no xref, main block)
    * @param nmr NMRSpectrum
    */
@@ -243,7 +243,7 @@ public class NMRJCAMPWriter
   /**
    * build a peak table.
    * 
-   * @return java.lang.String
+   * @return String
    * @param nmr NMRSpectrum
    */
   private String buildPeakTable(int block, NMRSpectrum nmr) {
@@ -281,7 +281,7 @@ public class NMRJCAMPWriter
    * title note is ignored, it is handled directly
    * shk3: BLOCKID is also ignored, this caused multiply block elements in a block
    * when writing a link spectrum.
-   * @return java.lang.String
+   * @return String
    */
   protected String getJCAMPNotes(Spectrum spectrum) {
     StringBuilder notesStr = new StringBuilder();

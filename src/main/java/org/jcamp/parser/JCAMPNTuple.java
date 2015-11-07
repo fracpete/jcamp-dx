@@ -55,7 +55,7 @@ public class JCAMPNTuple {
 	 * gets a header LDR.
 	 *
 	 * @return JCAMPDataRecord
-	 * @param key java.lang.String
+	 * @param key String
 	 */
 	public JCAMPDataRecord getHeader(String key) {
 		if (headers != null) {
@@ -80,7 +80,7 @@ public class JCAMPNTuple {
 	/**
 	 * gets containing JCAMP
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
 	public String getJCAMP() {
 		return containingBlock.getJCAMP();
@@ -129,7 +129,7 @@ public class JCAMPNTuple {
 	 * gets variable by name.
 	 *
 	 * @return com.creon.chem.jcamp.JCAMPVariable
-	 * @param name java.lang.String
+	 * @param name String
 	 */
 	public JCAMPVariable getVariableByName(String name) {
 		name = name.toUpperCase();
@@ -153,8 +153,8 @@ public class JCAMPNTuple {
 	/**
 	 * get variable value array in page dimension.
 	 *
-	 * @return java.lang.String[]
-	 * @param ldrKey java.lang.String
+	 * @return String[]
+	 * @param ldrKey String
 	 * @param v JCAMPVariable
 	 */
 	public String[] getVariableValues(String ldrKey, JCAMPVariable v) {

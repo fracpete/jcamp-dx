@@ -1,10 +1,11 @@
-/*******************************************************************************
- * Copyright (c) 2015.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the GNU Public License v2.0
+/**
+ * *****************************************************************************
+ * Copyright (c) 2015. All rights reserved. This program and the accompanying
+ * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- ******************************************************************************/
+ * ****************************************************************************
+ */
 package org.jcamp.parser;
 
 import static org.junit.Assert.assertEquals;
@@ -14,12 +15,11 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 
-import net.sf.kerner.utils.io.lazy.LazyStringReader;
-
+import org.apache.commons.io.FileUtils;
 import org.jcamp.VisitorJCAMPBlock;
 import org.jcamp.spectrum.IRSpectrum;
+import org.jcamp.spectrum.ISpectrum;
 import org.jcamp.spectrum.NMRSpectrum;
-import org.jcamp.spectrum.Spectrum;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -54,7 +54,7 @@ public class TestJCAMPReader {
 
 	@Test
 	public final void testAccessPeakList01() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
+		ISpectrum s = JCAMPReader.getInstance().createSpectrum(
 				new File("src/test/resources/testdata/1567755.jdx"));
 		assertNotNull(s);
 		assertTrue(s.hasPeakTable());
@@ -64,10 +64,8 @@ public class TestJCAMPReader {
 
 	@Test
 	public final void testAccessPeakList02() throws IOException, JCAMPException {
-		JCAMPBlock b = new JCAMPBlock(
-				new LazyStringReader()
-				.read(new File(
-						"src/test/resources/testdata2/2-MAPB.jcamp")));
+		JCAMPBlock b = new JCAMPBlock(FileUtils.readFileToString(
+				new File("src/test/resources/testdata2/2-MAPB.jcamp")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
 
@@ -76,7 +74,7 @@ public class TestJCAMPReader {
 				// 4th block contains peak table
 				if (cnt == 4) {
 					try {
-						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+						ISpectrum s = JCAMPReader.getInstance().createSpectrum(
 								element);
 						assertNotNull(s);
 						assertNotNull(s.getPeakTable());
@@ -92,9 +90,8 @@ public class TestJCAMPReader {
 	@Test
 	public final void testAccessPeakList03() throws IOException, JCAMPException {
 		JCAMPBlock b = new JCAMPBlock(
-				new LazyStringReader()
-				.read(new File(
-						"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
+				FileUtils.readFileToString(new File(
+								"src/test/resources/testdata2/S2015_1275_1 3-fpm_mit_Struc.jcamp")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
 
@@ -103,7 +100,7 @@ public class TestJCAMPReader {
 				// 4th block contains peak table
 				if (cnt == 4) {
 					try {
-						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+						ISpectrum s = JCAMPReader.getInstance().createSpectrum(
 								element);
 						assertNotNull(s);
 						assertNotNull(s.getPeakTable());
@@ -120,9 +117,8 @@ public class TestJCAMPReader {
 	@Test
 	public final void testAccessPeakList04() throws IOException, JCAMPException {
 		JCAMPBlock b = new JCAMPBlock(
-				new LazyStringReader()
-				.read(new File(
-						"src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx")));
+				FileUtils.readFileToString(new File(
+								"src/test/resources/testdata_BLAAF/BLAAF41h-a.jdx")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
 
@@ -131,7 +127,7 @@ public class TestJCAMPReader {
 				// 3th block contains peak table
 				if (cnt == 3) {
 					try {
-						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+						ISpectrum s = JCAMPReader.getInstance().createSpectrum(
 								element);
 						assertNotNull(s);
 						assertNotNull(s.getPeakTable());
@@ -148,7 +144,7 @@ public class TestJCAMPReader {
 	@Ignore
 	@Test
 	public final void testCreateSpectrum01() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader
+		ISpectrum s = JCAMPReader
 				.getInstance()
 				.createSpectrum(
 						new File(
@@ -159,7 +155,7 @@ public class TestJCAMPReader {
 
 	@Test
 	public final void testCreateSpectrum02() throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader
+		ISpectrum s = JCAMPReader
 				.getInstance()
 				.createSpectrum(
 						new File(
@@ -175,7 +171,7 @@ public class TestJCAMPReader {
 	@Test
 	public final void testCreateSpectrumInconsitentNumberOfHeaderColumns01()
 			throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader
+		ISpectrum s = JCAMPReader
 				.getInstance()
 				.createSpectrum(
 						new File(
@@ -186,15 +182,15 @@ public class TestJCAMPReader {
 	@Test
 	public final void testCreateSpectrumInconsitentNumberOfHeaderColumns02()
 			throws IOException, JCAMPException {
-		Spectrum s = JCAMPReader.getInstance().createSpectrum(
+		ISpectrum s = JCAMPReader.getInstance().createSpectrum(
 				new File("src/test/resources/testdata_LEV/LEVLA2hri.jdx"));
 		assertNotNull(s);
 	}
 
 	@Test
 	public final void testCreateSpectrumInfrared01() throws IOException,
-	JCAMPException {
-		Spectrum s = JCAMPReader
+			JCAMPException {
+		ISpectrum s = JCAMPReader
 				.getInstance()
 				.createSpectrum(
 						new File(
@@ -208,7 +204,7 @@ public class TestJCAMPReader {
 	@Test
 	public final void testWrongSpectrumType01() throws IOException,
 			JCAMPException {
-		JCAMPBlock b = new JCAMPBlock(new LazyStringReader().read(new File(
+		JCAMPBlock b = new JCAMPBlock(FileUtils.readFileToString(new File(
 				"src/test/resources/testdata_BLAAF/BLAAF172rpac.jdx")));
 		assertNotNull(b);
 		iterateAll(b, new VisitorJCAMPBlock() {
@@ -217,7 +213,7 @@ public class TestJCAMPReader {
 				// third block contains peak table
 				if (cnt == 2) {
 					try {
-						Spectrum s = JCAMPReader.getInstance().createSpectrum(
+						ISpectrum s = JCAMPReader.getInstance().createSpectrum(
 								element);
 						assertNotNull(s);
 						assertNotNull(s.getPeakTable());

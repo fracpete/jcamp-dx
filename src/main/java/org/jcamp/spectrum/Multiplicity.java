@@ -57,7 +57,7 @@ public class Multiplicity
 	/**
 	 * gets variable symbol.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
 	public String getSymbol() {
 		return symbol;
@@ -76,7 +76,7 @@ public class Multiplicity
 	 * helper
 	 *
 	 * @return int
-	 * @param symbol java.lang.String
+	 * @param symbol String
 	 */
 	public static Multiplicity multiplicityOf(char m) {
 		switch (m) {
@@ -104,7 +104,7 @@ public class Multiplicity
 	 * helper
 	 *
 	 * @return int
-	 * @param symbol java.lang.String
+	 * @param symbol String
 	 */
 	public static Multiplicity multiplicityOf(int m) {
 		if (m >= MULTIPLET.ordinal) {
@@ -120,7 +120,7 @@ public class Multiplicity
 	 * helper
 	 *
 	 * @return int
-	 * @param symbol java.lang.String
+	 * @param symbol String
 	 */
 	public static Multiplicity multiplicityOf(String symbol) {
 		symbol = symbol.trim().toUpperCase();

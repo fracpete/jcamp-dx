@@ -70,7 +70,7 @@ public abstract class Peak implements ISpectrumLabel {
 	/**
 	 * returns the label displayed.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public abstract String getLabel();
@@ -128,7 +128,7 @@ public abstract class Peak implements ISpectrumLabel {
 	/**
 	 * write debug info for label.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	@Override
 	public String toString() {

@@ -89,7 +89,7 @@ public class ArrayData implements IDataArray1D {
 	}
 
 	@Override
-	public java.lang.String getLabel() {
+	public String getLabel() {
 		if (label == null)
 			return unit.toString();
 		return label;
@@ -163,7 +163,7 @@ public class ArrayData implements IDataArray1D {
 	}
 
 	@Override
-	public void setLabel(java.lang.String newLabel) {
+	public void setLabel(String newLabel) {
 		label = newLabel;
 	}
 

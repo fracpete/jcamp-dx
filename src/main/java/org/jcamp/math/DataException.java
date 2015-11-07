@@ -27,7 +27,7 @@ public class DataException
   
   /**
    * DataException constructor comment.
-   * @param s java.lang.String
+   * @param s String
    */
   public DataException(String s) {
     super(s);

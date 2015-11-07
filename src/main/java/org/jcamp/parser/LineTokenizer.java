@@ -88,7 +88,7 @@ public class LineTokenizer implements Enumeration {
     /**
      * returns the next line.
      * 
-     * @return java.lang.String
+     * @return String
      */
     public Object nextElement() {
         return nextLine();
@@ -96,7 +96,7 @@ public class LineTokenizer implements Enumeration {
     /**
      * returns the next line.
      * 
-     * @return java.lang.String
+     * @return String
      */
     public String nextLine() {
         int p;
@@ -144,7 +144,7 @@ public class LineTokenizer implements Enumeration {
     /**
      * returns the next line.
      * 
-     * @return java.lang.String
+     * @return String
      */
     public String nextToken() {
         return nextLine();

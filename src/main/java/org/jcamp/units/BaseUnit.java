@@ -111,7 +111,7 @@ public final class BaseUnit
 
   /**
    * BaseUnit constructor comment.
-   * @param identifier java.lang.String
+   * @param identifier String
    */
   protected BaseUnit(String quantity, String name, String symbol) {
     super(symbol, name);
@@ -182,7 +182,7 @@ public final class BaseUnit
    * @return String
    */
   @Override
-  public java.lang.String getQuantity() {
+  public String getQuantity() {
     return quantity;
   }
   /**

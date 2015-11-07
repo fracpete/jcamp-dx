@@ -194,7 +194,7 @@ public class DataGroup {
      * gets value for symbol c
      * 
      * @return Object
-     * @param c java.lang.String
+     * @param c String
      */
     public Object getValue(String c) throws JCAMPException {
         return values[indexOfSymbol(c)];
@@ -203,7 +203,7 @@ public class DataGroup {
      * gets index of variable symbol.
      * 
      * @return int
-     * @param symbol java.lang.String
+     * @param symbol String
      */
     public int indexOfSymbol(String symbol) throws JCAMPException {
         for (int i = 0; i < varSymbols.length; i++) {

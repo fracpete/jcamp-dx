@@ -280,9 +280,9 @@ public class JCAMPDataRecord {
 	/**
 	 * gets normalized key.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getKey() {
+	public String getKey() {
 		return key;
 	}
 
@@ -298,7 +298,7 @@ public class JCAMPDataRecord {
 	/**
 	 * gets original, not normalized key.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	public String getOriginalKey() {
 		return jcamp.substring(start + 2, start + equalSignPos);

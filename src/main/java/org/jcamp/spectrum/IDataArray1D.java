@@ -23,7 +23,7 @@ public interface IDataArray1D
   /**
    * sets data label
    * 
-   * @param label java.lang.String
+   * @param label String
    */
   void setLabel(String label);
 
@@ -32,7 +32,7 @@ public interface IDataArray1D
   /**
    * get data label.
    * 
-   * @return java.lang.String
+   * @return String
    */
   String getLabel();
 }

@@ -7,7 +7,7 @@
  ******************************************************************************/
 package org.jcamp.parser;
 
-import org.jcamp.spectrum.Spectrum;
+import org.jcamp.spectrum.ISpectrum;
 /**
  * reader for spectra from JCAMP
  * @author Thomas Weber
@@ -19,5 +19,5 @@ public interface ISpectrumJCAMPReader {
      * @return Spectrum
      * @param block JCAMPBlock
      */
-    Spectrum createSpectrum(JCAMPBlock block) throws JCAMPException;
+    ISpectrum createSpectrum(JCAMPBlock block) throws JCAMPException;
 }

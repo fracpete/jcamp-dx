@@ -40,7 +40,7 @@ public class JCAMPBlock {
 	/**
 	 * testing.
 	 *
-	 * @param args java.lang.String[]
+	 * @param args String[]
 	 */
 	public static void main(String[] args) {
 		String jcamp = null;
@@ -138,7 +138,7 @@ public class JCAMPBlock {
 	 * @param start first index of substring, inclusive
 	 * @param end last index of substring, exclusive
 	 * @param parent parent {@code JCAMPBlock}
-	 * @see java.lang.String#substring(int, int)
+	 * @see String#substring(int, int)
 	 */
 	public JCAMPBlock(JCAMPBlock parent, String jcamp, int start, int end,
 			IErrorHandler errorHandler) throws JCAMPException {
@@ -157,7 +157,7 @@ public class JCAMPBlock {
 	/**
 	 * create JCAMPBlock from String
 	 *
-	 * @param jcamp java.lang.String
+	 * @param jcamp String
 	 */
 	public JCAMPBlock(String jcamp) throws JCAMPException {
 		this(jcamp, 0, jcamp.length());
@@ -186,7 +186,7 @@ public class JCAMPBlock {
 	 * @param jcamp string representing a JCAMP file
 	 * @param start first index of substring, inclusive
 	 * @param end last index of substring, exclusive
-	 * @see java.lang.String#substring(int, int)
+	 * @see String#substring(int, int)
 	 */
 	public JCAMPBlock(String jcamp, int start, int end,
 			IErrorHandler errorHandler) throws JCAMPException {
@@ -235,7 +235,7 @@ public class JCAMPBlock {
 	/**
 	 * analyze ##DATATYPE= LDR for spectrum type.
 	 *
-	 * @param datatype java.lang.String
+	 * @param datatype String
 	 */
 	private void analyzeSpectrumID(String dataType) {
 		if (dataType != null) {
@@ -275,7 +275,7 @@ public class JCAMPBlock {
 	 * change a data record to a new value and return modified JCAMPBlock.
 	 *
 	 * @return JCAMPBlock modified block
-	 * @param key java.lang.String normalized key
+	 * @param key String normalized key
 	 * @param newValue JCAMPDataRecord new data record value
 	 */
 	public JCAMPBlock changeDataRecord(String key, String newValue)
@@ -391,7 +391,7 @@ public class JCAMPBlock {
 	/**
 	 * gets JCAMP string containing block.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
 	public String getJCAMP() {
 		return this.jcamp;

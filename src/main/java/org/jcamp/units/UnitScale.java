@@ -89,17 +89,17 @@ public class UnitScale
 
   /**
    * gets name of scale (e.g. micro, kilo, ...).
-   * @return java.lang.String
+   * @return String
    */
-  public java.lang.String getName() {
+  public String getName() {
     return name;
   }
 
   /**
    * gets scale prefix (e.g. k,m,G).
-   * @return java.lang.String
+   * @return String
    */
-  public java.lang.String getPrefix() {
+  public String getPrefix() {
     return prefix;
   }
 }

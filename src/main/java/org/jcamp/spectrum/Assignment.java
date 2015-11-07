@@ -81,7 +81,7 @@ public class Assignment implements ISpectrumLabel, Cloneable {
 	/**
 	 * formats peak label.
 	 * 
-	 * @return java.lang.String
+	 * @return String
 	 */
 	private String formatLabel() {
 		if (targets == null || targets.length == 0)

@@ -4,7 +4,7 @@
  * materials are made available under the terms of the GNU Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- *****************************************************************************
+ * ****************************************************************************
  */
 package org.jcamp.spectrum;
 
@@ -23,7 +23,7 @@ import org.jcamp.units.Unit;
  * @author <a href="mailto:alexander.kerner@silico-sciences.com">Alexander
  * Kerner</a>
  */
-public class NMRSpectrum extends Spectrum1D {
+public class NMRSpectrum extends Spectrum1D implements INMRSpectrum {
 
 	@Override
 	public String toString() {
@@ -46,6 +46,7 @@ public class NMRSpectrum extends Spectrum1D {
 	protected double solventReference = 0; // solvent reference in ppm
 	protected boolean fid = false;
 	protected String solvent = "TMS";
+	protected Double temperature; // in K
 	private String mode = JCAMPReader.STRICT;
 
 	/**
@@ -122,7 +123,7 @@ public class NMRSpectrum extends Spectrum1D {
 		if (xData.getUnit().equals(CommonUnit.ppm)) {
 			// hz = freq * ppm + ref;
 			this.xData.scale(frequency);
-			if (mode == JCAMPReader.STRICT && reference == reference) // we are
+			if (JCAMPReader.STRICT.equals(mode) && reference == reference) // we are
 			// notin
 			// a
 			// peak
@@ -203,7 +204,7 @@ public class NMRSpectrum extends Spectrum1D {
 		}
 		if (xData.getUnit().equals(CommonUnit.hertz)) {
 			// ppm = (hz - ref) / freq;
-			if (mode == JCAMPReader.STRICT && reference == reference) {
+			if (JCAMPReader.STRICT.equals(mode) && reference == reference) {
 				xData.translate(-reference);
 			}
 			xData.scale(1. / frequency);
@@ -263,9 +264,9 @@ public class NMRSpectrum extends Spectrum1D {
 	/**
 	 * gets observe nucleus
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getNucleus() {
+	public String getNucleus() {
 		return nucleus;
 	}
 
@@ -281,9 +282,10 @@ public class NMRSpectrum extends Spectrum1D {
 	/**
 	 * gets solvent.
 	 *
-	 * @return java.lang.String
+	 * @return String
 	 */
-	public java.lang.String getSolvent() {
+	@Override
+	public String getSolvent() {
 		return solvent;
 	}
 
@@ -294,22 +296,6 @@ public class NMRSpectrum extends Spectrum1D {
 	 */
 	public double getSolventReference() {
 		return solventReference;
-	}
-
-	/**
-	 * gets full view range on x axis.
-	 */
-	@Override
-	public Range1D.Double getXFullViewRange() {
-		return new Range1D.Double(this.xAxisMap.getFullViewRange());
-	}
-
-	/**
-	 * gets full view range on y axis.
-	 */
-	@Override
-	public Range1D.Double getYFullViewRange() {
-		return new Range1D.Double(this.yAxisMap.getFullViewRange());
 	}
 
 	/**
@@ -337,9 +323,9 @@ public class NMRSpectrum extends Spectrum1D {
 	/**
 	 * sets observe nucleus.
 	 *
-	 * @param newNucleus java.lang.String
+	 * @param newNucleus String
 	 */
-	public void setNucleus(java.lang.String newNucleus) {
+	public void setNucleus(String newNucleus) {
 		nucleus = newNucleus;
 	}
 
@@ -359,9 +345,10 @@ public class NMRSpectrum extends Spectrum1D {
 	/**
 	 * sets solvent.
 	 *
-	 * @param newSolvent java.lang.String
+	 * @param newSolvent String
 	 */
-	public void setSolvent(java.lang.String newSolvent) {
+	@Override
+	public void setSolvent(String newSolvent) {
 		solvent = newSolvent;
 	}
 
@@ -385,14 +372,6 @@ public class NMRSpectrum extends Spectrum1D {
 	}
 
 	/**
-	 * sets full view range on y axis.
-	 */
-	@Override
-	public void setYFullViewRange(Range1D.Double dataRange) {
-		this.yAxisMap = new LinearAxisMap(yData, dataRange);
-	}
-
-	/**
 	 * Tells if the mode is STRICT or RELAXED.
 	 *
 	 * @return the current mode.
@@ -408,5 +387,15 @@ public class NMRSpectrum extends Spectrum1D {
 	 */
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+
+	@Override
+	public Double getTemperature() {
+		return temperature;
+	}
+
+	@Override
+	public void setTemperature(Double temperature) {
+		this.temperature = temperature;
 	}
 }

@@ -75,7 +75,7 @@ public interface IOrderedDataArray1D
   /**
    * get data label.
    * 
-   * @return java.lang.String
+   * @return String
    */
   String getLabel();
 
@@ -89,7 +89,7 @@ public interface IOrderedDataArray1D
   /**
    * sets data label
    * 
-   * @param label java.lang.String
+   * @param label String
    */
   void setLabel(String label);
 }

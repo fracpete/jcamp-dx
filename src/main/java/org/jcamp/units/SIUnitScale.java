@@ -55,8 +55,8 @@ public final class SIUnitScale
   /**
    * SIUnitScale constructor comment.
    * @param factor double
-   * @param name java.lang.String
-   * @param prefix java.lang.String
+   * @param name String
+   * @param prefix String
    */
   private SIUnitScale(double factor, String name, String prefix) {
     super(factor, name, prefix);

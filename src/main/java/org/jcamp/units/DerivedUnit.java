@@ -114,7 +114,7 @@ public final class DerivedUnit
    * @return String
    */
   @Override
-  public java.lang.String getQuantity() {
+  public String getQuantity() {
     return quantity;
   }
   /**
@@ -171,9 +171,9 @@ public final class DerivedUnit
   }
   /**
    * make key from name of symbol.
-   * @param quantity java.lang.String
-   * @param name java.lang.String
-   * @param symbol java.lang.String
+   * @param quantity String
+   * @param name String
+   * @param symbol String
    * @return String
    */
   private static String makeID(String quantity, String name, String symbol) {

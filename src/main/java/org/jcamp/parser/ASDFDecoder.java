@@ -11,13 +11,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ASDFDecoder {
 
-    /** boolean system property that determines whether decoder is validating or nor. */
-    public static final String ASDFDECODER_VALIDATE = "org.jcamp.parser.ASDFDecoder.validate";
-
     private static Log log = LogFactory.getLog(ASDFDecoder.class);
     private final static byte[] CRLF = {(byte) '\r', (byte) '\n' };
     private boolean isUnicodeAware = false;
-    private boolean isValidating = System.getProperty(ASDFDECODER_VALIDATE, "true").equals("true");
+    private boolean isValidating = true;
 
     /**
      * ASDFDecoder constructor.

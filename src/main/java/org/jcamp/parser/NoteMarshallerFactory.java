@@ -1,9 +1,9 @@
 package org.jcamp.parser;
+import org.jcamp.spectrum.notes.NoteDescriptor;
+
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Properties;
-
-import org.jcamp.spectrum.notes.NoteDescriptor;
 
 /**
  * factory for creating marshaller for spectrum notes.
@@ -12,7 +12,7 @@ import org.jcamp.spectrum.notes.NoteDescriptor;
 public class NoteMarshallerFactory {
     private static NoteMarshallerFactory theInstance = null;
     private static Hashtable marshallerTable = new Hashtable();
-    private static java.lang.Class DEFAULT_MARSHALLER;
+    private static java.lang.Class DEFAULT_MARSHALLER = DefaultNoteMarshaller.class;
 
     /**
      * NotesMarshallerFactory constructor comment.
@@ -24,7 +24,7 @@ public class NoteMarshallerFactory {
 
     /**
      * create marshaller for note
-     * 
+     *
      * @return com.creon.chem.jcamp.IJCAMPNoteMarshaller
      * @param descriptor org.jcamp.spectrum.notes.NoteDescriptor
      */
@@ -46,11 +46,11 @@ public class NoteMarshallerFactory {
 
     /**
      * factory singleton accessor method.
-     * 
+     *
      * @return com.creon.chem.jcamp.NoteMarshallerFactory
      */
     public static NoteMarshallerFactory getInstance() {
-	if (theInstance == null) {
+        if (theInstance == null) {
             theInstance = new NoteMarshallerFactory();
         }
 
@@ -60,21 +60,20 @@ public class NoteMarshallerFactory {
     /**
      * initialization method.
      * reads notes.properties file for initialization
-     * 
+     *
      */
     private void initFactory() {
-	marshallerTable.put(NoteDescriptor.TITLE, new IgnoreNoteMarshaller(NoteDescriptor.TITLE.getKey()));
+        marshallerTable.put(NoteDescriptor.TITLE, new IgnoreNoteMarshaller(NoteDescriptor.TITLE.getKey()));
         marshallerTable.put(NoteDescriptor.JCAMPDX, new IgnoreNoteMarshaller(NoteDescriptor.JCAMPDX.getKey()));
         Properties notesProps = new Properties();
         java.io.InputStream is = null;
         try {
             is = this.getClass().getClassLoader().getResourceAsStream("notes.properties");
-	     if (is == null)
+            if (is == null)
                 return;
             notesProps.load(is);
             String defaultJCAMPMarshaller = (String) notesProps.get("default.jcamp.marshaller");
             if (defaultJCAMPMarshaller != null) {
-
                 try {
                     DEFAULT_MARSHALLER = Class.forName(defaultJCAMPMarshaller);
                     if (!IJCAMPNoteMarshaller.class.isAssignableFrom(DEFAULT_MARSHALLER))
@@ -121,8 +120,8 @@ public class NoteMarshallerFactory {
                 }
             }
         } catch (java.io.IOException e) {
-		System.out.println("error");
-		e.printStackTrace();
+            System.out.println("error");
+            e.printStackTrace();
         } finally {
             try {
                 if (is != null)

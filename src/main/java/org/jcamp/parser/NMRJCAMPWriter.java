@@ -1,7 +1,5 @@
 package org.jcamp.parser;
 
-import java.util.Iterator;
-
 import org.jcamp.spectrum.Assignment;
 import org.jcamp.spectrum.NMRFIDSpectrum;
 import org.jcamp.spectrum.NMRSpectrum;
@@ -11,6 +9,8 @@ import org.jcamp.spectrum.Spectrum;
 import org.jcamp.spectrum.notes.Note;
 import org.jcamp.spectrum.notes.NoteDescriptor;
 import org.jcamp.units.CommonUnit;
+
+import java.util.Iterator;
 
 /**
  * adapter between NMR spectrum class and JCAMPWriter.
@@ -263,7 +263,7 @@ public class NMRJCAMPWriter
     jcamp.append("##PEAKTABLE=(XY..XY)").append(CRLF);
     for (int i = 0; i < n; i++) {
       double x = peaks[i].getPosition()[0];
-      double y = peaks[i].getPosition()[1];
+      double y = peaks[i].getHeight();
       jcamp.append(x).append(',').append(y).append(CRLF);
     }
     jcamp.append("##END=").append(CRLF);

@@ -1,4 +1,4 @@
-?.?.?
+0.9.4
 -----
 
 * fixed licenses, accidentally had it shifted to GPL; reverted to LGPL

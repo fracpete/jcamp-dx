@@ -211,6 +211,7 @@
           <show>protected</show>
           <nohelp>true</nohelp>
           <doctitle>${project.name}</doctitle>
+          <additionalparam>-Xdoclint:none</additionalparam>
         </configuration>
       </plugin>
 

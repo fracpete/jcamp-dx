@@ -22,6 +22,7 @@ import org.jcamp.spectrum.ISpectrumIdentifier;
  * class for handling JCAMP blocks.
  * 
  * @author Thomas Weber
+ * @author Christoph Läubrich - support for Parameter Values type
  */
 public class JCAMPBlock {
   private ASDFDecoder asdfDecoder = new ASDFDecoder();
@@ -76,7 +77,9 @@ public class JCAMPBlock {
     public final static Type FULLSPECTRUM = new Type(2, "full spectrum");
     public final static Type PEAKTABLE = new Type(3, "peak table");
     public final static Type ASSIGNMENT = new Type(4, "assignment");
-    private final static Type[] TYPES = new Type[] { LINK, STRUCTURE, FULLSPECTRUM, PEAKTABLE, ASSIGNMENT };
+	public final static Type PARAMETER_VALUES = new Type(5, "parameter values");
+	private final static Type[] TYPES = new Type[] { LINK, STRUCTURE, FULLSPECTRUM, PEAKTABLE, ASSIGNMENT,
+		PARAMETER_VALUES };
     private final static List TYPES_LIST = Collections.unmodifiableList(Arrays.asList(TYPES));
   }
   private final static String CRLF = "\r\n";
@@ -183,6 +186,8 @@ public class JCAMPBlock {
       } else if (dtype.indexOf("ASSIGNMENT") >= 0) {
 	this.type = Type.ASSIGNMENT;
 	analyzeSpectrumID(dtype);
+	    } else if (dtype.indexOf("PARAMETER") >= 0) {
+		this.type = Type.PARAMETER_VALUES;
       } else {
 	this.type = Type.FULLSPECTRUM;
 	analyzeSpectrumID(dtype);
@@ -554,6 +559,9 @@ public class JCAMPBlock {
       return;
     if (isLinkBlock())
       return;
+    if (this.type.equals(Type.PARAMETER_VALUES)) {
+	return;
+    }
     JCAMPDataRecord dataLDR = null;
     Enumeration records = getDataRecords();
     while (records.hasMoreElements()) {

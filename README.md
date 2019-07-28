@@ -15,6 +15,6 @@ You can use the following dependency in your pom.xml:
 <dependency>
   <groupId>com.github.fracpete</groupId>
   <artifactId>jcamp-dx</artifactId>
-  <version>0.9.4</version>
+  <version>0.9.5</version>
 </dependency>
 ```

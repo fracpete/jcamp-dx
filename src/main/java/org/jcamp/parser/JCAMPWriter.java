@@ -32,7 +32,7 @@ public class JCAMPWriter {
         ISpectrumJCAMPWriter writer = null;
         while (writer == null && spectrumClass != null) {
             writer = (ISpectrumJCAMPWriter) adapters.get(spectrumClass);
-            spectrumClass.getSuperclass();
+            spectrumClass = spectrumClass.getSuperclass();
         }
         return writer;
     }

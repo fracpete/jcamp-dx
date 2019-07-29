@@ -1,8 +1,25 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - implement custom Point2D class
+*******************************************************************************/
 package org.jcamp.math;
 
 import java.io.Serializable;
-
-import javax.vecmath.Point2d;
 
 /**
  * abstract base class for 2-dimensional grids.
@@ -165,7 +182,7 @@ public abstract class Grid2D
    * @param p Point2d
    * @return int
    */
-  public int indexAt(Point2d p) {
+  public int indexAt(Point2D p) {
     double g[] = coordinateAt(p.x, p.y);
     int ix = (int) (g[0] + .5);
     int iy = (int) (g[1] + .5);
@@ -190,9 +207,9 @@ public abstract class Grid2D
    * @return Point2d
    * @param index int
    */
-  public Point2d pointAt(int index) {
+  public Point2D pointAt(int index) {
     double[] c = gridPointAt(index);
-    return new Point2d(c[0], c[1]);
+    return new Point2D(c[0], c[1]);
   }
 
   /**

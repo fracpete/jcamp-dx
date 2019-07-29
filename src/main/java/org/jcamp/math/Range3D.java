@@ -1,9 +1,23 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - implement custom Point2D class
+*******************************************************************************/
 package org.jcamp.math;
-
-import javax.vecmath.Point3d;
-import javax.vecmath.Point3f;
-import javax.vecmath.Vector3d;
-import javax.vecmath.Vector3f;
 
 /**
  * base class for 3D data ranges.
@@ -1337,15 +1351,6 @@ public abstract class Range3D
     }
     
     /**
-     * include point p in range.
-     * @param p Point3d
-     * @return Range3D.Double (this)
-     */
-    public Range3D.Double include(Point3d p) {
-      return include(p.x, p.y, p.z);
-    }
-    
-    /**
      * include <code>range</code> in range.
      * @param range Range3D
      * @return Range3D.Double
@@ -1480,19 +1485,6 @@ public abstract class Range3D
     }
     
     /**
-     * translate range by vector <code>v</code>
-     * @param v Vector3d
-     */
-    public void translate(Vector3d v) {
-      this.xmin += v.x;
-      this.xmax += v.x;
-      this.ymin += v.y;
-      this.ymax += v.y;
-      this.zmin += v.z;
-      this.zmax += v.z;
-    }
-    
-    /**
      * gets union of <code>(xvalue,yvalue,zvalue)</code> with <code>this</code> range.
      * @param xvalue double
      * @param yvalue double
@@ -1514,15 +1506,6 @@ public abstract class Range3D
       if (zvalue > range.zmax)
 	range.zmax = zvalue;
       return range;
-    }
-    
-    /**
-     * gets union of point <code>p</code> with <code>this</code> range.
-     * @param p Point3d
-     * @return Range3D.Double
-     */
-    public Range3D.Double union(Point3d p) {
-      return union(p.x, p.y, p.z);
     }
     
     /**
@@ -2204,15 +2187,6 @@ public abstract class Range3D
     }
     
     /**
-     * include (<code>p</code>) in range.
-     * @param p Point3f
-     * @return Range3D.Float (this)
-     */
-    public Range3D.Float include(Point3f p) {
-      return include(p.x, p.y, p.z);
-    }
-    
-    /**
      * include <code>range</code> in range.
      * @param range Range3D
      * @return Range3D.Float
@@ -2375,19 +2349,6 @@ public abstract class Range3D
     }
     
     /**
-     * translate range by vector <code>v</code>
-     * @param v Vector3f
-     */
-    public void translate(Vector3f v) {
-      this.xmin += v.x;
-      this.xmax += v.x;
-      this.ymin += v.y;
-      this.ymax += v.y;
-      this.zmin += v.z;
-      this.zmax += v.z;
-    }
-    
-    /**
      * gets union of <code>(xvalue,yvalue,zvalue)</code> with <code>this</code> range.
      * @param xvalue float
      * @param yvalue float
@@ -2409,15 +2370,6 @@ public abstract class Range3D
       if (zvalue > range.zmax)
 	range.zmax = zvalue;
       return range;
-    }
-    
-    /**
-     * gets union of point <code>p</code> with <code>this</code> range.
-     * @param p Point3f
-     * @return Range3D.Float
-     */
-    public Range3D.Float union(Point3f p) {
-      return union(p.x, p.y, p.z);
     }
     
     /**
@@ -2524,21 +2476,6 @@ public abstract class Range3D
 	&& r.getYMaxAsDouble() <= getYMaxAsDouble()
 	&& r.getZMinAsDouble() >= getZMinAsDouble()
 	&& r.getZMaxAsDouble() <= getZMaxAsDouble());
-  }
-
-  /**
-   * check if range contains point <code>p</code>.
-   * @param p Point3d
-   * @return boolean
-   */
-  public boolean contains(Point3d p) {
-    return (
-	p.x >= getXMinAsDouble()
-	&& p.x <= getXMaxAsDouble()
-	&& p.y >= getYMinAsDouble()
-	&& p.y <= getYMaxAsDouble()
-	&& p.z >= getZMinAsDouble()
-	&& p.z <= getZMaxAsDouble());
   }
 
   /**

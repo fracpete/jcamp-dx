@@ -1,8 +1,25 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - implement custom Point2D class
+*******************************************************************************/
 package org.jcamp.math;
 
 import java.io.Serializable;
-
-import javax.vecmath.Point2d;
 
 /**
  * 2-dimensional numerical data arrays.
@@ -218,7 +235,7 @@ public class Array2D
   /**
    * gets 2D point at index <code>index</code>.
    */
-  public Point2d pointAt(int index) {
-    return new Point2d(arrayX.pointAt(index), arrayY.pointAt(index));
+  public Point2D pointAt(int index) {
+    return new Point2D(arrayX.pointAt(index), arrayY.pointAt(index));
   }
 }

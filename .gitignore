@@ -16,3 +16,4 @@
 *.lof
 .idea
 *.iml
+/bin

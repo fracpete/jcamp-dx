@@ -1,9 +1,23 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - implement custom Point2D class
+*******************************************************************************/
 package org.jcamp.math;
-
-import javax.vecmath.Point2d;
-import javax.vecmath.Point2f;
-import javax.vecmath.Vector2d;
-import javax.vecmath.Vector2f;
 
 /**
  * base class for 2D data ranges.
@@ -1010,7 +1024,7 @@ public abstract class Range2D
      * @param p Point2d
      * @return Range2D.Double (this)
      */
-    public Range2D.Double include(Point2d p) {
+    public Range2D.Double include(Point2D p) {
       return include(p.x, p.y);
     }
     
@@ -1108,17 +1122,6 @@ public abstract class Range2D
     }
     
     /**
-     * translate range by vector <code>v</code>
-     * @param v Vector2d
-     */
-    public void translate(Vector2d v) {
-      this.xmin += v.x;
-      this.xmax += v.x;
-      this.ymin += v.y;
-      this.ymax += v.y;
-    }
-    
-    /**
      * gets union of <code>(xvalue,yvalue)</code> with <code>this</code> range.
      * @param xvalue double
      * @param yvalue double
@@ -1142,7 +1145,7 @@ public abstract class Range2D
      * @param p Point2d
      * @return Range2D.Double
      */
-    public Range2D.Double union(Point2d p) {
+    public Range2D.Double union(Point2D p) {
       return union(p.x, p.y);
     }
     
@@ -1664,15 +1667,6 @@ public abstract class Range2D
     }
     
     /**
-     * include point <code>p</code> in range.
-     * @param p Point2f
-     * @return Range2D.Float (this)
-     */
-    public Range2D.Float include(Point2f p) {
-      return include(p.x, p.y);
-    }
-    
-    /**
      * include <code>range</code> in range.
      * @param range Range2D
      * @return Range2D.Float
@@ -1786,17 +1780,6 @@ public abstract class Range2D
     }
     
     /**
-     * translate range by vector <code>v</code>
-     * @param v Vector2f
-     */
-    public void translate(Vector2f v) {
-      xmin += v.x;
-      xmax += v.x;
-      ymin += v.y;
-      ymax += v.y;
-    }
-    
-    /**
      * gets union of <code>(xvalue,yvalue)</code> with <code>this</code> range.
      * @param xvalue float
      * @param yvalue float
@@ -1813,15 +1796,6 @@ public abstract class Range2D
       if (yvalue > range.ymax)
 	range.ymax = yvalue;
       return range;
-    }
-    
-    /**
-     * gets union of point <code>p</code> with <code>this</code> range.
-     * @param p Point2f
-     * @return Range2D.Float
-     */
-    public Range2D.Float union(Point2f p) {
-      return union(p.x, p.y);
     }
     
     /**
@@ -1913,7 +1887,7 @@ public abstract class Range2D
    * @param p Point2d
    * @return boolean
    */
-  public boolean contains(Point2d p) {
+  public boolean contains(Point2D p) {
     return (
 	p.x >= getXMinAsDouble()
 	&& p.x <= getXMaxAsDouble()

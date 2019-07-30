@@ -1,9 +1,26 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - replace logging by error handler
+*******************************************************************************/
 package org.jcamp.parser;
 
 import java.util.StringTokenizer;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jcamp.math.IArray1D;
 import org.jcamp.spectrum.ArrayData;
 import org.jcamp.spectrum.Assignment;
@@ -29,8 +46,6 @@ public class NMRJCAMPReader
   extends CommonSpectrumJCAMPReader
   implements ISpectrumJCAMPReader {
 
-  private static Log log = LogFactory.getLog(NMRJCAMPReader.class);
-  
   private String mode;
   
   /**
@@ -163,13 +178,7 @@ public class NMRJCAMPReader
 	double lastX = getLastX(block);
 	double[] intensities = getXYData(block, firstX, lastX, nPoints, xFactor, yFactor);
 	if (intensities.length != nPoints){
-	  /*throw new JCAMPException(
-                        "incorrect ##NPOINTS= or bad ##XYDATA=\n"
-                            + "found "
-                            + intensities.length
-                            + ", but ##NPOINTS= "
-                            + nPoints);*/
-	  log.warn(
+      block.getErrorHandler().warn(
 	      "incorrect ##NPOINTS= or bad ##XYDATA=\n"
 		  + "found "
 		  + intensities.length

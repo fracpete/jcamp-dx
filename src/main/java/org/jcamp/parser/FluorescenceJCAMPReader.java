@@ -1,9 +1,26 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - replace log by error handler
+*******************************************************************************/
 package org.jcamp.parser;
 
 import java.util.Arrays;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jcamp.math.IArray1D;
 import org.jcamp.math.IArray2D;
 import org.jcamp.spectrum.ArrayData;
@@ -29,8 +46,6 @@ import org.jcamp.units.Unit;
  */
 public class FluorescenceJCAMPReader
   extends CommonSpectrumJCAMPReader implements ISpectrumJCAMPReader {
-
-  private static Log log = LogFactory.getLog(FluorescenceJCAMPReader.class);
 
   /**
    */
@@ -99,19 +114,19 @@ public class FluorescenceJCAMPReader
 	excitationIndex = i;
       else if ("PAGE".equals(name));
       else
-	log.warn("unknown fluorescence variable: " + name);
+	block.getErrorHandler().warn("unknown fluorescence variable: " + name);
     }
     for (int i = 0; i < vars.length; i++) {
       if (intensityIndex < 0 && vars[i].getType().equals(JCAMPVariable.Type.DEPENDENT)) {
-	log.warn("intensity variable could not be recognized: using dependend variable at column " + (i + 1));
+    	  block.getErrorHandler().warn("intensity variable could not be recognized: using dependend variable at column " + (i + 1));
 	intensityIndex = i;
       }
       if (emissionIndex < 0 && vars[i].getType().equals(JCAMPVariable.Type.INDEPENDENT)) {
-	log.warn("emission variable could not be recognized: using independend variable at column " + (i + 1));
+    	  block.getErrorHandler().warn("emission variable could not be recognized: using independend variable at column " + (i + 1));
 	emissionIndex = i;
       }
       if (excitationIndex < 0 && vars[i].getType().equals(JCAMPVariable.Type.INDEPENDENT)) {
-	log.warn(
+    	  block.getErrorHandler().warn(
 	    "excitation variable could not be recognized: using independend variable at column " + (i + 1));
 	excitationIndex = i;
       }
@@ -171,7 +186,7 @@ public class FluorescenceJCAMPReader
       y.setLabel("Emission [" + emissionUnit + "]");
       intensities = new double[x.getLength() * y.getLength()];
       if (nPages != emissionDim.intValue())
-	log.warn("number of pages != emission dimension, possible missing values");
+    	  block.getErrorHandler().warn("number of pages != emission dimension, possible missing values");
       for (int i = 0; i < nPages; i++) {
 	JCAMPNTuplePage page = block.getNTuple().getPage(i);
 	IArray2D data = page.getXYData();
@@ -179,7 +194,7 @@ public class FluorescenceJCAMPReader
 	int index;
 	if (emissionStr == null) {
 	  index = i * x.getLength();
-	  log.warn("missing ##PAGE= emission entry, assuming ordered pages");
+	  block.getErrorHandler().warn("missing ##PAGE= emission entry, assuming ordered pages");
 	} else { // calculate index
 	  double emission = Double.parseDouble(emissionStr);
 	  index = y.indexAt(emission);
@@ -196,7 +211,7 @@ public class FluorescenceJCAMPReader
       y.setLabel("Excitation [" + excitationUnit + "]");
       intensities = new double[x.getLength() * y.getLength()];
       if (nPages != excitationDim.intValue())
-	log.warn("number of pages != excitation dimension, possible missing values");
+    	  block.getErrorHandler().warn("number of pages != excitation dimension, possible missing values");
       for (int i = 0; i < nPages; i++) {
 	JCAMPNTuplePage page = block.getNTuple().getPage(i);
 	IArray2D data = page.getXYData();
@@ -204,7 +219,7 @@ public class FluorescenceJCAMPReader
 	String excitationStr = page.getPageVariableValue(vars[excitationIndex].getSymbol());
 	if (excitationStr == null) {
 	  index = i * x.getLength();
-	  log.warn("missing ##PAGE= excitation entry, assuming ordered pages");
+	  block.getErrorHandler().warn("missing ##PAGE= excitation entry, assuming ordered pages");
 	} else { // calculate index
 	  double excitation = Double.parseDouble(excitationStr);
 	  index = y.indexAt(excitation);

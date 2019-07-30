@@ -1,3 +1,22 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - support for Parameter Values type, use default adapter
+*******************************************************************************/
 package org.jcamp.parser;
 
 import java.io.File;
@@ -14,8 +33,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.Vector;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 
 /**
@@ -26,23 +43,7 @@ import org.jcamp.spectrum.ISpectrumIdentifier;
  */
 public class JCAMPBlock {
   private ASDFDecoder asdfDecoder = new ASDFDecoder();
-  private static Log log = LogFactory.getLog(JCAMPBlock.class);
-  private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
-    @Override
-    public void fatal(String msg) throws JCAMPException {
-      log.fatal(msg);
-      throw new JCAMPException("FATAL ERROR! " + msg);
-    }
-    @Override
-    public void error(String msg) throws JCAMPException {
-      log.error(msg);
-      throw new JCAMPException("ERROR! " + msg);
-    }
-    @Override
-    public void warn(String msg) throws JCAMPException {
-      log.warn(msg);
-    }
-  };
+  private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter();
   private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
   public final static class Type implements Serializable {
     private static final long serialVersionUID = -8081269600789693382L;

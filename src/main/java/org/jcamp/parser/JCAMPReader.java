@@ -1,3 +1,22 @@
+/*******************************************************************************
+* The JCAMP-DX project is the reference implemention of the IUPAC JCAMP-DX spectroscopy data standard.
+* 
+*   Copyright (C) 2019 Thomas Weber
+*
+*    This library is free software; you can redistribute it and/or
+*    modify it under the terms of the GNU Library General Public
+*    License as published by the Free Software Foundation; either
+*    version 2 of the License, or (at your option) any later version.
+*
+*    This library is distributed in the hope that it will be useful,
+*    but WITHOUT ANY WARRANTY; without even the implied warranty of
+*    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+*    Library General Public License for more details.
+*
+* Contributors:
+* Thomas Weber - initial API and implementation
+* Christoph Läubrich - use default ErrorHandlerAdapter
+*******************************************************************************/
 package org.jcamp.parser;
 
 import java.io.IOException;
@@ -5,8 +24,6 @@ import java.io.Reader;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.jcamp.spectrum.ISpectrumIdentifier;
 import org.jcamp.spectrum.Spectrum;
 
@@ -16,24 +33,7 @@ import org.jcamp.spectrum.Spectrum;
  * @author Thomas Weber
  */
 public class JCAMPReader {
-  private static Log log = LogFactory.getLog(JCAMPReader.class);
-  private final static IErrorHandler DEFAULT_ERROR_HANDLER = new ErrorHandlerAdapter() {
-    @Override
-    public void fatal(String msg) throws JCAMPException {
-      log.fatal(msg);
-      throw new JCAMPException("FATAL ERROR! " + msg);
-    }
-    @Override
-    public void error(String msg) throws JCAMPException {
-      log.error(msg);
-      throw new JCAMPException("ERROR! " + msg);
-    }
-    @Override
-    public void warn(String msg) throws JCAMPException {
-      log.warn(msg);
-    }
-  };
-  private IErrorHandler errorHandler = DEFAULT_ERROR_HANDLER;
+  private IErrorHandler errorHandler = new ErrorHandlerAdapter();
   private static JCAMPReader theInstance = null;
   private static Hashtable adapters = new Hashtable(20);
   private static boolean isValidating=true;

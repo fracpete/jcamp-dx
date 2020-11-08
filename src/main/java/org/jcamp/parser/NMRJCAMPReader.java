@@ -324,6 +324,9 @@ public class NMRJCAMPReader
 
     if (!isFID && block.isNTupleBlock()) {
       JCAMPVariable x = block.getNTuple().getVariable("X");
+      if (x == null) {
+        block.getErrorHandler().fatal("missing X variable");
+      }
       if (x.getUnit().equals(CommonUnit.second)) {
 	block.getErrorHandler().warn("NMR FID without NMR FID data type");
 	isFID = true;
